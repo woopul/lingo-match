@@ -41,11 +41,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## Git styleguide
 
-### Branch names
-Valid branch name (except for main|develop) should start with phrases (feature|fix|hotfix) followed by forward slash and a title separated with dashes.
-example: `feature/husky-config`
-
-
 ### Commit message format
 
 Pattern: **type**(**scope**): **summary**
