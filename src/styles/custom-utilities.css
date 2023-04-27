@@ -1,0 +1,83 @@
+@layer utilities {
+  .text-hero {
+    @apply font-bold;
+    @apply text-42 desktop:text-64;
+    @apply leading-42 desktop:leading-64;
+    @apply -tracking-2 desktop:tracking-0;
+  }
+
+  .text-h1 {
+    @apply font-bold;
+    @apply text-24 desktop:text-40;
+    @apply leading-24 desktop:leading-40;
+  }
+
+  .text-h2 {
+    @apply font-bold;
+    @apply text-20 desktop:text-32;
+    @apply leading-24 desktop:leading-36;
+    @apply -tracking-3 desktop:-tracking-5;
+  }
+
+  .text-h3 {
+    @apply font-bold;
+    @apply text-18 desktop:text-24;
+    @apply leading-20 desktop:leading-28;
+    @apply -tracking-2 desktop:-tracking-4;
+  }
+
+  .text-h4 {
+    @apply font-bold;
+    @apply text-16 desktop:text-18;
+    @apply leading-20 desktop:leading-24;
+    @apply -tracking-2 desktop:-tracking-4;
+  }
+
+  .text-h5 {
+    @apply font-bold;
+    @apply text-14 desktop:text-16;
+    @apply leading-18 desktop:leading-20;
+    @apply -tracking-0 desktop:-tracking-2;
+  }
+
+  .text-preamble {
+    @apply text-16 desktop:text-18;
+    @apply leading-22 desktop:leading-28;
+  }
+
+  .text-paragraph {
+    @apply text-12 desktop:text-14;
+    @apply leading-18 desktop:leading-20;
+    @apply -tracking-1 desktop:tracking-0;
+  }
+
+  .text-small {
+    @apply text-10 desktop:text-12;
+    @apply leading-14 desktop:leading-16;
+    @apply tracking-2;
+  }
+
+  .text-xsmall {
+    @apply text-8 desktop:text-12;
+    @apply leading-14 desktop:leading-16;
+    @apply tracking-2;
+  }
+
+  .styled-link {
+    text-decoration: none;
+  }
+
+  .styled-link::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0.1rem;
+    background: #fff;
+    transition: width 0.3s ease-in-out;
+  }
+
+  .styled-link:hover::after {
+    width: 100%;
+  }
+
+}
