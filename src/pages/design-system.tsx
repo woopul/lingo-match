@@ -31,7 +31,7 @@ const secondaryColors: ColorMapType = {
   '950': 'bg-secondary-950',
 };
 
-export default function DesignSystem() {
+const DesignSystem = () => {
   return (
     <main className="px-6 pb-10">
       <h2 className="text-6xl w-full text-center font-bold mt-6 mb-8">Design System</h2>
@@ -79,16 +79,16 @@ export default function DesignSystem() {
             <h4 className="py-2">primary</h4>
             {Object.keys(primaryColors).map((el) => (
               <div
-                key={`bg-primary-${el}`}
                 className={`${primaryColors[el]} inline-block mr-1 rounded-md w-5 h-5 border-b-indigo-100 py-2`}
+                key={`bg-primary-${el}`}
               ></div>
             ))}
 
             <h4 className="py-2">secondary</h4>
             {Object.keys(secondaryColors).map((el) => (
               <div
-                key={`bg-primary-${el}`}
                 className={`${secondaryColors[el]} inline-block mr-1 rounded-md w-5 h-5 border-b-indigo-100 py-2`}
+                key={`bg-primary-${el}`}
               ></div>
             ))}
           </div>
@@ -96,4 +96,6 @@ export default function DesignSystem() {
       </div>
     </main>
   );
-}
+};
+
+export default DesignSystem;
