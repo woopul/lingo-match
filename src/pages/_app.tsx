@@ -1,16 +1,17 @@
 import '../styles/styles.css';
-import type { AppProps } from 'next/app';
-import { DM_Sans } from '@next/font/google';
+
 import { HeaderPlaceholder } from '@lingo-match/components';
+import { DM_Sans } from '@next/font/google';
+import type { AppProps } from 'next/app';
 
 const dmSans = DM_Sans({
   display: 'swap',
+  subsets: ['latin'],
   variable: '--font-dm-sans',
   weight: ['400', '500', '700'],
-  subsets: ['latin'],
 });
 
-export default function App({ Component, pageProps }: AppProps) {
+const CustomApp = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       <style global jsx>{`
@@ -24,4 +25,6 @@ export default function App({ Component, pageProps }: AppProps) {
       </main>
     </>
   );
-}
+};
+
+export default CustomApp;
