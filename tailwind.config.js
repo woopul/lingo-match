@@ -1,3 +1,4 @@
+/* eslint-disable sort-keys */
 /** @type {import('tailwindcss').Config} */
 const colors = require('tailwindcss/colors');
 
@@ -47,19 +48,7 @@ module.exports = {
         900: '#773510',
         950: '#441a04',
       },
-      martinique: {
-        50: '#f6f7f9',
-        100: '#ebedf3',
-        200: '#d3d7e4',
-        300: '#acb4cd',
-        400: '#7f8db1',
-        500: '#5f6e98',
-        600: '#4b587e',
-        700: '#3e4766',
-        800: '#363e56',
-        900: '#30354a',
-        950: '#151720',
-      },
+      bgColor: '#F5F5F5',
     },
     fontFamily: {
       default: ['var(--font-dm)', 'sans-serif'],

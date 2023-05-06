@@ -1,3 +1,5 @@
+import { HeaderPlaceholder } from '@lingo-match/components';
+
 type ColorMapType = {
   [key: string]: string;
 };
@@ -31,8 +33,9 @@ const secondaryColors: ColorMapType = {
   '950': 'bg-secondary-950',
 };
 
-const DesignSystem = () => {
-  return (
+const DesignSystem = () => (
+  <>
+    <HeaderPlaceholder />
     <main className="px-6 pb-10">
       <h2 className="text-6xl w-full text-center font-bold mt-6 mb-8">Design System</h2>
       <div className="grid w-full grid-cols-2 auto-rows-auto mt-2 gap-2">
@@ -95,7 +98,7 @@ const DesignSystem = () => {
         </div>
       </div>
     </main>
-  );
-};
+  </>
+);
 
 export default DesignSystem;
