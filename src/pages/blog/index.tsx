@@ -1,4 +1,4 @@
-import { getBlogPostBySlug, getBlogPosts, getLayoutConfig } from '@lingo-match/api/strapi';
+import { getBlogPostBySlug, getLayoutConfig } from '@lingo-match/api/strapi';
 import withLayout from '@lingo-match/containers/withLayout';
 import { BlogPostType } from '@lingo-match/pages/blog/[slug]';
 import { GetStaticProps } from 'next';
