@@ -1,6 +1,5 @@
 import '../styles/styles.css';
 
-import { HeaderPlaceholder } from '@lingo-match/components';
 import { DM_Sans } from '@next/font/google';
 import type { AppProps } from 'next/app';
 
@@ -12,6 +11,7 @@ const dmSans = DM_Sans({
 });
 
 const CustomApp = ({ Component, pageProps }: AppProps) => {
+  console.log('APP', { Component, pageProps });
   return (
     <>
       <style global jsx>{`
@@ -19,10 +19,7 @@ const CustomApp = ({ Component, pageProps }: AppProps) => {
           --font-dm: ${dmSans.style.fontFamily};
         }
       `}</style>
-      <main className="mx-auto max-w-[1920px]">
-        <HeaderPlaceholder />
-        <Component {...pageProps} />
-      </main>
+      <Component {...pageProps} />
     </>
   );
 };

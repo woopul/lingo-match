@@ -1,0 +1,34 @@
+import { Link } from '@lingo-match/components';
+import { LinkDTO } from '@lingo-match/components/Atoms/Link';
+import clsx from 'clsx';
+import NextLink from 'next/link';
+
+export type HeaderDTO = {
+  links?: LinkDTO[];
+  logo?: string;
+  logoDescription?: string;
+};
+
+export type HeaderProps = HeaderDTO & {
+  className?: string;
+};
+
+const Header = ({ className, links, logo, logoDescription }: HeaderProps) => (
+  <div className={clsx('bg-primary-500 w-full sticky z-10 top-0 shadow-2xl text-white', className)}>
+    <div className="py-2 px-5 flex justify-between items-center max-w-[144rem] mx-auto">
+      <NextLink className="no-underline" href="/">
+        <h1 className="text-h2 font-bold ">LingoMatch</h1>
+      </NextLink>
+      <nav className="flex gap-2">
+        {links?.map((link) => (
+          <Link key={link.path} {...link} />
+        ))}
+        <NextLink className="styled-link" href="/design-system">
+          <div className="text-preamble">design system</div>
+        </NextLink>
+      </nav>
+    </div>
+  </div>
+);
+
+export default Header;
