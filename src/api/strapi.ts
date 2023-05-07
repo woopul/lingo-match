@@ -1,14 +1,12 @@
+import { LayoutConfigDTO } from '@lingo-match/components/Organisms/Layout';
+import { BaseResponseDataType } from '@lingo-match/types/responses/baseApiResponse';
 import qs from 'qs';
 
-export function getStrapiURL(path: string = '') {
-  return `${process.env.STARPI_API_URL || 'http://localhost:1337'}${path}`;
-}
-
-const fetchAPI = async (
+const fetchAPI = async <RT>(
   path: string,
   urlParamsObject: Record<any, any> = {},
   options: Record<any, any> = {},
-) => {
+): Promise<BaseResponseDataType<RT>> => {
   // Merge default and user options
   const mergedOptions = {
     headers: {
@@ -18,20 +16,21 @@ const fetchAPI = async (
   };
 
   // Build request URL
+  const baseUrl = process.env.STARPI_API_URL;
   const queryString = qs.stringify(urlParamsObject);
-  const requestUrl = `${getStrapiURL(`/api${path}${queryString ? `?${queryString}` : ''}`)}`;
-
-  console.log('Strapi url', requestUrl);
+  const requestUrl = `${baseUrl}${path}${queryString ? `?${queryString}` : ''}`;
 
   const response = await fetch(requestUrl, mergedOptions);
 
   if (!response.ok) {
-    console.error(
-      `[FETCH STRAPI] Error during fetch on ${requestUrl} | options?: ${options} | error message: ${response.statusText}`,
+    throw new Error(
+      `[FETCH STRAPI] url: ${baseUrl}${path} | status: ${response.status} | message: ${
+        response.statusText
+      } | params: ${JSON.stringify(urlParamsObject)}`,
     );
-    // throw new Error(`An error occured please try again`);
   }
   const data = await response.json();
+  console.log('base response data', data);
   return data;
 };
 
@@ -56,7 +55,7 @@ const getBlogPostBySlug = async (slug: string) => {
 };
 
 const getLayoutConfig = async () =>
-  await fetchAPI('/layout', {
+  await fetchAPI<LayoutConfigDTO>('/layout', {
     populate: {
       Header: {
         populate: '*',

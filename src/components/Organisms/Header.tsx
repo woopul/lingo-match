@@ -1,27 +1,31 @@
-import Link from 'next/link';
+import { Link } from '@lingo-match/components';
+import { LinkDTO } from '@lingo-match/components/Atoms/Link';
+import clsx from 'clsx';
+import NextLink from 'next/link';
 
-export type HeaderProps = {
-  links?: {
-    label: string;
-    path: string;
-  };
+export type HeaderDTO = {
+  links?: LinkDTO[];
   logo?: string;
   logoDescription?: string;
 };
 
-const Header = (props: HeaderProps) => (
-  <div className="bg-primary-500 w-full sticky z-10 top-0 shadow-2xl">
+export type HeaderProps = HeaderDTO & {
+  className?: string;
+};
+
+const Header = ({ className, links, logo, logoDescription }: HeaderProps) => (
+  <div className={clsx('bg-primary-500 w-full sticky z-10 top-0 shadow-2xl text-white', className)}>
     <div className="py-2 px-5 flex justify-between items-center max-w-[144rem] mx-auto">
-      <Link className="no-underline" href="/">
+      <NextLink className="no-underline" href="/">
         <h1 className="text-h2 font-bold ">LingoMatch</h1>
-      </Link>
+      </NextLink>
       <nav className="flex gap-2">
-        <Link className="styled-link" href="/">
-          <div className="text-preamble">home</div>
-        </Link>
-        <Link className="styled-link" href="/design-system">
+        {links?.map((link) => (
+          <Link key={link.path} {...link} />
+        ))}
+        <NextLink className="styled-link" href="/design-system">
           <div className="text-preamble">design system</div>
-        </Link>
+        </NextLink>
       </nav>
     </div>
   </div>

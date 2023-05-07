@@ -34,7 +34,7 @@ const secondaryColors: ColorMapType = {
 };
 
 const DesignSystem = () => (
-  <>
+  <div className="text-white">
     <HeaderPlaceholder />
     <main className="px-6 pb-10">
       <h2 className="text-6xl w-full text-center font-bold mt-6 mb-8">Design System</h2>
@@ -98,7 +98,7 @@ const DesignSystem = () => (
         </div>
       </div>
     </main>
-  </>
+  </div>
 );
 
 export default DesignSystem;

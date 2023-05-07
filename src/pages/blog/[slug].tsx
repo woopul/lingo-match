@@ -1,5 +1,7 @@
 import { getLayoutConfig } from '@lingo-match/api/strapi';
 import { DEFAULT_STATIC_PAGE_CACHE_TIME } from '@lingo-match/constants/cache';
+import withLayout from '@lingo-match/containers/withLayout';
+import { BaseGetStaticPropsType } from '@lingo-match/types/responses/baseApiResponse';
 import { GetStaticProps } from 'next';
 
 export const getStaticPaths = async () => ({
@@ -7,7 +9,7 @@ export const getStaticPaths = async () => ({
   paths: [],
 });
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps<BaseGetStaticPropsType> = async (context) => {
   const layoutConfig = await getLayoutConfig();
 
   const post = {
@@ -33,11 +35,11 @@ export type BlogPostType = {
   title: string;
 };
 
-export type BlogPostProps = {
+export type BlogPostPageProps = {
   post: BlogPostType;
 };
 
-const BlogPost = ({ post }: BlogPostProps) => {
+const BlogPostPage = ({ post }: BlogPostPageProps) => {
   return (
     <>
       <h1>This is BlogPostPage</h1>
@@ -46,4 +48,4 @@ const BlogPost = ({ post }: BlogPostProps) => {
   );
 };
 
-export default BlogPost;
+export default withLayout(BlogPostPage);

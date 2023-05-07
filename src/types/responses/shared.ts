@@ -1,12 +1,13 @@
-type BaseDataWrapperType<DataType> = {
+export type SeoDTO = {
+  canonicalURL?: string;
   id: number;
-} & DataType;
-
-export type ComponentDataWrapperType<ComponentType = unknown> = {
-  data: {
-    attributes: ComponentType;
-    id: number;
-  };
+  keywords?: string;
+  metaDescription?: string;
+  metaRobots?: string;
+  metaTitle?: string;
+  metaViewport?: string;
+  // JSON string object
+  structuredData?: string;
 };
 
 type MediaDataSizeType = {
