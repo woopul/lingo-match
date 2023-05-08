@@ -1,7 +1,7 @@
 import { getLayoutConfig } from '@lingo-match/api/strapi';
 import { DEFAULT_STATIC_PAGE_CACHE_TIME } from '@lingo-match/constants/cache';
 import withLayout from '@lingo-match/containers/withLayout';
-import { BaseGetStaticPropsType } from '@lingo-match/types/responses/baseApiResponse';
+import { BaseGetStaticPropsType } from '@lingo-match/types/strapi/baseApiResponse';
 import { GetStaticProps } from 'next';
 
 export const getStaticProps: GetStaticProps<BaseGetStaticPropsType> = async (context) => {
@@ -9,7 +9,7 @@ export const getStaticProps: GetStaticProps<BaseGetStaticPropsType> = async (con
 
   return {
     props: {
-      layoutConfig: layoutConfig.data.attributes || {},
+      layoutConfig: layoutConfig || {},
     },
     revalidate: DEFAULT_STATIC_PAGE_CACHE_TIME,
   };

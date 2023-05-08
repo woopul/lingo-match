@@ -1,5 +1,5 @@
 import { LayoutConfigDTO } from '@lingo-match/components/Organisms/Layout';
-import { BaseResponseDataType } from '@lingo-match/types/responses/baseApiResponse';
+import { BaseResponseDataType } from '@lingo-match/types/strapi/baseApiResponse';
 import qs from 'qs';
 
 const fetchAPI = async <RT>(
@@ -54,15 +54,13 @@ const getBlogPostBySlug = async (slug: string) => {
   return post;
 };
 
-const getLayoutConfig = async () =>
-  await fetchAPI<LayoutConfigDTO>('/layout', {
-    populate: {
-      Header: {
-        populate: '*',
-      },
-      defaultSeo: '*',
-    },
+const getLayoutConfig = async () => {
+  const response = await fetchAPI<LayoutConfigDTO>('/layout', {
+    populate: 'deep',
   });
+
+  return response.data.attributes;
+};
 
 export {
   fetchAPI,

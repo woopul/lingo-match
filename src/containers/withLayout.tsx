@@ -1,6 +1,6 @@
 import { Layout } from '@lingo-match/components/Organisms';
 import { LayoutConfigDTO } from '@lingo-match/components/Organisms/Layout';
-import { BaseGetStaticPropsType } from '@lingo-match/types/responses/baseApiResponse';
+import { BaseGetStaticPropsType } from '@lingo-match/types/strapi/baseApiResponse';
 
 export type WithLayoutProps = LayoutConfigDTO & Record<any, any>;
 

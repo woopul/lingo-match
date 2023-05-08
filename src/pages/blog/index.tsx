@@ -8,7 +8,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   return {
     props: {
       blogPosts,
-      layoutConfig: layoutConfig.data.attributes || {},
+      layoutConfig: layoutConfig || {},
     },
   };
 };

@@ -1,12 +1,11 @@
-import { USPBar } from '@lingo-match/components';
-import { SeoDTO } from '@lingo-match/types/responses/shared';
+import { SeoDTO } from '@lingo-match/types/strapi/shared';
 import { PropsWithChildren } from 'react';
 
 import Header, { HeaderDTO } from './Header';
 
 export type LayoutConfigDTO = {
-  Header?: HeaderDTO;
   defaultSEO?: SeoDTO;
+  header?: HeaderDTO;
 };
 
 export type LayoutProps = {
@@ -15,8 +14,7 @@ export type LayoutProps = {
 
 const Layout = ({ children, layoutConfig }: PropsWithChildren<LayoutProps>) => (
   <div className="w-full min-h-[100vh] bg-primary-50">
-    {/*<USPBar />*/}
-    <Header {...layoutConfig?.Header} />
+    <Header {...layoutConfig?.header} />
     <main className="mx-auto max-w-[144rem] px-5">{children}</main>
   </div>
 );

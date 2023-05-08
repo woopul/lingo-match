@@ -1,7 +1,7 @@
 import { getBlogPostBySlug, getLayoutConfig } from '@lingo-match/api/strapi';
 import withLayout from '@lingo-match/containers/withLayout';
 import { BlogPostType } from '@lingo-match/pages/blog/[slug]';
-import { BaseGetStaticPropsType } from '@lingo-match/types/responses/baseApiResponse';
+import { BaseGetStaticPropsType } from '@lingo-match/types/strapi/baseApiResponse';
 import { GetStaticProps } from 'next';
 
 export const getStaticProps: GetStaticProps<BaseGetStaticPropsType> = async (context) => {
@@ -26,7 +26,7 @@ export const getStaticProps: GetStaticProps<BaseGetStaticPropsType> = async (con
 
   return {
     props: {
-      layoutConfig: layoutConfig.data.attributes || {},
+      layoutConfig: layoutConfig || {},
     },
   };
 };
