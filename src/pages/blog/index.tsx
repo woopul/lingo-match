@@ -1,5 +1,5 @@
 import { getBlogPosts, getLayoutConfig } from '@lingo-match/api/strapi';
-import { PrettyJSON } from '@lingo-match/components';
+import { Link, PrettyJSON } from '@lingo-match/components';
 import withLayout from '@lingo-match/containers/withLayout';
 import { BlogPostDTO } from '@lingo-match/types/strapi/blocks';
 import { GetStaticProps } from 'next';
@@ -26,7 +26,13 @@ const BlogListPage = ({ blogPosts }: BlogListPageProps) => {
       <h3 className="my-2">blog posts :</h3>
       <div className="flex flex-col">
         {blogPosts.map((post) => (
-          <PrettyJSON data={post} key={post.slug} />
+          <Link
+            className="p-3 hover:outline outline-indigo-400"
+            href={`/blog/${post.slug}` || '#'}
+            key={post.slug}
+          >
+            <PrettyJSON data={post} key={post.slug} />
+          </Link>
         ))}
       </div>
     </main>

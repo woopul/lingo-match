@@ -1,5 +1,5 @@
 import { getLayoutConfig, getPlatforms } from '@lingo-match/api/strapi';
-import { PrettyJSON } from '@lingo-match/components';
+import { Link, PrettyJSON } from '@lingo-match/components';
 import { DEFAULT_STATIC_PAGE_CACHE_TIME } from '@lingo-match/constants/cache';
 import withLayout from '@lingo-match/containers/withLayout';
 import { BaseGetStaticPropsType } from '@lingo-match/types/strapi/baseApiResponse';
@@ -29,7 +29,13 @@ const HomePage = ({ platforms }: HomePageProps) => {
       <h3 className="my-2">platforms :</h3>
       <div className="flex flex-col">
         {platforms.map((platform) => (
-          <PrettyJSON data={platform} key={platform.slug} />
+          <Link
+            className="p-3 hover:outline outline-indigo-400"
+            href={`/platform/${platform.slug}` || '#'}
+            key={platform.slug}
+          >
+            <PrettyJSON data={platform} key={platform.slug} />
+          </Link>
         ))}
       </div>
     </main>

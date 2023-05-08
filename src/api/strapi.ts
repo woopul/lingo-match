@@ -56,13 +56,13 @@ const getPlatforms = async () => {
 };
 
 const getPlatformBySlug = async (slug: string) => {
-  const platformResponse = await fetchAPI(`/platforms${slug}`);
-  return parseStrapiResponseToData(platformResponse);
+  const blogPostResponse = await fetchAPI<BlogPostDTO>(`/platforms/${slug}`);
+  return parseStrapiResponseToData<BlogPostDTO>(blogPostResponse);
 };
 
 const getBlogPostBySlug = async (slug: string) => {
-  const post = await fetchAPI(`/blogposts/${slug}`);
-  return post;
+  const blogPostsResponse = await fetchAPI<BlogPostDTO[]>(`/blogposts/${slug}`);
+  return parseStrapiResponseToData<BlogPostDTO[]>(blogPostsResponse);
 };
 
 const getLayoutConfig = async () => {
