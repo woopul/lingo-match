@@ -16,7 +16,7 @@ const fetchAPI = async <RT>(
   };
 
   // Build request URL
-  const baseUrl = process.env.STARPI_API_URL;
+  const baseUrl = process.env.STRAPI_API_URL;
   const queryString = qs.stringify(urlParamsObject);
   const requestUrl = `${baseUrl}${path}${queryString ? `?${queryString}` : ''}`;
 

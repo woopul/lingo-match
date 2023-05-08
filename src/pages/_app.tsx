@@ -10,6 +10,8 @@ const dmSans = DM_Sans({
   weight: ['400', '500', '700'],
 });
 
+console.log('vars', process.env);
+
 const CustomApp = ({ Component, pageProps }: AppProps) => {
   console.log('APP', { Component, pageProps });
   return (
