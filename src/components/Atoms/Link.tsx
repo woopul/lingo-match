@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import NextLink from 'next/link';
+import NextLink, { LinkProps as NextLinkProps } from 'next/link';
 import { PropsWithChildren } from 'react';
 
 export type LinkDTO = {
@@ -7,16 +7,17 @@ export type LinkDTO = {
   path?: string;
 };
 
-export type LinkProps = LinkDTO & {
+export type LinkProps = NextLinkProps & {
   className?: string;
+  label?: string;
   variant?: 'styled' | 'default';
 };
 
 const Link = ({
   children,
   className,
+  href,
   label,
-  path,
   variant = 'default',
 }: PropsWithChildren<LinkProps>) => (
   <NextLink
@@ -25,7 +26,7 @@ const Link = ({
       { 'styled-link': variant === 'styled' },
       className,
     )}
-    href={path || '/'}
+    href={href || '/'}
   >
     {children || label}
   </NextLink>

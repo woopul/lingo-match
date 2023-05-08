@@ -4,6 +4,16 @@ import { BlogPostDTO, PlatformDTO } from '@lingo-match/types/strapi/blocks';
 import { parseStrapiResponseToData } from '@lingo-match/utlis/parseStrapiResponse';
 import qs from 'qs';
 
+const getStrapiURL = (path: string = '') => {
+  return `${process.env.STRAPI_API_URL}${path}`;
+};
+
+export const getStrapiMediaURL = (media: any) => {
+  const { url } = media.data.attributes;
+  const imageUrl = url.startsWith('/') ? getStrapiURL(url) : url;
+  return imageUrl;
+};
+
 const fetchAPI = async <RT>(
   path: string,
   urlParamsObject: Record<any, any> = {},

@@ -2,7 +2,8 @@
 const footerConfig = [
   {
     title: undefined,
-    srcURL: '../public/vercel,svg',
+    srcUrl: '/logo.svg',
+    align: 'center',
   },
   {
     title: 'PROUDUKT',
@@ -33,9 +34,9 @@ const footerConfig = [
   {
     title: 'OBSERWUJ NAS',
     links: [
-      { label: 'OFERTY', path: '/' },
-      { label: 'OFERTY', path: '/' },
-      { label: 'OFERTY', path: '/' },
+      { label: 'FB', path: '/' },
+      { label: 'INSTA', path: '/' },
+      { label: 'Lnd', path: '/' },
     ],
   },
 ];
