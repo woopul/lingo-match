@@ -32,14 +32,12 @@ export type BaseStrapiDataWrapperType<DataType> = {
 };
 
 export type MainStrapiDataWrapperType<DataType> = {
-  attributes:
-    | (BaseStrapiAttributesType & MainStrapiAttributesType & DataType)
-    | (BaseStrapiAttributesType & MainStrapiAttributesType & DataType)[];
+  attributes: BaseStrapiAttributesType & MainStrapiAttributesType & DataType;
   id: number;
 };
 
 export type BaseResponseDataType<DataType> = {
-  data: MainStrapiDataWrapperType<DataType>;
+  data: MainStrapiDataWrapperType<DataType> | MainStrapiDataWrapperType<DataType>[];
   meeta?: MainStrapiMetaType;
 };
 

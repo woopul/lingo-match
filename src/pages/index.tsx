@@ -16,7 +16,6 @@ export const getStaticProps: GetStaticProps<BaseGetStaticPropsType> = async (con
 };
 
 const HomePage = (props: BaseGetStaticPropsType) => {
-  console.log('homepage props', props);
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <h2 className="text-6xl font-bold mt-6">HomePage Page</h2>

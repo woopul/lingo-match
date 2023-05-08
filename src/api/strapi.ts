@@ -1,5 +1,6 @@
 import { LayoutConfigDTO } from '@lingo-match/components/Organisms/Layout';
 import { BaseResponseDataType } from '@lingo-match/types/strapi/baseApiResponse';
+import { parseStrapiResponseToData } from '@lingo-match/utlis/parseStrapiResponse';
 import qs from 'qs';
 
 const fetchAPI = async <RT>(
@@ -30,27 +31,26 @@ const fetchAPI = async <RT>(
     );
   }
   const data = await response.json();
-  console.log('base response data', data);
   return data;
 };
 
 const getBlogPosts = async () => {
-  const posts = await fetchAPI('/blogposts', {}, { method: 'GET' });
-  return posts;
+  const response = await fetchAPI('/blogposts');
+  return parseStrapiResponseToData(response);
 };
 
 const getPlatforms = async () => {
-  const platforms = await fetchAPI('/platforms', {}, { method: 'GET' });
+  const platforms = await fetchAPI('/platforms');
   return platforms;
 };
 
 const getPlatformBySlug = async (slug: string) => {
-  const platforms = await fetchAPI(`/platforms${slug}`, {}, { method: 'GET' });
+  const platforms = await fetchAPI(`/platforms${slug}`);
   return platforms;
 };
 
 const getBlogPostBySlug = async (slug: string) => {
-  const post = await fetchAPI(`/blogposts/${slug}`, {}, { method: 'GET' });
+  const post = await fetchAPI(`/blogposts/${slug}`);
   return post;
 };
 
@@ -59,7 +59,7 @@ const getLayoutConfig = async () => {
     populate: 'deep',
   });
 
-  return response.data.attributes;
+  return parseStrapiResponseToData(response);
 };
 
 export {

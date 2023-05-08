@@ -19,7 +19,6 @@ const BlogListPage = (props: any) => {
       <h1>This is Blog List</h1>
       <div>{JSON.stringify(props)}</div>
       <div>{JSON.stringify(props.blogPosts)}</div>
-      <div>{JSON.stringify(props.posts)}</div>
     </>
   );
 };
