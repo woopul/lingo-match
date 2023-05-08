@@ -1,4 +1,5 @@
 import { LayoutConfigDTO } from '@lingo-match/components/Organisms/Layout';
+import { SeoDTO } from '@lingo-match/types/strapi/shared';
 
 export type BaseApiResponseType<BodyType = unknown> = {
   body: BodyType;
@@ -32,7 +33,7 @@ export type BaseStrapiDataWrapperType<DataType> = {
 };
 
 export type MainStrapiDataWrapperType<DataType> = {
-  attributes: BaseStrapiAttributesType & MainStrapiAttributesType & DataType;
+  attributes: BaseStrapiAttributesType & MainStrapiAttributesType & SeoDTO & DataType;
   id: number;
 };
 

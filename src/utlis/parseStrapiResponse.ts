@@ -7,7 +7,7 @@ export const parseStrapiResponseToData = <T>({ data }: BaseResponseDataType<T>):
   if (Array.isArray(data)) {
     return data?.map((dataItem) => parseStrapiDataType(dataItem)) as T[];
   }
-  return data.attributes as T;
+  return parseStrapiDataType(data);
 };
 
 const parseStrapiDataType = <T>(data: MainStrapiDataWrapperType<T>): T => data.attributes as T;

@@ -1,5 +1,6 @@
 import { LayoutConfigDTO } from '@lingo-match/components/Organisms/Layout';
 import { BaseResponseDataType } from '@lingo-match/types/strapi/baseApiResponse';
+import { BlogPostDTO, PlatformDTO } from '@lingo-match/types/strapi/blocks';
 import { parseStrapiResponseToData } from '@lingo-match/utlis/parseStrapiResponse';
 import qs from 'qs';
 
@@ -35,18 +36,18 @@ const fetchAPI = async <RT>(
 };
 
 const getBlogPosts = async () => {
-  const response = await fetchAPI('/blogposts');
-  return parseStrapiResponseToData(response);
+  const response = await fetchAPI<BlogPostDTO>('/blogposts');
+  return parseStrapiResponseToData<BlogPostDTO>(response);
 };
 
 const getPlatforms = async () => {
-  const platforms = await fetchAPI('/platforms');
-  return platforms;
+  const platformsResponse = await fetchAPI<PlatformDTO>('/platforms');
+  return parseStrapiResponseToData<PlatformDTO>(platformsResponse);
 };
 
 const getPlatformBySlug = async (slug: string) => {
-  const platforms = await fetchAPI(`/platforms${slug}`);
-  return platforms;
+  const platformResponse = await fetchAPI(`/platforms${slug}`);
+  return parseStrapiResponseToData(platformResponse);
 };
 
 const getBlogPostBySlug = async (slug: string) => {

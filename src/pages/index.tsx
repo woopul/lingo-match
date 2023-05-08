@@ -1,24 +1,37 @@
-import { getLayoutConfig } from '@lingo-match/api/strapi';
+import { getLayoutConfig, getPlatforms } from '@lingo-match/api/strapi';
+import { PrettyJSON } from '@lingo-match/components';
 import { DEFAULT_STATIC_PAGE_CACHE_TIME } from '@lingo-match/constants/cache';
 import withLayout from '@lingo-match/containers/withLayout';
 import { BaseGetStaticPropsType } from '@lingo-match/types/strapi/baseApiResponse';
+import { PlatformDTO } from '@lingo-match/types/strapi/blocks';
 import { GetStaticProps } from 'next';
 
 export const getStaticProps: GetStaticProps<BaseGetStaticPropsType> = async (context) => {
-  const layoutConfig = await getLayoutConfig();
+  const [layoutConfig, platforms] = await Promise.all([getLayoutConfig(), getPlatforms()]);
 
   return {
     props: {
       layoutConfig: layoutConfig || {},
+      platforms: platforms || [],
     },
     revalidate: DEFAULT_STATIC_PAGE_CACHE_TIME,
   };
 };
 
-const HomePage = (props: BaseGetStaticPropsType) => {
+type HomePageProps = {
+  platforms: PlatformDTO[];
+};
+
+const HomePage = ({ platforms }: HomePageProps) => {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h2 className="text-6xl font-bold mt-6">HomePage Page</h2>
+    <main className="min-h-screen">
+      <h2 className="text-6xl font-bold mt-3">Home Page - Platform list</h2>
+      <h3 className="my-2">platforms :</h3>
+      <div className="flex flex-col">
+        {platforms.map((platform) => (
+          <PrettyJSON data={platform} key={platform.slug} />
+        ))}
+      </div>
     </main>
   );
 };
