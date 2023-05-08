@@ -24,7 +24,7 @@ type HomePageProps = {
 
 const HomePage = ({ platforms }: HomePageProps) => {
   return (
-    <main className="min-h-screen">
+    <main>
       <h2 className="text-6xl font-bold mt-3">Home Page - Platform list</h2>
       <h3 className="my-2">platforms :</h3>
       <div className="flex flex-col">

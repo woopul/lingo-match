@@ -41,7 +41,7 @@ const getBlogPosts = async () => {
 };
 
 const getPlatforms = async () => {
-  const platformsResponse = await fetchAPI<PlatformDTO>('/platforms');
+  const platformsResponse = await fetchAPI<PlatformDTO>('/platforms', { populate: 'deep,2' });
   return parseStrapiResponseToData<PlatformDTO>(platformsResponse);
 };
 

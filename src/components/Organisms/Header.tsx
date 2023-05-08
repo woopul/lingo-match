@@ -14,21 +14,26 @@ export type HeaderProps = HeaderDTO & {
 };
 
 const Header = ({ className, links, logo, logoDescription }: HeaderProps) => (
-  <div className={clsx('bg-primary-500 w-full sticky z-10 top-0 shadow-2xl text-white', className)}>
+  <header
+    className={clsx(
+      'bg-primary-500 w-full h-max sticky z-10 top-0 shadow-2xl text-white',
+      className,
+    )}
+  >
     <div className="py-2 px-5 flex justify-between items-center max-w-[144rem] mx-auto">
       <NextLink className="no-underline" href="/">
         <h1 className="text-h2 font-bold ">LingoMatch</h1>
       </NextLink>
       <nav className="flex gap-2">
         {links?.map((link) => (
-          <Link key={link.path} {...link} />
+          <Link key={link.path} {...link} variant="styled" />
         ))}
         <NextLink className="styled-link" href="/design-system">
           <div className="text-preamble">design system</div>
         </NextLink>
       </nav>
     </div>
-  </div>
+  </header>
 );
 
 export default Header;
