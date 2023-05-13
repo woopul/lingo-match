@@ -31,11 +31,10 @@ type HomePageProps = {
 };
 
 const HomePage = ({ homePage: { hero, platformCard }, platforms }: HomePageProps) => {
-  console.log('platforms', platforms);
   return (
     <>
       <h2 className="text-6xl font-bold mt-3">Home Page - Platform list</h2>
-      <Hero desktopImageSrc={parseStrapiResponseToData(hero?.imageDesktop)?.url} />
+      {hero && <Hero {...hero} />}
       <div className="grid grid-cols-12 gap-x-2 h-full min-h-[150vh] mt-3">
         <aside className="bg-white col-span-3 rounded-md sticky top-10.5 h-[50rem] drop-shadow-md"></aside>
         <div className="flex flex-col gap-y-2 col-span-9">

@@ -9,7 +9,7 @@ export type LinkButtonProps = {
   label?: string;
 };
 
-const LinkButton = ({ children, className, href, label }) => {
+const LinkButton = ({ children, className, href, label }: LinkButtonProps) => {
   return (
     <NextLink
       className={clsx(

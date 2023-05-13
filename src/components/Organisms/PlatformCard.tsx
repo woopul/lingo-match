@@ -6,7 +6,10 @@ import { getPlatformUrl } from '@lingo-match/utlis';
 import { parseStrapiResponseToData } from '@lingo-match/utlis/parseStrapiResponse';
 import clsx from 'clsx';
 
-export type PlatformCardProps = PlatformDTO &
+export type PlatformCardProps = Pick<
+  PlatformDTO,
+  'title' | 'shortDescription' | 'labels' | 'slug' | 'logo' | 'price' | 'priceBeforeDiscount'
+> &
   PlatformCardDTO & {
     className?: string;
   };
@@ -39,7 +42,11 @@ const PlatformCard = ({
     >
       <div className="col-span-3 flex gap-2 items-start">
         <div className="w-[11.5rem] h-[4rem] relative">
-          <Image className="object-contain" src={logo.data?.attributes?.url || placeholderSrc} />
+          <Image
+            alt=""
+            className="object-contain"
+            src={logo.data?.attributes?.url || placeholderSrc}
+          />
         </div>
         <div className="w-full">
           <h3>{title}</h3>
@@ -58,9 +65,18 @@ const PlatformCard = ({
         </div>
         <div className="text-lightGray mt-1">{priceForShortLabel}</div>
       </div>
-      <div className={clsx('col-span-3 bg-lighterGray rounded-full px-3 flex items-center gap-5')}>
+      <div
+        className={clsx(
+          'col-span-3 bg-lighterGray rounded-full px-3 flex items-center gap-5 overflow-x-scroll',
+        )}
+      >
         {parsedLabelsToDisplay?.map(({ icon, title }) => (
-          <Label iconSrc={icon.data.attributes.url} key={title} label={title} />
+          <Label
+            className="whitespace-nowrap"
+            iconSrc={icon.data.attributes.url}
+            key={title}
+            label={title}
+          />
         ))}
       </div>
       <LinkButton href={getPlatformUrl(slug)}>{navigateToPlatformButtonLabel}</LinkButton>

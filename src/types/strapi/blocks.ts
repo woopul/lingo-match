@@ -7,7 +7,7 @@ export type CategoryDTO = {
 };
 
 export type HeroDTO = {
-  imageDesktop?: BaseResponseDataWrapper<StrapiMediaType>;
+  imageDesktop: BaseResponseDataWrapper<StrapiMediaType>;
 };
 
 export type PlatformDTO = {

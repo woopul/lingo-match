@@ -1,4 +1,4 @@
-import { BaseStrapiDataWrapperType } from '@lingo-match/types/strapi/baseApiResponse';
+import { BaseResponseDataWrapper } from '@lingo-match/types/strapi/baseApiResponse';
 
 type SeoMetaSocialType = {
   description: string;
@@ -13,7 +13,7 @@ export type SeoDTO = {
   keywords?: string;
   metaDescription?: string;
   metaImage?: {
-    data: BaseStrapiDataWrapperType<StrapiMediaType>;
+    data: BaseResponseDataWrapper<StrapiMediaType>;
   };
   metaRobots?: string;
   metaSocial: SeoMetaSocialType[] | [];
