@@ -1,23 +1,34 @@
-import {
-  BaseStrapiDataWrapperType,
-  MainStrapiDataWrapperType,
-} from '@lingo-match/types/strapi/baseApiResponse';
+import { BaseDataItem, BaseResponseDataWrapper } from '@lingo-match/types/strapi/baseApiResponse';
 import { StrapiMediaType } from '@lingo-match/types/strapi/shared';
 
 export type CategoryDTO = {
   name?: string;
-  platforms?: MainStrapiDataWrapperType<PlatformDTO>;
+  platforms?: BaseResponseDataWrapper<PlatformDTO[]>;
+};
+
+export type HeroDTO = {
+  imageDesktop?: BaseResponseDataWrapper<StrapiMediaType>;
 };
 
 export type PlatformDTO = {
   categories?: CategoryDTO[];
   description?: string;
-  labels?: string;
-  logo?: BaseStrapiDataWrapperType<StrapiMediaType>[];
-  name?: string;
-  price?: string;
+  labels: BaseResponseDataWrapper<LabelDTO[]> | null;
+  logo: BaseResponseDataWrapper<StrapiMediaType>;
+  price: number;
+  priceBeforeDiscount?: number;
   rating?: number;
-  slug?: string;
+  shortDescription?: string;
+  slug: string;
+  title: string;
+};
+
+export type PlatformCardDTO = {
+  basicVersionLabel: string;
+  basicVersionPayedLabel: string;
+  navigateToPlatformButtonLabel: string;
+  priceForShortLabel: string;
+  pricePerMonthLabel: string;
 };
 
 export type BlogPostDTO = {
@@ -29,4 +40,14 @@ export type BlogPostDTO = {
   splash?: string;
   title?: string;
   updatedAt?: string;
+};
+
+export type HomePageDTO = {
+  hero: HeroDTO;
+  platformCard: PlatformCardDTO;
+};
+
+export type LabelDTO = {
+  icon: BaseResponseDataWrapper<StrapiMediaType>;
+  title: string;
 };

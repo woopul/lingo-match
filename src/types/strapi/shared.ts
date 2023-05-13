@@ -61,6 +61,6 @@ export type StrapiMediaType = {
   };
   size?: number;
   updatedAt?: string;
-  url?: string;
+  url: string;
   width?: number;
 };

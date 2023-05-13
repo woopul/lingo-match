@@ -1,13 +1,22 @@
 import clsx from 'clsx';
-import NextImage, { ImageProps } from 'next/image';
+import NextImage, { ImageProps as NextImageProps } from 'next/image';
 import { useState } from 'react';
 
-const Image = ({ fill = true, ...rest }: ImageProps) => {
+export type ImageProps = NextImageProps & {
+  className?: string;
+};
+
+const Image = ({ className, fill = true, ...rest }: ImageProps) => {
   const [isLoading, setLoading] = useState(true);
 
   return (
     <>
-      <NextImage fill={fill} onLoadingComplete={() => setLoading(false)} {...rest} />
+      <NextImage
+        className={clsx(className || 'object-contain')}
+        fill={fill}
+        onLoadingComplete={() => setLoading(false)}
+        {...rest}
+      />
       <div
         className={clsx(
           'absolute backdrop-blur-lg duration-300',

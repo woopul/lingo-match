@@ -9,6 +9,10 @@ module.exports = {
       black: colors.black,
       indigo: colors.indigo,
       white: colors.white,
+      accentOne: '#E60576',
+      accentTwo: '#2CCCC3',
+      lightGray: '#8C8A8A',
+      lighterGray: '#F3F4F4',
       primary: {
         50: '#f4f1ff',
         100: '#ebe5ff',

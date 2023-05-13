@@ -1,6 +1,6 @@
 import { LayoutConfigDTO } from '@lingo-match/components/Organisms/Layout';
-import { BaseResponseDataType } from '@lingo-match/types/strapi/baseApiResponse';
-import { BlogPostDTO, PlatformDTO } from '@lingo-match/types/strapi/blocks';
+import { BaseResponseDataWrapper, MainDT } from '@lingo-match/types/strapi/baseApiResponse';
+import { BlogPostDTO, HomePageDTO, PlatformDTO } from '@lingo-match/types/strapi/blocks';
 import { parseStrapiResponseToData } from '@lingo-match/utlis/parseStrapiResponse';
 import qs from 'qs';
 
@@ -18,7 +18,7 @@ const fetchAPI = async <RT>(
   path: string,
   urlParamsObject: Record<any, any> = {},
   options: Record<any, any> = {},
-): Promise<BaseResponseDataType<RT>> => {
+): Promise<BaseResponseDataWrapper<RT>> => {
   // Merge default and user options
   const mergedOptions = {
     headers: {
@@ -51,8 +51,8 @@ const getBlogPosts = async () => {
 };
 
 const getPlatforms = async () => {
-  const platformsResponse = await fetchAPI<PlatformDTO>('/platforms', { populate: 'deep,2' });
-  return parseStrapiResponseToData<PlatformDTO>(platformsResponse);
+  const platformsResponse = await fetchAPI<PlatformDTO[]>('/platforms', { populate: 'deep,3' });
+  return parseStrapiResponseToData<PlatformDTO[]>(platformsResponse);
 };
 
 const getPlatformBySlug = async (slug: string) => {
@@ -63,6 +63,11 @@ const getPlatformBySlug = async (slug: string) => {
 const getBlogPostBySlug = async (slug: string) => {
   const blogPostsResponse = await fetchAPI<BlogPostDTO[]>(`/blogposts/${slug}`);
   return parseStrapiResponseToData<BlogPostDTO[]>(blogPostsResponse);
+};
+
+const getHomePage = async () => {
+  const homePageResponse = await fetchAPI<HomePageDTO>(`/home-page`, { populate: 'deep' });
+  return parseStrapiResponseToData<HomePageDTO>(homePageResponse) as HomePageDTO;
 };
 
 const getLayoutConfig = async () => {
@@ -78,6 +83,7 @@ export {
   getBlogPosts,
   getBlogPostBySlug,
   getLayoutConfig,
+  getHomePage,
   getPlatforms,
   getPlatformBySlug,
 };

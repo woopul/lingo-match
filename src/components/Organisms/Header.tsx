@@ -20,7 +20,7 @@ const Header = ({ className, links, logo, logoDescription }: HeaderProps) => (
       className,
     )}
   >
-    <div className="py-2 px-5 flex justify-between items-center max-w-[144rem] mx-auto">
+    <div className="py-2 px-8 flex justify-between items-center max-w-[144rem] mx-auto">
       <NextLink className="no-underline" href="/">
         <h1 className="text-h2 font-bold ">LingoMatch</h1>
       </NextLink>

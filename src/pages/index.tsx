@@ -1,16 +1,23 @@
-import { getLayoutConfig, getPlatforms } from '@lingo-match/api/strapi';
-import { Link, PrettyJSON } from '@lingo-match/components';
+import { getHomePage, getLayoutConfig, getPlatforms } from '@lingo-match/api/strapi';
+import Hero from '@lingo-match/components/Atoms/Hero';
+import { PlatformCard } from '@lingo-match/components/Organisms';
 import { DEFAULT_STATIC_PAGE_CACHE_TIME } from '@lingo-match/constants/cache';
 import withLayout from '@lingo-match/containers/withLayout';
 import { BaseGetStaticPropsType } from '@lingo-match/types/strapi/baseApiResponse';
-import { PlatformDTO } from '@lingo-match/types/strapi/blocks';
+import { HomePageDTO, PlatformDTO } from '@lingo-match/types/strapi/blocks';
+import { parseStrapiResponseToData } from '@lingo-match/utlis/parseStrapiResponse';
 import { GetStaticProps } from 'next';
 
 export const getStaticProps: GetStaticProps<BaseGetStaticPropsType> = async (context) => {
-  const [layoutConfig, platforms] = await Promise.all([getLayoutConfig(), getPlatforms()]);
+  const [layoutConfig, platforms, homePage] = await Promise.all([
+    getLayoutConfig(),
+    getPlatforms(),
+    getHomePage(),
+  ]);
 
   return {
     props: {
+      homePage: homePage || {},
       layoutConfig: layoutConfig || {},
       platforms: platforms || [],
     },
@@ -19,26 +26,25 @@ export const getStaticProps: GetStaticProps<BaseGetStaticPropsType> = async (con
 };
 
 type HomePageProps = {
+  homePage: HomePageDTO;
   platforms: PlatformDTO[];
 };
 
-const HomePage = ({ platforms }: HomePageProps) => {
+const HomePage = ({ homePage: { hero, platformCard }, platforms }: HomePageProps) => {
+  console.log('platforms', platforms);
   return (
-    <main>
+    <>
       <h2 className="text-6xl font-bold mt-3">Home Page - Platform list</h2>
-      <h3 className="my-2">platforms :</h3>
-      <div className="flex flex-col">
-        {platforms.map((platform) => (
-          <Link
-            className="p-3 hover:outline outline-indigo-400"
-            href={`/platform/${platform.slug}` || '#'}
-            key={platform.slug}
-          >
-            <PrettyJSON data={platform} key={platform.slug} />
-          </Link>
-        ))}
+      <Hero desktopImageSrc={parseStrapiResponseToData(hero?.imageDesktop)?.url} />
+      <div className="grid grid-cols-12 gap-x-2 h-full min-h-[150vh] mt-3">
+        <aside className="bg-white col-span-3 rounded-md sticky top-10.5 h-[50rem] drop-shadow-md"></aside>
+        <div className="flex flex-col gap-y-2 col-span-9">
+          {platforms.map((platform) => (
+            <PlatformCard {...platform} {...platformCard} key={platform.slug} />
+          ))}
+        </div>
       </div>
-    </main>
+    </>
   );
 };
 

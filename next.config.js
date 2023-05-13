@@ -4,7 +4,7 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     loader: 'default',
-    domains: ['localhost'],
+    domains: ['localhost', 'res.cloudinary.com'],
   },
 };
 
