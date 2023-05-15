@@ -72,7 +72,7 @@ const getHomePage = async () => {
 
 const getLayoutConfig = async () => {
   const response = await fetchAPI<LayoutConfigDTO>('/layout', {
-    populate: 'deep',
+    populate: 'deep,4',
   });
 
   return parseStrapiResponseToData(response);

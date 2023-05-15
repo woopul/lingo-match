@@ -15,8 +15,8 @@ export type PlatformDTO = {
   description?: string;
   labels: BaseResponseDataWrapper<LabelDTO[]> | null;
   logo: BaseResponseDataWrapper<StrapiMediaType>;
-  price: number;
-  priceBeforeDiscount?: number;
+  priceAsNumber: number;
+  priceBeforeDiscountAsNumber?: number;
   rating?: number;
   shortDescription?: string;
   slug: string;

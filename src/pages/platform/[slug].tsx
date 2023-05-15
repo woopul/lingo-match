@@ -11,10 +11,10 @@ export const getStaticPaths = async () => ({
   paths: [],
 });
 
-export const getStaticProps: GetStaticProps<BaseGetStaticPropsType> = async ({ params }) => {
+export const getStaticProps: GetStaticProps<BaseGetStaticPropsType> = async (context) => {
   const [layoutConfig, post] = await Promise.all([
     getLayoutConfig(),
-    getPlatformBySlug(params?.slug as string),
+    getPlatformBySlug(context.params?.slug as string),
   ]);
 
   return {

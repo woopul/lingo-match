@@ -5,7 +5,6 @@ import { DEFAULT_STATIC_PAGE_CACHE_TIME } from '@lingo-match/constants/cache';
 import withLayout from '@lingo-match/containers/withLayout';
 import { BaseGetStaticPropsType } from '@lingo-match/types/strapi/baseApiResponse';
 import { HomePageDTO, PlatformDTO } from '@lingo-match/types/strapi/blocks';
-import { parseStrapiResponseToData } from '@lingo-match/utlis/parseStrapiResponse';
 import { GetStaticProps } from 'next';
 
 export const getStaticProps: GetStaticProps<BaseGetStaticPropsType> = async (context) => {
@@ -33,7 +32,6 @@ type HomePageProps = {
 const HomePage = ({ homePage: { hero, platformCard }, platforms }: HomePageProps) => {
   return (
     <>
-      <h2 className="text-6xl font-bold mt-3">Home Page - Platform list</h2>
       {hero && <Hero {...hero} />}
       <div className="grid grid-cols-12 gap-x-2 h-full min-h-[150vh] mt-3">
         <aside className="bg-white col-span-3 rounded-md sticky top-10.5 h-[50rem] drop-shadow-md"></aside>

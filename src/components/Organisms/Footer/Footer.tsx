@@ -1,43 +1,49 @@
-import { Link } from '@lingo-match/components';
-import { Image } from '@lingo-match/components';
+import { LinkIcon } from '@lingo-match/components';
 import Logo from '@lingo-match/components/Atoms/Logo';
+import { BaseDataItem } from '@lingo-match/types/strapi/baseApiResponse';
+import { StrapiMediaType } from '@lingo-match/types/strapi/shared';
 import clsx from 'clsx';
 
-import footerConfig from './footerConfig';
-
 export type FooterColumnType = {
-  align?: 'bottom' | 'top' | 'center';
+  align?: 'vertical' | 'horizontal';
   links?: {
+    href?: string;
+    icon?: {
+      data: BaseDataItem<StrapiMediaType> | null;
+    };
     label?: string;
-    path?: string;
-    srcUrl?: string;
   }[];
-  srcUrl?: string;
   title?: string;
 };
 
-export type FooterProps = {
-  className?: string;
-  columns?: FooterColumnType[];
+export type FooterDTO = {
+  footerColumns?: FooterColumnType[];
 };
 
-const Footer = ({ className, columns = footerConfig as FooterColumnType[] }: FooterProps) => (
+export type FooterProps = FooterDTO & {
+  className?: string;
+};
+
+const Footer = ({ className, footerColumns }: FooterProps) => (
   <footer className={clsx('bg-primary-500 w-full z-10 bottom-0 shadow-2xl text-white', className)}>
     <div className="py-2 px-8 mx-auto max-w-[144rem] grid grid-cols-5">
-      {columns?.map(({ align, links, srcUrl, title }) => (
-        <div className={clsx('flex flex-col', align === 'center' && 'justify-center')} key={title}>
+      <Logo className="self-center" src="/logo.svg" />
+      {footerColumns?.map(({ align, links, title }) => (
+        <div className="flex flex-col" key={`${title || ''}-${links?.length || 0}`}>
           <div className="mb-1">{title}</div>
-          {srcUrl && <Logo src={srcUrl} />}
-          {links?.map((link) => {
-            return (
-              <Link
-                className="text-paragraph uppercase"
-                href={link.path || ''}
-                key={`${link.path}-${link.label}`}
-                label={link.label || ''}
-              />
-            );
-          })}
+          <div className={clsx('w-full', align === 'horizontal' && 'flex items-center gap-2')}>
+            {links?.map((link) => {
+              return (
+                <LinkIcon
+                  className="text-paragraph uppercase"
+                  href={link.href || ''}
+                  iconSrc={link.icon?.data?.attributes.url || ''}
+                  key={`${link.href}-${link.label}`}
+                  label={link.label || ''}
+                />
+              );
+            })}
+          </div>
         </div>
       ))}
     </div>

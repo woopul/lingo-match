@@ -8,7 +8,13 @@ import clsx from 'clsx';
 
 export type PlatformCardProps = Pick<
   PlatformDTO,
-  'title' | 'shortDescription' | 'labels' | 'slug' | 'logo' | 'price' | 'priceBeforeDiscount'
+  | 'title'
+  | 'shortDescription'
+  | 'labels'
+  | 'slug'
+  | 'logo'
+  | 'priceAsNumber'
+  | 'priceBeforeDiscountAsNumber'
 > &
   PlatformCardDTO & {
     className?: string;
@@ -24,8 +30,8 @@ const PlatformCard = ({
   labels,
   logo,
   navigateToPlatformButtonLabel,
-  price,
-  priceBeforeDiscount,
+  priceAsNumber,
+  priceBeforeDiscountAsNumber,
   priceForShortLabel,
   pricePerMonthLabel,
   shortDescription,
@@ -57,9 +63,13 @@ const PlatformCard = ({
         <div>{basicVersionLabel}</div>
         <p className="text-16 font-bold text-accentTwo">{basicVersionPayedLabel}</p>
         <div className="flex items-end">
-          <div className="text-accentOne line-through mr-3">US$ {priceBeforeDiscount}</div>
+          {!!priceBeforeDiscountAsNumber && (
+            <div className="text-accentOne line-through mr-3">
+              US$ {priceBeforeDiscountAsNumber}
+            </div>
+          )}
           <div>
-            <span className="font-bold text-black text-16"> {price} $</span>
+            <span className="font-bold text-black text-16"> {priceAsNumber} $</span>
             <span className="text-lightGray">{pricePerMonthLabel}</span>
           </div>
         </div>

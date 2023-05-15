@@ -11,3 +11,12 @@ export const parseStrapiResponseToData = <T>(
   }
   return (item.data as BaseDataItem<T>).attributes as T;
 };
+
+export const strapiData = <T>(
+  item: BaseResponseDataWrapper<Array<BaseDataItem<T>>> | BaseResponseDataWrapper<BaseDataItem<T>>,
+): T | T[] => {
+  if (Array.isArray(item.data)) {
+    return (item.data as Array<BaseDataItem<T>>).map((dataItem) => dataItem.attributes) as T[];
+  }
+  return (item.data as BaseDataItem<T>).attributes as T;
+};
