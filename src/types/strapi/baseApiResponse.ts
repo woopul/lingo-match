@@ -1,10 +1,5 @@
-import { LayoutConfigDTO } from '@lingo-match/components/Organisms/Layout';
-
-export type BaseApiResponseType<BodyType = unknown> = {
-  body: BodyType;
-  error?: object;
-  status: number;
-};
+import { LayoutConfigDTO } from '@lingo-match/components/Layout';
+import { BlockWrapper } from '@lingo-match/types/strapi/blocks';
 
 type BaseStrapiAttributesType = {
   createdAt?: string;
@@ -39,6 +34,11 @@ export type BaseResponseDataWrapper<DT> = {
   meta?: MainStrapiMetaType | {};
 };
 
+export type DataWrapper<DT> = {
+  data: DT;
+};
+
 export type BaseGetStaticPropsType = {
+  blocks?: BlockWrapper[];
   layoutConfig: LayoutConfigDTO | {};
 } & Record<any, any>;

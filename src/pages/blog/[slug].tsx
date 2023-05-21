@@ -1,8 +1,9 @@
-import { getBlogPostBySlug, getLayoutConfig, getPlatformBySlug } from '@lingo-match/api/strapi';
+import { getBlogPostBySlug, getLayoutConfig } from '@lingo-match/api/strapi';
 import { PrettyJSON } from '@lingo-match/components';
 import { DEFAULT_STATIC_PAGE_CACHE_TIME } from '@lingo-match/constants/cache';
 import withLayout from '@lingo-match/containers/withLayout';
 import { BaseGetStaticPropsType } from '@lingo-match/types/strapi/baseApiResponse';
+import { BlogPostDTO, HomePageDTO } from '@lingo-match/types/strapi/blocks';
 import { GetStaticProps } from 'next';
 import ReactMarkdown from 'react-markdown';
 
@@ -17,8 +18,10 @@ export const getStaticProps: GetStaticProps<BaseGetStaticPropsType> = async ({ p
     getBlogPostBySlug(params?.slug as string),
   ]);
 
+  const blocks = (post as BlogPostDTO)?.blocks;
   return {
     props: {
+      blocks: blocks || [],
       layoutConfig: layoutConfig || {},
       post: post || 'Not found',
     },

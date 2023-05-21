@@ -1,6 +1,11 @@
 import { BaseDataItem, BaseResponseDataWrapper } from '@lingo-match/types/strapi/baseApiResponse';
 import { StrapiMediaType } from '@lingo-match/types/strapi/shared';
 
+export type BlockWrapper<T = any> = T & {
+  __component: string;
+  id: string;
+};
+
 export type CategoryDTO = {
   name?: string;
   platforms?: BaseResponseDataWrapper<PlatformDTO[]>;
@@ -32,6 +37,7 @@ export type PlatformCardDTO = {
 };
 
 export type BlogPostDTO = {
+  blocks?: BlockWrapper[];
   content?: string;
   createdAt?: string;
   locale?: string;
@@ -43,6 +49,7 @@ export type BlogPostDTO = {
 };
 
 export type HomePageDTO = {
+  blocks: BlockWrapper[];
   hero: HeroDTO;
   platformCard: PlatformCardDTO;
 };

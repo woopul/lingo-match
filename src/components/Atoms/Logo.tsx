@@ -7,7 +7,7 @@ export type LogoProps = {
 };
 
 const Logo = ({ className, src = './logo.svg' }: LogoProps) => (
-  <Link className={className} href="/">
+  <Link className={clsx(className)} href="/">
     <div className={clsx('w-[14.5rem] h-[4rem] relative')}>
       <Image alt="" className="object-contain" key={src} src={src!} />
     </div>

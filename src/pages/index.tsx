@@ -14,13 +14,18 @@ export const getStaticProps: GetStaticProps<BaseGetStaticPropsType> = async (con
     getHomePage(),
   ]);
 
+  const blocks = (homePage as HomePageDTO)?.blocks || [];
+
+  console.log('homepage blocks', { blocks, homePage });
   return {
     props: {
+      blocks: blocks,
       homePage: homePage || {},
       layoutConfig: layoutConfig || {},
       platforms: platforms || [],
     },
-    revalidate: DEFAULT_STATIC_PAGE_CACHE_TIME,
+    // revalidate: DEFAULT_STATIC_PAGE_CACHE_TIME,
+    revalidate: 30, //30s
   };
 };
 

@@ -80,4 +80,37 @@
     width: 100%;
   }
 
+  .placeholder {
+    height: 6rem;
+    border: 1px solid #b93b3b;
+    width: 100%;
+    text-align: center;
+    background: white;
+    position: relative;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+  }
+
+  .placeholder::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top left,
+        transparent 0%,
+        transparent calc(50% - 1px),
+        #b93b3b 50%,
+        transparent calc(50% + 1px),
+        transparent 100%
+      ),
+      linear-gradient(
+        to top right,
+        transparent 0%,
+        transparent calc(50% - 1px),
+        #b93b3b 50%,
+        transparent calc(50% + 1px),
+        transparent 100%
+      );
+  }
 }

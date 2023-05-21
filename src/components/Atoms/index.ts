@@ -4,3 +4,5 @@ export { default as PrettyJSON } from './PrettyJSON';
 export { default as Link } from './Link';
 export { default as Image } from './Image';
 export { default as LinkIcon } from './LinkIcon';
+export { default as ImagesContainer } from './ImagesContainer';
+export { default as Spacer } from './Spacer';

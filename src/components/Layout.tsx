@@ -1,9 +1,8 @@
-import { Footer } from '@lingo-match/components/Organisms/Footer';
-import { FooterColumnType } from '@lingo-match/components/Organisms/Footer/Footer';
+import { Footer, FooterColumnType } from '@lingo-match/components';
 import { SeoDTO } from '@lingo-match/types/strapi/shared';
 import { PropsWithChildren } from 'react';
 
-import Header, { HeaderDTO } from './Header';
+import Header, { HeaderDTO } from './Organisms/Header';
 
 export type LayoutConfigDTO = {
   defaultSEO?: SeoDTO;

@@ -1,5 +1,5 @@
-import { LayoutConfigDTO } from '@lingo-match/components/Organisms/Layout';
-import { BaseResponseDataWrapper, MainDT } from '@lingo-match/types/strapi/baseApiResponse';
+import { LayoutConfigDTO } from '@lingo-match/components/Layout';
+import { BaseResponseDataWrapper } from '@lingo-match/types/strapi/baseApiResponse';
 import { BlogPostDTO, HomePageDTO, PlatformDTO } from '@lingo-match/types/strapi/blocks';
 import { parseStrapiResponseToData } from '@lingo-match/utlis/parseStrapiResponse';
 import qs from 'qs';
@@ -56,17 +56,21 @@ const getPlatforms = async () => {
 };
 
 const getPlatformBySlug = async (slug: string) => {
-  const blogPostResponse = await fetchAPI<BlogPostDTO>(`/platforms/${slug}`);
+  const blogPostResponse = await fetchAPI<BlogPostDTO>(`/platforms/${slug}`, {
+    populate: 'deep,3',
+  });
   return parseStrapiResponseToData<BlogPostDTO>(blogPostResponse);
 };
 
 const getBlogPostBySlug = async (slug: string) => {
-  const blogPostsResponse = await fetchAPI<BlogPostDTO[]>(`/blogposts/${slug}`);
+  const blogPostsResponse = await fetchAPI<BlogPostDTO[]>(`/blogposts/${slug}`, {
+    populate: 'deep,3',
+  });
   return parseStrapiResponseToData<BlogPostDTO[]>(blogPostsResponse);
 };
 
 const getHomePage = async () => {
-  const homePageResponse = await fetchAPI<HomePageDTO>(`/home-page`, { populate: 'deep' });
+  const homePageResponse = await fetchAPI<HomePageDTO>(`/home-page`, { populate: 'deep,3' });
   return parseStrapiResponseToData<HomePageDTO>(homePageResponse) as HomePageDTO;
 };
 

@@ -1,7 +1,6 @@
-import { getBlogPostBySlug, getLayoutConfig } from '@lingo-match/api/strapi';
+import { getLayoutConfig } from '@lingo-match/api/strapi';
 import { PrettyJSON } from '@lingo-match/components';
 import withLayout from '@lingo-match/containers/withLayout';
-import { BlogPostType } from '@lingo-match/pages/blog/[slug]';
 import { BaseGetStaticPropsType } from '@lingo-match/types/strapi/baseApiResponse';
 import { PlatformDTO } from '@lingo-match/types/strapi/blocks';
 import { GetStaticProps } from 'next';
