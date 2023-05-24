@@ -12,6 +12,7 @@ export const parseStrapiResponseToData = <T>(
   return (item.data as BaseDataItem<T>).attributes as T;
 };
 
+// TODO refactor this function to take proper generic type and return type feedback
 export const strapiData = <T>(
   item: BaseResponseDataWrapper<Array<BaseDataItem<T>>> | BaseResponseDataWrapper<BaseDataItem<T>>,
 ): T | T[] => {

@@ -46,7 +46,7 @@ const fetchAPI = async <RT>(
 };
 
 const getBlogPosts = async () => {
-  const response = await fetchAPI<BlogPostDTO>('/blogposts');
+  const response = await fetchAPI<BlogPostDTO>('/blogposts', { populate: 'deep,3' });
   return parseStrapiResponseToData<BlogPostDTO>(response);
 };
 
@@ -63,10 +63,10 @@ const getPlatformBySlug = async (slug: string) => {
 };
 
 const getBlogPostBySlug = async (slug: string) => {
-  const blogPostsResponse = await fetchAPI<BlogPostDTO[]>(`/blogposts/${slug}`, {
+  const blogPostsResponse = await fetchAPI<BlogPostDTO>(`/blogposts/${slug}`, {
     populate: 'deep,3',
   });
-  return parseStrapiResponseToData<BlogPostDTO[]>(blogPostsResponse);
+  return parseStrapiResponseToData<BlogPostDTO>(blogPostsResponse);
 };
 
 const getHomePage = async () => {

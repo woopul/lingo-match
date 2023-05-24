@@ -1,9 +1,22 @@
-import { BaseDataItem, BaseResponseDataWrapper } from '@lingo-match/types/strapi/baseApiResponse';
+import {
+  BaseArrayDataWrapper,
+  BaseDataWrapper,
+  BaseResponseDataWrapper,
+} from '@lingo-match/types/strapi/baseApiResponse';
 import { StrapiMediaType } from '@lingo-match/types/strapi/shared';
+
+// TODO clean up, restructure and check those types
 
 export type BlockWrapper<T = any> = T & {
   __component: string;
   id: string;
+};
+
+export type BlocksType = BlockWrapper[] | [];
+
+type TagType = {
+  name: string;
+  type: string;
 };
 
 export type CategoryDTO = {
@@ -12,7 +25,39 @@ export type CategoryDTO = {
 };
 
 export type HeroDTO = {
+  description?: string;
+  id: number;
   imageDesktop: BaseResponseDataWrapper<StrapiMediaType>;
+  textColor?: string;
+  title?: TitleDTO;
+};
+
+export type HorizontalAlignmentType = 'left' | 'center' | 'right';
+export type TextSizeStyleType =
+  | 'text-hero'
+  | 'text-h1'
+  | 'text-h2'
+  | 'text-h3'
+  | 'text-h4'
+  | 'text-h5';
+
+export type DescriptionSizeStyleType = 'S' | 'M' | 'L' | 'XL';
+
+export type TitleDTO = {
+  horizontalAlignment: HorizontalAlignmentType;
+  id: number;
+  tagType: 'h1' | 'h2' | 'h3' | 'h4' | 'h5';
+  title: string;
+  titleSizeStyle: TextSizeStyleType;
+};
+
+export type DescriptionDTO = {
+  description?: string;
+  descriptionRichText?: string;
+  descriptionSizeStyle: DescriptionSizeStyleType;
+  id: number;
+  richText?: string;
+  textColor?: string;
 };
 
 export type PlatformDTO = {
@@ -37,13 +82,16 @@ export type PlatformCardDTO = {
 };
 
 export type BlogPostDTO = {
-  blocks?: BlockWrapper[];
+  author: string;
+  blocks: BlocksType;
+  blogCategories: BaseArrayDataWrapper<TagType>;
   content?: string;
   createdAt?: string;
   locale?: string;
   publishedAt?: string;
-  slug?: string;
-  splash?: string;
+  shortDescription: string;
+  slug: string;
+  splash: BaseDataWrapper<StrapiMediaType>;
   title?: string;
   updatedAt?: string;
 };

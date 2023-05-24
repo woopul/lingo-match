@@ -16,12 +16,20 @@ const Spacer = dynamic(() => import('@lingo-match/components/Atoms/Spacer'), {
   ssr: true,
 });
 
+const SectionWithTitle = dynamic(
+  () => import('@lingo-match/components/Organisms/SectionWithTitle'),
+  {
+    ssr: true,
+  },
+);
+
 export type BlockConfigType = Record<string, any>;
 
 export const blockConfig = {
   hero: Hero,
   'icon-link': LinkIcon,
   'images-container': ImagesContainer,
+  'section-with-title': SectionWithTitle,
   spacing: Spacer,
 };
 

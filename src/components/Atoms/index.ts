@@ -6,3 +6,4 @@ export { default as Image } from './Image';
 export { default as LinkIcon } from './LinkIcon';
 export { default as ImagesContainer } from './ImagesContainer';
 export { default as Spacer } from './Spacer';
+export { default as GradientBox } from './GradientBox';

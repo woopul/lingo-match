@@ -1,5 +1,5 @@
 import { getBlogPosts, getLayoutConfig } from '@lingo-match/api/strapi';
-import { Link, PrettyJSON } from '@lingo-match/components';
+import { GradientBox, Link, PostList, PrettyJSON } from '@lingo-match/components';
 import withLayout from '@lingo-match/containers/withLayout';
 import { BlogPostDTO } from '@lingo-match/types/strapi/blocks';
 import { GetStaticProps } from 'next';
@@ -21,21 +21,11 @@ type BlogListPageProps = {
 
 const BlogListPage = ({ blogPosts }: BlogListPageProps) => {
   return (
-    <main className="min-h-screen">
-      <h2 className="text-6xl font-bold mt-3">Blog List Page</h2>
-      <h3 className="my-2">blog posts :</h3>
-      <div className="flex flex-col">
-        {blogPosts.map((post) => (
-          <Link
-            className="p-3 hover:outline outline-indigo-400"
-            href={`/blog/${post.slug}` || '#'}
-            key={post.slug}
-          >
-            <PrettyJSON data={post} key={post.slug} />
-          </Link>
-        ))}
-      </div>
-    </main>
+    <>
+      <GradientBox />
+      <h2 className="text-6xl font-bold my-3 text-white">Blog List Page</h2>
+      <PostList posts={blogPosts} />
+    </>
   );
 };
 

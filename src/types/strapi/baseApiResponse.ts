@@ -12,6 +12,8 @@ type MainStrapiAttributesType = {
   published_at?: string;
 };
 
+type StrapiAttributesType = BaseStrapiAttributesType & MainStrapiAttributesType;
+
 type MainStrapiMetaType = {
   pagination: {
     page: number;
@@ -31,6 +33,16 @@ export type BaseDataItem<DT> = {
 
 export type BaseResponseDataWrapper<DT> = {
   data: DT extends any[] ? Array<BaseDataItem<DT>> : BaseDataItem<DT>;
+  meta?: MainStrapiMetaType | {};
+};
+
+export type BaseArrayDataWrapper<DT> = {
+  data: Array<BaseDataItem<DT>> | null;
+  meta?: MainStrapiMetaType | {};
+};
+
+export type BaseDataWrapper<DT> = {
+  data: BaseDataItem<DT> | null;
   meta?: MainStrapiMetaType | {};
 };
 

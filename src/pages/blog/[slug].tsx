@@ -29,25 +29,17 @@ export const getStaticProps: GetStaticProps<BaseGetStaticPropsType> = async ({ p
   };
 };
 
-export type BlogPostType = {
-  author: string;
-  content: string;
-  slug: string;
-  title: string;
-};
-
 export type BlogPostPageProps = {
-  post: BlogPostType;
+  post: BlogPostDTO;
 };
 
 const BlogPostPage = ({ post }: BlogPostPageProps) => {
   return (
-    <main className="min-h-screen">
+    <>
       <h2 className="text-6xl font-bold mt-3">Blog Post Page</h2>
       <h3 className="my-2">posts :</h3>
-      <div className="flex flex-col">{<PrettyJSON data={post} key={post.slug} />}</div>
-      <ReactMarkdown>{post.content}</ReactMarkdown>
-    </main>
+      {/*<div className="flex flex-col">{<PrettyJSON data={post} key={post.slug} />}</div>*/}
+    </>
   );
 };
 
