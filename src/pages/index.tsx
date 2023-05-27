@@ -2,6 +2,7 @@ import { getHomePage, getLayoutConfig, getPlatforms } from '@lingo-match/api/str
 import { GradientBox } from '@lingo-match/components';
 import Hero from '@lingo-match/components/Atoms/Hero';
 import { PlatformCard } from '@lingo-match/components/Organisms';
+import AccordionItem from '@lingo-match/components/Organisms/AccordionItem';
 import { DEFAULT_STATIC_PAGE_CACHE_TIME } from '@lingo-match/constants/cache';
 import withLayout from '@lingo-match/containers/withLayout';
 import { BaseGetStaticPropsType } from '@lingo-match/types/strapi/baseApiResponse';
@@ -38,7 +39,9 @@ const HomePage = ({ homePage: { hero, platformCard }, platforms }: HomePageProps
       <GradientBox />
       {hero && <Hero {...hero} />}
       <div className="grid grid-cols-12 gap-x-2 h-full min-h-[150vh] mt-3">
-        <aside className="bg-white col-span-3 rounded-md sticky top-[calc(8.5rem+1.6rem)] h-[50rem] drop-shadow-md"></aside>
+        <aside className="bg-white col-span-3 rounded-md sticky top-[calc(8.5rem+1.6rem)] h-[50rem] drop-shadow-md">
+          <AccordionItem title="Accordion Item 1" />
+        </aside>
         <div className="flex flex-col gap-y-2 col-span-9">
           {platforms.map((platform) => (
             <PlatformCard {...platform} {...platformCard} key={platform.slug} />
