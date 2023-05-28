@@ -1,16 +1,16 @@
 import clsx from 'clsx';
-import React, { ReactElement } from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 import { BsChevronDown } from 'react-icons/bs';
 
 export type AccordionItemProps = {
-  content?: string;
+  children?: ReactNode;
   expanded?: boolean;
   icon?: ReactElement;
   title: string;
 };
 
 const AccordionItem = ({
-  content,
+  children,
   expanded = false,
   icon: IconComponent,
   title,
@@ -20,7 +20,7 @@ const AccordionItem = ({
   return (
     <div className="w-full p-2">
       <button
-        className="flex w-full justify-between items-center"
+        className="flex w-full justify-between items-center font-bold text-paragraph"
         onClick={() => setIsExpanded(!isExpanded)}
       >
         {IconComponent && IconComponent} <span>{title}</span>{' '}
@@ -35,10 +35,7 @@ const AccordionItem = ({
           isExpanded && 'grid-rows-[1fr]',
         )}
       >
-        <div className="overflow-hidden">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic, libero nemo omnis placeat
-          provident quaerat qui quia. Est harum, impedit!
-        </div>
+        <div className="overflow-hidden pt-1">{children}</div>
       </div>
     </div>
   );

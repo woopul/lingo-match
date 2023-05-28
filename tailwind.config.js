@@ -7,14 +7,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        black: colors.black,
-        indigo: colors.indigo,
-        white: colors.white,
+        orange: '#FACD3D',
         accentOne: '#E60576',
         accentTwo: '#2CCCC3',
-        lightGray: '#8C8A8A',
-        darkGray: '#acabab',
-        lighterGray: '#F3F4F4',
+        darkGrey: '#8C8A8A',
+        middleGrey: '#D9D9D9',
+        lightGrey: '#acabab',
+        lighterGrey: '#F3F4F4',
         primary: {
           50: '#f4f1ff',
           100: '#ebe5ff',

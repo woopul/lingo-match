@@ -1,5 +1,6 @@
 import { getHomePage, getLayoutConfig, getPlatforms } from '@lingo-match/api/strapi';
 import { GradientBox } from '@lingo-match/components';
+import Checkbox from '@lingo-match/components/Atoms/CheckBox';
 import Hero from '@lingo-match/components/Atoms/Hero';
 import { PlatformCard } from '@lingo-match/components/Organisms';
 import AccordionItem from '@lingo-match/components/Organisms/AccordionItem';
@@ -40,7 +41,11 @@ const HomePage = ({ homePage: { hero, platformCard }, platforms }: HomePageProps
       {hero && <Hero {...hero} />}
       <div className="grid grid-cols-12 gap-x-2 h-full min-h-[150vh] mt-3">
         <aside className="bg-white col-span-3 rounded-md sticky top-[calc(8.5rem+1.6rem)] h-[50rem] drop-shadow-md">
-          <AccordionItem title="Accordion Item 1" />
+          <AccordionItem expanded title="Accordion Item 1">
+            <div>
+              <Checkbox id={'1'} label="text checkbox" variant="icon" />
+            </div>
+          </AccordionItem>
         </aside>
         <div className="flex flex-col gap-y-2 col-span-9">
           {platforms.map((platform) => (
