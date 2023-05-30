@@ -3,14 +3,18 @@ import React, { ReactElement, ReactNode } from 'react';
 import { BsChevronDown } from 'react-icons/bs';
 
 export type AccordionItemProps = {
+  bold?: boolean;
   children?: ReactNode;
+  className?: string;
   expanded?: boolean;
   icon?: ReactElement;
-  title: string;
+  title: ReactNode;
 };
 
 const AccordionItem = ({
+  bold = false,
   children,
+  className,
   expanded = false,
   icon: IconComponent,
   title,
@@ -18,14 +22,14 @@ const AccordionItem = ({
   const [isExpanded, setIsExpanded] = React.useState(expanded);
 
   return (
-    <div className="w-full p-2">
+    <div className={clsx('w-full p-2', className)}>
       <button
-        className="flex w-full justify-between items-center font-bold text-paragraph"
+        className={clsx('flex w-full items-center  text-paragraph', bold && 'font-bold')}
         onClick={() => setIsExpanded(!isExpanded)}
       >
-        {IconComponent && IconComponent} <span>{title}</span>{' '}
+        {IconComponent && IconComponent} {title}
         <BsChevronDown
-          className={clsx(' transition-rotate duration-300', isExpanded && 'rotate-180')}
+          className={clsx(' transition-rotate duration-300 ml-auto', isExpanded && 'rotate-180')}
         />
       </button>
 

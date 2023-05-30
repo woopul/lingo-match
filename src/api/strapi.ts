@@ -64,7 +64,7 @@ const getPlatformBySlug = async (slug: string) => {
 
 const getBlogPostBySlug = async (slug: string) => {
   const blogPostsResponse = await fetchAPI<BlogPostDTO>(`/blogposts/${slug}`, {
-    populate: 'deep,3',
+    populate: 'deep,4',
   });
   return parseStrapiResponseToData<BlogPostDTO>(blogPostsResponse);
 };

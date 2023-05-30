@@ -1,11 +1,9 @@
 import { getBlogPostBySlug, getLayoutConfig } from '@lingo-match/api/strapi';
-import { PrettyJSON } from '@lingo-match/components';
 import { DEFAULT_STATIC_PAGE_CACHE_TIME } from '@lingo-match/constants/cache';
 import withLayout from '@lingo-match/containers/withLayout';
 import { BaseGetStaticPropsType } from '@lingo-match/types/strapi/baseApiResponse';
-import { BlogPostDTO, HomePageDTO } from '@lingo-match/types/strapi/blocks';
+import { BlogPostDTO } from '@lingo-match/types/strapi/blocks';
 import { GetStaticProps } from 'next';
-import ReactMarkdown from 'react-markdown';
 
 export const getStaticPaths = async () => ({
   fallback: 'blocking',
@@ -38,7 +36,6 @@ const BlogPostPage = ({ post }: BlogPostPageProps) => {
     <>
       <h2 className="text-6xl font-bold mt-3">Blog Post Page</h2>
       <h3 className="my-2">posts :</h3>
-      {/*<div className="flex flex-col">{<PrettyJSON data={post} key={post.slug} />}</div>*/}
     </>
   );
 };

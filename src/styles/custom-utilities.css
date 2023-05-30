@@ -81,7 +81,7 @@
   }
 
   .placeholder {
-    height: 6rem;
+    min-height: 6rem;
     border: 1px solid #b93b3b;
     width: 100%;
     text-align: center;
@@ -89,10 +89,13 @@
     position: relative;
     display: flex;
     align-items:center;
+    flex-direction: column;
     justify-content: center;
+
   }
 
   .placeholder::before {
+    pointer-events: none;
     content: "";
     position: absolute;
     inset: 0;

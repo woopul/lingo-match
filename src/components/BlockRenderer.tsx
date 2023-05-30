@@ -1,3 +1,5 @@
+import { PrettyJSON } from '@lingo-match/components/Atoms';
+import AccordionItem from '@lingo-match/components/Organisms/AccordionItem';
 import { BlockWrapper } from '@lingo-match/types/strapi/blocks';
 import React from 'react';
 
@@ -17,25 +19,32 @@ const BlockRenderer = ({ blockConfig, blocks }: BlockRendererProps) => {
   }
 
   return (
-    <>
+    <div className="w-full [&>*+*]:mt-3">
       {blocks.map(({ __component, id, ...rest }) => {
         const Component = getComponent(__component, blockConfig);
 
         if (!Component) {
-          return <Placeholder component={__component} key={id} />;
+          return <Placeholder component={__component} {...rest} key={id} />;
         }
 
         return <Component key={id} {...rest} />;
       })}
-    </>
+    </div>
   );
 };
 
-const Placeholder = ({ component }: { component: string }) => (
-  <div className="placeholder my-1">
-    <p className="bg-white h-fit z-10">
-      Block <b>{component}</b> not found.
-    </p>
+const Placeholder = ({ component, ...rest }: { component: string }) => (
+  <div className="placeholder my-1 p-2">
+    <AccordionItem
+      className="py-1 h-fit bg-white z-10 w-[25vw] text-left [&>button]:mr-3 "
+      title={
+        <p>
+          <span className="font-bold">{component}</span> not found | data:
+        </p>
+      }
+    >
+      <PrettyJSON data={rest} />
+    </AccordionItem>
   </div>
 );
 

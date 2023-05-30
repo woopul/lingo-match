@@ -15,7 +15,6 @@ const PostList = ({ display = 'grid', posts }: PostListProps) => {
 
   const postCardAlignment = display === 'grid' ? 'vertical' : 'horizontal';
 
-  console.log('posts', posts);
   return (
     <div className={clsx('grid grid-cols-3 gap-2')}>
       {posts.map((post) => (
