@@ -18,7 +18,7 @@ const Hero = ({ description, imageDesktop, textColor, title }: HeroDTO) => {
           style={heroTextColorStyle}
         >
           <CustomTag className={title.titleSizeStyle}>{title.title}</CustomTag>
-          {description && <p className="text-paragraph text-white mt-2">{description}</p>}
+          {description && <p className="text-preamble text-white mt-2">{description}</p>}
         </div>
       )}
     </div>

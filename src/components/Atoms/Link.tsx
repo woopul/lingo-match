@@ -1,15 +1,17 @@
 import clsx from 'clsx';
 import NextLink, { LinkProps as NextLinkProps } from 'next/link';
-import { PropsWithChildren } from 'react';
+import { CSSProperties, PropsWithChildren } from 'react';
 
 export type LinkDTO = {
   label?: string;
   path?: string;
+  textColor: string | null;
 };
 
 export type LinkProps = NextLinkProps & {
   className?: string;
   label?: string;
+  style?: CSSProperties;
   variant?: 'styled' | 'default';
 };
 
@@ -18,6 +20,7 @@ const Link = ({
   className,
   href,
   label,
+  style,
   variant = 'default',
 }: PropsWithChildren<LinkProps>) => (
   <NextLink
@@ -27,6 +30,7 @@ const Link = ({
       className,
     )}
     href={href || '/'}
+    style={style}
   >
     {children || label}
   </NextLink>

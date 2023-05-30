@@ -39,8 +39,14 @@ const Header = ({ className, links, logo, logoDescription, logoTitle }: HeaderPr
           {logoDescription && <div className="text-small mt-0.5">{logoDescription}</div>}
         </NextLink>
         <nav className="flex gap-2">
-          {links?.map(({ label, path }) => (
-            <Link href={path || '/'} key={path} label={label || ''} variant="styled" />
+          {links?.map(({ label, path, textColor }) => (
+            <Link
+              href={path || '/'}
+              key={path}
+              label={label || ''}
+              style={{ color: textColor || '' }}
+              variant="styled"
+            />
           ))}
           <NextLink className="styled-link" href="/design-system">
             <div className="text-preamble">design system</div>
