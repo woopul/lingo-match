@@ -96,9 +96,26 @@ export type BlogPostDTO = {
   updatedAt?: string;
 };
 
+export type TagDTO = {
+  name: string;
+  type: string;
+};
+
+export type FilterAccordionDTO = {
+  expanded: boolean;
+  icon: BaseDataWrapper<StrapiMediaType>;
+  id: number;
+  positionReversed: boolean;
+  shouldBeExpandable: boolean;
+  tags: BaseArrayDataWrapper<TagDTO>;
+  title: string;
+  variant: 'default' | 'toggle' | 'icon' | 'label';
+};
+
 export type HomePageDTO = {
   blocks: BlockWrapper[];
   hero: HeroDTO;
+  mainFilters: FilterAccordionDTO[] | [];
   platformCard: PlatformCardDTO;
 };
 

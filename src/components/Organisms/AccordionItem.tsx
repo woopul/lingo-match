@@ -7,7 +7,8 @@ export type AccordionItemProps = {
   children?: ReactNode;
   className?: string;
   expanded?: boolean;
-  icon?: ReactElement;
+  icon?: ReactElement | null;
+  shouldBeExpandable?: boolean;
   title: ReactNode;
 };
 
@@ -17,6 +18,7 @@ const AccordionItem = ({
   className,
   expanded = false,
   icon: IconComponent,
+  shouldBeExpandable = true,
   title,
 }: AccordionItemProps) => {
   const [isExpanded, setIsExpanded] = React.useState(expanded);
@@ -28,15 +30,18 @@ const AccordionItem = ({
         onClick={() => setIsExpanded(!isExpanded)}
       >
         {IconComponent && IconComponent} {title}
-        <BsChevronDown
-          className={clsx(' transition-rotate duration-300 ml-auto', isExpanded && 'rotate-180')}
-        />
+        {shouldBeExpandable && (
+          <BsChevronDown
+            className={clsx(' transition-rotate duration-300 ml-auto', isExpanded && 'rotate-180')}
+          />
+        )}
       </button>
 
       <div
         className={clsx(
-          'grid grid-rows-[0fr] transition-[grid-template-rows] ease-in-out duration-[500ms]',
-          isExpanded && 'grid-rows-[1fr]',
+          'grid transition-[grid-template-rows] ease-in-out duration-[500ms]',
+          shouldBeExpandable ? 'grid-rows-[0fr]' : 'grid-rows-[1fr]',
+          isExpanded && shouldBeExpandable && 'grid-rows-[1fr]',
         )}
       >
         <div className="overflow-hidden pt-1">{children}</div>

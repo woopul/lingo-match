@@ -26,7 +26,6 @@ const PostCard = ({
   splash,
   title,
 }: PostCardProps) => {
-  console.log(splash, blogCategories);
   return (
     <NextLink
       className={clsx(

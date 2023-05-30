@@ -16,7 +16,6 @@ export type CheckboxColumnsProps = {
 };
 
 const CheckboxColumns = ({ columns }: CheckboxColumnsProps) => {
-  console.log('Checkbox col component', columns);
   return (
     <div className="desktop:grid desktop:grid-cols-3">
       {columns.map(({ checkboxLabels, id }) => (
