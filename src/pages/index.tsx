@@ -17,6 +17,7 @@ export const getStaticProps: GetStaticProps<BaseGetStaticPropsType> = async (con
   ]);
 
   const blocks = (homePage as HomePageDTO)?.blocks || [];
+
   return {
     props: {
       blocks: blocks,

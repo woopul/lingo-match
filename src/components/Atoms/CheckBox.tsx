@@ -70,7 +70,7 @@ const Checkbox = forwardRef(
           type="checkbox"
           {...rest}
         />
-        {(variant === 'default' || variant === 'icon') && (
+        {(variant === 'default' || 'icon' === variant) && (
           <div
             className={clsx(
               'relative flex h-2.3 w-2.3 shrink-0 items-center justify-center overflow-hidden',
