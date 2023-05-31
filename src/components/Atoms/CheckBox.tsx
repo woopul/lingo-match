@@ -14,6 +14,7 @@ type CheckboxProps = {
   className?: string;
   id: string;
   label: ReactNode;
+  onChange?: () => void;
   positionReversed?: boolean;
   variant?: 'default' | 'toggle' | 'icon' | 'label';
 } & InputHTMLAttributes<HTMLInputElement>;
@@ -39,9 +40,9 @@ const Checkbox = forwardRef(
     const [isChecked, setIsChecked] = useState(checked ?? false);
     const checkedBackgroundStyle = isChecked || defaultChecked ? 'bg-orange ' : 'bg-lightGrey';
 
-    const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
-      setIsChecked(e.target.checked);
-      onChange && onChange(e);
+    const handleOnChange = () => {
+      setIsChecked(!isChecked);
+      onChange && onChange();
     };
 
     return (
@@ -87,9 +88,10 @@ const Checkbox = forwardRef(
         )}
         {variant === 'toggle' && (
           <div
-            className="peer-checked:bg-orange bg-lightGrey bg-opacity-60 h-[2rem] w-[3.9rem] border bg-white rounded-full
-          after:absolute after:rounded-full after:left-[2px] after:h-[1.8rem] after:w-[1.8rem] after:bg-white after:transition-all after:content-['']
+            className="cursor-pointer peer-checked:bg-orange relative bg-lighterGrey h-[2rem] w-[3.9rem] border rounded-full
+          after:absolute after:rounded-full after:left-[2px] after:h-[1.8rem] shrink-0 after:w-[1.8rem] after:bg-white after:transition-all after:content-['']
           peer-checked:after:translate-x-[100%] peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-1 peer-focus:ring-lightGray"
+            onClick={handleOnChange}
           />
         )}
         <label
