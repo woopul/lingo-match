@@ -40,7 +40,7 @@ const HomePage = ({ homePage: { hero, mainFilters, platformCard }, platforms }: 
       <GradientBox />
       {hero && <Hero {...hero} />}
       <div className="grid grid-cols-12 gap-x-2 h-full min-h-[150vh] mt-3">
-        <aside className="bg-white flex flex-col col-span-3 pb-2 rounded-md sticky top-[calc(8.5rem+1.6rem)] min-h-[40rem] h-fit drop-shadow-md">
+        <aside className="bg-white col-span-3 rounded-md sticky top-[calc(8.5rem+1.6rem)] min-h-[40rem] h-fit drop-shadow-md">
           <MainPlatformFilters filters={mainFilters} />
         </aside>
         <div className="flex flex-col gap-y-2 col-span-9">

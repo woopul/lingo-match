@@ -1,3 +1,4 @@
+import { getFilteredPlatforms } from '@lingo-match/api/strapi';
 import Button from '@lingo-match/components/Atoms/Button';
 import Checkbox from '@lingo-match/components/Atoms/CheckBox';
 import IconImage from '@lingo-match/components/Atoms/IconImage';
@@ -5,7 +6,7 @@ import AccordionItem from '@lingo-match/components/Organisms/AccordionItem';
 import { BaseDataItem } from '@lingo-match/types/strapi/baseApiResponse';
 import { FilterAccordionDTO, TagDTO } from '@lingo-match/types/strapi/blocks';
 import clsx from 'clsx';
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 
 export type MainPlatformFiltersProps = {
   filters: FilterAccordionDTO[] | [];
@@ -14,25 +15,42 @@ export type MainPlatformFiltersProps = {
 const MainPlatformFilters = ({ filters }: MainPlatformFiltersProps) => {
   const [selectedFilters, setSelectedFilters] = useState<Record<string, string[]>>({});
 
-  const handleFiltersChange = ({ filter, group }: { filter: string; group: string }) => {
-    const selectedGroup = selectedFilters[group] ?? [];
+  const handleFiltersChange = ({ filter, groupId }: { filter: string; groupId: number }) => {
+    const selectedGroup = selectedFilters[groupId] ?? [];
     if (!selectedGroup?.includes(filter)) {
-      setSelectedFilters({ ...selectedFilters, [group]: [...selectedGroup, filter] });
+      setSelectedFilters({ ...selectedFilters, [groupId]: [...selectedGroup, filter] });
       return;
     }
     const newSelectedGroup = selectedGroup.filter(
       (selectedFilter: string) => selectedFilter !== filter,
     );
-    setSelectedFilters({ ...selectedFilters, [group]: newSelectedGroup });
+    setSelectedFilters({ ...selectedFilters, [groupId]: newSelectedGroup });
   };
 
-  const getFiltersCount = (groupTitle: string, groupId: number) => {
-    return selectedFilters[`${groupTitle}-${groupId}`]?.length ?? 0;
+  const isCheckboxChecked = ({ filter, groupId }: { filter: string; groupId: number }) => {
+    return selectedFilters[groupId]?.includes(filter) ?? false;
   };
 
+  const getFiltersCount = (groupId: number) => {
+    return selectedFilters[groupId]?.length ?? 0;
+  };
+
+  const handleFiltersSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const filtersArray = Object.values(selectedFilters).reduce(
+      (acc, curr) => [...acc, ...curr],
+      [],
+    );
+    const filteredResponse = await getFilteredPlatforms(filtersArray);
+    console.log(filteredResponse);
+  };
+
+  console.log({ selectedFilters });
+  console.log(Object.values(selectedFilters).reduce((acc, curr) => [...acc, ...curr], []));
   return (
-    <>
-      <div className="flex flex-col gap-1.5 py-2 h-full">
+    <form className="flex flex-col p-2" onSubmit={handleFiltersSubmit}>
+      <div className="flex flex-col gap-1.5 h-full pb-2">
         {filters.map(
           ({
             expanded,
@@ -51,23 +69,24 @@ const MainPlatformFilters = ({ filters }: MainPlatformFiltersProps) => {
             return (
               <AccordionItem
                 bold
-                className="pt-0 pb-0"
+                className="px-0 py-0"
                 expanded={expanded}
                 icon={Icon}
                 key={groupId}
                 shouldBeExpandable={shouldBeExpandable}
-                title={`${groupTitle} (${getFiltersCount(groupTitle, groupId)})`}
+                title={`${groupTitle} (${getFiltersCount(groupId)})`}
               >
-                <div className={clsx('flex gap-1 pb-1 px-0.5', variant !== 'label' && 'flex-col')}>
-                  {tags.data?.map(({ attributes, id }: BaseDataItem<TagDTO>) => (
+                <div className={clsx('flex gap-1 pb-1 px-1', variant !== 'label' && 'flex-col')}>
+                  {tags.data?.map(({ attributes, id }) => (
                     <Checkbox
+                      checked={isCheckboxChecked({ filter: attributes.type, groupId })}
                       id={`${attributes.name}-${groupId}-${id}`}
                       key={id}
                       label={attributes.name}
                       onChange={() =>
                         handleFiltersChange({
                           filter: attributes.type,
-                          group: `${groupTitle}-${groupId}`,
+                          groupId,
                         })
                       }
                       positionReversed={positionReversed}
@@ -80,10 +99,20 @@ const MainPlatformFilters = ({ filters }: MainPlatformFiltersProps) => {
           },
         )}
       </div>
-      <Button className="self-center mt-auto mx-auto hover:bg-opacity-75" color="secondary">
-        Aplikuj filtry
-      </Button>
-    </>
+      <div className="flex gap-2 justify-center mt-auto mx-auto">
+        <Button className="hover:bg-opacity-75" color="secondary" type="submit">
+          Aplikuj filtry
+        </Button>
+        <Button
+          className=" hover:bg-opacity-75"
+          color="black"
+          onClick={() => setSelectedFilters({})}
+          variant="text"
+        >
+          Reset
+        </Button>
+      </div>
+    </form>
   );
 };
 

@@ -38,7 +38,8 @@ const Checkbox = forwardRef(
     ref: ForwardedRef<HTMLInputElement>,
   ) => {
     const [isChecked, setIsChecked] = useState(checked ?? false);
-    const checkedBackgroundStyle = isChecked || defaultChecked ? 'bg-orange ' : 'bg-lightGrey';
+    const checkedBackgroundStyle =
+      (checked ?? isChecked) || defaultChecked ? 'bg-orange ' : 'bg-lightGrey';
 
     const handleOnChange = () => {
       setIsChecked(!isChecked);
@@ -58,7 +59,7 @@ const Checkbox = forwardRef(
         )}
       >
         <input
-          checked={isChecked}
+          checked={checked ?? isChecked}
           className={clsx(
             'absolute top-0 left-0 z-10 m-0 cursor-pointer p-0 opacity-0 disabled:pointer-events-none peer',
             variant === 'toggle' ? 'h-2.5 w-5.5' : 'h-full w-2.3',
@@ -79,7 +80,7 @@ const Checkbox = forwardRef(
               checkedBackgroundStyle,
             )}
           >
-            {isChecked && variant === 'icon' && (
+            {(checked ?? isChecked) && variant === 'icon' && (
               <div className="ml-[1px]">
                 <IoMdCheckmark />
               </div>
