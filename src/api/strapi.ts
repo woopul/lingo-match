@@ -49,7 +49,6 @@ const getBlogPosts = async () => {
   try {
     const response = await fetchAPI<BlogPostDTO>('/blogposts', { populate: 'deep,3' });
     return parseStrapiResponseToData<BlogPostDTO>(response);
-    //ts-ignore-next-line
   } catch (error) {
     console.error(`[BlogPosts Service Error] Cannot get blog posts - ${error.message}`);
     return null;
@@ -60,7 +59,6 @@ const getPlatforms = async () => {
   try {
     const platformsResponse = await fetchAPI<PlatformDTO[]>('/platforms', { populate: 'deep,3' });
     return parseStrapiResponseToData<PlatformDTO[]>(platformsResponse);
-    //ts-ignore-next-line
   } catch (error) {
     console.error(`[Platforms Service Error] Cannot get platforms - ${error.message}`);
     return null;
@@ -73,7 +71,6 @@ const getPlatformBySlug = async (slug: string) => {
       populate: 'deep,3',
     });
     return parseStrapiResponseToData<BlogPostDTO>(blogPostResponse);
-    //ts-ignore-next-line
   } catch (error) {
     console.error(`[Platform Service Error] Cannot get platform - ${error.message}`);
     return null;
@@ -86,7 +83,6 @@ const getBlogPostBySlug = async (slug: string) => {
       populate: 'deep,4',
     });
     return parseStrapiResponseToData<BlogPostDTO>(blogPostsResponse);
-    //ts-ignore-next-line
   } catch (error) {
     console.error(`[BlogPost Service Error] Cannot get blog post - ${error.message}`);
     return null;
@@ -97,7 +93,6 @@ const getHomePage = async () => {
   try {
     const homePageResponse = await fetchAPI<HomePageDTO>(`/home-page`, { populate: 'deep,3' });
     return parseStrapiResponseToData<HomePageDTO>(homePageResponse) as HomePageDTO;
-    //ts-ignore-next-line
   } catch (error) {
     console.error(`[HomePage Service Error] Cannot get home page - ${error.message}`);
     return null;
@@ -111,7 +106,6 @@ const getLayoutConfig = async () => {
     });
 
     return parseStrapiResponseToData(response);
-    //ts-ignore-next-line
   } catch (error) {
     console.error(`[Layout Service Error] Cannot get layout config - ${error.message}`);
     return null;
@@ -127,7 +121,6 @@ const getFilteredPlatforms = async (filters: string[]) => {
         $and: filtersMap,
       },
     });
-    //ts-ignore-next-line
   } catch (error) {
     console.error(
       `[Platforms Service Error] Filter platforms Cannot get platforms - ${error.message}`,
