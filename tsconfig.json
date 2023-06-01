@@ -14,8 +14,9 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "useUnknownInCatchVariables": false,
     "paths": {
-      "@lingo-match/*": ["./src/*"],
+      "@lingo-match/*": ["./src/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

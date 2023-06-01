@@ -36,7 +36,7 @@ const fetchAPI = async <RT>(
 
   if (!response.ok) {
     throw new Error(
-      `[FETCH STRAPI] url: ${baseUrl}${path} | status: ${response.status} | message: ${
+      `Error during fetch | url: ${baseUrl}${path} | status: ${response.status} | message: ${
         response.statusText
       } | params: ${JSON.stringify(urlParamsObject)}`,
     );
@@ -46,50 +46,94 @@ const fetchAPI = async <RT>(
 };
 
 const getBlogPosts = async () => {
-  const response = await fetchAPI<BlogPostDTO>('/blogposts', { populate: 'deep,3' });
-  return parseStrapiResponseToData<BlogPostDTO>(response);
+  try {
+    const response = await fetchAPI<BlogPostDTO>('/blogposts', { populate: 'deep,3' });
+    return parseStrapiResponseToData<BlogPostDTO>(response);
+    //ts-ignore-next-line
+  } catch (error) {
+    console.error(`[BlogPosts Service Error] Cannot get blog posts - ${error.message}`);
+    return null;
+  }
 };
 
 const getPlatforms = async () => {
-  const platformsResponse = await fetchAPI<PlatformDTO[]>('/platforms', { populate: 'deep,3' });
-  return parseStrapiResponseToData<PlatformDTO[]>(platformsResponse);
+  try {
+    const platformsResponse = await fetchAPI<PlatformDTO[]>('/platforms', { populate: 'deep,3' });
+    return parseStrapiResponseToData<PlatformDTO[]>(platformsResponse);
+    //ts-ignore-next-line
+  } catch (error) {
+    console.error(`[Platforms Service Error] Cannot get platforms - ${error.message}`);
+    return null;
+  }
 };
 
 const getPlatformBySlug = async (slug: string) => {
-  const blogPostResponse = await fetchAPI<BlogPostDTO>(`/platforms/${slug}`, {
-    populate: 'deep,3',
-  });
-  return parseStrapiResponseToData<BlogPostDTO>(blogPostResponse);
+  try {
+    const blogPostResponse = await fetchAPI<BlogPostDTO>(`/platforms/${slug}`, {
+      populate: 'deep,3',
+    });
+    return parseStrapiResponseToData<BlogPostDTO>(blogPostResponse);
+    //ts-ignore-next-line
+  } catch (error) {
+    console.error(`[Platform Service Error] Cannot get platform - ${error.message}`);
+    return null;
+  }
 };
 
 const getBlogPostBySlug = async (slug: string) => {
-  const blogPostsResponse = await fetchAPI<BlogPostDTO>(`/blogposts/${slug}`, {
-    populate: 'deep,4',
-  });
-  return parseStrapiResponseToData<BlogPostDTO>(blogPostsResponse);
+  try {
+    const blogPostsResponse = await fetchAPI<BlogPostDTO>(`/blogposts/${slug}`, {
+      populate: 'deep,4',
+    });
+    return parseStrapiResponseToData<BlogPostDTO>(blogPostsResponse);
+    //ts-ignore-next-line
+  } catch (error) {
+    console.error(`[BlogPost Service Error] Cannot get blog post - ${error.message}`);
+    return null;
+  }
 };
 
 const getHomePage = async () => {
-  const homePageResponse = await fetchAPI<HomePageDTO>(`/home-page`, { populate: 'deep,3' });
-  return parseStrapiResponseToData<HomePageDTO>(homePageResponse) as HomePageDTO;
+  try {
+    const homePageResponse = await fetchAPI<HomePageDTO>(`/home-page`, { populate: 'deep,3' });
+    return parseStrapiResponseToData<HomePageDTO>(homePageResponse) as HomePageDTO;
+    //ts-ignore-next-line
+  } catch (error) {
+    console.error(`[HomePage Service Error] Cannot get home page - ${error.message}`);
+    return null;
+  }
 };
 
 const getLayoutConfig = async () => {
-  const response = await fetchAPI<LayoutConfigDTO>('/layout', {
-    populate: 'deep,4',
-  });
+  try {
+    const response = await fetchAPI<LayoutConfigDTO>('/layout', {
+      populate: 'deep,4',
+    });
 
-  return parseStrapiResponseToData(response);
+    return parseStrapiResponseToData(response);
+    //ts-ignore-next-line
+  } catch (error) {
+    console.error(`[Layout Service Error] Cannot get layout config - ${error.message}`);
+    return null;
+  }
 };
 
 const getFilteredPlatforms = async (filters: string[]) => {
-  const filtersMap = filters.map((filter) => ({ tags: { type: { $eq: filter } } }));
+  try {
+    const filtersMap = filters.map((filter) => ({ tags: { type: { $eq: filter } } }));
 
-  return await fetchAPI<PlatformDTO[]>(`/platforms`, {
-    filters: {
-      $and: filtersMap,
-    },
-  });
+    return await fetchAPI<PlatformDTO[]>(`/platforms`, {
+      filters: {
+        $and: filtersMap,
+      },
+    });
+    //ts-ignore-next-line
+  } catch (error) {
+    console.error(
+      `[Platforms Service Error] Filter platforms Cannot get platforms - ${error.message}`,
+    );
+    return null;
+  }
 };
 
 export {

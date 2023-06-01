@@ -5,8 +5,10 @@ import { BlogPostDTO } from '@lingo-match/types/strapi/blocks';
 import { GetStaticProps } from 'next';
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const [layoutConfig, blogPosts] = await Promise.all([getLayoutConfig(), getBlogPosts()]);
+  // const [layoutConfig, blogPosts] = await Promise.all([), getBlogPosts()]);
 
+  const layoutConfig = await getLayoutConfig();
+  const blogPosts = await getBlogPosts();
   return {
     props: {
       blogPosts,
