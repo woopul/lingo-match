@@ -8,6 +8,7 @@ import withLayout from '@lingo-match/containers/withLayout';
 import { BaseGetStaticPropsType } from '@lingo-match/types/strapi/baseApiResponse';
 import { HomePageDTO, PlatformDTO } from '@lingo-match/types/strapi/blocks';
 import { GetStaticProps } from 'next';
+import { useState } from 'react';
 
 export const getStaticProps: GetStaticProps<BaseGetStaticPropsType> = async (context) => {
   const [layoutConfig, platforms, homePage] = await Promise.all([
@@ -35,6 +36,7 @@ type HomePageProps = {
 };
 
 const HomePage = ({ homePage: { hero, mainFilters, platformCard }, platforms }: HomePageProps) => {
+  const [platformList, setPlatformList] = useState<PlatformDTO[]>(platforms);
   return (
     <>
       <GradientBox />

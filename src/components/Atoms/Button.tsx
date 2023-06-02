@@ -20,7 +20,7 @@ const BUTTON_STYLE_MAP = {
   black_full:
     'bg-black text-white hoover:bg-opacity-75 disabled:bg-opacity-50 disabled:cursor-initial',
   black_link: 'text-black underline hover:font-bold disabled:opacity-20 disabled:font-normal',
-  black_text: 'text-black',
+  black_text: 'text-black disabled:opacity-20',
   primary_full: 'bg-primary-400 text-white disabled:bg-primary-200 disabled:cursor-initial',
   primary_link:
     'text-primary-500 underline hover:font-bold disabled:opacity-20 disabled:font-normal',

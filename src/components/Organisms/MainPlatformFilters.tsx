@@ -1,6 +1,7 @@
 import Button from '@lingo-match/components/Atoms/Button';
 import Checkbox from '@lingo-match/components/Atoms/CheckBox';
 import IconImage from '@lingo-match/components/Atoms/IconImage';
+import Loader from '@lingo-match/components/Atoms/Loader';
 import AccordionItem from '@lingo-match/components/Organisms/AccordionItem';
 import { FilterAccordionDTO } from '@lingo-match/types/strapi/blocks';
 import clsx from 'clsx';
@@ -12,6 +13,7 @@ export type MainPlatformFiltersProps = {
 
 const MainPlatformFilters = ({ filters }: MainPlatformFiltersProps) => {
   const [selectedFilters, setSelectedFilters] = useState<Record<string, string[]>>({});
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleFiltersChange = ({ filter, groupId }: { filter: string; groupId: number }) => {
     const selectedGroup = selectedFilters[groupId] ?? [];
@@ -36,6 +38,7 @@ const MainPlatformFilters = ({ filters }: MainPlatformFiltersProps) => {
   const handleFiltersSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    setIsLoading(true);
     const filtersArray = Object.values(selectedFilters).reduce(
       (acc, curr) => [...acc, ...curr],
       [],
@@ -46,6 +49,7 @@ const MainPlatformFilters = ({ filters }: MainPlatformFiltersProps) => {
       body: JSON.stringify(filtersArray),
       method: 'POST',
     });
+    setIsLoading(false);
   };
 
   return (
@@ -103,12 +107,19 @@ const MainPlatformFilters = ({ filters }: MainPlatformFiltersProps) => {
         )}
       </div>
       <div className="flex gap-2 justify-center mt-auto mx-auto">
-        <Button className="hover:bg-opacity-75" color="secondary" type="submit">
+        <Button
+          className="hover:bg-opacity-75 relative"
+          color="secondary"
+          disabled={isLoading}
+          type="submit"
+        >
           Aplikuj filtry
+          {isLoading && <Loader className="w-2.5 h-2.5 absolute right-1" />}
         </Button>
         <Button
           className=" hover:bg-opacity-75"
           color="black"
+          disabled={isLoading}
           onClick={() => setSelectedFilters({})}
           variant="text"
         >
