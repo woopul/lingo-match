@@ -5,7 +5,7 @@ import { parseStrapiResponseToData } from '@lingo-match/utlis/parseStrapiRespons
 import qs from 'qs';
 
 const getStrapiURL = (path: string = '') => {
-  return `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${path}`;
+  return `${process.env.STRAPI_API_URL}${path}`;
 };
 
 export const getStrapiMediaURL = (media: any) => {
@@ -28,7 +28,7 @@ const fetchAPI = async <RT>(
   };
 
   // Build request URL
-  const baseUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL;
+  const baseUrl = process.env.STRAPI_API_URL;
   const queryString = qs.stringify(urlParamsObject);
   const requestUrl = `${baseUrl}${path}${queryString ? `?${queryString}` : ''}`;
 
@@ -112,13 +112,13 @@ const getLayoutConfig = async () => {
   }
 };
 
-const getFilteredPlatforms = async (filters: string[]) => {
+const getFilteredPlatforms = async (filtersArray: string[]) => {
   try {
-    const filtersMap = filters.map((filter) => ({ tags: { type: { $eq: filter } } }));
-
+    const filters = { $and: filtersArray.map((filter) => ({ tags: { type: { $eq: filter } } })) };
     return await fetchAPI<PlatformDTO[]>(`/platforms`, {
-      filters: {
-        $and: filtersMap,
+      filters,
+      populate: {
+        tags: true,
       },
     });
   } catch (error) {

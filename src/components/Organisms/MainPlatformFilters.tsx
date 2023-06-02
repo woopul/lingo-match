@@ -42,8 +42,11 @@ const MainPlatformFilters = ({ filters }: MainPlatformFiltersProps) => {
       (acc, curr) => [...acc, ...curr],
       [],
     );
-    const filteredResponse = await getFilteredPlatforms(filtersArray);
-    console.log(filteredResponse);
+    console.log({ filtersArray });
+    const filteredResponse = await fetch('/api/platforms/filter', {
+      body: JSON.stringify(filtersArray),
+      method: 'POST',
+    });
   };
 
   console.log({ selectedFilters });
@@ -79,13 +82,16 @@ const MainPlatformFilters = ({ filters }: MainPlatformFiltersProps) => {
                 <div className={clsx('flex gap-1 pb-1 px-1', variant !== 'label' && 'flex-col')}>
                   {tags.data?.map(({ attributes, id }) => (
                     <Checkbox
-                      checked={isCheckboxChecked({ filter: attributes.type, groupId })}
+                      checked={isCheckboxChecked({
+                        filter: attributes.type ?? attributes.name,
+                        groupId,
+                      })}
                       id={`${attributes.name}-${groupId}-${id}`}
                       key={id}
                       label={attributes.name}
                       onChange={() =>
                         handleFiltersChange({
-                          filter: attributes.type,
+                          filter: attributes.type ?? attributes.name,
                           groupId,
                         })
                       }

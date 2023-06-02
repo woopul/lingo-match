@@ -1,11 +1,28 @@
+import { getFilteredPlatforms } from '@lingo-match/api/strapi';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
+const platformFiltersHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { body, method } = req;
+
+  let payload;
+  try {
+    payload = JSON.parse(body);
+    if (!Array.isArray(payload)) {
+      throw new Error();
+    }
+  } catch (error) {
+    return res.status(400).json({ message: `invalid payload, filters string[] expected` });
+  }
 
   if (method !== 'POST') {
     return res.status(405).json({ message: 'method not allowed' });
   }
 
-  res.status(200).json({ name: 'John Doe' });
-}
+  try {
+    const response = await getFilteredPlatforms(payload);
+    return res.status(200).json(response);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+export default platformFiltersHandler;
