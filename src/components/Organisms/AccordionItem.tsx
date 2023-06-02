@@ -28,6 +28,7 @@ const AccordionItem = ({
       <button
         className={clsx('flex w-full items-center  text-paragraph', bold && 'font-bold')}
         onClick={() => setIsExpanded(!isExpanded)}
+        type="button"
       >
         {IconComponent && IconComponent} {title}
         {shouldBeExpandable && (

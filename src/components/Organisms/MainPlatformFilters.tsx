@@ -1,10 +1,8 @@
-import { getFilteredPlatforms } from '@lingo-match/api/strapi';
 import Button from '@lingo-match/components/Atoms/Button';
 import Checkbox from '@lingo-match/components/Atoms/CheckBox';
 import IconImage from '@lingo-match/components/Atoms/IconImage';
 import AccordionItem from '@lingo-match/components/Organisms/AccordionItem';
-import { BaseDataItem } from '@lingo-match/types/strapi/baseApiResponse';
-import { FilterAccordionDTO, TagDTO } from '@lingo-match/types/strapi/blocks';
+import { FilterAccordionDTO } from '@lingo-match/types/strapi/blocks';
 import clsx from 'clsx';
 import { FormEvent, useState } from 'react';
 
@@ -42,15 +40,14 @@ const MainPlatformFilters = ({ filters }: MainPlatformFiltersProps) => {
       (acc, curr) => [...acc, ...curr],
       [],
     );
-    console.log({ filtersArray });
+
+    // TODO - handle response change for filtered platforms
     const filteredResponse = await fetch('/api/platforms/filter', {
       body: JSON.stringify(filtersArray),
       method: 'POST',
     });
   };
 
-  console.log({ selectedFilters });
-  console.log(Object.values(selectedFilters).reduce((acc, curr) => [...acc, ...curr], []));
   return (
     <form className="flex flex-col p-2" onSubmit={handleFiltersSubmit}>
       <div className="flex flex-col gap-1.5 h-full pb-2">
