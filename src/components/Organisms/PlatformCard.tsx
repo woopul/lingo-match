@@ -1,22 +1,17 @@
 import { Image } from '@lingo-match/components';
 import Label from '@lingo-match/components/Atoms/Label';
-import { LabelDTO, PlatformCardDTO, PlatformDTO } from '@lingo-match/types/strapi/blocks';
+import {
+  LabelDTO,
+  PlatformCardConfigDTO,
+  PlatformTrimToCardDTO,
+} from '@lingo-match/types/strapi/blocks';
 import { getPlatformUrl } from '@lingo-match/utlis';
 import { parseStrapiResponseToData } from '@lingo-match/utlis/parseStrapiResponse';
 import clsx from 'clsx';
 import NextLink from 'next/link';
 
-export type PlatformCardProps = Pick<
-  PlatformDTO,
-  | 'title'
-  | 'shortDescription'
-  | 'labels'
-  | 'slug'
-  | 'logo'
-  | 'priceAsNumber'
-  | 'priceBeforeDiscountAsNumber'
-> &
-  PlatformCardDTO & {
+export type PlatformCardProps = PlatformTrimToCardDTO &
+  PlatformCardConfigDTO & {
     className?: string;
   };
 

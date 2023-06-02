@@ -19,7 +19,7 @@ export const parseStrapiResponseToData = <T>(
 
 // TODO refactor this function to take proper generic type and return type feedback
 export const strapiData = <T>(
-  item: BaseArrayDataWrapper<T> | BaseDataWrapper<T>,
+  item: BaseDataWrapper<T> | BaseArrayDataWrapper<T>,
 ): T | T[] | null => {
   if (!item?.data) {
     return null;

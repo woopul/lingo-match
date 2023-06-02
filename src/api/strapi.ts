@@ -1,7 +1,10 @@
 import { LayoutConfigDTO } from '@lingo-match/components/Layout';
-import { BaseResponseDataWrapper } from '@lingo-match/types/strapi/baseApiResponse';
+import {
+  BaseResponseDataWrapper,
+  CustomResponseDataType,
+} from '@lingo-match/types/strapi/baseApiResponse';
 import { BlogPostDTO, HomePageDTO, PlatformDTO } from '@lingo-match/types/strapi/blocks';
-import { parseStrapiResponseToData } from '@lingo-match/utlis/parseStrapiResponse';
+import { parseStrapiResponseToData, strapiData } from '@lingo-match/utlis/parseStrapiResponse';
 import qs from 'qs';
 
 const getStrapiURL = (path: string = '') => {
@@ -115,17 +118,19 @@ const getLayoutConfig = async () => {
 const getFilteredPlatforms = async (filtersArray: string[]) => {
   try {
     const filters = { $and: filtersArray.map((filter) => ({ tags: { type: { $eq: filter } } })) };
-    return await fetchAPI<PlatformDTO[]>(`/platforms`, {
+    const response = await fetchAPI<PlatformDTO[]>(`/platforms`, {
       filters,
       populate: {
         tags: true,
       },
     });
+
+    return { data: strapiData(response), success: true };
   } catch (error) {
     console.error(
       `[Platforms Service Error] Filter platforms Cannot get platforms - ${error.message}`,
     );
-    return null;
+    return { data: null, success: false };
   }
 };
 

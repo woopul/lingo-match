@@ -9,9 +9,10 @@ import { FormEvent, useState } from 'react';
 
 export type MainPlatformFiltersProps = {
   filters: FilterAccordionDTO[] | [];
+  setPlatformList: (platforms: any) => void;
 };
 
-const MainPlatformFilters = ({ filters }: MainPlatformFiltersProps) => {
+const MainPlatformFilters = ({ filters, setPlatformList }: MainPlatformFiltersProps) => {
   const [selectedFilters, setSelectedFilters] = useState<Record<string, string[]>>({});
   const [isLoading, setIsLoading] = useState(false);
 
@@ -45,11 +46,20 @@ const MainPlatformFilters = ({ filters }: MainPlatformFiltersProps) => {
     );
 
     // TODO - handle response change for filtered platforms
-    const filteredResponse = await fetch('/api/platforms/filter', {
+    const response = await fetch('/api/platforms/filter', {
       body: JSON.stringify(filtersArray),
       method: 'POST',
     });
+
+    const data = await response.json();
+    console.log('FILTERS RESPONSE', data);
+    if (!data.success) {
+      // TODO - handle fetch error
+      setIsLoading(false);
+      return;
+    }
     setIsLoading(false);
+    setPlatformList(data);
   };
 
   return (

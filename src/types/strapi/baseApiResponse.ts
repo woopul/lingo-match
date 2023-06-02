@@ -12,7 +12,9 @@ type MainStrapiAttributesType = {
   published_at?: string;
 };
 
-type StrapiAttributesType = BaseStrapiAttributesType & MainStrapiAttributesType;
+export type StrapiAdditionalAttributesType =
+  | BaseStrapiAttributesType
+  | (BaseStrapiAttributesType & MainStrapiAttributesType);
 
 type MainStrapiMetaType = {
   pagination: {
@@ -25,6 +27,17 @@ type MainStrapiMetaType = {
 
 export type BaseDT<DT> = DT & BaseStrapiAttributesType;
 export type MainDT<DT> = DT & BaseStrapiAttributesType & MainStrapiAttributesType;
+
+export type CustomResponseDataType<TExpected, TFallback = null> = Promise<
+  | {
+      data: TExpected;
+      success: true;
+    }
+  | {
+      data: TFallback;
+      success: false;
+    }
+>;
 
 export type BaseDataItem<DT> = {
   attributes: MainDT<DT> | BaseDT<DT>;

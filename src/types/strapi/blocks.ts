@@ -1,7 +1,9 @@
 import {
   BaseArrayDataWrapper,
+  BaseDataItem,
   BaseDataWrapper,
   BaseResponseDataWrapper,
+  StrapiAdditionalAttributesType,
 } from '@lingo-match/types/strapi/baseApiResponse';
 import { StrapiMediaType } from '@lingo-match/types/strapi/shared';
 
@@ -60,7 +62,18 @@ export type DescriptionDTO = {
   textColor?: string;
 };
 
-export type PlatformDTO = {
+export type PlatformTrimToCardDTO = Pick<
+  PlatformDTO,
+  | 'title'
+  | 'shortDescription'
+  | 'labels'
+  | 'slug'
+  | 'logo'
+  | 'priceAsNumber'
+  | 'priceBeforeDiscountAsNumber'
+>;
+
+export type PlatformDTO = StrapiAdditionalAttributesType & {
   categories?: CategoryDTO[];
   description?: string;
   labels: BaseResponseDataWrapper<LabelDTO[]> | null;
@@ -73,7 +86,7 @@ export type PlatformDTO = {
   title: string;
 };
 
-export type PlatformCardDTO = {
+export type PlatformCardConfigDTO = {
   basicVersionLabel: string;
   basicVersionPayedLabel: string;
   navigateToPlatformButtonLabel: string;
@@ -116,7 +129,7 @@ export type HomePageDTO = {
   blocks: BlockWrapper[];
   hero: HeroDTO;
   mainFilters: FilterAccordionDTO[] | [];
-  platformCard: PlatformCardDTO;
+  platformCard: PlatformCardConfigDTO;
 };
 
 export type LabelDTO = {
