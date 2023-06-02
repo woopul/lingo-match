@@ -90,7 +90,7 @@ const Checkbox = forwardRef(
         {variant === 'toggle' && (
           <div
             className="cursor-pointer peer-checked:bg-orange relative bg-lighterGrey h-[2rem] w-[3.9rem] border rounded-full
-          after:absolute after:rounded-full after:left-[2px] after:h-[1.8rem] shrink-0 after:w-[1.8rem] after:bg-white after:transition-all after:content-['']
+          after:absolute after:rounded-full after:h-[1.8rem] shrink-0 after:w-[1.8rem] after:bg-white after:transition-all after:content-['']
           peer-checked:after:translate-x-[100%] peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-1 peer-focus:ring-lightGray"
             onClick={handleOnChange}
           />
