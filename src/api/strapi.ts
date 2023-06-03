@@ -1,9 +1,15 @@
+import { FETCH_FIELDS_PLATFORM_LIST } from '@lingo-match/api/fetchFieldsConfig';
 import { LayoutConfigDTO } from '@lingo-match/components/Layout';
 import {
   BaseResponseDataWrapper,
   CustomResponseDataType,
 } from '@lingo-match/types/strapi/baseApiResponse';
-import { BlogPostDTO, HomePageDTO, PlatformDTO } from '@lingo-match/types/strapi/blocks';
+import {
+  BlogPostDTO,
+  HomePageDTO,
+  PlatformDTO,
+  PlatformTrimToCardDTO,
+} from '@lingo-match/types/strapi/blocks';
 import { parseStrapiResponseToData, strapiData } from '@lingo-match/utlis/parseStrapiResponse';
 import qs from 'qs';
 
@@ -60,7 +66,16 @@ const getBlogPosts = async () => {
 
 const getPlatforms = async () => {
   try {
-    const platformsResponse = await fetchAPI<PlatformDTO[]>('/platforms', { populate: 'deep,3' });
+    const platformsResponse = await fetchAPI<PlatformDTO[]>('/platforms', {
+      fields: FETCH_FIELDS_PLATFORM_LIST,
+      populate: {
+        labels: {
+          populate: '*',
+        },
+        logo: true,
+        tags: true,
+      },
+    });
     return parseStrapiResponseToData<PlatformDTO[]>(platformsResponse);
   } catch (error) {
     console.error(`[Platforms Service Error] Cannot get platforms - ${error.message}`);
@@ -119,8 +134,13 @@ const getFilteredPlatforms = async (filtersArray: string[]) => {
   try {
     const filters = { $and: filtersArray.map((filter) => ({ tags: { type: { $eq: filter } } })) };
     const response = await fetchAPI<PlatformDTO[]>(`/platforms`, {
+      fields: FETCH_FIELDS_PLATFORM_LIST,
       filters,
       populate: {
+        labels: {
+          populate: '*',
+        },
+        logo: true,
         tags: true,
       },
     });

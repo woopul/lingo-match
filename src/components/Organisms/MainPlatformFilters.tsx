@@ -51,15 +51,15 @@ const MainPlatformFilters = ({ filters, setPlatformList }: MainPlatformFiltersPr
       method: 'POST',
     });
 
-    const data = await response.json();
-    console.log('FILTERS RESPONSE', data);
-    if (!data.success) {
-      // TODO - handle fetch error
+    const { data, success } = await response.json();
+
+    if (!success) {
+      // TODO - handle fetch error (notification?)
       setIsLoading(false);
       return;
     }
-    setIsLoading(false);
     setPlatformList(data);
+    setIsLoading(false);
   };
 
   return (

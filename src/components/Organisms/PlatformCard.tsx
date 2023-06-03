@@ -10,10 +10,10 @@ import { parseStrapiResponseToData } from '@lingo-match/utlis/parseStrapiRespons
 import clsx from 'clsx';
 import NextLink from 'next/link';
 
-export type PlatformCardProps = PlatformTrimToCardDTO &
-  PlatformCardConfigDTO & {
-    className?: string;
-  };
+export type PlatformCardProps = {
+  className?: string;
+  platformData: PlatformTrimToCardDTO;
+} & PlatformCardConfigDTO;
 
 const placeholderSrc =
   'https://res.cloudinary.com/dbnc7cgvp/image/upload/v1682797183/logo_2_33627850b1.png';
@@ -22,17 +22,21 @@ const PlatformCard = ({
   basicVersionLabel,
   basicVersionPayedLabel,
   className,
-  labels,
-  logo,
-  priceAsNumber,
-  priceBeforeDiscountAsNumber,
+  platformData: {
+    labels,
+    logo,
+    priceAsNumber,
+    priceBeforeDiscountAsNumber,
+    shortDescription,
+    slug,
+    title,
+  },
+  platformData,
   priceForShortLabel,
   pricePerMonthLabel,
-  shortDescription,
-  slug,
-  title,
 }: PlatformCardProps) => {
   const parsedLabelsToDisplay = parseStrapiResponseToData<LabelDTO[]>(labels) as LabelDTO[];
+  console.log('PLATFORM CARD DATA', platformData);
   return (
     <NextLink className="cursor-pointer no-underline hover:shadow-md" href={getPlatformUrl(slug)}>
       <div
@@ -46,7 +50,7 @@ const PlatformCard = ({
             <Image
               alt=""
               className="object-contain"
-              src={logo.data?.attributes?.url || placeholderSrc}
+              src={logo?.data?.attributes?.url || placeholderSrc}
             />
           </div>
           <div className="w-full">
@@ -74,7 +78,7 @@ const PlatformCard = ({
           {parsedLabelsToDisplay?.map(({ icon, title }) => (
             <Label
               className="whitespace-nowrap bg-lightGrey rounded-full flex items-center px-2 py-1 h-max "
-              iconSrc={icon.data.attributes.url}
+              iconSrc={icon?.data.attributes.url}
               key={title}
               label={title}
             />

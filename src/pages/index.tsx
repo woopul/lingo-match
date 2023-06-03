@@ -37,6 +37,8 @@ type HomePageProps = {
 
 const HomePage = ({ homePage: { hero, mainFilters, platformCard }, platforms }: HomePageProps) => {
   const [platformList, setPlatformList] = useState<PlatformDTO[]>(platforms);
+
+  console.log({ platformList });
   return (
     <>
       <GradientBox />
@@ -45,11 +47,13 @@ const HomePage = ({ homePage: { hero, mainFilters, platformCard }, platforms }: 
         <aside className="bg-white col-span-3 rounded-md sticky top-[calc(8.5rem+1.6rem)] min-h-[40rem] h-fit drop-shadow-md">
           <MainPlatformFilters filters={mainFilters} setPlatformList={setPlatformList} />
         </aside>
-        <div className="flex flex-col gap-y-2 col-span-9">
-          {platforms.map((platform) => (
-            <PlatformCard {...platform} {...platformCard} key={platform.slug} />
-          ))}
-        </div>
+        {!!platformList?.length && (
+          <div className="flex flex-col gap-y-2 col-span-9">
+            {platformList.map((platform) => (
+              <PlatformCard {...platformCard} key={platform.slug} platformData={platform} />
+            ))}
+          </div>
+        )}
       </div>
     </>
   );
