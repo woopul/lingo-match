@@ -38,7 +38,6 @@ type HomePageProps = {
 const HomePage = ({ homePage: { hero, mainFilters, platformCard }, platforms }: HomePageProps) => {
   const [platformList, setPlatformList] = useState<PlatformDTO[]>(platforms);
 
-  console.log({ platformList });
   return (
     <>
       <GradientBox />

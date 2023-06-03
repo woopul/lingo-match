@@ -14,6 +14,7 @@ type CheckboxProps = {
   className?: string;
   id: string;
   label: ReactNode;
+  labelFullWidth?: boolean;
   onChange?: () => void;
   positionReversed?: boolean;
   variant?: 'default' | 'toggle' | 'icon' | 'label';
@@ -30,6 +31,7 @@ const Checkbox = forwardRef(
       disabled,
       id,
       label,
+      labelFullWidth,
       onChange,
       positionReversed,
       variant = 'icon',
@@ -98,6 +100,7 @@ const Checkbox = forwardRef(
         <label
           className={clsx(
             'cursor-pointer text-12 leading-18 -tracking-1 desktop:text-14 desktop:leading-20 desktop:-tracking-0',
+            labelFullWidth ? 'w-full' : 'w-fit',
             variant === 'label'
               ? 'peer-checked:bg-orange rounded-full bg-lightGrey px-1.5 py-0.5'
               : 'pl-1',

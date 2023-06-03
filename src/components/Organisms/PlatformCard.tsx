@@ -36,7 +36,6 @@ const PlatformCard = ({
   pricePerMonthLabel,
 }: PlatformCardProps) => {
   const parsedLabelsToDisplay = parseStrapiResponseToData<LabelDTO[]>(labels) as LabelDTO[];
-  console.log('PLATFORM CARD DATA', platformData);
   return (
     <NextLink className="cursor-pointer no-underline hover:shadow-md" href={getPlatformUrl(slug)}>
       <div

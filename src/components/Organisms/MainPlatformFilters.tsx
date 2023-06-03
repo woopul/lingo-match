@@ -1,5 +1,5 @@
 import Button from '@lingo-match/components/Atoms/Button';
-import Checkbox from '@lingo-match/components/Atoms/CheckBox';
+import Checkbox from '@lingo-match/components/Atoms/Checkbox';
 import IconImage from '@lingo-match/components/Atoms/IconImage';
 import Loader from '@lingo-match/components/Atoms/Loader';
 import AccordionItem from '@lingo-match/components/Organisms/AccordionItem';
@@ -90,7 +90,12 @@ const MainPlatformFilters = ({ filters, setPlatformList }: MainPlatformFiltersPr
                 shouldBeExpandable={shouldBeExpandable}
                 title={`${groupTitle} (${getFiltersCount(groupId)})`}
               >
-                <div className={clsx('flex gap-1 pb-1 px-1', variant !== 'label' && 'flex-col')}>
+                <div
+                  className={clsx(
+                    'flex gap-1 pb-1 px-1',
+                    variant === 'label' ? 'flex-row flex-wrap' : 'flex-col',
+                  )}
+                >
                   {tags.data?.map(({ attributes, id }) => (
                     <Checkbox
                       checked={isCheckboxChecked({
@@ -100,6 +105,7 @@ const MainPlatformFilters = ({ filters, setPlatformList }: MainPlatformFiltersPr
                       id={`${attributes.name}-${groupId}-${id}`}
                       key={id}
                       label={attributes.name}
+                      labelFullWidth
                       onChange={() =>
                         handleFiltersChange({
                           filter: attributes.type ?? attributes.name,
