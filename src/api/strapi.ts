@@ -1,15 +1,7 @@
-import { FETCH_FIELDS_PLATFORM_LIST } from '@lingo-match/api/fetchFieldsConfig';
+import { FETCH_FIELDS_PLATFORM_LIST } from '@lingo-match/api/strapiFetchFieldsConfig';
 import { LayoutConfigDTO } from '@lingo-match/components/Layout';
-import {
-  BaseResponseDataWrapper,
-  CustomResponseDataType,
-} from '@lingo-match/types/strapi/baseApiResponse';
-import {
-  BlogPostDTO,
-  HomePageDTO,
-  PlatformDTO,
-  PlatformTrimToCardDTO,
-} from '@lingo-match/types/strapi/blocks';
+import { BaseResponseDataWrapper } from '@lingo-match/types/strapi/baseApiResponse';
+import { BlogPostDTO, HomePageDTO, PlatformDTO } from '@lingo-match/types/strapi/blocks';
 import { parseStrapiResponseToData, strapiData } from '@lingo-match/utlis/parseStrapiResponse';
 import qs from 'qs';
 

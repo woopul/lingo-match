@@ -1,3 +1,4 @@
+import { CurrencyResponseType, getCurrenciesExchangeRate } from '@lingo-match/api/currency';
 import { getHomePage, getLayoutConfig, getPlatforms } from '@lingo-match/api/strapi';
 import { GradientBox } from '@lingo-match/components';
 import Hero from '@lingo-match/components/Atoms/Hero';
@@ -18,10 +19,12 @@ export const getStaticProps: GetStaticProps<BaseGetStaticPropsType> = async (con
   ]);
 
   const blocks = (homePage as HomePageDTO)?.blocks || [];
+  const { data: currenciesExchangeRate } = await getCurrenciesExchangeRate();
 
   return {
     props: {
       blocks: blocks,
+      currenciesExchangeRate: currenciesExchangeRate,
       homePage: homePage || {},
       layoutConfig: layoutConfig || {},
       platforms: platforms || [],
@@ -31,11 +34,16 @@ export const getStaticProps: GetStaticProps<BaseGetStaticPropsType> = async (con
 };
 
 type HomePageProps = {
+  currenciesExchangeRate: CurrencyResponseType[];
   homePage: HomePageDTO;
   platforms: PlatformDTO[];
 };
 
-const HomePage = ({ homePage: { hero, mainFilters, platformCard }, platforms }: HomePageProps) => {
+const HomePage = ({
+  currenciesExchangeRate,
+  homePage: { hero, mainFilters, platformCard },
+  platforms,
+}: HomePageProps) => {
   const [platformList, setPlatformList] = useState<PlatformDTO[]>(platforms);
 
   return (
@@ -49,7 +57,12 @@ const HomePage = ({ homePage: { hero, mainFilters, platformCard }, platforms }: 
         {!!platformList?.length && (
           <div className="flex flex-col gap-y-2 col-span-9">
             {platformList.map((platform) => (
-              <PlatformCard {...platformCard} key={platform.slug} platformData={platform} />
+              <PlatformCard
+                currenciesExchangeRate={currenciesExchangeRate}
+                {...platformCard}
+                key={platform.slug}
+                platformData={platform}
+              />
             ))}
           </div>
         )}

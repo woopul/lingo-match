@@ -1,5 +1,7 @@
+import { CurrencyResponseType } from '@lingo-match/api/currency';
 import { Image } from '@lingo-match/components';
 import Label from '@lingo-match/components/Atoms/Label';
+import { SUPPORTED_CURRENCIES } from '@lingo-match/types/strapi';
 import {
   LabelDTO,
   PlatformCardConfigDTO,
@@ -12,6 +14,7 @@ import NextLink from 'next/link';
 
 export type PlatformCardProps = {
   className?: string;
+  currenciesExchangeRate: CurrencyResponseType[];
   platformData: PlatformTrimToCardDTO;
 } & PlatformCardConfigDTO;
 
@@ -22,20 +25,38 @@ const PlatformCard = ({
   basicVersionLabel,
   basicVersionPayedLabel,
   className,
+  currenciesExchangeRate,
+  paymentInForeignCurrencyLabel,
   platformData: {
+    currency,
     labels,
     logo,
+    mainCurrencyForThisMarket = SUPPORTED_CURRENCIES.PLN,
     priceAsNumber,
     priceBeforeDiscountAsNumber,
     shortDescription,
     slug,
     title,
   },
-  platformData,
   priceForShortLabel,
   pricePerMonthLabel,
 }: PlatformCardProps) => {
   const parsedLabelsToDisplay = parseStrapiResponseToData<LabelDTO[]>(labels) as LabelDTO[];
+  const isForeignCurrency = () => currency !== mainCurrencyForThisMarket;
+
+  // TODO - change it to use mixed currencies pair exchange rate
+  const getCalculatedValueInPLN = (price: number) => {
+    const currencyRate = currenciesExchangeRate?.find((item) => item.code === currency)?.mid ?? 1;
+    return price * currencyRate;
+  };
+
+  const parsePriceToDisplay = (price: number) => {
+    if (isForeignCurrency()) {
+      return `${getCalculatedValueInPLN(price).toFixed(2)}`;
+    }
+    return `${price.toFixed(2)}`;
+  };
+
   return (
     <NextLink className="cursor-pointer no-underline hover:shadow-md" href={getPlatformUrl(slug)}>
       <div
@@ -60,18 +81,25 @@ const PlatformCard = ({
         <div className="col-span-1 text-small flex text-middleGrey flex-col row-span-2 items-end">
           <div>{basicVersionLabel}</div>
           <p className="text-16 font-bold text-accentTwo">{basicVersionPayedLabel}</p>
-          <div className="flex items-end mt-auto">
-            {!!priceBeforeDiscountAsNumber && (
-              <div className="text-accentOne line-through mr-3">
-                US$ {priceBeforeDiscountAsNumber}
-              </div>
+          <div className="mt-auto text-right flex flex-col gap-1">
+            {isForeignCurrency() && paymentInForeignCurrencyLabel && (
+              <div className="mt-auto">{paymentInForeignCurrencyLabel}</div>
             )}
-            <div>
-              <span className="font-bold text-black text-16"> {priceAsNumber} $</span>
-              <span className="text-middleGrey">{pricePerMonthLabel}</span>
+            <div className="flex justify-end">
+              {!!priceBeforeDiscountAsNumber && (
+                <div className="text-accentOne line-through mr-3">
+                  {mainCurrencyForThisMarket} {parsePriceToDisplay(priceBeforeDiscountAsNumber)}
+                </div>
+              )}
+              <div>
+                <span className="font-bold text-black text-16">
+                  {parsePriceToDisplay(priceAsNumber)} {mainCurrencyForThisMarket}
+                </span>
+                <span className="text-middleGrey">{pricePerMonthLabel}</span>
+              </div>
             </div>
+            <div className="text-middleGrey">{priceForShortLabel}</div>
           </div>
-          <div className="text-middleGrey mt-1">{priceForShortLabel}</div>
         </div>
         <div className={clsx('col-span-3 flex gap-2 overflow-x-scroll self-end')}>
           {parsedLabelsToDisplay?.map(({ icon, title }) => (

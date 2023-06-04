@@ -77,10 +77,11 @@ const Checkbox = forwardRef(
         {(variant === 'default' || 'icon' === variant) && (
           <div
             className={clsx(
-              'relative flex h-2.3 w-2.3 shrink-0 items-center justify-center overflow-hidden',
+              'relative flex h-2.3 w-2.3 shrink-0 items-center justify-center overflow-hidden hover:cursor-pointer',
               align === 'start' && 'mt-1',
               checkedBackgroundStyle,
             )}
+            onClick={handleOnChange}
           >
             {(checked ?? isChecked) && variant === 'icon' && (
               <div className="ml-[1px]">

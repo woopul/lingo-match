@@ -1,10 +1,10 @@
 import {
   BaseArrayDataWrapper,
-  BaseDataItem,
   BaseDataWrapper,
   BaseResponseDataWrapper,
   StrapiAdditionalAttributesType,
 } from '@lingo-match/types/strapi/baseApiResponse';
+import { SUPPORTED_CURRENCIES } from '@lingo-match/types/strapi/custom';
 import { StrapiMediaType } from '@lingo-match/types/strapi/shared';
 
 // TODO clean up, restructure and check those types
@@ -65,6 +65,8 @@ export type DescriptionDTO = {
 export type PlatformTrimToCardDTO = Pick<
   PlatformDTO,
   | 'title'
+  | 'currency'
+  | 'mainCurrencyForThisMarket'
   | 'shortDescription'
   | 'labels'
   | 'slug'
@@ -75,9 +77,11 @@ export type PlatformTrimToCardDTO = Pick<
 
 export type PlatformDTO = StrapiAdditionalAttributesType & {
   categories?: CategoryDTO[];
+  currency?: SUPPORTED_CURRENCIES;
   description?: string;
   labels: BaseResponseDataWrapper<LabelDTO[]> | null;
   logo: BaseResponseDataWrapper<StrapiMediaType>;
+  mainCurrencyForThisMarket: SUPPORTED_CURRENCIES;
   priceAsNumber: number;
   priceBeforeDiscountAsNumber?: number;
   rating?: number;
@@ -90,6 +94,7 @@ export type PlatformCardConfigDTO = {
   basicVersionLabel: string;
   basicVersionPayedLabel: string;
   navigateToPlatformButtonLabel: string;
+  paymentInForeignCurrencyLabel: string;
   priceForShortLabel: string;
   pricePerMonthLabel: string;
 };
