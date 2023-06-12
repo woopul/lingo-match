@@ -42,7 +42,6 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     {
       className,
       color = 'black',
-      cy = 'button',
       cyId,
       disabled = false,
       fullWidth = false,
@@ -68,8 +67,6 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           BUTTON_STYLE_MAP[`${color}_${variant}`],
           className,
         )}
-        data-cy={cy}
-        data-cy-id={cyId}
         disabled={disabled}
         ref={ref}
         // eslint-disable-next-line react/button-has-type

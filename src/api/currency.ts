@@ -1,4 +1,3 @@
-import { CustomResponseDataType } from '@lingo-match/types/strapi/baseApiResponse';
 import { ApiError } from 'next/dist/server/api-utils';
 
 const supportedCurrencies = ['USD', 'EUR', 'GBP'];

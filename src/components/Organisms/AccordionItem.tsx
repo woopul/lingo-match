@@ -26,7 +26,11 @@ const AccordionItem = ({
   return (
     <div className={clsx('w-full p-2', className)}>
       <button
-        className={clsx('flex w-full items-center  text-paragraph', bold && 'font-bold')}
+        className={clsx(
+          'flex w-full items-center  text-paragraph',
+          bold && 'font-bold',
+          !shouldBeExpandable && 'cursor-default',
+        )}
         onClick={() => setIsExpanded(!isExpanded)}
         type="button"
       >

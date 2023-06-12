@@ -101,7 +101,7 @@ const PlatformCard = ({
             <div className="text-middleGrey">{priceForShortLabel}</div>
           </div>
         </div>
-        <div className={clsx('col-span-3 flex gap-2 overflow-x-scroll self-end')}>
+        <div className={clsx('col-span-3 flex gap-2 self-end')}>
           {parsedLabelsToDisplay?.map(({ icon, title }) => (
             <Label
               className="whitespace-nowrap bg-lightGrey rounded-full flex items-center px-2 py-1 h-max "
