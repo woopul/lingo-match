@@ -40,7 +40,7 @@ const MainPlatformFilters = ({ filters, setPlatformList }: MainPlatformFiltersPr
     };
   }, [selectedFilters]);
 
-  const handleFiltersChange = (filter: { groupId: number; name: string; type: string }) => {
+  const handleFiltersChange = (filter: SelectedFilterType) => {
     if (!isEmpty(selectedFilters) && selectedFilters.some((item) => item.name === filter.name)) {
       setSelectedFilters(selectedFilters.filter((item) => item.name !== filter.name));
       return;
