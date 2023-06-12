@@ -2,12 +2,11 @@ import Button from '@lingo-match/components/Atoms/Button';
 import Checkbox from '@lingo-match/components/Atoms/Checkbox';
 import IconImage from '@lingo-match/components/Atoms/IconImage';
 import Loader from '@lingo-match/components/Atoms/Loader';
-import RangeInput from '@lingo-match/components/Atoms/RangeInput';
 import AccordionItem from '@lingo-match/components/Organisms/AccordionItem';
 import { FilterAccordionDTO } from '@lingo-match/types/strapi/blocks';
 import clsx from 'clsx';
 import { debounce, isEmpty } from 'lodash-es';
-import { FormEvent, useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BsFilterLeft } from 'react-icons/bs';
 import { IoCloseOutline } from 'react-icons/io5';
 
@@ -33,7 +32,6 @@ const MainPlatformFilters = ({ filters, setPlatformList }: MainPlatformFiltersPr
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    setIsLoading(true);
     debounceFetchFilters();
     return () => {
       debounceFetchFilters.cancel();
@@ -57,6 +55,7 @@ const MainPlatformFilters = ({ filters, setPlatformList }: MainPlatformFiltersPr
   };
 
   const handleFiltersSubmit = async () => {
+    setIsLoading(true);
     const filtersArray = selectedFilters.map((item) => item.type);
 
     // TODO - handle response change for filtered platforms
