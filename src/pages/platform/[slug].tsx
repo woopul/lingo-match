@@ -1,4 +1,4 @@
-import { getBlogPostBySlug, getLayoutConfig, getPlatformBySlug } from '@lingo-match/api/strapi';
+import { getLayoutConfig, getPlatformBySlug } from '@lingo-match/api/strapi';
 import { PrettyJSON } from '@lingo-match/components';
 import { DEFAULT_STATIC_PAGE_CACHE_TIME } from '@lingo-match/constants/cache';
 import withLayout from '@lingo-match/containers/withLayout';
