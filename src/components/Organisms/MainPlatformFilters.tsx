@@ -30,6 +30,11 @@ type SelectedFilterType = {
 const MainPlatformFilters = ({ filters, setPlatformList }: MainPlatformFiltersProps) => {
   const [selectedFilters, setSelectedFilters] = useState<Array<SelectedFilterType>>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [initialised, setInitialised] = useState(false);
+
+  useEffect(() => {
+    setInitialised(true);
+  }, []);
 
   useEffect(() => {
     debounceFetchFilters();
@@ -55,6 +60,10 @@ const MainPlatformFilters = ({ filters, setPlatformList }: MainPlatformFiltersPr
   };
 
   const handleFiltersSubmit = async () => {
+    if (!initialised) {
+      return;
+    }
+
     setIsLoading(true);
     const filtersArray = selectedFilters.map((item) => item.type);
 
