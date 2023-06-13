@@ -1,6 +1,7 @@
 import { CurrencyResponseType } from '@lingo-match/api/currency';
 import { Image } from '@lingo-match/components';
 import Label from '@lingo-match/components/Atoms/Label';
+import { formatPrice } from '@lingo-match/helpers/formatPrice';
 import { SUPPORTED_CURRENCIES } from '@lingo-match/types/strapi';
 import {
   LabelDTO,
@@ -50,11 +51,12 @@ const PlatformCard = ({
     return price * currencyRate;
   };
 
-  const parsePriceToDisplay = (price: number) => {
+  const parseAndFormatPriceToCorrectCurrency = (price: number) => {
+    let priceValue = price;
     if (isForeignCurrency()) {
-      return `${getCalculatedValueInPLN(price).toFixed(2)}`;
+      priceValue = getCalculatedValueInPLN(price);
     }
-    return `${price.toFixed(2)}`;
+    return formatPrice(priceValue);
   };
 
   return (
@@ -88,12 +90,13 @@ const PlatformCard = ({
             <div className="flex justify-end">
               {!!priceBeforeDiscountAsNumber && (
                 <div className="text-accentOne line-through mr-3">
-                  {mainCurrencyForThisMarket} {parsePriceToDisplay(priceBeforeDiscountAsNumber)}
+                  {mainCurrencyForThisMarket}{' '}
+                  {parseAndFormatPriceToCorrectCurrency(priceBeforeDiscountAsNumber)}
                 </div>
               )}
               <div>
                 <span className="font-bold text-black text-16">
-                  {parsePriceToDisplay(priceAsNumber)} {mainCurrencyForThisMarket}
+                  {parseAndFormatPriceToCorrectCurrency(priceAsNumber)} {mainCurrencyForThisMarket}
                 </span>
                 <span className="text-middleGrey">{pricePerMonthLabel}</span>
               </div>
