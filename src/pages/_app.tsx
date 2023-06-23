@@ -1,5 +1,6 @@
 import '../styles/styles.css';
 
+import ErrorBoundary from '@lingo-match/components/Organisms/ErrorBoundary';
 import { DM_Sans } from '@next/font/google';
 import type { AppProps } from 'next/app';
 
@@ -18,7 +19,9 @@ const CustomApp = ({ Component, pageProps }: AppProps) => {
           --font-dm: ${dmSans.style.fontFamily};
         }
       `}</style>
-      <Component {...pageProps} />
+      <ErrorBoundary>
+        <Component {...pageProps} />
+      </ErrorBoundary>
     </>
   );
 };
