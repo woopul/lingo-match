@@ -4,7 +4,7 @@ import React from 'react';
 
 export type LabelProps = {
   className?: string;
-  iconSrc?: string;
+  iconSrc: string | undefined;
   label: string;
 };
 

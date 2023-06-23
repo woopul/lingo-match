@@ -107,8 +107,8 @@ const PlatformCard = ({
         <div className={clsx('col-span-3 flex gap-2 self-end')}>
           {parsedLabelsToDisplay?.map(({ icon, title }) => (
             <Label
-              className="whitespace-nowrap bg-lightGrey rounded-full flex items-center px-2 py-1 h-max "
-              iconSrc={icon?.data.attributes.url}
+              className="whitespace-nowrap bg-lightGrey rounded-full flex items-center px-2 py-1"
+              iconSrc={icon.data?.attributes.url}
               key={title}
               label={title}
             />
