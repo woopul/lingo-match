@@ -52,7 +52,7 @@ const HomePage = ({
       {hero && <Hero {...hero} />}
       <div className="grid grid-cols-12 gap-x-2 h-full min-h-[150vh] mt-3">
         <aside className="bg-white col-span-3 rounded-md sticky top-[calc(8.5rem+1.6rem)] min-h-[40rem] h-fit drop-shadow-md">
-          <MainPlatformFilters filters={mainFilters} setPlatformList={setPlatformList} />
+          <MainPlatformFilters filters={mainFilters || []} setPlatformList={setPlatformList} />
         </aside>
         {!!platformList?.length && (
           <div className="flex flex-col gap-y-2 col-span-9">
