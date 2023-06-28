@@ -1,14 +1,15 @@
+import clsx from 'clsx';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
-import BlockQuote from './BlockQuote';
-
 type RichTextProps = {
+  className?: string;
   data: string;
+  style?: React.CSSProperties;
 };
 
-const RichText = ({ data }: RichTextProps) => (
-  <section className="rich-text py-2">
+const RichText = ({ className, data, style }: RichTextProps) => (
+  <section className={clsx('rich-text py-1', className)} style={style}>
     <Markdown remarkPlugins={[remarkGfm]}>{data}</Markdown>
   </section>
 );

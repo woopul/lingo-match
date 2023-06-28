@@ -12,7 +12,7 @@ const SectionWithTitle = ({ description, title }: SectionWithTitleProps) => {
     <section className="[&_*+*]:mt-1 [&>h1]:mb-2">
       {title && <CustomTag className={title.titleSizeStyle}>{title.title}</CustomTag>}
       {description?.map(({ descriptionSizeStyle, descriptionText, id, textColor }) => (
-        <RichText data={descriptionText} key={id} />
+        <RichText data={descriptionText} key={id} style={{ color: textColor }} />
       ))}
     </section>
   );
