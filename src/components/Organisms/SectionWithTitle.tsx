@@ -8,7 +8,6 @@ export type SectionWithTitleProps = {
 
 const SectionWithTitle = ({ description, title }: SectionWithTitleProps) => {
   const CustomTag = title?.tagType || 'h2';
-  console.log({ description });
   return (
     <section className="[&_*+*]:mt-1 [&>h1]:mb-2">
       {title && <CustomTag className={title.titleSizeStyle}>{title.title}</CustomTag>}
