@@ -57,6 +57,7 @@ export type DescriptionDTO = {
   description?: string;
   descriptionRichText?: string;
   descriptionSizeStyle: DescriptionSizeStyleType;
+  descriptionText: string;
   id: number;
   richText?: string;
   textColor?: string;

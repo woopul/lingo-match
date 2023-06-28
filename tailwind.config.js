@@ -129,5 +129,5 @@ module.exports = {
       desktop: '1024px',
     },
   },
-  plugins: [],
+  plugins: ['@tailwindcss/typography'],
 };
