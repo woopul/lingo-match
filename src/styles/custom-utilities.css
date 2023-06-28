@@ -88,21 +88,20 @@
     background: white;
     position: relative;
     display: flex;
-    align-items:center;
+    align-items: center;
     flex-direction: column;
     justify-content: center;
-
   }
 
   .custom-slider {
     -webkit-appearance: none;
     width: 100%;
     height: 2px;
-    background: #C4C4C4;
+    background: #c4c4c4;
     outline: none;
     opacity: 1;
-    -webkit-transition: .2s;
-    transition: opacity .2s;
+    -webkit-transition: 0.2s;
+    transition: opacity 0.2s;
     border-radius: 2px;
   }
 
@@ -115,7 +114,7 @@
     appearance: none;
     width: 14px;
     height: 14px;
-    background: #FACD3D;
+    background: #facd3d;
     cursor: ew-resize;
     box-shadow: 0 0 2px 0 #555;
     border-radius: 50%;
@@ -124,23 +123,23 @@
   .custom-slider::-moz-range-thumb {
     width: 14px;
     height: 14px;
-    background: #FACD3D;
+    background: #facd3d;
     cursor: ew-resize;
     box-shadow: 0 0 2px 0 #555;
     border-radius: 50%;
   }
 
   .custom-slider::-ms-fill-lower {
-    background: #FACD3D;
+    background: #facd3d;
     opacity: 0.8;
   }
 
   .custom-slider::-moz-range-progress {
-    background: #FACD3D;
+    background: #facd3d;
     opacity: 0.8;
   }
 
-  .custom-slider::-webkit-slider-runnable-track  {
+  .custom-slider::-webkit-slider-runnable-track {
     -webkit-appearance: none;
     box-shadow: none;
     border: none;
@@ -182,5 +181,25 @@
         transparent calc(50% + 1px),
         transparent 100%
       );
+  }
+  .rich-text blockquote {
+    @apply bg-gray-100;
+    @apply ml-1;
+    border-left: 8px solid #ccc;
+    padding: 0.5em 10px;
+    quotes: "\201C""\201D""\2018""\2019";
+  }
+  .rich-text blockquote:before {
+    color: #ccc;
+    content: open-quote;
+    font-size: 4em;
+    line-height: 0.1em;
+    margin-right: 0.25em;
+    vertical-align: -0.4em;
+  }
+
+  .rich-text blockquote p {
+    margin-top: 4px;
+    padding-left: 2.5rem;
   }
 }
