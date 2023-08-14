@@ -1,5 +1,6 @@
 import { FETCH_FIELDS_PLATFORM_LIST } from '@lingo-match/api/strapiFetchFieldsConfig';
 import { LayoutConfigDTO } from '@lingo-match/components/Layout';
+import { redis } from '@lingo-match/lib/redis';
 import { BaseResponseDataWrapper } from '@lingo-match/types/strapi/baseApiResponse';
 import { BlogPostDTO, HomePageDTO, PlatformDTO } from '@lingo-match/types/strapi/blocks';
 import { parseStrapiResponseToData, strapiData } from '@lingo-match/utlis/parseStrapiResponse';
@@ -33,6 +34,13 @@ const fetchAPI = async <RT>(
   const queryString = qs.stringify(urlParamsObject);
   const requestUrl = `${baseUrl}${path}${queryString ? `?${queryString}` : ''}`;
 
+  // Check if data cached and return if it is
+  const cachedData = await redis.get(requestUrl);
+
+  if (cachedData) {
+    return JSON.parse(cachedData);
+  }
+
   const response = await fetch(requestUrl, mergedOptions);
 
   if (!response.ok) {
@@ -42,7 +50,10 @@ const fetchAPI = async <RT>(
       } | params: ${JSON.stringify(urlParamsObject)}`,
     );
   }
+
   const data = await response.json();
+  // set cache in redis
+  await redis.set(requestUrl, JSON.stringify(data));
   return data;
 };
 
@@ -148,11 +159,11 @@ const getFilteredPlatforms = async (filtersArray: string[]) => {
 
 export {
   fetchAPI,
-  getBlogPosts,
   getBlogPostBySlug,
-  getLayoutConfig,
-  getHomePage,
-  getPlatforms,
-  getPlatformBySlug,
+  getBlogPosts,
   getFilteredPlatforms,
+  getHomePage,
+  getLayoutConfig,
+  getPlatformBySlug,
+  getPlatforms,
 };
