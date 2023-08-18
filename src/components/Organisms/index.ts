@@ -1,4 +1,4 @@
-export { default as PlatformCard } from './PlatformCard';
+export { PlatformCard } from './PlatformCard';
 export { default as Header } from './Header';
 export { default as SectionWithTitle } from './SectionWithTitle';
 export { default as PostCard } from './PostCard';

@@ -20,14 +20,14 @@ const Header = ({ className, links, logo, logoDescription, logoTitle }: HeaderPr
   return (
     <header
       className={clsx(
-        'w-full h-[8.5rem] sticky z-10 top-0 text-white bg-gradient-to-b from-primary-600 to-[#9447fe]',
+        'sticky top-0 z-10 h-auto w-full bg-gradient-to-b from-primary-600 to-[#9447fe] text-white desktop:h-[8.5rem]',
         className,
       )}
     >
-      <div className="py-2 px-8 flex justify-between items-center max-w-[144rem] mx-auto">
-        <NextLink className="no-underline flex flex-col" href="/">
+      <div className="mx-auto flex max-w-[144rem] items-center justify-between px-2 py-2 desktop:px-8">
+        <NextLink className="flex flex-col no-underline" href="/">
           {logo ? (
-            <div className="w-[15rem] relative h-[3.5rem]">
+            <div className="relative h-[3.5rem] w-[15rem]">
               <Image
                 alt={logo.data.attributes.alternativeText || ''}
                 src={logo.data.attributes.url}
@@ -36,7 +36,9 @@ const Header = ({ className, links, logo, logoDescription, logoTitle }: HeaderPr
           ) : (
             <h1 className="text-h2 font-bold ">{logoTitle}</h1>
           )}
-          {logoDescription && <div className="text-small mt-0.5">{logoDescription}</div>}
+          {logoDescription && (
+            <div className="text-small mt-0.5 hidden desktop:block">{logoDescription}</div>
+          )}
         </NextLink>
         <nav className="flex gap-2">
           {links?.map(({ label, path, textColor }) => (

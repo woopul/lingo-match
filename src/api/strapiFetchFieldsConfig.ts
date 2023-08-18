@@ -5,6 +5,7 @@ export const FETCH_FIELDS_PLATFORM_LIST = [
   'priceAsNumber',
   'priceBeforeDiscountAsNumber',
   'shortDescription',
+  'shortDescriptionMobile',
   'slug',
   'title',
   'currency',

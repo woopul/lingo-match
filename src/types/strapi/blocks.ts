@@ -69,6 +69,7 @@ export type PlatformTrimToCardDTO = Pick<
   | 'currency'
   | 'mainCurrencyForThisMarket'
   | 'shortDescription'
+  | 'shortDescriptionMobile'
   | 'labels'
   | 'slug'
   | 'logo'
@@ -87,6 +88,7 @@ export type PlatformDTO = StrapiAdditionalAttributesType & {
   priceBeforeDiscountAsNumber?: number;
   rating?: number;
   shortDescription?: string;
+  shortDescriptionMobile?: string;
   slug: string;
   title: string;
 };

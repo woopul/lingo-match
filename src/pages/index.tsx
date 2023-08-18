@@ -46,16 +46,18 @@ const HomePage = ({
 }: HomePageProps) => {
   const [platformList, setPlatformList] = useState<PlatformDTO[]>(platforms);
 
+  console.log({ platformList });
   return (
     <>
       <GradientBox />
       {hero && <Hero {...hero} />}
-      <div className="grid grid-cols-12 gap-x-2 h-full min-h-[150vh] mt-3">
-        <aside className="bg-white col-span-3 rounded-md sticky top-[calc(8.5rem+1.6rem)] min-h-[40rem] h-fit drop-shadow-md">
+      <div className="mt-3 grid h-full min-h-[150vh] grid-cols-12 gap-x-2">
+        <aside className="sticky top-[calc(8.5rem+1.6rem)] col-span-3 hidden h-fit min-h-[40rem] rounded-md bg-white drop-shadow-md desktop:block">
           <MainPlatformFilters filters={mainFilters || []} setPlatformList={setPlatformList} />
         </aside>
+
         {!!platformList?.length && (
-          <div className="flex flex-col gap-y-2 col-span-9">
+          <div className="col-span-12 flex  flex-col  gap-y-2 desktop:col-span-9">
             {platformList.map((platform) => (
               <PlatformCard
                 currenciesExchangeRate={currenciesExchangeRate}
