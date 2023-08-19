@@ -1,3 +1,4 @@
+/** @type {import("prettier").Options} */
 module.exports = {
   arrowParens: 'always',
   bracketSpacing: true,
@@ -16,7 +17,8 @@ module.exports = {
       },
     },
   ],
-  plugins: ['prettier-plugin-tailwindcss'],
+  // TODO: solve this - not working with prettier 3.0
+  // plugins: ['prettier-plugin-tailwindcss'],
   printWidth: 100,
   semi: true,
   singleQuote: true,
