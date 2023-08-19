@@ -59,14 +59,17 @@ export const PlatformCardMobile = ({
   };
 
   return (
-    <NextLink className="cursor-pointer no-underline hover:shadow-md" href={getPlatformUrl(slug)}>
+    <NextLink
+      className="cursor-pointer no-underline hover:shadow-md desktop:hidden"
+      href={getPlatformUrl(slug)}
+    >
       <div
         className={clsx(
           'flex h-[18rem] flex-col gap-1 rounded-md bg-white p-1.5 drop-shadow-lg',
           className,
         )}
       >
-        <div className="flex justify-between gap-3">
+        <div className="flex gap-3 justify-between">
           <div className="relative mr-3 h-[4rem] w-[9rem] overflow-hidden rounded-md">
             <Image
               alt=""

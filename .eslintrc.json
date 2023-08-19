@@ -6,8 +6,8 @@
     "sort-destructure-keys",
     "simple-import-sort",
     "typescript-sort-keys",
-    "eslint-plugin-prettier",
-    "sort-keys-fix"
+    "sort-keys-fix",
+    "prettier"
   ],
   "rules": {
     "prettier/prettier": "error",
