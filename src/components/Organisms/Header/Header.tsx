@@ -7,7 +7,8 @@ import NextLink from 'next/link';
 import { useState } from 'react';
 import { FiMenu } from 'react-icons/fi';
 import { IoClose } from 'react-icons/io5';
-import { MdClose } from 'react-icons/md';
+
+import { MenuMobile } from './MenuMobille';
 
 export type HeaderDTO = {
   links?: LinkDTO[];
@@ -25,21 +26,28 @@ const headerHeight = {
   mobile: '6.7rem',
 };
 
-const Header = ({ className, links, logo, logoDescription, logoTitle }: HeaderProps) => {
+export const Header = ({ className, links, logo, logoDescription, logoTitle }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const handleMenuButtonClick = () => {
     setIsMenuOpen(() => !isMenuOpen);
   };
   return (
     <>
+      <MenuMobile
+        // Tailwind do not wanna see this height if its dynamic value taken from headerHeight
+        className={`top-[6.7rem]`}
+        headerHight={headerHeight.mobile}
+        isOpen={isMenuOpen}
+        links={links}
+      />
       <header
         className={clsx(
-          `sticky top-0 z-20 h-${headerHeight.mobile} w-full bg-gradient-to-b from-primary-600 to-[#9447fe] text-white desktop:h-${headerHeight.desktop}`,
+          `sticky top-0 z-20 h-${headerHeight.mobile} relative w-full bg-gradient-to-b from-primary-600 to-[#9447fe] text-white desktop:h-${headerHeight.desktop}`,
           className,
         )}
       >
         {/* Header mobile */}
-        <div className="flex w-full items-center justify-between px-2 py-2 sm:hidden">
+        <div className="relative z-[22] flex w-full items-center justify-between px-2 py-2 sm:hidden">
           <NextLink className="flex flex-col no-underline" href="/">
             {logo ? (
               <div className="relative h-[3.5rem] w-[15rem]">
@@ -89,7 +97,7 @@ const Header = ({ className, links, logo, logoDescription, logoTitle }: HeaderPr
         </div>
       </header>
       {/* Menu mobile */}
-      <nav
+      {/* <nav
         className={clsx(
           `sticky top-[${headerHeight.mobile}] z-10 flex flex-col gap-2 bg-white p-2 uppercase text-black sm:hidden`,
           !isMenuOpen && '-translate-y-full',
@@ -104,7 +112,7 @@ const Header = ({ className, links, logo, logoDescription, logoTitle }: HeaderPr
             variant="styled"
           />
         ))}
-      </nav>
+      </nav> */}
     </>
   );
 };

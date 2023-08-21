@@ -2,7 +2,7 @@ import { Footer, FooterColumnType } from '@lingo-match/components';
 import { SeoDTO } from '@lingo-match/types/strapi/shared';
 import { PropsWithChildren } from 'react';
 
-import Header, { HeaderDTO } from './Organisms/Header';
+import Header, { HeaderDTO } from './Organisms/Header/Header';
 
 export type LayoutConfigDTO = {
   defaultSEO?: SeoDTO;
