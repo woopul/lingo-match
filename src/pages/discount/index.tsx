@@ -25,7 +25,7 @@ type DiscountPageProps = {
 const DiscountPage = ({ discounts }: DiscountPageProps) => {
   return (
     <main className="min-h-screen">
-      <h2 className="text-6xl font-bold mt-3">Discount Page</h2>
+      <h2 className="text-6xl mt-3 font-bold">Discount Page</h2>
       <h3 className="my-2">discount list :</h3>
       <div className="flex flex-col">
         {discounts.map((post) => (

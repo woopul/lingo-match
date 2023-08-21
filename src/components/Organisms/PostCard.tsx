@@ -29,13 +29,13 @@ const PostCard = ({
   return (
     <NextLink
       className={clsx(
-        'cursor-pointer no-underline hover:shadow-md flex',
+        'flex cursor-pointer no-underline hover:shadow-md',
         alignment === 'vertical' ? 'flex-col' : 'flex-row',
         className,
       )}
       href={getBlogUrl(slug)}
     >
-      <div className="w-full h-[23.5rem] relative bg-primary-200">
+      <div className="relative h-[23.5rem] w-full bg-primary-200">
         {splash?.data && (
           <Image
             alt=""
@@ -44,11 +44,11 @@ const PostCard = ({
           />
         )}
       </div>
-      <div className="flex flex-col [&>*]:mb-1 px-1 mt-1">
-        <div className="w-full text-primary-500 flex">
+      <div className="mt-1 flex flex-col px-1 [&>*]:mb-1">
+        <div className="flex w-full text-primary-500">
           {blogCategories?.data?.map((categoryItem) => (
             <div
-              className="capitalize after:content-['|'] after:mx-1 [&:last-child]:after:content-none"
+              className="capitalize after:mx-1 after:content-['|'] [&:last-child]:after:content-none"
               key={categoryItem.id}
             >
               {categoryItem.attributes.name}
@@ -57,7 +57,7 @@ const PostCard = ({
         </div>
         <h3>{title}</h3>
         <p className="">{shortDescription}</p>
-        <p className={clsx('mt-auto text-darkGray')}>
+        <p className={clsx('text-darkGray mt-auto')}>
           BY {author} / {publishedAt}
         </p>
       </div>

@@ -27,7 +27,7 @@ const AccordionItem = ({
     <div className={clsx('w-full p-2', className)}>
       <button
         className={clsx(
-          'flex w-full items-center  text-paragraph',
+          'text-paragraph flex w-full  items-center',
           bold && 'font-bold',
           !shouldBeExpandable && 'cursor-default',
         )}
@@ -37,14 +37,14 @@ const AccordionItem = ({
         {IconComponent && IconComponent} {title}
         {shouldBeExpandable && (
           <BsChevronDown
-            className={clsx(' transition-rotate duration-300 ml-auto', isExpanded && 'rotate-180')}
+            className={clsx(' transition-rotate ml-auto duration-300', isExpanded && 'rotate-180')}
           />
         )}
       </button>
 
       <div
         className={clsx(
-          'grid transition-[grid-template-rows] ease-in-out duration-[500ms]',
+          'grid transition-[grid-template-rows] duration-[500ms] ease-in-out',
           shouldBeExpandable ? 'grid-rows-[0fr]' : 'grid-rows-[1fr]',
           isExpanded && shouldBeExpandable && 'grid-rows-[1fr]',
         )}

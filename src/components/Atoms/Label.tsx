@@ -10,9 +10,9 @@ export type LabelProps = {
 
 const Label = ({ className, iconSrc, label }: LabelProps) => {
   return (
-    <div className={clsx('flex gap-1 text-small', className)}>
+    <div className={clsx('text-small flex gap-1', className)}>
       {iconSrc && (
-        <div className="w-[2.1rem] h-[2.1rem] relative shrink-0">
+        <div className="relative h-[2.1rem] w-[2.1rem] shrink-0">
           <Image alt="" src={iconSrc} />
         </div>
       )}

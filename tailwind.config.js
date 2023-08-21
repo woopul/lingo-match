@@ -1,7 +1,7 @@
 /* eslint-disable sort-keys */
 /** @type {import('tailwindcss').Config} */
 const colors = require('tailwindcss/colors');
-
+const defaultTheme = require('tailwindcss/defaultTheme');
 module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
@@ -127,6 +127,7 @@ module.exports = {
     },
     screens: {
       desktop: '1024px',
+      ...defaultTheme.screens,
     },
   },
   plugins: ['@tailwindcss/typography'],

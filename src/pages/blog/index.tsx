@@ -26,7 +26,7 @@ type BlogListPageProps = {
 const BlogListPage = ({ blogPosts }: BlogListPageProps) => {
   return (
     <>
-      <h2 className="text-6xl font-bold my-3 text-white">Blog List Page</h2>
+      <h2 className="text-6xl my-3 font-bold text-white">Blog List Page</h2>
       <PostList posts={blogPosts} />
     </>
   );

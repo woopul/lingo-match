@@ -37,11 +37,11 @@ const DesignSystem = () => (
   <div className="text-white">
     <HeaderPlaceholder />
     <main className="px-6 pb-10">
-      <h2 className="text-6xl w-full text-center font-bold mt-6 mb-8">Design System</h2>
-      <div className="grid w-full grid-cols-2 auto-rows-auto mt-2 gap-2">
+      <h2 className="text-6xl mb-8 mt-6 w-full text-center font-bold">Design System</h2>
+      <div className="mt-2 grid w-full auto-rows-auto grid-cols-2 gap-2">
         <div>
           <h2 className="mb-2">fonts</h2>
-          <div className="[&>*]:py-2 [&>*]:break-words border border-b-indigo-200 rounded-md px-2">
+          <div className="rounded-md border border-b-indigo-200 px-2 [&>*]:break-words [&>*]:py-2">
             <h1>This is H1</h1>
             <h2>This is H2</h2>
             <h3>This is H3</h3>
@@ -78,11 +78,11 @@ const DesignSystem = () => (
         </div>
         <div>
           <h2 className="mb-2">colors</h2>
-          <div className="border border-b-indigo-200 min-h-[20rem] rounded-md p-2">
+          <div className="min-h-[20rem] rounded-md border border-b-indigo-200 p-2">
             <h4 className="py-2">primary</h4>
             {Object.keys(primaryColors).map((el) => (
               <div
-                className={`${primaryColors[el]} inline-block mr-1 rounded-md w-5 h-5 border-b-indigo-100 py-2`}
+                className={`${primaryColors[el]} mr-1 inline-block h-5 w-5 rounded-md border-b-indigo-100 py-2`}
                 key={`bg-primary-${el}`}
               ></div>
             ))}
@@ -90,7 +90,7 @@ const DesignSystem = () => (
             <h4 className="py-2">secondary</h4>
             {Object.keys(secondaryColors).map((el) => (
               <div
-                className={`${secondaryColors[el]} inline-block mr-1 rounded-md w-5 h-5 border-b-indigo-100 py-2`}
+                className={`${secondaryColors[el]} mr-1 inline-block h-5 w-5 rounded-md border-b-indigo-100 py-2`}
                 key={`bg-primary-${el}`}
               ></div>
             ))}

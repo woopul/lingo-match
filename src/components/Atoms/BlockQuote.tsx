@@ -3,12 +3,11 @@ export type BlockQuoteProps = {
 };
 
 const BlockQuote = (props: any) => {
-  console.log('BLOCQOUTE', props);
   return (
     <blockquote className="relative">
       <svg
         aria-hidden="true"
-        className="absolute top-0 left-0 transform -translate-x-6 -translate-y-8 h-16 w-16 text-gray-100 dark:text-gray-700"
+        className="h-16 w-16 absolute left-0 top-0 -translate-x-6 -translate-y-8 transform text-gray-100 dark:text-gray-700"
         fill="none"
         height="16"
         viewBox="0 0 16 16"
@@ -22,7 +21,7 @@ const BlockQuote = (props: any) => {
       </svg>
 
       <div className="relative z-10">
-        <p className="text-gray-800 sm:text-xl dark:text-white">
+        <p className="sm:text-xl text-gray-800 dark:text-white">
           <em>TEST QUOTE</em>
         </p>
       </div>

@@ -63,7 +63,7 @@ const Checkbox = forwardRef(
         <input
           checked={checked ?? isChecked}
           className={clsx(
-            'absolute top-0 left-0 z-10 m-0 cursor-pointer p-0 opacity-0 disabled:pointer-events-none peer',
+            'peer absolute left-0 top-0 z-10 m-0 cursor-pointer p-0 opacity-0 disabled:pointer-events-none',
             variant === 'toggle' ? 'h-2.5 w-5.5' : 'h-full w-2.3',
           )}
           defaultChecked={defaultChecked}
@@ -92,9 +92,9 @@ const Checkbox = forwardRef(
         )}
         {variant === 'toggle' && (
           <div
-            className="cursor-pointer peer-checked:bg-orange relative bg-lighterGrey h-[2rem] w-[3.9rem] border rounded-full
-          after:absolute after:rounded-full after:h-[1.8rem] shrink-0 after:w-[1.8rem] after:bg-white after:transition-all after:content-['']
-          peer-checked:after:translate-x-[100%] peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-1 peer-focus:ring-lightGray"
+            className="peer-focus:ring-lightGray relative h-[2rem] w-[3.9rem] shrink-0 cursor-pointer rounded-full border
+          bg-lighterGrey after:absolute after:h-[1.8rem] after:w-[1.8rem] after:rounded-full after:bg-white after:transition-all after:content-['']
+          peer-checked:bg-orange peer-checked:after:translate-x-[100%] peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-1"
             onClick={handleOnChange}
           />
         )}
@@ -103,7 +103,7 @@ const Checkbox = forwardRef(
             'cursor-pointer text-12 leading-18 -tracking-1 desktop:text-14 desktop:leading-20 desktop:-tracking-0',
             labelFullWidth ? 'w-full' : 'w-fit',
             variant === 'label'
-              ? 'peer-checked:bg-orange rounded-full bg-lightGrey px-1.5 py-0.5'
+              ? 'rounded-full bg-lightGrey px-1.5 py-0.5 peer-checked:bg-orange'
               : 'pl-1',
           )}
           htmlFor={id}

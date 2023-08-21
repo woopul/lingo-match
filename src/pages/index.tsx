@@ -46,7 +46,6 @@ const HomePage = ({
 }: HomePageProps) => {
   const [platformList, setPlatformList] = useState<PlatformDTO[]>(platforms);
 
-  console.log({ platformList });
   return (
     <>
       <GradientBox />

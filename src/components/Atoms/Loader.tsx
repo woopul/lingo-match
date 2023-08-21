@@ -15,7 +15,7 @@ export type LoaderProps = {
 const Loader = ({ className, size = 'small' }: LoaderProps) => (
   <div
     className={clsx(
-      'bg-transparent border-4 border-middleGrey rounded-full border-t-blue-50 animate-spin',
+      'animate-spin rounded-full border-4 border-middleGrey border-t-blue-50 bg-transparent',
       LoaderSizeStyleMap[size],
       className,
     )}

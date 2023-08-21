@@ -13,10 +13,10 @@ const ImagesContainer = ({ images }: ImagesContainerProps) => {
   }
 
   return (
-    <div className="w-full flex gap-1">
+    <div className="flex w-full gap-1">
       {images.data.map((image) => (
         <div
-          className="w-full aspect-square bg-primary-200 relative rounded-md overflow-hidden"
+          className="relative aspect-square w-full overflow-hidden rounded-md bg-primary-200"
           key={image.attributes.url}
         >
           <Image

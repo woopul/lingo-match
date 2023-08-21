@@ -34,7 +34,7 @@ export type BlogPostPageProps = {
 const BlogPostPage = ({ post }: BlogPostPageProps) => {
   return (
     <>
-      <h2 className="text-6xl font-bold mt-3">Blog Post Page</h2>
+      <h2 className="text-6xl mt-3 font-bold">Blog Post Page</h2>
       <h3 className="my-2">posts :</h3>
     </>
   );

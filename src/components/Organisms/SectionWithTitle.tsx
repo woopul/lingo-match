@@ -9,7 +9,7 @@ export type SectionWithTitleProps = {
 const SectionWithTitle = ({ description, title }: SectionWithTitleProps) => {
   const CustomTag = title?.tagType || 'h2';
   return (
-    <section className="[&_*+*]:mt-1 [&>h1]:mb-2">
+    <section className="[&>h1]:mb-2 [&_*+*]:mt-1">
       {title && <CustomTag className={title.titleSizeStyle}>{title.title}</CustomTag>}
       {description?.map(({ descriptionSizeStyle, descriptionText, id, textColor }) => (
         <RichText data={descriptionText} key={id} style={{ color: textColor }} />

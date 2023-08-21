@@ -4,6 +4,10 @@ import { BaseResponseDataWrapper } from '@lingo-match/types/strapi/baseApiRespon
 import { StrapiMediaType } from '@lingo-match/types/strapi/shared';
 import clsx from 'clsx';
 import NextLink from 'next/link';
+import { useState } from 'react';
+import { FiMenu } from 'react-icons/fi';
+import { IoClose } from 'react-icons/io5';
+import { MdClose } from 'react-icons/md';
 
 export type HeaderDTO = {
   links?: LinkDTO[];
@@ -16,46 +20,92 @@ export type HeaderProps = HeaderDTO & {
   className?: string;
 };
 
+const headerHeight = {
+  desktop: '8.5rem',
+  mobile: '6.7rem',
+};
+
 const Header = ({ className, links, logo, logoDescription, logoTitle }: HeaderProps) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const handleMenuButtonClick = () => {
+    setIsMenuOpen(() => !isMenuOpen);
+  };
   return (
-    <header
-      className={clsx(
-        'sticky top-0 z-10 h-auto w-full bg-gradient-to-b from-primary-600 to-[#9447fe] text-white desktop:h-[8.5rem]',
-        className,
-      )}
-    >
-      <div className="mx-auto flex max-w-[144rem] items-center justify-between px-2 py-2 desktop:px-8">
-        <NextLink className="flex flex-col no-underline" href="/">
-          {logo ? (
-            <div className="relative h-[3.5rem] w-[15rem]">
-              <Image
-                alt={logo.data.attributes.alternativeText || ''}
-                src={logo.data.attributes.url}
-              />
-            </div>
-          ) : (
-            <h1 className="text-h2 font-bold ">{logoTitle}</h1>
-          )}
-          {logoDescription && (
-            <div className="text-small mt-0.5 hidden desktop:block">{logoDescription}</div>
-          )}
-        </NextLink>
-        <nav className="flex gap-2">
-          {links?.map(({ label, path, textColor }) => (
-            <Link
-              href={path || '/'}
-              key={path}
-              label={label || ''}
-              style={{ color: textColor || '' }}
-              variant="styled"
-            />
-          ))}
-          <NextLink className="styled-link" href="/design-system">
-            <div className="text-preamble">design system</div>
+    <>
+      <header
+        className={clsx(
+          `sticky top-0 z-20 h-${headerHeight.mobile} w-full bg-gradient-to-b from-primary-600 to-[#9447fe] text-white desktop:h-${headerHeight.desktop}`,
+          className,
+        )}
+      >
+        {/* Header mobile */}
+        <div className="flex w-full items-center justify-between px-2 py-2 sm:hidden">
+          <NextLink className="flex flex-col no-underline" href="/">
+            {logo ? (
+              <div className="relative h-[3.5rem] w-[15rem]">
+                <Image
+                  alt={logo.data.attributes.alternativeText || ''}
+                  src={logo.data.attributes.url}
+                />
+              </div>
+            ) : (
+              <h1 className="text-h2 font-bold ">{logoTitle}</h1>
+            )}
           </NextLink>
-        </nav>
-      </div>
-    </header>
+          <button onClick={handleMenuButtonClick}>
+            <FiMenu className={clsx('h-3.5 w-3.5', isMenuOpen && 'hidden')} />
+            <IoClose className={clsx('fill:white -mr-[3px]', !isMenuOpen && 'hidden')} size={35} />
+          </button>
+        </div>
+        {/* Header desktop */}
+        <div className="mx-auto hidden max-w-[144rem] items-center justify-between px-8 py-2 sm:flex">
+          <NextLink className="flex flex-col no-underline" href="/">
+            {logo ? (
+              <div className="relative h-[3.5rem] w-[15rem]">
+                <Image
+                  alt={logo.data.attributes.alternativeText || ''}
+                  src={logo.data.attributes.url}
+                />
+              </div>
+            ) : (
+              <h1 className="text-h2 font-bold ">{logoTitle}</h1>
+            )}
+            {logoDescription && <div className="text-small mt-0.5 block">{logoDescription}</div>}
+          </NextLink>
+          <nav className="flex gap-2">
+            {links?.map(({ label, path, textColor }) => (
+              <Link
+                href={path || '/'}
+                key={path}
+                label={label || ''}
+                style={{ color: textColor || '' }}
+                variant="styled"
+              />
+            ))}
+            <NextLink className="styled-link" href="/design-system">
+              <div className="text-preamble">design system</div>
+            </NextLink>
+          </nav>
+        </div>
+      </header>
+      {/* Menu mobile */}
+      <nav
+        className={clsx(
+          `sticky top-[${headerHeight.mobile}] z-10 flex flex-col gap-2 bg-white p-2 uppercase text-black sm:hidden`,
+          !isMenuOpen && '-translate-y-full',
+        )}
+      >
+        {links?.map(({ label, path, textColor }) => (
+          <Link
+            href={path || '/'}
+            key={path}
+            label={label || ''}
+            style={{ color: textColor || '' }}
+            variant="styled"
+          />
+        ))}
+      </nav>
+    </>
   );
 };
 

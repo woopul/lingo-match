@@ -6,19 +6,19 @@ const Hero = ({ description, imageDesktop, textColor, title }: HeroDTO) => {
   const CustomTag = title?.tagType || 'h2';
   const heroTextColorStyle = textColor ? { color: textColor } : {};
   return (
-    <div className="w-full relative h-[24rem]">
+    <div className="relative h-[24rem] w-full">
       {imageDesktop.data && (
-        <div className="h-[24rem] bg-primary-200 relative mt-2">
+        <div className="relative mt-2 h-[24rem] bg-primary-200">
           <Image alt={''} className="object-cover" src={imageDesktop.data.attributes.url} />
         </div>
       )}
       {title && (
         <div
-          className="absolute px-2 inset-0 flex flex-col justify-center items-center text-[#ffffff]"
+          className="absolute inset-0 flex flex-col items-center justify-center px-2 text-[#ffffff]"
           style={heroTextColorStyle}
         >
           <CustomTag className={title.titleSizeStyle}>{title.title}</CustomTag>
-          {description && <p className="text-preamble text-white mt-2">{description}</p>}
+          {description && <p className="text-preamble mt-2 text-white">{description}</p>}
         </div>
       )}
     </div>

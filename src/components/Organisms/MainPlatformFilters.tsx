@@ -87,13 +87,13 @@ const MainPlatformFilters = ({ filters, setPlatformList }: MainPlatformFiltersPr
   const debounceFetchFilters = debounce(handleFiltersSubmit, 1000);
 
   return (
-    <div className="px-2 relative">
-      <div className="sticky z-20 p-2 mb-2 -mx-2 top-[8.5rem] bg-white flex flex-col gap-2 border-lighterGrey border-b">
+    <div className="relative px-2">
+      <div className="sticky top-[8.5rem] z-20 -mx-2 mb-2 flex flex-col gap-2 border-b border-lighterGrey bg-white p-2">
         <div className="flex justify-between">
           <div className="flex items-center">
-            <BsFilterLeft className="w-[2.4rem] h-[2.4rem]" />
+            <BsFilterLeft className="h-[2.4rem] w-[2.4rem]" />
             <div className="mx-2">{labels.filters}</div>
-            {isLoading && <Loader className="w-[1.8rem] h-[1.8rem]" />}
+            {isLoading && <Loader className="h-[1.8rem] w-[1.8rem]" />}
           </div>
           <Button
             disabled={isEmpty(selectedFilters)}
@@ -109,7 +109,7 @@ const MainPlatformFilters = ({ filters, setPlatformList }: MainPlatformFiltersPr
             <div className="flex flex-wrap gap-1">
               {selectedFilters?.map((filter) => (
                 <div
-                  className="rounded-full bg-orange flex content-between items-center flex-row-reverse"
+                  className="flex flex-row-reverse content-between items-center rounded-full bg-orange"
                   key={filter.name}
                 >
                   <Button
@@ -128,7 +128,7 @@ const MainPlatformFilters = ({ filters, setPlatformList }: MainPlatformFiltersPr
         )}
       </div>
       <form className="flex flex-col">
-        <div className="flex flex-col gap-1.5 h-full pb-2">
+        <div className="flex h-full flex-col gap-1.5 pb-2">
           {/*<AccordionItem*/}
           {/*  bold*/}
           {/*  className="px-0 pt-0 pb-1"*/}
@@ -165,7 +165,7 @@ const MainPlatformFilters = ({ filters, setPlatformList }: MainPlatformFiltersPr
                 >
                   <div
                     className={clsx(
-                      'flex gap-1 pb-1 px-1',
+                      'flex gap-1 px-1 pb-1',
                       variant === 'label' ? 'flex-row flex-wrap' : 'flex-col',
                     )}
                   >

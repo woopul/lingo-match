@@ -13,7 +13,7 @@ const LinkButton = ({ children, className, href, label }: LinkButtonProps) => {
   return (
     <NextLink
       className={clsx(
-        'text-white bg-primary-500 px-2 py-1 font-bold rounded-full no-underline text-center text-16 hover:bg-primary-600',
+        'rounded-full bg-primary-500 px-2 py-1 text-center text-16 font-bold text-white no-underline hover:bg-primary-600',
         className,
       )}
       href={href || '#'}

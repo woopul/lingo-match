@@ -18,7 +18,7 @@ module.exports = {
     },
   ],
   // TODO: solve this - not working with prettier 3.0
-  // plugins: ['prettier-plugin-tailwindcss'],
+  plugins: ['prettier-plugin-tailwindcss'],
   printWidth: 100,
   semi: true,
   singleQuote: true,

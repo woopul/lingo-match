@@ -31,7 +31,7 @@ const RangeInput = ({ className, id, max, min }: RangeSliderProps) => {
           type="range"
         />
         <div
-          className={clsx('absolute h-[2px] bg-orange w-0 pointer-events-none')}
+          className={clsx('pointer-events-none absolute h-[2px] w-0 bg-orange')}
           id="range-bar-filled"
         ></div>
       </div>

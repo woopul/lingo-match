@@ -1,2 +1,2 @@
-const USPBar = () => <div className="w-full bg-primary-500 h-[3.3rem]"></div>;
+const USPBar = () => <div className="h-[3.3rem] w-full bg-primary-500"></div>;
 export default USPBar;

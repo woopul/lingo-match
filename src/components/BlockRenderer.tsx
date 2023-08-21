@@ -36,7 +36,7 @@ const BlockRenderer = ({ blockConfig, blocks }: BlockRendererProps) => {
 const Placeholder = ({ component, ...rest }: { component: string }) => (
   <div className="placeholder my-1 p-2">
     <AccordionItem
-      className="py-1 h-fit bg-white z-10 w-[25vw] text-left [&>button]:mr-3 "
+      className="z-10 h-fit w-[25vw] bg-white py-1 text-left [&>button]:mr-3 "
       title={
         <p>
           <span className="font-bold">{component}</span> not found | data:

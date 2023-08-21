@@ -57,7 +57,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         {...props}
         className={clsx(
-          'items-center justify-center gap-0.25 transition-all w-fit rounded-full',
+          'w-fit items-center justify-center gap-0.25 rounded-full transition-all',
           inline ? 'inline' : 'flex',
           variant === 'link' || variant === 'text'
             ? 'items-start gap-1 px-0 text-12 leading-18 desktop:text-14 desktop:leading-20'

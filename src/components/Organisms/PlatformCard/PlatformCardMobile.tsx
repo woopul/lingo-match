@@ -69,7 +69,7 @@ export const PlatformCardMobile = ({
           className,
         )}
       >
-        <div className="flex gap-3 justify-between">
+        <div className="flex justify-between gap-3">
           <div className="relative mr-3 h-[4rem] w-[9rem] overflow-hidden rounded-md">
             <Image
               alt=""

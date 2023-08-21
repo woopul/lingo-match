@@ -40,7 +40,7 @@ export type BlogPostPageProps = {
 const PlatformPage = ({ post }: BlogPostPageProps) => {
   return (
     <main className="min-h-screen">
-      <h2 className="text-6xl font-bold mt-3">Platform Page</h2>
+      <h2 className="text-6xl mt-3 font-bold">Platform Page</h2>
       <h3 className="my-2">platform: </h3>
       <div className="flex flex-col">{<PrettyJSON data={post} key={post.slug} />}</div>
       <ReactMarkdown>{post.content}</ReactMarkdown>

@@ -9,7 +9,7 @@
   .text-h1 {
     @apply font-bold;
     @apply text-24 desktop:text-40;
-    @apply leading-24 desktop:leading-40;
+    @apply leading-[120%] desktop:leading-[110%];
   }
 
   .text-h2 {
