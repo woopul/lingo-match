@@ -96,23 +96,6 @@ export const Header = ({ className, links, logo, logoDescription, logoTitle }: H
           </nav>
         </div>
       </header>
-      {/* Menu mobile */}
-      {/* <nav
-        className={clsx(
-          `sticky top-[${headerHeight.mobile}] z-10 flex flex-col gap-2 bg-white p-2 uppercase text-black sm:hidden`,
-          !isMenuOpen && '-translate-y-full',
-        )}
-      >
-        {links?.map(({ label, path, textColor }) => (
-          <Link
-            href={path || '/'}
-            key={path}
-            label={label || ''}
-            style={{ color: textColor || '' }}
-            variant="styled"
-          />
-        ))}
-      </nav> */}
     </>
   );
 };
