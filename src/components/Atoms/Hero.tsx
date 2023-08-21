@@ -1,5 +1,6 @@
 import { Image } from '@lingo-match/components';
 import { HeroDTO } from '@lingo-match/types/strapi/blocks';
+import clsx from 'clsx';
 import React from 'react';
 
 const Hero = ({ description, imageDesktop, textColor, title }: HeroDTO) => {
@@ -17,7 +18,7 @@ const Hero = ({ description, imageDesktop, textColor, title }: HeroDTO) => {
           className="absolute inset-0 flex flex-col items-center justify-center px-2 text-[#ffffff]"
           style={heroTextColorStyle}
         >
-          <CustomTag className={title.titleSizeStyle}>{title.title}</CustomTag>
+          <CustomTag className={clsx(title.titleSizeStyle, 'text-center')}>{title.title}</CustomTag>
           {description && <p className="text-preamble mt-2 text-white">{description}</p>}
         </div>
       )}
