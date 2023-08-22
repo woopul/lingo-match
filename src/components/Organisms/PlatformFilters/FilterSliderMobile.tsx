@@ -8,10 +8,13 @@ import { clearAllBodyScrollLocks, disableBodyScroll } from 'body-scroll-lock';
 import clsx from 'clsx';
 import { debounce, isEmpty } from 'lodash-es';
 import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { BsFilterLeft } from 'react-icons/bs';
-import { IoCloseOutline } from 'react-icons/io5';
+import { IoClose, IoCloseOutline } from 'react-icons/io5';
 
-export type MainPlatformFiltersProps = {
+export type FilterSliderMobileProps = {
+  className?: string;
+  close: () => void;
   filters: FilterAccordionDTO[] | [];
   isMobileFiltersOpen?: boolean;
   selectedFilters: Array<SelectedFilterType>;
@@ -31,13 +34,15 @@ type SelectedFilterType = {
   type: string;
 };
 
-export const MainPlatformFilters = ({
+export const FilterSliderMobile = ({
+  className,
+  close,
   filters,
   isMobileFiltersOpen,
   selectedFilters,
   setPlatformList,
   setSelectedFilters,
-}: MainPlatformFiltersProps) => {
+}: FilterSliderMobileProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [initialised, setInitialised] = useState(false);
   const filterContainer = useRef(null);
@@ -109,35 +114,44 @@ export const MainPlatformFilters = ({
 
   const debounceFetchFilters = debounce(handleFiltersSubmit, 1000);
 
-  const classesDesktop =
-    'desktop:sticky desktop:top-[calc(8.5rem+1.6rem)] desktop:col-span-3 min-h-[40rem] dektop:rounded-md desktop:drop-shadow-md';
+  if (!initialised) {
+    return null;
+  }
 
-  const classesMobile = clsx(
-    'fixed inset-0 w-[100vw] z-30 h-fit min-h-[40rem] bg-white -translate-x-full transition-transform duration-300 ease-in-out',
-    isMobileFiltersOpen && 'translate-x-0',
-  );
-
-  return (
-    <aside className={clsx(classesMobile, classesDesktop)} ref={filterContainer}>
+  return createPortal(
+    <aside
+      className={clsx(
+        'fixed inset-0 z-30 -translate-x-full overflow-y-scroll bg-white transition-transform duration-300 ease-in-out desktop:hidden',
+        isMobileFiltersOpen && 'translate-x-0',
+      )}
+      ref={filterContainer}
+    >
       <div className="relative px-2">
-        <div className="dektop:top-[8.5rem] sticky -mx-2 mb-2 flex flex-col gap-2 border-b border-lighterGrey bg-white p-2">
+        <div className="sticky top-0 z-30 -mx-2 mb-2 flex flex-col gap-2 border-b border-lighterGrey bg-white p-2">
           <div className="flex justify-between">
             <div className="flex items-center">
               <BsFilterLeft className="h-[2.4rem] w-[2.4rem]" />
               <div className="mx-2">{labels.filters}</div>
               {isLoading && <Loader className="h-[1.8rem] w-[1.8rem]" />}
             </div>
-            <Button
-              disabled={isEmpty(selectedFilters)}
-              onClick={() => setSelectedFilters([])}
-              variant="text"
-            >
-              {labels.cleanFilters}
-            </Button>
+            <button onClick={close}>
+              <IoClose className={clsx('fill:white -mr-[3px]')} size={35} />
+            </button>
           </div>
+
           {!isEmpty(selectedFilters) && (
             <div className="text-paragraph flex flex-col gap-1">
-              <div className="font-bold">{labels.selectedFilters}</div>
+              <div className="flex items-center gap-2">
+                <div className="font-bold">{labels.selectedFilters}</div>
+                <Button
+                  className="pyu-1 border-[1px] border-black px-1 py-[2px]"
+                  disabled={isEmpty(selectedFilters)}
+                  onClick={() => setSelectedFilters([])}
+                  variant="text"
+                >
+                  {labels.cleanFilters}
+                </Button>
+              </div>
               <div className="flex flex-wrap gap-1">
                 {selectedFilters?.map((filter) => (
                   <div
@@ -218,6 +232,7 @@ export const MainPlatformFilters = ({
           </div>
         </form>
       </div>
-    </aside>
+    </aside>,
+    document.body,
   );
 };

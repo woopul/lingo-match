@@ -22,19 +22,24 @@ export type PlatformFitlersBarMobileProps = {
   className?: string;
   cleanFiltersButtonLabel?: string;
   filterButtonLabelMobile: string;
+  handleFiltersChange: (filter: SelectedFilterType) => void;
   handleMobileFiltersOpen: () => void;
+  isLoading: boolean;
   selectedFilters?: Array<SelectedFilterType>;
+  setSelectedFilters: (filters: any) => void;
 };
 
 export const PlatformFitlersBarMobile = ({
   className,
   cleanFiltersButtonLabel = 'Wyczyść',
   filterButtonLabelMobile,
+  handleFiltersChange,
   handleMobileFiltersOpen,
+  isLoading,
   selectedFilters,
+  setSelectedFilters,
 }: PlatformFitlersBarMobileProps) => {
   const [_, setInit] = useState(false);
-  const swiperRef = useRef(null);
 
   const prevButton = useRef(null);
   const nextButton = useRef(null);
@@ -51,9 +56,17 @@ export const PlatformFitlersBarMobile = ({
         <button className="flex items-center gap-1 text-16" onClick={handleMobileFiltersOpen}>
           <div className="relative">
             <BsFilterLeft className="z-2" size={26} />
-            {!!selectedFilters?.length && (
-              <span className="-z-1 absolute -right-[6px] -top-[4px] z-0 h-[15px] w-[15px] rounded-full bg-orange text-10">
-                {selectedFilters.length}
+            {(!!selectedFilters?.length || isLoading) && (
+              <span
+                className={clsx(
+                  'absolute -right-[6px] -top-[4px] h-[15px] w-[15px] rounded-full bg-orange text-10 ',
+                  {
+                    ['animate-spin border-2 border-[#ffffff60] border-r-[#ffe70f] bg-transparent']:
+                      isLoading,
+                  },
+                )}
+              >
+                {!isLoading && selectedFilters!.length}
               </span>
             )}
           </div>
@@ -78,8 +91,11 @@ export const PlatformFitlersBarMobile = ({
           >
             <SwiperSlide>
               {!!selectedFilters?.length && (
-                <button className="rounded-full border-[1px] border-black px-1 text-14">
-                  Wyczyść
+                <button
+                  className="rounded-full border-[1px] border-black px-1 text-14"
+                  onClick={() => setSelectedFilters([])}
+                >
+                  {cleanFiltersButtonLabel}
                 </button>
               )}
             </SwiperSlide>
@@ -88,7 +104,7 @@ export const PlatformFitlersBarMobile = ({
                 <div className="flex w-fit flex-row-reverse content-between items-center rounded-full bg-orange">
                   <Button
                     className="peer p-[0.5rem] px-[0.5rem]"
-                    // onClick={() => handleFiltersChange(filter)}
+                    onClick={() => handleFiltersChange(filter)}
                     type={'button'}
                     variant="text"
                   >

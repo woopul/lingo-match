@@ -3,8 +3,7 @@ import { getHomePage, getLayoutConfig, getPlatforms } from '@lingo-match/api/str
 import { GradientBox } from '@lingo-match/components';
 import Hero from '@lingo-match/components/Atoms/Hero';
 import { PlatformCard } from '@lingo-match/components/Organisms';
-import { MainPlatformFilters } from '@lingo-match/components/Organisms/PatformFilters/MainPlatformFilters';
-import { PlatformFilters } from '@lingo-match/components/Organisms/PatformFilters/PlatformFilters';
+import { PlatformFilters } from '@lingo-match/components/Organisms/PlatformFilters/PlatformFilters';
 import { DEFAULT_STATIC_PAGE_CACHE_TIME } from '@lingo-match/constants/cache';
 import withLayout from '@lingo-match/containers/withLayout';
 import { BaseGetStaticPropsType } from '@lingo-match/types/strapi/baseApiResponse';

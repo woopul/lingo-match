@@ -4,18 +4,15 @@ import IconImage from '@lingo-match/components/Atoms/IconImage';
 import Loader from '@lingo-match/components/Atoms/Loader';
 import AccordionItem from '@lingo-match/components/Organisms/AccordionItem';
 import { FilterAccordionDTO } from '@lingo-match/types/strapi/blocks';
-import { clearAllBodyScrollLocks, disableBodyScroll } from 'body-scroll-lock';
 import clsx from 'clsx';
-import { debounce, isEmpty } from 'lodash-es';
-import { useEffect, useRef, useState } from 'react';
-import { createPortal } from 'react-dom';
+import { isEmpty } from 'lodash-es';
 import { BsFilterLeft } from 'react-icons/bs';
-import { IoClose, IoCloseOutline } from 'react-icons/io5';
+import { IoCloseOutline } from 'react-icons/io5';
 
 export type MainPlatformFiltersProps = {
-  close: () => void;
   filters: FilterAccordionDTO[] | [];
-  isMobileFiltersOpen?: boolean;
+  handleFiltersChange: (filter: SelectedFilterType) => void;
+  isLoading: boolean;
   selectedFilters: Array<SelectedFilterType>;
   setPlatformList: (platforms: any) => void;
   setSelectedFilters: (filters: any) => void;
@@ -33,50 +30,13 @@ type SelectedFilterType = {
   type: string;
 };
 
-export const MainFiltersMobile = ({
-  close,
+export const FiltersAsideDesktop = ({
   filters,
-  isMobileFiltersOpen,
+  handleFiltersChange,
+  isLoading,
   selectedFilters,
-  setPlatformList,
   setSelectedFilters,
 }: MainPlatformFiltersProps) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [initialised, setInitialised] = useState(false);
-  const filterContainer = useRef(null);
-
-  useEffect(() => {
-    setInitialised(true);
-  }, []);
-
-  useEffect(() => {
-    const filterContainerTarget = filterContainer.current;
-
-    if (isMobileFiltersOpen && filterContainerTarget) {
-      const storedRequestAnimationFrame = window.requestAnimationFrame;
-      window.requestAnimationFrame = () => 50;
-      disableBodyScroll(filterContainerTarget, { reserveScrollBarGap: true });
-      window.requestAnimationFrame = storedRequestAnimationFrame;
-    }
-
-    return () => clearAllBodyScrollLocks();
-  }, [isMobileFiltersOpen]);
-
-  useEffect(() => {
-    debounceFetchFilters();
-    return () => {
-      debounceFetchFilters.cancel();
-    };
-  }, [selectedFilters]);
-
-  const handleFiltersChange = (filter: SelectedFilterType) => {
-    if (!isEmpty(selectedFilters) && selectedFilters.some((item) => item.name === filter.name)) {
-      setSelectedFilters(selectedFilters.filter((item) => item.name !== filter.name));
-      return;
-    }
-    setSelectedFilters([...selectedFilters, filter]);
-  };
-
   const isCheckboxChecked = (type: string) => {
     return selectedFilters.some((item) => item.type === type);
   };
@@ -85,72 +45,27 @@ export const MainFiltersMobile = ({
     return selectedFilters.filter((item) => item.groupId === groupId).length;
   };
 
-  const handleFiltersSubmit = async () => {
-    if (!initialised) {
-      return;
-    }
-
-    setIsLoading(true);
-    const filtersArray = selectedFilters.map((item) => item.type);
-
-    // TODO - handle response change for filtered platforms
-    const response = await fetch('/api/platforms/filter', {
-      body: JSON.stringify(filtersArray),
-      method: 'POST',
-    });
-
-    const { data, success } = await response.json();
-
-    if (!success) {
-      // TODO - handle fetch error (notification?)
-      setIsLoading(false);
-      return;
-    }
-    setPlatformList(data);
-    setIsLoading(false);
-  };
-
-  const debounceFetchFilters = debounce(handleFiltersSubmit, 1000);
-
-  if (!initialised) {
-    return null;
-  }
-
-  return createPortal(
-    <aside
-      className={clsx(
-        'fixed inset-0 z-30 -translate-x-full overflow-y-scroll bg-white transition-transform duration-300 ease-in-out desktop:hidden',
-        isMobileFiltersOpen && 'translate-x-0',
-      )}
-      ref={filterContainer}
-    >
+  return (
+    <aside className="sticky top-[calc(8.5rem+1.6rem)] col-span-3 hidden min-h-[40rem] rounded-md bg-white drop-shadow-md desktop:block">
       <div className="relative px-2">
-        <div className="sticky top-0 z-30 -mx-2 mb-2 flex flex-col gap-2 border-b border-lighterGrey bg-white p-2">
+        <div className="sticky top-[8.5rem] -mx-2 mb-2 flex flex-col gap-2 border-b border-lighterGrey bg-white p-2">
           <div className="flex justify-between">
             <div className="flex items-center">
               <BsFilterLeft className="h-[2.4rem] w-[2.4rem]" />
               <div className="mx-2">{labels.filters}</div>
               {isLoading && <Loader className="h-[1.8rem] w-[1.8rem]" />}
             </div>
-            <button onClick={close}>
-              <IoClose className={clsx('fill:white -mr-[3px]')} size={35} />
-            </button>
+            <Button
+              disabled={isEmpty(selectedFilters)}
+              onClick={() => setSelectedFilters([])}
+              variant="text"
+            >
+              {labels.cleanFilters}
+            </Button>
           </div>
-
           {!isEmpty(selectedFilters) && (
             <div className="text-paragraph flex flex-col gap-1">
-              <div className="flex items-center gap-2">
-                <div className="font-bold">{labels.selectedFilters}</div>
-                <Button
-                  border-color=""
-                  className="pyu-1 border-[1px] border-black px-1 py-[2px]"
-                  disabled={isEmpty(selectedFilters)}
-                  onClick={() => setSelectedFilters([])}
-                  variant="text"
-                >
-                  {labels.cleanFilters}
-                </Button>
-              </div>
+              <div className="font-bold">{labels.selectedFilters}</div>
               <div className="flex flex-wrap gap-1">
                 {selectedFilters?.map((filter) => (
                   <div
@@ -231,7 +146,6 @@ export const MainFiltersMobile = ({
           </div>
         </form>
       </div>
-    </aside>,
-    document.body,
+    </aside>
   );
 };
