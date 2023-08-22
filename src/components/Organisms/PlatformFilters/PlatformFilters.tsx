@@ -3,8 +3,8 @@ import { debounce, isEmpty } from 'lodash-es';
 import { useEffect, useState } from 'react';
 
 import { FiltersAsideDesktop } from './FiltersAsideDesktop';
+import { FiltersBarMobile } from './FiltersBarMobile';
 import { FilterSliderMobile } from './FilterSliderMobile';
-import { PlatformFitlersBarMobile } from './PlatformFiltersBarMobile';
 
 export type MainPlatformFiltersProps = {
   filters: FilterAccordionDTO[] | [];
@@ -78,7 +78,7 @@ export const PlatformFilters = ({ filters, setPlatformList }: MainPlatformFilter
   return (
     <>
       {/* Mobile Filters  */}
-      <PlatformFitlersBarMobile
+      <FiltersBarMobile
         className="z-10 col-span-12 -ml-2 mb-2 w-[100vw] bg-transparent desktop:hidden"
         filterButtonLabelMobile={labels.filters}
         handleFiltersChange={handleFiltersChange}

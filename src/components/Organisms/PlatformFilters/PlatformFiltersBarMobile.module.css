@@ -1,6 +1,15 @@
 .PlatformFiltersBarMobile :global(.swiper-button-disabled) {
   display: none;
 }
+
 .PlatformFiltersBarMobile :global(.swiper-slide) {
   width: fit-content;
+}
+
+.PlatformFiltersBarMobile :global(.swiper-wrapper) {
+  align-items: center;
+}
+
+.PlatformFiltersBarMobile :global(.swiper) {
+  padding-right: 10px;
 }

@@ -18,7 +18,7 @@ type SelectedFilterType = {
   type: string;
 };
 
-export type PlatformFitlersBarMobileProps = {
+export type FitlersBarMobileProps = {
   className?: string;
   cleanFiltersButtonLabel?: string;
   filterButtonLabelMobile: string;
@@ -29,7 +29,7 @@ export type PlatformFitlersBarMobileProps = {
   setSelectedFilters: (filters: any) => void;
 };
 
-export const PlatformFitlersBarMobile = ({
+export const FiltersBarMobile = ({
   className,
   cleanFiltersButtonLabel = 'Wyczyść',
   filterButtonLabelMobile,
@@ -38,7 +38,7 @@ export const PlatformFitlersBarMobile = ({
   isLoading,
   selectedFilters,
   setSelectedFilters,
-}: PlatformFitlersBarMobileProps) => {
+}: FitlersBarMobileProps) => {
   const [_, setInit] = useState(false);
 
   const prevButton = useRef(null);
@@ -72,7 +72,7 @@ export const PlatformFitlersBarMobile = ({
           </div>
           <div>{filterButtonLabelMobile}</div>
         </button>
-        <div className="relative ml-1.5 w-full overflow-hidden">
+        <div className="relative -mr-2 ml-1.5 w-full overflow-hidden">
           <button
             className="bg-opacity-4 absolute left-0 top-0 z-30 h-full bg-gradient-to-r from-white via-white via-80% pl-1 pr-1 opacity-90"
             ref={prevButton}
@@ -115,13 +115,13 @@ export const PlatformFitlersBarMobile = ({
               </SwiperSlide>
             ))}
           </Swiper>
+          <button
+            className="bg-opacity-4 absolute right-0 top-0 z-30 h-full bg-gradient-to-l from-white via-white via-80% pl-1 pr-1 opacity-90"
+            ref={nextButton}
+          >
+            <MdOutlineArrowForwardIos size={16} />
+          </button>
         </div>
-        <button
-          className="bg-opacity-4 absolute right-0 top-[2px] z-30 -mr-2 h-[22px] bg-gradient-to-l from-white via-white via-80% pl-1 pr-1 opacity-90"
-          ref={nextButton}
-        >
-          <MdOutlineArrowForwardIos size={16} />
-        </button>
       </div>
     </div>
   );
