@@ -134,11 +134,13 @@ export const FilterSliderMobile = ({
               <div className="mx-2">{labels.filters}</div>
               {isLoading && <Loader className="h-[1.8rem] w-[1.8rem]" />}
             </div>
+            {/* Close Button */}
             <button onClick={close}>
               <IoClose className={clsx('fill:white -mr-[3px]')} size={35} />
             </button>
           </div>
 
+          {/* Selected Filters */}
           {!isEmpty(selectedFilters) && (
             <div className="text-paragraph flex flex-col gap-1">
               <div className="flex items-center gap-2">
@@ -173,6 +175,7 @@ export const FilterSliderMobile = ({
             </div>
           )}
         </div>
+        {/* Filters List */}
         <form className="flex flex-col">
           <div className="flex h-full flex-col gap-1.5 pb-2">
             {filters.map(

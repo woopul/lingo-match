@@ -33,13 +33,7 @@ export const Header = ({ className, links, logo, logoDescription, logoTitle }: H
   };
   return (
     <>
-      <MenuMobile
-        // Tailwind do not wanna see this height if its dynamic value taken from headerHeight
-        className={`top-[6.7rem]`}
-        headerHight={headerHeight.mobile}
-        isOpen={isMenuOpen}
-        links={links}
-      />
+      <MenuMobile close={handleMenuButtonClick} isOpen={isMenuOpen} links={links} />
       <header
         className={clsx(
           `sticky top-0 z-20 h-${headerHeight.mobile} relative w-full bg-gradient-to-b from-primary-600 to-[#9447fe] text-white desktop:h-${headerHeight.desktop}`,
@@ -61,8 +55,7 @@ export const Header = ({ className, links, logo, logoDescription, logoTitle }: H
             )}
           </NextLink>
           <button onClick={handleMenuButtonClick}>
-            <FiMenu className={clsx('h-3.5 w-3.5', isMenuOpen && 'hidden')} />
-            <IoClose className={clsx('fill:white -mr-[3px]', !isMenuOpen && 'hidden')} size={35} />
+            <FiMenu size={30} />
           </button>
         </div>
         {/* Header desktop */}
