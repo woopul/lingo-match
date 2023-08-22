@@ -3,7 +3,8 @@ import { getHomePage, getLayoutConfig, getPlatforms } from '@lingo-match/api/str
 import { GradientBox } from '@lingo-match/components';
 import Hero from '@lingo-match/components/Atoms/Hero';
 import { PlatformCard } from '@lingo-match/components/Organisms';
-import MainPlatformFilters from '@lingo-match/components/Organisms/MainPlatformFilters';
+import { MainPlatformFilters } from '@lingo-match/components/Organisms/PatformFilters/MainPlatformFilters';
+import { PlatformFilters } from '@lingo-match/components/Organisms/PatformFilters/PlatformFilters';
 import { DEFAULT_STATIC_PAGE_CACHE_TIME } from '@lingo-match/constants/cache';
 import withLayout from '@lingo-match/containers/withLayout';
 import { BaseGetStaticPropsType } from '@lingo-match/types/strapi/baseApiResponse';
@@ -50,10 +51,8 @@ const HomePage = ({
     <>
       <GradientBox />
       {hero && <Hero {...hero} />}
-      <div className="mt-3 grid h-full min-h-[150vh] grid-cols-12 gap-x-2">
-        <aside className="sticky top-[calc(8.5rem+1.6rem)] col-span-3 hidden h-fit min-h-[40rem] rounded-md bg-white drop-shadow-md desktop:block">
-          <MainPlatformFilters filters={mainFilters || []} setPlatformList={setPlatformList} />
-        </aside>
+      <div className="mt-3 grid h-full min-h-[150vh] auto-rows-max grid-cols-12 gap-x-2">
+        <PlatformFilters filters={mainFilters || []} setPlatformList={setPlatformList} />
 
         {!!platformList?.length && (
           <div className="col-span-12 flex  flex-col  gap-y-2 desktop:col-span-9">

@@ -1,0 +1,35 @@
+@layer components {
+  .mySwiper {
+  --swiper-navigation-size: 44px;
+  --swiper-navigation-top-offset: 50%;
+  --swiper-navigation-sides-offset: -10px;
+  --swiper-navigation-color: black;
+  --swiper-navigation-top-offset: 0%;
+  }
+
+  .mySwiper.swiper {
+    padding: 0 10px 0 16px;
+  }
+
+  .mySwiper .swiper-button-disabled {
+    display: none;
+  }
+
+  .mySwiper .swiper-slide{
+    width: fit-content
+  }
+
+  .mySwiper .swiper-button-next,
+  .mySwiper .swiper-button-prev{
+    height: 100%;
+    padding: 0 5px;
+    top:0;
+    margin: 0;
+  }
+
+  .mySwiper .swiper-button-prev:after,
+  .mySwiper .swiper-button-next:after {
+    font-size: 20px;
+  }
+
+}

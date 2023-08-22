@@ -1,0 +1,6 @@
+.PlatformFiltersBarMobile :global(.swiper-button-disabled) {
+  display: none;
+}
+.PlatformFiltersBarMobile :global(.swiper-slide) {
+  width: fit-content;
+}

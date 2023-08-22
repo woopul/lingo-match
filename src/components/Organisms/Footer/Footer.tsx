@@ -25,7 +25,12 @@ export type FooterProps = FooterDTO & {
 };
 
 const Footer = ({ className, footerColumns }: FooterProps) => (
-  <footer className={clsx('bottom-0 z-10 w-full bg-primary-500 text-white shadow-2xl', className)}>
+  <footer
+    className={clsx(
+      'bottom-0 z-10 w-full overflow-hidden bg-primary-500 text-white shadow-2xl',
+      className,
+    )}
+  >
     <div className="mx-auto grid max-w-[144rem] grid-cols-5 px-8 py-2">
       <Logo className="self-center" src="/logo.svg" />
       {footerColumns?.map(({ align, links, title }) => (
