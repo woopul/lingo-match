@@ -38,12 +38,11 @@ const fetchAPI = async <RT>(
   try {
     const cachedData = await redis.get(requestUrl);
 
-    console.log('cached data', cachedData);
     if (cachedData) {
       return JSON.parse(cachedData);
     }
-  } catch (e) {
-    console.error('GET ERROR', e);
+  } catch (error) {
+    console.error('GET ERROR', error);
   }
 
   const response = await fetch(requestUrl, mergedOptions);

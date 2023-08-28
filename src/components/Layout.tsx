@@ -18,7 +18,7 @@ export type LayoutProps = {
 const Layout = ({ children, layoutConfig }: PropsWithChildren<LayoutProps>) => {
   const { footerColumns, header } = layoutConfig;
   return (
-    <div className="flex min-h-[100vh] w-full flex-col bg-lighterGrey">
+    <div className="flex min-h-[100vh] w-full flex-col bg-white">
       <Header {...header} />
       <main className="mx-auto w-full max-w-[144rem] px-2 pb-8 desktop:px-8">{children}</main>
       <Footer footerColumns={footerColumns || []} />
