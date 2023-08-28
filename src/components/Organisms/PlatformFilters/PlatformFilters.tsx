@@ -9,6 +9,7 @@ import { FilterSliderMobile } from './Mobile/FilterSliderMobile';
 export type MainPlatformFiltersProps = {
   filters: FilterAccordionDTO[] | [];
   setPlatformList: (platforms: any) => void;
+  totalItems?: number;
 };
 
 const labels = {
@@ -23,7 +24,11 @@ type SelectedFilterType = {
   type: string;
 };
 
-export const PlatformFilters = ({ filters, setPlatformList }: MainPlatformFiltersProps) => {
+export const PlatformFilters = ({
+  filters,
+  setPlatformList,
+  totalItems,
+}: MainPlatformFiltersProps) => {
   const [selectedFilters, setSelectedFilters] = useState<Array<SelectedFilterType>>([]);
   const [isMobileFilterModalOpen, setIsMobileFilterModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);

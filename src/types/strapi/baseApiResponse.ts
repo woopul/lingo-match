@@ -16,7 +16,7 @@ export type StrapiAdditionalAttributesType =
   | BaseStrapiAttributesType
   | (BaseStrapiAttributesType & MainStrapiAttributesType);
 
-type MainStrapiMetaType = {
+export type MainStrapiMetaType = {
   pagination: {
     page: number;
     pageCount: number;
@@ -46,7 +46,7 @@ export type BaseDataItem<DT> = {
 
 export type BaseResponseDataWrapper<DT> = {
   data: DT extends any[] ? Array<BaseDataItem<DT>> : BaseDataItem<DT>;
-  meta?: MainStrapiMetaType | {};
+  meta?: MainStrapiMetaType;
 };
 
 export type BaseArrayDataWrapper<DT> = {

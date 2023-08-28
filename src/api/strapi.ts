@@ -92,7 +92,8 @@ const getPlatforms = async () => {
         tags: true,
       },
     });
-    return parseStrapiResponseToData<PlatformDTO[]>(platformsResponse);
+    // return parseStrapiResponseToData<PlatformDTO[]>(platformsResponse);
+    return platformsResponse;
   } catch (error) {
     console.error(`[Platforms Service Error] Cannot get platforms - ${error.message}`);
     return null;

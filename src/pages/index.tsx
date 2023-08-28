@@ -6,8 +6,12 @@ import { PlatformCard } from '@lingo-match/components/Organisms';
 import { PlatformFilters } from '@lingo-match/components/Organisms/PlatformFilters/PlatformFilters';
 import { DEFAULT_STATIC_PAGE_CACHE_TIME } from '@lingo-match/constants/cache';
 import withLayout from '@lingo-match/containers/withLayout';
-import { BaseGetStaticPropsType } from '@lingo-match/types/strapi/baseApiResponse';
+import {
+  BaseGetStaticPropsType,
+  MainStrapiMetaType,
+} from '@lingo-match/types/strapi/baseApiResponse';
 import { HomePageDTO, PlatformDTO } from '@lingo-match/types/strapi/blocks';
+import { parseStrapiResponseToData } from '@lingo-match/utlis';
 import { GetStaticProps } from 'next';
 import { useState } from 'react';
 
@@ -29,7 +33,8 @@ export const getStaticProps: GetStaticProps<BaseGetStaticPropsType> = async (con
       currenciesExchangeRate: currenciesExchangeRate,
       homePage: homePage || {},
       layoutConfig: layoutConfig || {},
-      platforms: platforms || [],
+      meta: platforms?.meta,
+      platforms: parseStrapiResponseToData<PlatformDTO[]>(platforms) || [],
     },
     revalidate: DEFAULT_STATIC_PAGE_CACHE_TIME,
   };
@@ -38,22 +43,29 @@ export const getStaticProps: GetStaticProps<BaseGetStaticPropsType> = async (con
 type HomePageProps = {
   currenciesExchangeRate: CurrencyResponseType[];
   homePage: HomePageDTO;
+  meta: MainStrapiMetaType;
   platforms: PlatformDTO[];
 };
 
 const HomePage = ({
   currenciesExchangeRate,
   homePage: { hero, mainFilters, platformCard },
+  meta,
   platforms,
 }: HomePageProps) => {
   const [platformList, setPlatformList] = useState<PlatformDTO[]>(platforms);
 
+  console.log(meta);
   return (
     <>
       <GradientBox />
       {hero && <Hero {...hero} />}
       <div className="mt-3 grid h-full min-h-[150vh] auto-rows-max grid-cols-12 gap-x-2">
-        <PlatformFilters filters={mainFilters || []} setPlatformList={setPlatformList} />
+        <PlatformFilters
+          filters={mainFilters || []}
+          setPlatformList={setPlatformList}
+          totalItems={meta.pagination.total}
+        />
 
         {!!platformList?.length && (
           <div className="col-span-12 flex  flex-col  gap-y-2 desktop:col-span-9">

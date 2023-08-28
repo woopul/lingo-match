@@ -8,7 +8,7 @@ export type ImagesContainerProps = {
 };
 
 const ImagesContainer = ({ images }: ImagesContainerProps) => {
-  if (!images.data.length) {
+  if (!images.data?.length) {
     return null;
   }
 
