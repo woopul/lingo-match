@@ -2,9 +2,9 @@ import { FilterAccordionDTO } from '@lingo-match/types/strapi/blocks';
 import { debounce, isEmpty } from 'lodash-es';
 import { useEffect, useState } from 'react';
 
-import { FiltersAsideDesktop } from './FiltersAsideDesktop';
-import { FiltersBarMobile } from './FiltersBarMobile';
-import { FilterSliderMobile } from './FilterSliderMobile';
+import { FiltersAsideDesktop } from './Desktop/FiltersAsideDesktop';
+import { FiltersBarMobile } from './Mobile/FiltersBarMobile';
+import { FilterSliderMobile } from './Mobile/FilterSliderMobile';
 
 export type MainPlatformFiltersProps = {
   filters: FilterAccordionDTO[] | [];

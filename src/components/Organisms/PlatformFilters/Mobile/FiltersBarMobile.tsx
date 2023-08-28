@@ -10,7 +10,7 @@ import { MdOutlineArrowForwardIos } from 'react-icons/md';
 import { Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import styles from './PlatformFiltersBarMobile.module.css';
+import styles from './FiltersBarMobile.module.css';
 
 type SelectedFilterType = {
   groupId: number;
@@ -73,18 +73,18 @@ export const FiltersBarMobile = ({
           <div>{filterButtonLabelMobile}</div>
         </button>
         <div className="relative -mr-2 ml-1.5 w-full overflow-hidden">
-          <button
+          {/* <button
             className="bg-opacity-4 absolute left-0 top-0 z-30 h-full bg-gradient-to-r from-white via-white via-80% pl-1 pr-1 opacity-90"
             ref={prevButton}
           >
             <MdOutlineArrowForwardIos className="-ml-1 rotate-180" size={16} />
-          </button>
+          </button> */}
           <Swiper
             modules={[Navigation]}
-            navigation={{
-              nextEl: nextButton.current,
-              prevEl: prevButton.current,
-            }}
+            // navigation={{
+            //   nextEl: nextButton.current,
+            //   prevEl: prevButton.current,
+            // }}
             onInit={() => setInit(true)}
             slidesPerView="auto"
             spaceBetween={8}
@@ -110,17 +110,19 @@ export const FiltersBarMobile = ({
                   >
                     <IoCloseOutline />
                   </Button>
-                  <span className="pl-1 leading-14 peer-hover:line-through">{filter.name}</span>
+                  <span className="max-w-[100px] text-ellipsis pl-1 leading-14 peer-hover:line-through">
+                    {filter.name}
+                  </span>
                 </div>
               </SwiperSlide>
             ))}
           </Swiper>
-          <button
+          {/* <button
             className="bg-opacity-4 absolute right-0 top-0 z-30 h-full bg-gradient-to-l from-white via-white via-80% pl-1 pr-1 opacity-90"
             ref={nextButton}
           >
             <MdOutlineArrowForwardIos size={16} />
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

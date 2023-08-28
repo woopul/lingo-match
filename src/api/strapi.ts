@@ -35,10 +35,15 @@ const fetchAPI = async <RT>(
   const requestUrl = `${baseUrl}${path}${queryString ? `?${queryString}` : ''}`;
 
   // Check if data cached and return if it is
-  const cachedData = await redis.get(requestUrl);
+  try {
+    const cachedData = await redis.get(requestUrl);
 
-  if (cachedData) {
-    return JSON.parse(cachedData);
+    console.log('cached data', cachedData);
+    if (cachedData) {
+      return JSON.parse(cachedData);
+    }
+  } catch (e) {
+    console.error('GET ERROR', e);
   }
 
   const response = await fetch(requestUrl, mergedOptions);
@@ -53,7 +58,11 @@ const fetchAPI = async <RT>(
 
   const data = await response.json();
   // set cache in redis
-  await redis.set(requestUrl, JSON.stringify(data));
+  try {
+    await redis.set(requestUrl, JSON.stringify(data));
+  } catch (error) {
+    console.error(error);
+  }
   return data;
 };
 

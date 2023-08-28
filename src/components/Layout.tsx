@@ -21,7 +21,7 @@ const Layout = ({ children, layoutConfig }: PropsWithChildren<LayoutProps>) => {
     <div className="flex min-h-[100vh] w-full flex-col bg-lighterGrey">
       <Header {...header} />
       <main className="mx-auto w-full max-w-[144rem] px-2 pb-8 desktop:px-8">{children}</main>
-      <Footer className="mt-auto" footerColumns={footerColumns || []} />
+      <Footer footerColumns={footerColumns || []} />
     </div>
   );
 };
