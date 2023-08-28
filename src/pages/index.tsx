@@ -12,6 +12,8 @@ import { GetStaticProps } from 'next';
 import { useState } from 'react';
 
 export const getStaticProps: GetStaticProps<BaseGetStaticPropsType> = async (context) => {
+  console.log('context', context);
+
   const [layoutConfig, platforms, homePage] = await Promise.all([
     getLayoutConfig(),
     getPlatforms(),

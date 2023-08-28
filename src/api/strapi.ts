@@ -34,16 +34,18 @@ const fetchAPI = async <RT>(
   const queryString = qs.stringify(urlParamsObject);
   const requestUrl = `${baseUrl}${path}${queryString ? `?${queryString}` : ''}`;
 
-  // Check if data cached and return if it is
-  try {
-    const cachedData = await redis.get(requestUrl);
+  // ------------------------------
+  //  GET CACHED DATA FROM REDIS
+  // ------------------------------
+  // try {
+  //   const cachedData = await redis.get(requestUrl);
 
-    if (cachedData) {
-      return JSON.parse(cachedData);
-    }
-  } catch (error) {
-    console.error('GET ERROR', error);
-  }
+  //   if (cachedData) {
+  //     return JSON.parse(cachedData);
+  //   }
+  // } catch (error) {
+  //   console.error('GET ERROR', error);
+  // }
 
   const response = await fetch(requestUrl, mergedOptions);
 
@@ -56,12 +58,15 @@ const fetchAPI = async <RT>(
   }
 
   const data = await response.json();
-  // set cache in redis
-  try {
-    await redis.set(requestUrl, JSON.stringify(data));
-  } catch (error) {
-    console.error(error);
-  }
+
+  // ------------------------------
+  //  SET CACHED DATA IN REDIS
+  // ------------------------------
+  // try {
+  //   await redis.set(requestUrl, JSON.stringify(data));
+  // } catch (error) {
+  //   console.error(error);
+  // }
   return data;
 };
 
