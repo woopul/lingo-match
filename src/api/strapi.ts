@@ -162,7 +162,7 @@ const getFilteredPlatforms = async (filtersArray: string[]) => {
       },
     });
 
-    return { data: strapiData(response), success: true };
+    return { data: response, success: true };
   } catch (error) {
     console.error(
       `[Platforms Service Error] Filter platforms Cannot get platforms - ${error.message}`,

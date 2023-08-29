@@ -46,9 +46,9 @@ export const FiltersAsideDesktop = ({
   };
 
   return (
-    <aside className="sticky top-[calc(8.5rem+1.6rem)] col-span-3 hidden min-h-[40rem] rounded-md bg-white drop-shadow-md desktop:block">
-      <div className="relative px-2">
-        <div className="sticky top-[8.5rem] -mx-2 mb-2 flex flex-col gap-2 border-b border-lighterGrey bg-white p-2">
+    <aside className="sticky top-[6.7rem] col-span-3 hidden min-h-[40rem] rounded-md bg-white drop-shadow-md desktop:block">
+      <div className=" px-2">
+        <div className="sticky top-[6.7rem] z-20 -mx-2 mb-2 flex flex-col gap-2 border-b border-lighterGrey bg-white p-2">
           <div className="flex justify-between">
             <div className="flex items-center">
               <BsFilterLeft className="h-[2.4rem] w-[2.4rem]" />

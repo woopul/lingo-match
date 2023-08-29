@@ -1,4 +1,5 @@
 import { FilterAccordionDTO } from '@lingo-match/types/strapi/blocks';
+import { strapiData } from '@lingo-match/utlis';
 import { debounce, isEmpty } from 'lodash-es';
 import { useEffect, useState } from 'react';
 
@@ -29,6 +30,7 @@ export const PlatformFilters = ({
   setPlatformList,
   totalItems,
 }: MainPlatformFiltersProps) => {
+  const [total, setTotal] = useState(totalItems);
   const [selectedFilters, setSelectedFilters] = useState<Array<SelectedFilterType>>([]);
   const [isMobileFilterModalOpen, setIsMobileFilterModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -69,12 +71,14 @@ export const PlatformFilters = ({
 
     const { data, success } = await response.json();
 
+    console.log('data', { data, strapiData: strapiData(data) });
     if (!success) {
       // TODO - handle fetch error (notification?)
       setIsLoading(false);
       return;
     }
-    setPlatformList(data);
+    setPlatformList(strapiData(data));
+    setTotal(data.meta.pagination.total);
     setIsLoading(false);
   };
 
@@ -91,6 +95,7 @@ export const PlatformFilters = ({
         isLoading={isLoading}
         selectedFilters={selectedFilters}
         setSelectedFilters={setSelectedFilters}
+        totalItems={total}
       />
       <FilterSliderMobile
         close={() => setIsMobileFilterModalOpen(false)}

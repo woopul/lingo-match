@@ -24,7 +24,7 @@ const BlockRenderer = ({ blockConfig, blocks }: BlockRendererProps) => {
         const Component = getComponent(__component, blockConfig);
 
         if (!Component) {
-          return <Placeholder component={__component} {...rest} key={id} />;
+          return <Placeholder component={__component} {...rest} key={`${id}_${__component}`} />;
         }
 
         return <Component key={id} {...rest} />;

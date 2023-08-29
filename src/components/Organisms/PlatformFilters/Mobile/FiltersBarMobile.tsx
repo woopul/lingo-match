@@ -3,10 +3,9 @@ import 'swiper/css/navigation';
 
 import Button from '@lingo-match/components/Atoms/Button';
 import clsx from 'clsx';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { BsFilterLeft } from 'react-icons/bs';
-import { IoClose, IoCloseOutline } from 'react-icons/io5';
-import { MdOutlineArrowForwardIos } from 'react-icons/md';
+import { IoCloseOutline } from 'react-icons/io5';
 import { Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -27,6 +26,11 @@ export type FitlersBarMobileProps = {
   isLoading: boolean;
   selectedFilters?: Array<SelectedFilterType>;
   setSelectedFilters: (filters: any) => void;
+  totalItems?: number;
+};
+
+const labels = {
+  allPlatformsFound: 'Znalezione oferty',
 };
 
 export const FiltersBarMobile = ({
@@ -38,20 +42,12 @@ export const FiltersBarMobile = ({
   isLoading,
   selectedFilters,
   setSelectedFilters,
+  totalItems,
 }: FitlersBarMobileProps) => {
   const [_, setInit] = useState(false);
 
-  const prevButton = useRef(null);
-  const nextButton = useRef(null);
-
   return (
-    <div
-      className={clsx(
-        'w-100vw h-fit bg-lighterGrey px-2',
-        styles.PlatformFiltersBarMobile,
-        className,
-      )}
-    >
+    <div className={clsx('w-100vw h-fit px-2', styles.PlatformFiltersBarMobile, className)}>
       <div className="relative flex items-center">
         <button className="flex items-center gap-1 text-16" onClick={handleMobileFiltersOpen}>
           <div className="relative">
@@ -73,18 +69,8 @@ export const FiltersBarMobile = ({
           <div>{filterButtonLabelMobile}</div>
         </button>
         <div className="relative -mr-2 ml-1.5 w-full overflow-hidden">
-          {/* <button
-            className="bg-opacity-4 absolute left-0 top-0 z-30 h-full bg-gradient-to-r from-white via-white via-80% pl-1 pr-1 opacity-90"
-            ref={prevButton}
-          >
-            <MdOutlineArrowForwardIos className="-ml-1 rotate-180" size={16} />
-          </button> */}
           <Swiper
             modules={[Navigation]}
-            // navigation={{
-            //   nextEl: nextButton.current,
-            //   prevEl: prevButton.current,
-            // }}
             onInit={() => setInit(true)}
             slidesPerView="auto"
             spaceBetween={8}
@@ -110,19 +96,18 @@ export const FiltersBarMobile = ({
                   >
                     <IoCloseOutline />
                   </Button>
-                  <span className="max-w-[100px] text-ellipsis pl-1 leading-14 peer-hover:line-through">
+                  <span className="max-w-[150px] overflow-hidden text-ellipsis whitespace-nowrap pl-1 leading-14 peer-hover:line-through">
                     {filter.name}
                   </span>
                 </div>
               </SwiperSlide>
             ))}
           </Swiper>
-          {/* <button
-            className="bg-opacity-4 absolute right-0 top-0 z-30 h-full bg-gradient-to-l from-white via-white via-80% pl-1 pr-1 opacity-90"
-            ref={nextButton}
-          >
-            <MdOutlineArrowForwardIos size={16} />
-          </button> */}
+        </div>
+      </div>
+      <div className="mt-1">
+        <div className="text-12 text-darkGrey">
+          {labels.allPlatformsFound}: {totalItems}
         </div>
       </div>
     </div>
