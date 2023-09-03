@@ -20,6 +20,9 @@ const Pagination = ({
   totalItems,
 }: PaginationProps) => {
   const pages = usePagination(totalItems, currentPage, itemsPerPage);
+  if (pageCount <= 1) {
+    return null;
+  }
 
   return (
     <div className="mt-4 flex items-center justify-center gap-1">
