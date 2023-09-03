@@ -71,9 +71,8 @@ export const PlatformFilters = ({
 
     const { data, success } = await response.json();
 
-    console.log('data', { data, strapiData: strapiData(data) });
     if (!success) {
-      // TODO - handle fetch error (notification?)
+      console.error('Error while fetching filtered platforms');
       setIsLoading(false);
       return;
     }

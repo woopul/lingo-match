@@ -80,10 +80,19 @@ const getBlogPosts = async () => {
   }
 };
 
-const getPlatforms = async () => {
+export type GetPlatformsPayloadOptions = {
+  filters?: string[];
+  pagination?: {
+    page: number;
+    pageSize: number;
+  };
+};
+const getPlatforms = async (options?: GetPlatformsPayloadOptions) => {
+  const { pagination } = options || {};
   try {
     const platformsResponse = await fetchAPI<PlatformDTO[]>('/platforms', {
       fields: FETCH_FIELDS_PLATFORM_LIST,
+      pagination,
       populate: {
         labels: {
           populate: '*',
@@ -92,7 +101,7 @@ const getPlatforms = async () => {
         tags: true,
       },
     });
-    // return parseStrapiResponseToData<PlatformDTO[]>(platformsResponse);
+
     return platformsResponse;
   } catch (error) {
     console.error(`[Platforms Service Error] Cannot get platforms - ${error.message}`);

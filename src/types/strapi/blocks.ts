@@ -137,6 +137,7 @@ export type HomePageDTO = {
   blocks: BlockWrapper[];
   hero: HeroDTO;
   mainFilters: FilterAccordionDTO[] | [];
+  paginationItemsPerPage: number;
   platformCard: PlatformCardConfigDTO;
 };
 

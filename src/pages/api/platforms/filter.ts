@@ -14,7 +14,6 @@ const platformFiltersHandler = async (req: NextApiRequest, res: NextApiResponse)
   } catch (error) {
     return res
       .status(400)
-
       .json({ success: false, message: `invalid payload, filters string[] expected` });
   }
 

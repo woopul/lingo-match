@@ -1,0 +1,1 @@
+export const DEFAULT_PLATFORMS_PAGE_LIMIT = 5;

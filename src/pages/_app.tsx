@@ -3,6 +3,7 @@ import '../styles/styles.css';
 import ErrorBoundary from '@lingo-match/components/Organisms/ErrorBoundary';
 import { DM_Sans } from '@next/font/google';
 import type { AppProps } from 'next/app';
+import { StrictMode } from 'react';
 
 const dmSans = DM_Sans({
   display: 'swap',

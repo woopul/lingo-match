@@ -2,7 +2,7 @@ import { Head, Html, Main, NextScript } from 'next/document';
 
 const CustomDocument = () => {
   return (
-    <Html lang="en">
+    <Html lang="pl">
       <Head />
       <body>
         <Main />
