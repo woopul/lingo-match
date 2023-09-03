@@ -14,6 +14,9 @@ export async function middleware(req: NextRequest) {
     return;
   }
 
+  if (req.nextUrl.pathname.includes('rev')) {
+  }
+
   if (req.nextUrl.locale === 'default') {
     const locale = req.cookies.get(LOCALE_COOKIE)?.value || 'pl';
 
