@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next/types';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const path = req.query[0] as string;
+    const path = req.query.path as string;
     await res.revalidate(path);
     return res.json({ revalidated: true });
   } catch (err) {

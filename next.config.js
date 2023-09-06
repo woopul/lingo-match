@@ -24,6 +24,16 @@ const nextConfig = {
       },
     ];
   },
+  async rewrites() {
+    return {
+      beforeFiles: [
+        {
+          source: '/',
+          destination: '/platforms/',
+        },
+      ],
+    };
+  },
   i18n: {
     locales: ['default', 'pl', 'en'],
     defaultLocale: 'default',

@@ -3,7 +3,7 @@ import 'swiper/css/navigation';
 
 import Button from '@lingo-match/components/Atoms/Button';
 import clsx from 'clsx';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { BsFilterLeft } from 'react-icons/bs';
 import { IoCloseOutline } from 'react-icons/io5';
 import { Navigation } from 'swiper/modules';
@@ -45,9 +45,31 @@ export const FiltersBarMobile = ({
   totalItems,
 }: FitlersBarMobileProps) => {
   const [_, setInit] = useState(false);
+  const [isFilterStickyActive, setIsFilterStickyActive] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const headerHeight = document.getElementById('header')?.offsetHeight;
+    const handleScroll = () => {
+      if (ref.current && headerHeight) {
+        const { top } = ref.current.getBoundingClientRect();
+        setIsFilterStickyActive(top <= headerHeight);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <div className={clsx('w-100vw h-fit px-2', styles.PlatformFiltersBarMobile, className)}>
+    <div
+      className={clsx(
+        'w-100vw sticky top-[67px] h-fit px-2 py-2 transition-all duration-200',
+        styles.PlatformFiltersBarMobile,
+        isFilterStickyActive && 'border-b-[1px] border-b-gray-300 bg-white shadow-md',
+        className,
+      )}
+      ref={ref}
+    >
       <div className="relative flex items-center">
         <button className="flex items-center gap-1 text-16" onClick={handleMobileFiltersOpen}>
           <div className="relative">

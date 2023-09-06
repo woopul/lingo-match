@@ -39,6 +39,7 @@ export const Header = ({ className, links, logo, logoDescription, logoTitle }: H
           `sticky top-0 z-20 h-${headerHeight.mobile} relative w-full bg-gradient-to-b from-primary-600 to-[#9447fe] text-white desktop:h-${headerHeight.desktop}`,
           className,
         )}
+        id="header"
       >
         {/* Header mobile */}
         <div className="relative z-[22] flex w-full items-center justify-between px-2 py-2 sm:hidden">

@@ -24,6 +24,7 @@ const Link = ({
   variant = 'default',
 }: PropsWithChildren<LinkProps>) => (
   <NextLink
+    as={href}
     className={clsx(
       'text-preamble no-underline',
       { 'styled-link': variant === 'styled' },
