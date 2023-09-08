@@ -6,17 +6,17 @@ import { SUPPORTED_CURRENCIES } from '@lingo-match/types/strapi';
 import {
   LabelDTO,
   PlatformCardConfigDTO,
-  PlatformTrimToCardDTO,
+  PlatformDTOMapToMainCard,
 } from '@lingo-match/types/strapi/blocks';
 import { getPlatformUrl } from '@lingo-match/utlis';
+import { cn } from '@lingo-match/utlis/cn';
 import { parseStrapiResponseToData } from '@lingo-match/utlis/parseStrapiResponse';
-import clsx from 'clsx';
 import NextLink from 'next/link';
 
 export type PlatformCardProps = {
   className?: string;
   currenciesExchangeRate: CurrencyResponseType[];
-  platformData: PlatformTrimToCardDTO;
+  platformData: PlatformDTOMapToMainCard;
 } & PlatformCardConfigDTO;
 
 const placeholderSrc =
@@ -61,13 +61,12 @@ export const PlatformCardDesktop = ({
 
   return (
     <NextLink
-      className="hidden cursor-pointer no-underline hover:shadow-md desktop:block"
+      className={cn('cursor-pointer no-underline hover:shadow-md', className)}
       href={getPlatformUrl(slug)}
     >
       <div
-        className={clsx(
+        className={cn(
           'grid h-[18rem] min-h-[17.5rem] w-full grid-cols-4 gap-x-2 gap-y-2 rounded-md bg-white px-2 py-2 drop-shadow-md desktop:h-fit desktop:px-3',
-          className,
         )}
       >
         <div className="col-span-3 flex items-start gap-2">
@@ -107,7 +106,7 @@ export const PlatformCardDesktop = ({
             <div className="text-middleGrey">{priceForShortLabel}</div>
           </div>
         </div>
-        <div className={clsx('col-span-3 flex gap-2 self-end overflow-hidden')}>
+        <div className={cn('col-span-3 flex gap-2 self-end overflow-hidden')}>
           {parsedLabelsToDisplay?.map(({ icon, title }) => (
             <Label
               className="flex items-center whitespace-nowrap rounded-full bg-lightGrey px-2 py-1"

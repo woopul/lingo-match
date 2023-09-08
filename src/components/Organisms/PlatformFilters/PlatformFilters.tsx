@@ -9,7 +9,10 @@ import { FilterSliderMobile } from './Mobile/FilterSliderMobile';
 
 export type MainPlatformFiltersProps = {
   filters: FilterAccordionDTO[] | [];
+  pageSize?: number;
+  setPageCount: (count: number) => void;
   setPlatformList: (platforms: any) => void;
+  setTotal: (count: any) => void;
   totalItems?: number;
 };
 
@@ -27,10 +30,12 @@ type SelectedFilterType = {
 
 export const PlatformFilters = ({
   filters,
+  pageSize,
+  setPageCount,
   setPlatformList,
+  setTotal,
   totalItems,
 }: MainPlatformFiltersProps) => {
-  const [total, setTotal] = useState(totalItems);
   const [selectedFilters, setSelectedFilters] = useState<Array<SelectedFilterType>>([]);
   const [isMobileFilterModalOpen, setIsMobileFilterModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -64,7 +69,7 @@ export const PlatformFilters = ({
     const filtersArray = selectedFilters.map((item) => item.type);
 
     // TODO - handle response change for filtered platforms
-    const response = await fetch('/api/platforms/filter', {
+    const response = await fetch(`/api/platforms/filter?pageSize=${pageSize}`, {
       body: JSON.stringify(filtersArray),
       method: 'POST',
     });
@@ -78,6 +83,7 @@ export const PlatformFilters = ({
     }
     setPlatformList(strapiData(data));
     setTotal(data.meta.pagination.total);
+    setPageCount(data.meta.pagination.pageCount);
     setIsLoading(false);
   };
 
@@ -94,7 +100,7 @@ export const PlatformFilters = ({
         isLoading={isLoading}
         selectedFilters={selectedFilters}
         setSelectedFilters={setSelectedFilters}
-        totalItems={total}
+        totalItems={totalItems}
       />
       <FilterSliderMobile
         close={() => setIsMobileFilterModalOpen(false)}

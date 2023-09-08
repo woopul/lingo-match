@@ -15,10 +15,9 @@ import {
 } from '@lingo-match/types/strapi/baseApiResponse';
 import { HomePageDTO, PlatformDTO } from '@lingo-match/types/strapi/blocks';
 import { parseStrapiResponseToData } from '@lingo-match/utlis';
-import Cookies from 'js-cookie';
 import { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
-import { use, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export const getStaticPaths = async () => {
   return {
@@ -36,13 +35,14 @@ export const getStaticProps: GetStaticProps<BaseGetStaticPropsType> = async ({ p
 
   const currentPage = params?.page?.[0] || 1;
   const homePage = await getHomePage();
+  const pageSize = homePage?.paginationItemsPerPage || DEFAULT_PLATFORMS_PAGE_LIMIT;
 
   const [layoutConfig, platforms] = await Promise.all([
     getLayoutConfig(),
     getPlatforms({
       pagination: {
         page: Number(currentPage),
-        pageSize: homePage?.paginationItemsPerPage || DEFAULT_PLATFORMS_PAGE_LIMIT,
+        pageSize: '' + pageSize,
       },
     }),
   ]);
@@ -56,8 +56,8 @@ export const getStaticProps: GetStaticProps<BaseGetStaticPropsType> = async ({ p
       currenciesExchangeRate: currenciesExchangeRate,
       homePage: homePage || {},
       layoutConfig: layoutConfig || {},
-      meta: platforms?.meta,
-      platforms: parseStrapiResponseToData<PlatformDTO[]>(platforms) || [],
+      meta: platforms.data?.meta,
+      platforms: parseStrapiResponseToData<PlatformDTO[]>(platforms.data) || [],
     },
     revalidate: DEFAULT_STATIC_PAGE_CACHE_TIME,
   };
@@ -72,17 +72,19 @@ type HomePageProps = {
 
 const HomePage = ({
   currenciesExchangeRate,
-  homePage: { hero, mainFilters, platformCard },
+  homePage: { hero, mainFilters, paginationItemsPerPage: pageSize, platformCard },
   meta,
   platforms,
 }: HomePageProps) => {
-  const router = useRouter();
-
   const [platformList, setPlatformList] = useState<PlatformDTO[]>([]);
+  const [pageCount, setPageCount] = useState(meta.pagination.pageCount);
+  const [total, setTotal] = useState(meta.pagination.total);
 
   useEffect(() => {
     setPlatformList(platforms);
   }, [platforms]);
+
+  console.log('[...page]', { platformList });
 
   return (
     <>
@@ -91,8 +93,11 @@ const HomePage = ({
       <div className="mt-3 grid h-full auto-rows-max grid-cols-12 gap-x-2">
         <PlatformFilters
           filters={mainFilters || []}
+          pageSize={pageSize}
+          setPageCount={setPageCount}
           setPlatformList={setPlatformList}
-          totalItems={meta.pagination.total}
+          setTotal={setTotal}
+          totalItems={total}
         />
 
         {!!platformList?.length && (
@@ -111,7 +116,7 @@ const HomePage = ({
       <Pagination
         currentPage={meta.pagination.page}
         itemsPerPage={meta.pagination.pageSize}
-        pageCount={meta.pagination.pageCount}
+        pageCount={pageCount}
         renderPageLink={(page) => `/platforms/${page === 1 ? '' : page}`}
         totalItems={meta.pagination.total}
       />

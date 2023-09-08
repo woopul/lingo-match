@@ -34,17 +34,17 @@ export const FooterDesktop = ({ className, footerColumns }: FooterProps) => (
   >
     <div className="mx-auto grid max-w-[144rem] grid-cols-5 px-8 py-2">
       <Logo className="self-center" src="/logo.svg" />
-      {footerColumns?.map(({ align, links, title }) => (
-        <div className="flex flex-col" key={`${title || ''}-${links?.length || 0}`}>
+      {footerColumns?.map(({ align, links, title }, i) => (
+        <div className="flex flex-col" key={`${title || ''}-${links?.length || 0}-${i}`}>
           <div className="mb-1">{title}</div>
           <div className={clsx('w-full', align === 'horizontal' && 'flex items-center gap-2')}>
-            {links?.map((link) => {
+            {links?.map((link, i) => {
               return (
                 <LinkIcon
                   className="text-paragraph uppercase"
                   href={link.href || ''}
                   iconSrc={link.icon?.data?.attributes.url || ''}
-                  key={`${link.href}-${link.label}`}
+                  key={`${link.href}-${link.label || ''}-${i}`}
                   label={link.label || ''}
                 />
               );

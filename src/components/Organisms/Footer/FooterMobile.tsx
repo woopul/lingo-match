@@ -35,21 +35,22 @@ export const FooterMobile = ({ className, footerColumns }: FooterProps) => (
     )}
   >
     <div className="flex max-w-[144rem] flex-col">
-      {footerColumns?.map(({ align, links, title }) => (
+      {footerColumns?.map(({ align, links, title }, i) => (
         <AccordionItem bold className="px-0 py-0" key={title} title={title}>
           <div
             className={clsx(
               'flex  gap-1 pb-1',
               align === 'horizontal' ? 'flex-row items-center gap-2' : 'flex-col',
             )}
+            key={`${title || ''}-${links?.length || 0}-${i}`}
           >
-            {links?.map((link) => {
+            {links?.map((link, i) => {
               return (
                 <LinkIcon
                   className="text-paragraph px-1 uppercase"
                   href={link.href || ''}
                   iconSrc={link.icon?.data?.attributes.url || ''}
-                  key={`${link.href}-${link.label}`}
+                  key={`${link.href}-${link.label || ''}-${i}`}
                   label={link.label || ''}
                 />
               );

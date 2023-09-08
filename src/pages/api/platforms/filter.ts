@@ -1,11 +1,12 @@
 /* eslint-disable sort-keys */
-import { getFilteredPlatforms } from '@lingo-match/api/strapi';
+import { getFilteredPlatforms, getPlatforms } from '@lingo-match/api/strapi';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 const platformFiltersHandler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { body, method } = req;
+  const { body, method, query } = req;
 
   let payload;
+  const pageSize = query.pageSize as string;
   try {
     payload = JSON.parse(body);
     if (!Array.isArray(payload)) {
@@ -22,7 +23,10 @@ const platformFiltersHandler = async (req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    const response = await getFilteredPlatforms(payload);
+    const response = await getPlatforms({
+      filters: payload,
+      pagination: { pageSize: pageSize as string },
+    });
     return res.status(200).json(response);
   } catch (error) {
     return res.status(500).json({ success: false, message: error.message });

@@ -1,5 +1,6 @@
 import { FETCH_FIELDS_PLATFORM_LIST } from '@lingo-match/api/strapiFetchFieldsConfig';
 import { LayoutConfigDTO } from '@lingo-match/components/Layout';
+import { DEFAULT_PLATFORMS_PAGE_LIMIT } from '@lingo-match/constants/requests';
 import { redis } from '@lingo-match/lib/redis';
 import { BaseResponseDataWrapper } from '@lingo-match/types/strapi/baseApiResponse';
 import { BlogPostDTO, HomePageDTO, PlatformDTO } from '@lingo-match/types/strapi/blocks';
@@ -83,16 +84,24 @@ const getBlogPosts = async () => {
 export type GetPlatformsPayloadOptions = {
   filters?: string[];
   pagination?: {
-    page: number;
-    pageSize: number;
+    page?: number;
+    pageSize?: string;
   };
 };
 const getPlatforms = async (options?: GetPlatformsPayloadOptions) => {
-  const { pagination } = options || {};
+  const { filters: filtersArray, pagination } = options || {};
+  const filters = filtersArray?.length
+    ? { $and: filtersArray.map((filter) => ({ tags: { type: { $eq: filter } } })) }
+    : [];
   try {
-    const platformsResponse = await fetchAPI<PlatformDTO[]>('/platforms', {
+    const response = await fetchAPI<PlatformDTO[]>('/platforms', {
       fields: FETCH_FIELDS_PLATFORM_LIST,
-      pagination,
+      filters,
+      pagination: {
+        page: 1,
+        pageSize: DEFAULT_PLATFORMS_PAGE_LIMIT,
+        ...(pagination || {}),
+      },
       populate: {
         labels: {
           populate: '*',
@@ -102,10 +111,12 @@ const getPlatforms = async (options?: GetPlatformsPayloadOptions) => {
       },
     });
 
-    return platformsResponse;
+    return { data: response, success: true };
   } catch (error) {
-    console.error(`[Platforms Service Error] Cannot get platforms - ${error.message}`);
-    return null;
+    console.error(
+      `[Platforms Service Error] Filter platforms Cannot get platforms - ${error.message}`,
+    );
+    return { data: null, success: false };
   }
 };
 

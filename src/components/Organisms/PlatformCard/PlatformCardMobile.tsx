@@ -5,18 +5,18 @@ import { SUPPORTED_CURRENCIES } from '@lingo-match/types/strapi';
 import {
   LabelDTO,
   PlatformCardConfigDTO,
-  PlatformTrimToCardDTO,
+  PlatformDTOMapToMainCard,
 } from '@lingo-match/types/strapi/blocks';
 import { getPlatformUrl } from '@lingo-match/utlis';
+import { cn } from '@lingo-match/utlis/cn';
 import { parseStrapiResponseToData } from '@lingo-match/utlis/parseStrapiResponse';
-import clsx from 'clsx';
 import NextLink from 'next/link';
 import { TbInfoCircle } from 'react-icons/tb';
 
 export type PlatformCardProps = {
   className?: string;
   currenciesExchangeRate: CurrencyResponseType[];
-  platformData: PlatformTrimToCardDTO;
+  platformData: PlatformDTOMapToMainCard;
 } & PlatformCardConfigDTO;
 
 const placeholderSrc =
@@ -60,15 +60,10 @@ export const PlatformCardMobile = ({
 
   return (
     <NextLink
-      className="cursor-pointer no-underline hover:shadow-md desktop:hidden"
+      className={cn('cursor-pointer no-underline hover:shadow-md', className)}
       href={getPlatformUrl(slug)}
     >
-      <div
-        className={clsx(
-          'flex h-[18rem] flex-col gap-1 rounded-md bg-white p-1.5 drop-shadow-lg',
-          className,
-        )}
-      >
+      <div className={cn('flex h-[18rem] flex-col gap-1 rounded-md bg-white p-1.5 drop-shadow-lg')}>
         <div className="flex justify-between">
           <div className="relative mr-3 h-[4rem] w-[9rem] overflow-hidden rounded-md">
             <Image
@@ -102,7 +97,7 @@ export const PlatformCardMobile = ({
           <p className="ml-0.5 text-12 font-bold text-accentTwo">{basicVersionPayedLabel}</p>
         </div>
         {!!parsedLabelsToDisplay && (
-          <div className={clsx('flex items-center overflow-hidden')}>
+          <div className={cn('flex items-center overflow-hidden')}>
             {parsedLabelsToDisplay.slice(0, 3).map(({ title }) => (
               <div
                 className="text-small flex items-center font-bold text-darkGrey after:mx-[6px] after:inline-block after:h-[4px] after:w-[4px] after:shrink-0 after:rounded-full after:bg-current after:last:hidden"

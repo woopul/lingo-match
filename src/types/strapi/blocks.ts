@@ -63,7 +63,22 @@ export type DescriptionDTO = {
   textColor?: string;
 };
 
-export type PlatformTrimToCardDTO = Pick<
+export type PlatformDTOMapToRecommendedCard = Pick<
+  PlatformDTO,
+  | 'title'
+  | 'captionRecommended'
+  | 'currency'
+  | 'mainCurrencyForThisMarket'
+  | 'shortDescription'
+  | 'shortDescriptionMobile'
+  | 'labels'
+  | 'slug'
+  | 'logo'
+  | 'priceAsNumber'
+  | 'priceBeforeDiscountAsNumber'
+>;
+
+export type PlatformDTOMapToMainCard = Pick<
   PlatformDTO,
   | 'title'
   | 'currency'
@@ -79,6 +94,7 @@ export type PlatformTrimToCardDTO = Pick<
 
 export type PlatformDTO = StrapiAdditionalAttributesType & {
   blocks: BlocksType;
+  captionRecommended?: string;
   categories?: CategoryDTO[];
   currency?: SUPPORTED_CURRENCIES;
   description?: string;

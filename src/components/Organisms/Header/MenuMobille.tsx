@@ -1,5 +1,6 @@
 import { Link } from '@lingo-match/components';
 import { LinkDTO } from '@lingo-match/components/Atoms/Link';
+import { getHomeRoute } from '@lingo-match/helpers/getHomeRoute';
 import { clearAllBodyScrollLocks, disableBodyScroll } from 'body-scroll-lock';
 import clsx from 'clsx';
 import { useEffect, useRef, useState } from 'react';
@@ -53,7 +54,7 @@ export const MenuMobile = ({ className, close, isOpen, links }: MenuMobileProps)
         {links?.map(({ label, path, textColor }) => (
           <li className="mx-auto px-3 py-2 " key={path}>
             <Link
-              href={path || '/'}
+              href={getHomeRoute(path)}
               label={label || ''}
               style={{ color: textColor || '', fontSize: '18px' }}
               variant="styled"
