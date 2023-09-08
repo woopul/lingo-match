@@ -1,12 +1,13 @@
+import { getHomePage } from '@lingo-match/api/strapi';
 import { Image, Link } from '@lingo-match/components';
 import { LinkDTO } from '@lingo-match/components/Atoms/Link';
+import { getHomeRoute } from '@lingo-match/helpers/getHomeRoute';
 import { BaseResponseDataWrapper } from '@lingo-match/types/strapi/baseApiResponse';
 import { StrapiMediaType } from '@lingo-match/types/strapi/shared';
 import clsx from 'clsx';
 import NextLink from 'next/link';
 import { useState } from 'react';
 import { FiMenu } from 'react-icons/fi';
-import { IoClose } from 'react-icons/io5';
 
 import { MenuMobile } from './MenuMobille';
 
@@ -43,7 +44,7 @@ export const Header = ({ className, links, logo, logoDescription, logoTitle }: H
       >
         {/* Header mobile */}
         <div className="relative z-[22] flex w-full items-center justify-between px-2 py-2 sm:hidden">
-          <NextLink className="flex flex-col no-underline" href="/">
+          <NextLink className="flex flex-col no-underline" href="/platforms">
             {logo ? (
               <div className="relative h-[3.5rem] w-[15rem]">
                 <Image
@@ -61,7 +62,7 @@ export const Header = ({ className, links, logo, logoDescription, logoTitle }: H
         </div>
         {/* Header desktop */}
         <div className="mx-auto hidden max-w-[144rem] items-center justify-between px-8 py-2 sm:flex">
-          <NextLink className="flex flex-col no-underline" href="/">
+          <NextLink className="flex flex-col no-underline" href="/pltforms">
             {logo ? (
               <div className="relative h-[3.5rem] w-[15rem]">
                 <Image
@@ -77,7 +78,7 @@ export const Header = ({ className, links, logo, logoDescription, logoTitle }: H
           <nav className="flex gap-2">
             {links?.map(({ label, path, textColor }) => (
               <Link
-                href={path || '/'}
+                href={getHomeRoute(path)}
                 key={path}
                 label={label || ''}
                 style={{ color: textColor || '' }}

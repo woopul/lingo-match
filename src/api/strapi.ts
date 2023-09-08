@@ -111,10 +111,10 @@ const getPlatforms = async (options?: GetPlatformsPayloadOptions) => {
 
 const getPlatformBySlug = async (slug: string) => {
   try {
-    const blogPostResponse = await fetchAPI<BlogPostDTO>(`/platforms/${slug}`, {
+    const blogPostResponse = await fetchAPI<PlatformDTO>(`/platforms/${slug}`, {
       populate: 'deep,3',
     });
-    return parseStrapiResponseToData<BlogPostDTO>(blogPostResponse);
+    return parseStrapiResponseToData<PlatformDTO>(blogPostResponse);
   } catch (error) {
     console.error(`[Platform Service Error] Cannot get platform - ${error.message}`);
     return null;

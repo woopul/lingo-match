@@ -32,12 +32,7 @@ export type BlogPostPageProps = {
 };
 
 const BlogPostPage = ({ post }: BlogPostPageProps) => {
-  return (
-    <>
-      <h2 className="text-6xl mt-3 font-bold">Blog Post Page</h2>
-      <h3 className="my-2">posts :</h3>
-    </>
-  );
+  return <></>;
 };
 
 export default withLayout(BlogPostPage);

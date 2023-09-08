@@ -9,7 +9,7 @@ import { StrapiMediaType } from '@lingo-match/types/strapi/shared';
 
 // TODO clean up, restructure and check those types
 
-export type BlockWrapper<T = any> = T & {
+export type BlockWrapper<T = Record<string, any>> = T & {
   __component: string;
   id: string;
 };
@@ -78,6 +78,7 @@ export type PlatformTrimToCardDTO = Pick<
 >;
 
 export type PlatformDTO = StrapiAdditionalAttributesType & {
+  blocks: BlocksType;
   categories?: CategoryDTO[];
   currency?: SUPPORTED_CURRENCIES;
   description?: string;
