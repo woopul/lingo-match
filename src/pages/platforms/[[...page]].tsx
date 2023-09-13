@@ -1,7 +1,6 @@
 import { CurrencyResponseType, getCurrenciesExchangeRate } from '@lingo-match/api/currency';
 import { getHomePage, getLayoutConfig, getPlatforms } from '@lingo-match/api/strapi';
 import { GradientBox } from '@lingo-match/components';
-import Button from '@lingo-match/components/Atoms/Button';
 import Hero from '@lingo-match/components/Atoms/Hero';
 import { PlatformCard } from '@lingo-match/components/Organisms';
 import Pagination from '@lingo-match/components/Organisms/Pagination';
