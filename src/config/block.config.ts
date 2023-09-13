@@ -16,6 +16,13 @@ const Spacer = dynamic(() => import('@lingo-match/components/Atoms/Spacer'), {
   ssr: true,
 });
 
+const RecommendedPlatforms = dynamic(
+  () => import('@lingo-match/components/Organisms/RecommendedPlatforms/RecommendedPlatforms'),
+  {
+    ssr: true,
+  },
+);
+
 const CheckboxColumns = dynamic(() => import('@lingo-match/components/Organisms/CheckboxColumns'), {
   ssr: true,
 });
@@ -30,10 +37,11 @@ const SectionWithTitle = dynamic(
 export type BlockConfigType = Record<string, any>;
 
 export const blockConfig = {
-  'checkbox-columns': CheckboxColumns,
+  'checkbox-column': CheckboxColumns,
   hero: Hero,
   'icon-link': LinkIcon,
   'images-container': ImagesContainer,
+  'recommended-plarforms': RecommendedPlatforms,
   'section-with-title': SectionWithTitle,
   spacing: Spacer,
 };

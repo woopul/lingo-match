@@ -1,11 +1,12 @@
 import { getLayoutConfig, getPlatformBySlug } from '@lingo-match/api/strapi';
 import { PrettyJSON } from '@lingo-match/components';
+import { getPropsConfig } from '@lingo-match/config/getProps.config';
 import { DEFAULT_STATIC_PAGE_CACHE_TIME } from '@lingo-match/constants/cache';
 import withLayout from '@lingo-match/containers/withLayout';
 import { PlatformDTO } from '@lingo-match/types/strapi';
 import { BaseGetStaticPropsType } from '@lingo-match/types/strapi/baseApiResponse';
+import { extendBlockData } from '@lingo-match/utlis';
 import { GetStaticProps } from 'next';
-import ReactMarkdown from 'react-markdown';
 
 export const getStaticPaths = async () => ({
   fallback: 'blocking',
@@ -19,9 +20,15 @@ export const getStaticProps: GetStaticProps<BaseGetStaticPropsType> = async (con
   ]);
 
   const blocks = (platform as PlatformDTO)?.blocks;
+
+  const extendedBlocks = await extendBlockData({
+    blocks,
+    getPropsConfig,
+  });
+
   return {
     props: {
-      blocks: blocks || [],
+      blocks: extendedBlocks || [],
       layoutConfig: layoutConfig || {},
       platform: platform || 'Not found',
     },

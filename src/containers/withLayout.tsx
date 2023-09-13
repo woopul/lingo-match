@@ -11,7 +11,7 @@ const withLayout = (Component: any) => {
     return (
       <Layout layoutConfig={layoutConfig}>
         <Component {...rest} />
-        {blocks && <BlockRenderer blockConfig={blockConfig} blocks={blocks} />}
+        {blocks && <BlockRenderer blocks={blocks} />}
       </Layout>
     );
   };

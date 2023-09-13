@@ -1,4 +1,3 @@
-import { getHomePage } from '@lingo-match/api/strapi';
 import { Image, Link } from '@lingo-match/components';
 import { LinkDTO } from '@lingo-match/components/Atoms/Link';
 import { getHomeRoute } from '@lingo-match/helpers/getHomeRoute';
@@ -81,7 +80,7 @@ export const Header = ({ className, links, logo, logoDescription, logoTitle }: H
                 href={getHomeRoute(path)}
                 key={path}
                 label={label || ''}
-                style={{ color: textColor || '' }}
+                style={{ ...(textColor ? { color: textColor } : {}) }}
                 variant="styled"
               />
             ))}

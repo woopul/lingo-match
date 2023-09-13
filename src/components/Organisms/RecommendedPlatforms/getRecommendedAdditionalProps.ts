@@ -1,16 +1,18 @@
-import { PlatformDTOMapToRecommendedCard } from '@lingo-match/types/strapi';
+import { StrapiBlockType } from '@lingo-match/types/strapi';
 import { pick } from 'lodash-es';
 
-export const getRecommendedPlatformProps = (block: PlatformDTOMapToRecommendedCard[]) => {
+import { RecommendedPlatformsBlockType } from './RecommendedPlatforms';
+
+export const getRecommendedPlatformProps = async (
+  block: StrapiBlockType<RecommendedPlatformsBlockType>,
+) => {
+  const { __component, id } = block;
+
   return {
-    // ...pick(platform, [
-    //   'id',
-    //   'name',
-    //   'slug',
-    //   'labels',
-    //   'logo',
-    //   'description',
-    //   'captionRecommended',
-    // ]),
+    __component,
+    id,
+    platforms: block.platforms.data.map((platform) =>
+      pick(platform, ['id', 'name', 'slug', 'labels', 'logo', 'description', 'captionRecommended']),
+    ),
   };
 };

@@ -1,19 +1,15 @@
 import { PrettyJSON } from '@lingo-match/components/Atoms';
 import AccordionItem from '@lingo-match/components/Organisms/AccordionItem';
-import { BlockWrapper } from '@lingo-match/types/strapi/blocks';
+import { blockConfig } from '@lingo-match/config/block.config';
+import { StrapiBlockType } from '@lingo-match/types/strapi/blocks';
+import { getComponent } from '@lingo-match/utlis';
 import React from 'react';
 
 export type BlockRendererProps = {
-  blockConfig: Record<string, any>;
-  blocks?: BlockWrapper[];
+  blocks?: StrapiBlockType[];
 };
 
-const getComponent = (__component: string, blockConfig: Record<string, any>) => {
-  const blockName = __component.split('.')[1];
-  return blockConfig[blockName];
-};
-
-const BlockRenderer = ({ blockConfig, blocks }: BlockRendererProps) => {
+const BlockRenderer = ({ blocks }: BlockRendererProps) => {
   if (!blocks?.length) {
     return null;
   }

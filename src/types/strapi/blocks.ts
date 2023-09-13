@@ -9,12 +9,17 @@ import { StrapiMediaType } from '@lingo-match/types/strapi/shared';
 
 // TODO clean up, restructure and check those types
 
-export type BlockWrapper<T = Record<string, any>> = T & {
+export type BlockType = {
   __component: string;
   id: string;
 };
 
-export type BlocksType = BlockWrapper[] | [];
+export type StrapiBlockType<T = Record<string, any>> = {
+  __component: string;
+  id: string;
+} & T;
+
+export type StrapiBlocksType = StrapiBlockType[];
 
 type TagType = {
   name: string;
@@ -93,7 +98,7 @@ export type PlatformDTOMapToMainCard = Pick<
 >;
 
 export type PlatformDTO = StrapiAdditionalAttributesType & {
-  blocks: BlocksType;
+  blocks: StrapiBlockType[];
   captionRecommended?: string;
   categories?: CategoryDTO[];
   currency?: SUPPORTED_CURRENCIES;
@@ -121,7 +126,7 @@ export type PlatformCardConfigDTO = {
 
 export type BlogPostDTO = {
   author: string;
-  blocks: BlocksType;
+  blocks: StrapiBlockType[];
   blogCategories: BaseArrayDataWrapper<TagType>;
   content?: string;
   createdAt?: string;
@@ -151,7 +156,7 @@ export type FilterAccordionDTO = {
 };
 
 export type HomePageDTO = {
-  blocks: BlockWrapper[];
+  blocks: StrapiBlockType[];
   hero: HeroDTO;
   mainFilters: FilterAccordionDTO[] | [];
   paginationItemsPerPage: number;

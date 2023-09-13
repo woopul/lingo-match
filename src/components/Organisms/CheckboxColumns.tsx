@@ -18,7 +18,7 @@ export type CheckboxColumnsProps = {
 const CheckboxColumns = ({ columns }: CheckboxColumnsProps) => {
   return (
     <div className="desktop:grid desktop:grid-cols-3">
-      {columns.map(({ checkboxLabels, id }) => (
+      {columns?.map(({ checkboxLabels, id }) => (
         <div className="flex flex-col gap-1" key={id}>
           {checkboxLabels?.map(({ checked, id, label }) => (
             <CheckboxLabel checked={checked} key={id} label={label} />

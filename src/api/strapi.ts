@@ -85,7 +85,7 @@ export type GetPlatformsPayloadOptions = {
   filters?: string[];
   pagination?: {
     page?: number;
-    pageSize?: string;
+    pageSize?: number;
   };
 };
 const getPlatforms = async (options?: GetPlatformsPayloadOptions) => {

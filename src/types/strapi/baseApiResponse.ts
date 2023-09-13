@@ -1,5 +1,5 @@
 import { LayoutConfigDTO } from '@lingo-match/components/Layout';
-import { BlockWrapper } from '@lingo-match/types/strapi/blocks';
+import { StrapiBlockType } from '@lingo-match/types/strapi/blocks';
 
 type BaseStrapiAttributesType = {
   createdAt?: string;
@@ -64,6 +64,6 @@ export type DataWrapper<DT> = {
 };
 
 export type BaseGetStaticPropsType = {
-  blocks?: BlockWrapper[];
+  blocks?: StrapiBlockType[];
   layoutConfig: LayoutConfigDTO | {};
 } & Record<any, any>;

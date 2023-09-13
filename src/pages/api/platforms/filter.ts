@@ -6,7 +6,7 @@ const platformFiltersHandler = async (req: NextApiRequest, res: NextApiResponse)
   const { body, method, query } = req;
 
   let payload;
-  const pageSize = query.pageSize as string;
+  const pageSize = query.pageSize;
   try {
     payload = JSON.parse(body);
     if (!Array.isArray(payload)) {
@@ -25,7 +25,7 @@ const platformFiltersHandler = async (req: NextApiRequest, res: NextApiResponse)
   try {
     const response = await getPlatforms({
       filters: payload,
-      pagination: { pageSize: pageSize as string },
+      pagination: { pageSize: pageSize ? Number(pageSize) : undefined },
     });
     return res.status(200).json(response);
   } catch (error) {
