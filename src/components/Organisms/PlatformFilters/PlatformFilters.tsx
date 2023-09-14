@@ -93,7 +93,7 @@ export const PlatformFilters = ({
     <>
       {/* Mobile Filters  */}
       <FiltersBarMobile
-        className="z-10 col-span-12 -ml-2 mb-2 w-[100vw] bg-transparent desktop:hidden"
+        className="z-20 col-span-12 -ml-2 mb-2 w-[100vw] bg-transparent desktop:hidden"
         filterButtonLabelMobile={labels.filters}
         handleFiltersChange={handleFiltersChange}
         handleMobileFiltersOpen={() => setIsMobileFilterModalOpen(!isMobileFilterModalOpen)}

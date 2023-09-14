@@ -2,6 +2,7 @@ export { Footer, type FooterColumnType, type FooterDTO, type FooterProps } from 
 export { Header } from './Header';
 export { PlatformCard } from './PlatformCard';
 export { PlatformFilters } from './PlatformFilters';
+export { PlatformsNotFound } from './PlatformsNotFound';
 export { default as PostCard } from './PostCard';
 export { default as PostList } from './PostList';
 export { RecommendedPlatforms } from './RecommendedPlatforms';

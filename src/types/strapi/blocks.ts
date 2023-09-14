@@ -1,5 +1,6 @@
 import {
   BaseArrayDataWrapper,
+  BaseDataItem,
   BaseDataWrapper,
   BaseResponseDataWrapper,
   StrapiAdditionalAttributesType,
@@ -155,12 +156,20 @@ export type FilterAccordionDTO = {
   variant: 'default' | 'toggle' | 'icon' | 'label';
 };
 
+export type PlatformNotFoundDTO = {
+  description: string;
+  imageSrc: BaseDataWrapper<StrapiMediaType>;
+  subtitle: string;
+  title: string;
+};
+
 export type HomePageDTO = {
   blocks: StrapiBlockType[];
   hero: HeroDTO;
   mainFilters: FilterAccordionDTO[] | [];
   paginationItemsPerPage: number;
   platformCard: PlatformCardConfigDTO;
+  platformNotFound: PlatformNotFoundDTO;
 };
 
 export type LabelDTO = {

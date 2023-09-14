@@ -5,7 +5,7 @@ import Hero from '@lingo-match/components/Atoms/Hero';
 import { PlatformCard } from '@lingo-match/components/Organisms';
 import Pagination from '@lingo-match/components/Organisms/Pagination';
 import { PlatformFilters } from '@lingo-match/components/Organisms/PlatformFilters/PlatformFilters';
-import { getPropsConfig } from '@lingo-match/config/getProps.config';
+import { PlatformsNotFound } from '@lingo-match/components/Organisms/PlatformsNotFound';
 import { DEFAULT_STATIC_PAGE_CACHE_TIME } from '@lingo-match/constants/cache';
 import { DEFAULT_PLATFORMS_PAGE_LIMIT } from '@lingo-match/constants/requests';
 import withLayout from '@lingo-match/containers/withLayout';
@@ -72,7 +72,7 @@ type HomePageProps = {
 
 const HomePage = ({
   currenciesExchangeRate,
-  homePage: { hero, mainFilters, paginationItemsPerPage: pageSize, platformCard },
+  homePage: { hero, mainFilters, paginationItemsPerPage: pageSize, platformCard, platformNotFound },
   meta,
   platforms,
 }: HomePageProps) => {
@@ -97,18 +97,20 @@ const HomePage = ({
           setTotal={setTotal}
           totalItems={total}
         />
-        {!!platformList?.length && (
-          <div className="flex flex-col gap-y-2 desktop:col-span-9">
-            {platformList.map((platform) => (
+        <div className="flex flex-col gap-y-2 desktop:col-span-9">
+          {platformList.length ? (
+            platformList.map((platform) => (
               <PlatformCard
                 currenciesExchangeRate={currenciesExchangeRate}
                 {...platformCard}
                 key={platform.slug}
                 platformData={platform}
               />
-            ))}
-          </div>
-        )}
+            ))
+          ) : (
+            <PlatformsNotFound {...platformNotFound} />
+          )}
+        </div>
       </div>
       <Pagination
         currentPage={meta.pagination.page}
