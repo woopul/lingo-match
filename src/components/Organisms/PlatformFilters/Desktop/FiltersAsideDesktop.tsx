@@ -6,6 +6,7 @@ import AccordionItem from '@lingo-match/components/Organisms/AccordionItem';
 import { FilterAccordionDTO } from '@lingo-match/types/strapi/blocks';
 import clsx from 'clsx';
 import { isEmpty } from 'lodash-es';
+import { useEffect, useState } from 'react';
 import { BsFilterLeft } from 'react-icons/bs';
 import { IoCloseOutline } from 'react-icons/io5';
 
@@ -37,9 +38,15 @@ export const FiltersAsideDesktop = ({
   selectedFilters,
   setSelectedFilters,
 }: MainPlatformFiltersProps) => {
+  const [headerHeight, setHeaderHeight] = useState(0);
   const isCheckboxChecked = (type: string) => {
     return selectedFilters.some((item) => item.type === type);
   };
+
+  useEffect(() => {
+    const headerHeight = document.getElementById('header')?.offsetHeight || 0;
+    setHeaderHeight(headerHeight);
+  }, []);
 
   const getFiltersCountForGroup = (groupId: number) => {
     return selectedFilters.filter((item) => item.groupId === groupId).length;
@@ -48,7 +55,10 @@ export const FiltersAsideDesktop = ({
   return (
     <aside className="col-span-3 hidden min-h-[40rem] flex-col justify-start desktop:flex">
       <div className="sticky top-10 rounded-md bg-white px-2 drop-shadow-md">
-        <div className="sticky top-10 z-20 -mx-2 mb-2 flex flex-col gap-2 border-b border-lighterGrey bg-white p-2">
+        <div
+          className="sticky  z-20 -mx-2 mb-2 flex flex-col gap-2 rounded-md border-b border-lighterGrey bg-white p-2"
+          style={{ top: headerHeight }}
+        >
           <div className="flex justify-between">
             <div className="flex items-center">
               <BsFilterLeft className="h-[2.4rem] w-[2.4rem]" />

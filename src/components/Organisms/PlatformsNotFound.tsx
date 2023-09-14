@@ -32,9 +32,9 @@ export const PlatformsNotFound = ({
       </div>
       <div className="relative h-[187px] w-full max-w-[278px] shrink-0 self-center">
         <Image
-          alt={imageSrc.data?.attributes.alternativeText ?? ''}
+          alt={imageSrc?.data?.attributes.alternativeText ?? ''}
           className="object-cover"
-          src={imageSrc.data?.attributes.url || ''}
+          src={imageSrc?.data?.attributes.url || ''}
         />
       </div>
     </div>
