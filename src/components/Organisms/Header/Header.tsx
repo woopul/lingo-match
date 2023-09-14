@@ -1,5 +1,6 @@
 import { Image, Link } from '@lingo-match/components';
 import { LinkDTO } from '@lingo-match/components/Atoms/Link';
+import { HOME_PAGE_ROUTE } from '@lingo-match/constants/routes';
 import { getHomeRoute } from '@lingo-match/helpers/getHomeRoute';
 import { BaseResponseDataWrapper } from '@lingo-match/types/strapi/baseApiResponse';
 import { StrapiMediaType } from '@lingo-match/types/strapi/shared';
@@ -43,7 +44,7 @@ export const Header = ({ className, links, logo, logoDescription, logoTitle }: H
       >
         {/* Header mobile */}
         <div className="relative z-[22] flex w-full items-center justify-between px-2 py-2 sm:hidden">
-          <NextLink className="flex flex-col no-underline" href="/platforms">
+          <NextLink className="flex flex-col no-underline" href={HOME_PAGE_ROUTE}>
             {logo ? (
               <div className="relative h-[3.5rem] w-[15rem]">
                 <Image
@@ -61,7 +62,7 @@ export const Header = ({ className, links, logo, logoDescription, logoTitle }: H
         </div>
         {/* Header desktop */}
         <div className="mx-auto hidden max-w-[144rem] items-center justify-between px-8 py-2 sm:flex">
-          <NextLink className="flex flex-col no-underline" href="/pltforms">
+          <NextLink className="flex flex-col no-underline" href={HOME_PAGE_ROUTE}>
             {logo ? (
               <div className="relative h-[3.5rem] w-[15rem]">
                 <Image

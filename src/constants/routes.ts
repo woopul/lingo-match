@@ -1,1 +1,1 @@
-export const HOME_PAGE = '/platforms';
+export const HOME_PAGE_ROUTE = '/platforms';

@@ -1,7 +1,6 @@
 import { Layout } from '@lingo-match/components';
 import BlockRenderer from '@lingo-match/components/BlockRenderer';
 import { LayoutConfigDTO } from '@lingo-match/components/Layout';
-import blockConfig from '@lingo-match/config/block.config';
 import { BaseGetStaticPropsType } from '@lingo-match/types/strapi/baseApiResponse';
 
 export type WithLayoutProps = LayoutConfigDTO & Record<any, any>;
