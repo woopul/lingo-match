@@ -29,3 +29,10 @@ export const strapiData = <T>(
   }
   return item.data.attributes;
 };
+
+export const strapiDataArray = <T>(item: BaseArrayDataWrapper<T>): T[] => {
+  if (!item?.data || !Array.isArray(item.data)) {
+    return [];
+  }
+  return item.data.map((dataItem) => dataItem.attributes);
+};

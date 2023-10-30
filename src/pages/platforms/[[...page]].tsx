@@ -15,7 +15,7 @@ import {
   MainStrapiMetaType,
 } from '@lingo-match/types/strapi/baseApiResponse';
 import { HomePageDTO, PlatformDTO } from '@lingo-match/types/strapi/blocks';
-import { extendBlockData, parseStrapiResponseToData } from '@lingo-match/utlis';
+import { parseStrapiResponseToData } from '@lingo-match/utlis';
 import { GetStaticProps } from 'next';
 import { useEffect, useState } from 'react';
 
@@ -53,11 +53,12 @@ export const getStaticProps: GetStaticProps<BaseGetStaticPropsType> = async ({ p
   return {
     props: {
       blocks: blocks,
-      currenciesExchangeRate: currenciesExchangeRate,
+      currenciesExchangeRate,
       homePage: homePage || {},
       layoutConfig: layoutConfig || {},
-      meta: platforms.data?.meta,
+      meta: platforms.data?.meta || {},
       platforms: parseStrapiResponseToData<PlatformDTO[]>(platforms.data) || [],
+      platforms2: platforms,
     },
     revalidate: DEFAULT_STATIC_PAGE_CACHE_TIME,
   };
@@ -77,8 +78,8 @@ const HomePage = ({
   platforms,
 }: HomePageProps) => {
   const [platformList, setPlatformList] = useState<PlatformDTO[]>([]);
-  const [pageCount, setPageCount] = useState(meta.pagination.pageCount);
-  const [total, setTotal] = useState(meta.pagination.total);
+  const [pageCount, setPageCount] = useState(meta.pagination?.pageCount);
+  const [total, setTotal] = useState(meta.pagination?.total);
 
   useEffect(() => {
     setPlatformList(platforms);
@@ -113,11 +114,11 @@ const HomePage = ({
         </div>
       </div>
       <Pagination
-        currentPage={meta.pagination.page}
-        itemsPerPage={meta.pagination.pageSize}
+        currentPage={meta.pagination?.page}
+        itemsPerPage={meta.pagination?.pageSize}
         pageCount={pageCount}
         renderPageLink={getPlatformPaginationRoute}
-        totalItems={meta.pagination.total}
+        totalItems={meta.pagination?.total}
       />
     </>
   );

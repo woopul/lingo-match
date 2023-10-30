@@ -41,7 +41,7 @@ export const blockConfig = {
   hero: Hero,
   'icon-link': LinkIcon,
   'images-container': ImagesContainer,
-  'recommended-plarforms': RecommendedPlatforms,
+  'recommended-platforms': RecommendedPlatforms,
   'section-with-title': SectionWithTitle,
   spacing: Spacer,
 };

@@ -7,6 +7,7 @@ export type WithLayoutProps = LayoutConfigDTO & Record<any, any>;
 
 const withLayout = (Component: any) => {
   const wrappedComponent = ({ blocks, layoutConfig, ...rest }: BaseGetStaticPropsType) => {
+    console.log({ blocks });
     return (
       <Layout layoutConfig={layoutConfig}>
         <Component {...rest} />

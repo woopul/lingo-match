@@ -104,7 +104,7 @@ export type PlatformDTO = StrapiAdditionalAttributesType & {
   categories?: CategoryDTO[];
   currency?: SUPPORTED_CURRENCIES;
   description?: string;
-  labels: BaseResponseDataWrapper<LabelDTO[]> | null;
+  labels: BaseArrayDataWrapper<LabelDTO>;
   logo: BaseResponseDataWrapper<StrapiMediaType>;
   mainCurrencyForThisMarket: SUPPORTED_CURRENCIES;
   priceAsNumber: number;
@@ -114,6 +114,10 @@ export type PlatformDTO = StrapiAdditionalAttributesType & {
   shortDescriptionMobile?: string;
   slug: string;
   title: string;
+};
+
+export type TranslationsDTO = {
+  [key: string]: Record<string, string>;
 };
 
 export type PlatformCardConfigDTO = {

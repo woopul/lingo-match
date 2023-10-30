@@ -3,7 +3,12 @@ import { LayoutConfigDTO } from '@lingo-match/components/Layout';
 import { DEFAULT_PLATFORMS_PAGE_LIMIT } from '@lingo-match/constants/requests';
 import { redis } from '@lingo-match/lib/redis';
 import { BaseResponseDataWrapper } from '@lingo-match/types/strapi/baseApiResponse';
-import { BlogPostDTO, HomePageDTO, PlatformDTO } from '@lingo-match/types/strapi/blocks';
+import {
+  BlogPostDTO,
+  HomePageDTO,
+  PlatformDTO,
+  TranslationsDTO,
+} from '@lingo-match/types/strapi/blocks';
 import { parseStrapiResponseToData, strapiData } from '@lingo-match/utlis/parseStrapiResponse';
 import qs from 'qs';
 
@@ -88,6 +93,11 @@ export type GetPlatformsPayloadOptions = {
     pageSize?: number;
   };
 };
+
+export type GetLabelsOptions = {
+  fields: string[];
+};
+
 const getPlatforms = async (options?: GetPlatformsPayloadOptions) => {
   const { filters: filtersArray, pagination } = options || {};
   const filters = filtersArray?.length
@@ -123,9 +133,22 @@ const getPlatforms = async (options?: GetPlatformsPayloadOptions) => {
 const getPlatformBySlug = async (slug: string) => {
   try {
     const blogPostResponse = await fetchAPI<PlatformDTO>(`/platforms/${slug}`, {
-      populate: 'deep,3',
+      populate: 'deep,4',
     });
     return parseStrapiResponseToData<PlatformDTO>(blogPostResponse);
+  } catch (error) {
+    console.error(`[Platform Service Error] Cannot get platform - ${error.message}`);
+    return null;
+  }
+};
+
+const getLabels = async ({ fields = [] }: GetLabelsOptions) => {
+  try {
+    const blogPostResponse = await fetchAPI<TranslationsDTO>(`/translation`, {
+      populate: fields,
+      // populate: 'deep,2',
+    });
+    return parseStrapiResponseToData<TranslationsDTO>(blogPostResponse);
   } catch (error) {
     console.error(`[Platform Service Error] Cannot get platform - ${error.message}`);
     return null;
@@ -197,6 +220,7 @@ export {
   getBlogPosts,
   getFilteredPlatforms,
   getHomePage,
+  getLabels,
   getLayoutConfig,
   getPlatformBySlug,
   getPlatforms,

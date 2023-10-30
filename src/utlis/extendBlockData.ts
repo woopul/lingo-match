@@ -10,9 +10,11 @@ export const extendBlockData = async ({ blocks, getPropsConfig }: ExtendBlockDat
     return;
   }
   blocks.map((block) => block.__component);
+
   return Promise.all(
     blocks?.map((block) => {
-      const getProps = getPropsConfig[block.__component] || (() => Promise.resolve(block));
+      const targetBlock = block.__component.split('.')[1];
+      const getProps = getPropsConfig[targetBlock] || (() => Promise.resolve(block));
       return getProps(block);
     }),
   );

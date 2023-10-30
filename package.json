@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve:dev": "next dev --port=3005",
-    "serve:prod": "dotenv -e .env.production.local next dev --port=3005",
+    "dev": "next dev --port=3005",
+    "prod": "dotenv -e .env.production.local next dev --port=3005",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",

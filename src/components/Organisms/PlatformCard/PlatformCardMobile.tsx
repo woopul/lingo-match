@@ -9,7 +9,7 @@ import {
 } from '@lingo-match/types/strapi/blocks';
 import { getPlatformUrl } from '@lingo-match/utlis';
 import { cn } from '@lingo-match/utlis/cn';
-import { parseStrapiResponseToData } from '@lingo-match/utlis/parseStrapiResponse';
+import { strapiDataArray } from '@lingo-match/utlis/parseStrapiResponse';
 import NextLink from 'next/link';
 import { TbInfoCircle } from 'react-icons/tb';
 
@@ -41,7 +41,7 @@ export const PlatformCardMobile = ({
   priceForShortLabel,
   pricePerMonthLabel,
 }: PlatformCardProps) => {
-  const parsedLabelsToDisplay = parseStrapiResponseToData<LabelDTO[]>(labels) as LabelDTO[];
+  const parsedLabelsToDisplay = strapiDataArray<LabelDTO>(labels);
   const isForeignCurrency = () => currency !== mainCurrencyForThisMarket;
 
   // TODO - change it to use mixed currencies pair exchange rate
