@@ -7,7 +7,7 @@ export type CheckboxLabelProps = {
 };
 
 const CheckboxLabel = ({ checked, label }: CheckboxLabelProps) => {
-  const checkedBackgroundStyle = checked ? 'bg-orange ' : 'bg-middleGrey';
+  const checkedBackgroundStyle = checked ? 'bg-orange ' : 'bg-lightGrey';
   return (
     <div className="flex items-center gap-1">
       <div

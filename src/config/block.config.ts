@@ -37,7 +37,7 @@ const SectionWithTitle = dynamic(
 export type BlockConfigType = Record<string, any>;
 
 export const blockConfig = {
-  'checkbox-column': CheckboxColumns,
+  'checkbox-columns': CheckboxColumns,
   hero: Hero,
   'icon-link': LinkIcon,
   'images-container': ImagesContainer,
