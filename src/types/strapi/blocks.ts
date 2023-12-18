@@ -98,7 +98,7 @@ export type PlatformDTOMapToMainCard = Pick<
 >;
 
 export type PlatformDTO = StrapiAdditionalAttributesType & {
-  blocks: StrapiBlockType[];
+  blocks?: StrapiBlockType[];
   captionRecommended?: string;
   categories?: CategoryDTO[];
   currency?: SUPPORTED_CURRENCIES;

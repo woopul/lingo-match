@@ -3,6 +3,7 @@ import { getLayoutConfig, getPlatformBySlug } from '@lingo-match/api/strapi';
 import { Image, Spacer } from '@lingo-match/components';
 import { PrettyJSON } from '@lingo-match/components';
 import Label from '@lingo-match/components/Atoms/Label';
+import BlockRenderer from '@lingo-match/components/BlockRenderer';
 import { getPropsConfig } from '@lingo-match/config/getProps.config';
 import { DEFAULT_STATIC_PAGE_CACHE_TIME } from '@lingo-match/constants/cache';
 import { placeholderSrc } from '@lingo-match/constants/urls';
@@ -24,7 +25,9 @@ export const getStaticProps: GetStaticProps<BaseGetStaticPropsType> = async (con
     getPlatformBySlug(context.params?.slug as string),
   ]);
 
-  const blocks = (platform as PlatformDTO)?.blocks;
+  // extract and remove blocks from platform data as theire will be used in nested component
+  const blocks = JSON.parse(JSON.stringify((platform as PlatformDTO)?.blocks));
+  delete (platform as PlatformDTO).blocks;
 
   const extendedBlocks = await extendBlockData({
     blocks,
@@ -33,7 +36,7 @@ export const getStaticProps: GetStaticProps<BaseGetStaticPropsType> = async (con
 
   return {
     props: {
-      blocks: extendedBlocks || [],
+      contentBlocks: extendedBlocks || [],
       layoutConfig: layoutConfig || {},
       platform: platform || 'Not found',
     },
@@ -42,11 +45,13 @@ export const getStaticProps: GetStaticProps<BaseGetStaticPropsType> = async (con
 };
 
 export type PlatformPageType = {
+  contentBlocks?: any[];
   currenciesExchangeRate: CurrencyResponseType[];
   platform: PlatformDTO;
 };
 
 const PlatformPage = ({
+  contentBlocks,
   platform: { detailedDescription, labels, logo, recommendedPlatforms, title },
   platform,
 }: PlatformPageType) => {
@@ -54,7 +59,7 @@ const PlatformPage = ({
 
   console.log({ platform });
   return (
-    <main className={cn('grid min-h-screen grid-cols-12')}>
+    <main className={cn('grid grid-cols-12 gap-2')}>
       <div className="col-span-full pt-[96px]" data-breadcrumbs-placeholder />
       <div className="col-span-10 p-2 md:shadow-lg">
         <div className="grid grid-cols-[minmax(100px,140px)_1fr] gap-2">
@@ -81,9 +86,7 @@ const PlatformPage = ({
           ))}
         </div>
         <Spacer className="py-3" dividerPosition="center" withDivider />
-      </div>
-      <div className="flex flex-col">
-        {<PrettyJSON data={{ blocks: platform.blocks }} key={platform.slug} />}
+        <BlockRenderer blocks={contentBlocks} />
       </div>
     </main>
   );
