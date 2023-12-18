@@ -1,8 +1,9 @@
 import { cn } from '@lingo-match/utlis/cn';
 
 export type SpacerProps = {
+  className?: string;
   dividerPosition: 'top' | 'center' | 'bottom';
-  size: 'S' | 'M' | 'L' | 'XL';
+  size?: 'S' | 'M' | 'L' | 'XL';
   withDivider?: boolean;
 };
 
@@ -15,16 +16,18 @@ const spacerSizeClassMap = {
 };
 
 const dividerPositionClassMap = {
-  bottom: 'border-b border-darkGrey',
-  center: 'before:w-full before:h-[0.1rem] before:bg-darkGrey flex items-center',
-  top: 'border-t border-darkGrey',
+  bottom: 'border-b border-lightGrey',
+  center: 'before:w-full before:h-[0.1rem] before:bg-lightGrey flex items-center',
+  top: 'border-t border-lightGrey',
 };
 
-const Spacer = ({ dividerPosition, size, withDivider }: SpacerProps) => (
+const Spacer = ({ className, dividerPosition, size, withDivider }: SpacerProps) => (
   <div
-    className={cn(spacerSizeClassMap[size], {
-      [dividerPositionClassMap[dividerPosition]]: withDivider,
-    })}
+    className={cn(
+      size && spacerSizeClassMap[size],
+      withDivider && dividerPositionClassMap[dividerPosition],
+      className,
+    )}
   ></div>
 );
 
