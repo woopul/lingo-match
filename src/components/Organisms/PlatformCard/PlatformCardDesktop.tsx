@@ -1,6 +1,7 @@
 import { CurrencyResponseType } from '@lingo-match/api/currency';
 import { Image } from '@lingo-match/components';
 import Label from '@lingo-match/components/Atoms/Label';
+import { placeholderSrc } from '@lingo-match/constants/urls';
 import { formatPrice } from '@lingo-match/helpers/formatPrice';
 import { SUPPORTED_CURRENCIES } from '@lingo-match/types/strapi';
 import {
@@ -10,7 +11,7 @@ import {
 } from '@lingo-match/types/strapi/blocks';
 import { getPlatformUrl } from '@lingo-match/utlis';
 import { cn } from '@lingo-match/utlis/cn';
-import { parseStrapiResponseToData, strapiData } from '@lingo-match/utlis/parseStrapiResponse';
+import { strapiData } from '@lingo-match/utlis/parseStrapiResponse';
 import NextLink from 'next/link';
 
 export type PlatformCardProps = {
@@ -18,9 +19,6 @@ export type PlatformCardProps = {
   currenciesExchangeRate: CurrencyResponseType[];
   platformData: PlatformDTOMapToMainCard;
 } & PlatformCardConfigDTO;
-
-const placeholderSrc =
-  'https://res.cloudinary.com/dbnc7cgvp/image/upload/v1682797183/logo_2_33627850b1.png';
 
 export const PlatformCardDesktop = ({
   basicVersionLabel,

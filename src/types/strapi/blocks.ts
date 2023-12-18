@@ -1,6 +1,5 @@
 import {
   BaseArrayDataWrapper,
-  BaseDataItem,
   BaseDataWrapper,
   BaseResponseDataWrapper,
   StrapiAdditionalAttributesType,
@@ -104,12 +103,17 @@ export type PlatformDTO = StrapiAdditionalAttributesType & {
   categories?: CategoryDTO[];
   currency?: SUPPORTED_CURRENCIES;
   description?: string;
+  detailedDescription?: string;
   labels: BaseArrayDataWrapper<LabelDTO>;
   logo: BaseResponseDataWrapper<StrapiMediaType>;
   mainCurrencyForThisMarket: SUPPORTED_CURRENCIES;
   priceAsNumber: number;
   priceBeforeDiscountAsNumber?: number;
   rating?: number;
+  recommendedPlatforms?: {
+    platforms: PlatformDTOMapToRecommendedCard[];
+    title: string;
+  };
   shortDescription?: string;
   shortDescriptionMobile?: string;
   slug: string;
