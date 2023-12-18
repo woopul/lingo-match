@@ -1,4 +1,4 @@
-import { CurrencyResponseType, getCurrenciesExchangeRate } from '@lingo-match/api/currency';
+import { CurrencyResponseType } from '@lingo-match/api/currency';
 import { getLayoutConfig, getPlatformBySlug } from '@lingo-match/api/strapi';
 import { PrettyJSON } from '@lingo-match/components';
 import { getPropsConfig } from '@lingo-match/config/getProps.config';
