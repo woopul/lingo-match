@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import { cn } from '@lingo-match/utlis/cn';
 import NextLink, { LinkProps as NextLinkProps } from 'next/link';
 import { CSSProperties, PropsWithChildren } from 'react';
 
@@ -25,11 +25,7 @@ const Link = ({
 }: PropsWithChildren<LinkProps>) => (
   <NextLink
     as={href}
-    className={clsx(
-      'text-preamble no-underline',
-      { 'styled-link': variant === 'styled' },
-      className,
-    )}
+    className={cn('text-preamble no-underline', { 'styled-link': variant === 'styled' }, className)}
     href={href || '/'}
     style={style}
   >

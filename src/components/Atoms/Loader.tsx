@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import { cn } from '@lingo-match/utlis/cn';
 import React from 'react';
 
 const LoaderSizeStyleMap = {
@@ -14,7 +14,7 @@ export type LoaderProps = {
 
 const Loader = ({ className, size = 'small' }: LoaderProps) => (
   <div
-    className={clsx(
+    className={cn(
       'animate-spin rounded-full border-4 border-middleGrey border-t-blue-50 bg-transparent',
       LoaderSizeStyleMap[size],
       className,

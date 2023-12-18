@@ -1,7 +1,7 @@
 import { Image } from '@lingo-match/components';
 import { BlogPostDTO } from '@lingo-match/types/strapi/blocks';
 import { getBlogUrl } from '@lingo-match/utlis';
-import clsx from 'clsx';
+import { cn } from '@lingo-match/utlis/cn';
 import NextLink from 'next/link';
 
 export type PostCardProps = Pick<
@@ -28,7 +28,7 @@ const PostCard = ({
 }: PostCardProps) => {
   return (
     <NextLink
-      className={clsx(
+      className={cn(
         'flex cursor-pointer no-underline hover:shadow-md',
         alignment === 'vertical' ? 'flex-col' : 'flex-row',
         className,
@@ -57,7 +57,7 @@ const PostCard = ({
         </div>
         <h3>{title}</h3>
         <p className="">{shortDescription}</p>
-        <p className={clsx('text-darkGray mt-auto')}>
+        <p className={cn('text-darkGray mt-auto')}>
           BY {author} / {publishedAt}
         </p>
       </div>

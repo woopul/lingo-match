@@ -1,8 +1,7 @@
 import { LinkIcon } from '@lingo-match/components';
-import Logo from '@lingo-match/components/Atoms/Logo';
 import { BaseDataItem } from '@lingo-match/types/strapi/baseApiResponse';
 import { StrapiMediaType } from '@lingo-match/types/strapi/shared';
-import clsx from 'clsx';
+import { cn } from '@lingo-match/utlis/cn';
 
 import AccordionItem from '../AccordionItem';
 
@@ -28,7 +27,7 @@ export type FooterProps = FooterDTO & {
 
 export const FooterMobile = ({ className, footerColumns }: FooterProps) => (
   <footer
-    className={clsx(
+    className={cn(
       'desktop:hidden',
       'bottom-0 z-10 w-full overflow-hidden bg-primary-500 p-2 text-white shadow-2xl',
       className,
@@ -38,7 +37,7 @@ export const FooterMobile = ({ className, footerColumns }: FooterProps) => (
       {footerColumns?.map(({ align, links, title }, i) => (
         <AccordionItem bold className="px-0 py-0" key={title} title={title}>
           <div
-            className={clsx(
+            className={cn(
               'flex  gap-1 pb-1',
               align === 'horizontal' ? 'flex-row items-center gap-2' : 'flex-col',
             )}

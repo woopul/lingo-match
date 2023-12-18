@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import { cn } from '@lingo-match/utlis/cn';
 import NextLink from 'next/link';
 import React from 'react';
 
@@ -12,7 +12,7 @@ export type LinkButtonProps = {
 const LinkButton = ({ children, className, href, label }: LinkButtonProps) => {
   return (
     <NextLink
-      className={clsx(
+      className={cn(
         'rounded-full bg-primary-500 px-2 py-1 text-center text-16 font-bold text-white no-underline hover:bg-primary-600',
         className,
       )}

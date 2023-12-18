@@ -1,5 +1,5 @@
 import { Image } from '@lingo-match/components';
-import clsx from 'clsx';
+import { cn } from '@lingo-match/utlis/cn';
 import React from 'react';
 
 export type IconImageProps = {
@@ -17,7 +17,7 @@ const MapIconSizeToClass = {
 const IconImage = ({ className, size = 'small', src }: IconImageProps) => {
   const iconSize = MapIconSizeToClass[size];
   return (
-    <div className={clsx('relative', iconSize, className)}>
+    <div className={cn('relative', iconSize, className)}>
       <Image alt={''} src={src} />
     </div>
   );

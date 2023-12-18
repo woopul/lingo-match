@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import { cn } from '@lingo-match/utlis/cn';
 
 export type SpacerProps = {
   dividerPosition: 'top' | 'center' | 'bottom';
@@ -22,7 +22,7 @@ const dividerPositionClassMap = {
 
 const Spacer = ({ dividerPosition, size, withDivider }: SpacerProps) => (
   <div
-    className={clsx(spacerSizeClassMap[size], {
+    className={cn(spacerSizeClassMap[size], {
       [dividerPositionClassMap[dividerPosition]]: withDivider,
     })}
   ></div>

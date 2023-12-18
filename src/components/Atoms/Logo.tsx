@@ -1,6 +1,6 @@
 import { Image, Link } from '@lingo-match/components';
 import { HOME_PAGE_ROUTE } from '@lingo-match/constants/routes';
-import clsx from 'clsx';
+import { cn } from '@lingo-match/utlis/cn';
 
 export type LogoProps = {
   className?: string;
@@ -8,8 +8,8 @@ export type LogoProps = {
 };
 
 const Logo = ({ className, src = './logo.svg' }: LogoProps) => (
-  <Link className={clsx(className)} href={HOME_PAGE_ROUTE}>
-    <div className={clsx('relative h-[4rem] w-[14.5rem]')}>
+  <Link className={cn(className)} href={HOME_PAGE_ROUTE}>
+    <div className={cn('relative h-[4rem] w-[14.5rem]')}>
       <Image alt="" className="object-contain" key={src} src={src!} />
     </div>
   </Link>

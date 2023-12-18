@@ -1,5 +1,5 @@
 import { Image } from '@lingo-match/components';
-import clsx from 'clsx';
+import { cn } from '@lingo-match/utlis/cn';
 import React from 'react';
 
 export type LabelProps = {
@@ -10,7 +10,7 @@ export type LabelProps = {
 
 const Label = ({ className, iconSrc, label }: LabelProps) => {
   return (
-    <div className={clsx('text-small flex gap-1', className)}>
+    <div className={cn('text-small flex gap-1', className)}>
       {iconSrc && (
         <div className="relative h-[2.1rem] w-[2.1rem] shrink-0">
           <Image alt="" src={iconSrc} />

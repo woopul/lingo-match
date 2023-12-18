@@ -45,6 +45,7 @@ export type PlatformPageType = {
 const PlatformPage = ({ platform }: PlatformPageType) => {
   return (
     <main className="min-h-screen">
+      <div className=""></div>
       <div className="flex flex-col">
         {<PrettyJSON data={{ blocks: platform.blocks }} key={platform.slug} />}
       </div>

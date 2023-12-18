@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import { cn } from '@lingo-match/utlis/cn';
 import NextImage, { ImageProps as NextImageProps } from 'next/image';
 import { useState } from 'react';
 
@@ -12,13 +12,13 @@ const Image = ({ className, fill = true, ...rest }: ImageProps) => {
   return (
     <>
       <NextImage
-        className={clsx(className || 'object-contain')}
+        className={cn(className || 'object-contain')}
         fill={fill}
         onLoadingComplete={() => setLoading(false)}
         {...rest}
       />
       <div
-        className={clsx(
+        className={cn(
           'absolute backdrop-blur-lg duration-300',
           isLoading ? 'visible opacity-100' : 'invisible opacity-0',
         )}

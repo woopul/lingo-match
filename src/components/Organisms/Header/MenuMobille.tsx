@@ -1,8 +1,8 @@
 import { Link } from '@lingo-match/components';
 import { LinkDTO } from '@lingo-match/components/Atoms/Link';
 import { getHomeRoute } from '@lingo-match/helpers/getHomeRoute';
+import { cn } from '@lingo-match/utlis/cn';
 import { clearAllBodyScrollLocks, disableBodyScroll } from 'body-scroll-lock';
-import clsx from 'clsx';
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { IoClose } from 'react-icons/io5';
@@ -40,7 +40,7 @@ export const MenuMobile = ({ className, close, isOpen, links }: MenuMobileProps)
 
   return createPortal(
     <nav
-      className={clsx(
+      className={cn(
         `fixed inset-0 z-20 bg-white p-2 capitalize text-black transition-transform duration-300 sm:hidden`,
         !isOpen && '-translate-x-full',
         className,

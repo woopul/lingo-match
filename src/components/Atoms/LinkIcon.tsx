@@ -1,5 +1,5 @@
 import { Image } from '@lingo-match/components';
-import clsx from 'clsx';
+import { cn } from '@lingo-match/utlis/cn';
 import NextLink from 'next/link';
 
 export type LinkIconProps = {
@@ -10,7 +10,7 @@ export type LinkIconProps = {
 };
 
 const LinkIcon = ({ className, href, iconSrc, label }: LinkIconProps) => (
-  <NextLink className={clsx('text-preamble flex gap-1 no-underline', className)} href={href || '/'}>
+  <NextLink className={cn('text-preamble flex gap-1 no-underline', className)} href={href || '/'}>
     {iconSrc && (
       <div className="relative h-[2.1rem] w-[2.1rem]">
         <Image alt="" src={iconSrc} />

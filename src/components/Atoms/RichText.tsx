@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import { cn } from '@lingo-match/utlis/cn';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
@@ -9,7 +9,7 @@ type RichTextProps = {
 };
 
 const RichText = ({ className, data, style }: RichTextProps) => (
-  <section className={clsx('rich-text py-1', className)} style={style}>
+  <section className={cn('rich-text py-1', className)} style={style}>
     <Markdown remarkPlugins={[remarkGfm]}>{data}</Markdown>
   </section>
 );

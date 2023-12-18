@@ -2,7 +2,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 
 import Button from '@lingo-match/components/Atoms/Button';
-import clsx from 'clsx';
+import { cn } from '@lingo-match/utlis/cn';
 import { useEffect, useRef, useState } from 'react';
 import { BsFilterLeft } from 'react-icons/bs';
 import { IoCloseOutline } from 'react-icons/io5';
@@ -62,7 +62,7 @@ export const FiltersBarMobile = ({
 
   return (
     <div
-      className={clsx(
+      className={cn(
         'w-100vw sticky top-[67px] h-fit px-2 py-2 transition-all duration-200',
         styles.PlatformFiltersBarMobile,
         isFilterStickyActive && 'border-b-[1px] border-b-gray-300 bg-white shadow-md',
@@ -76,7 +76,7 @@ export const FiltersBarMobile = ({
             <BsFilterLeft className="z-2" size={26} />
             {(!!selectedFilters?.length || isLoading) && (
               <span
-                className={clsx(
+                className={cn(
                   'absolute -right-[6px] -top-[4px] h-[15px] w-[15px] rounded-full bg-orange text-10 ',
                   {
                     ['animate-spin border-2 border-[#ffffff60] border-r-[#ffe70f] bg-transparent']:

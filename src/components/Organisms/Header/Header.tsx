@@ -4,7 +4,7 @@ import { HOME_PAGE_ROUTE } from '@lingo-match/constants/routes';
 import { getHomeRoute } from '@lingo-match/helpers/getHomeRoute';
 import { BaseResponseDataWrapper } from '@lingo-match/types/strapi/baseApiResponse';
 import { StrapiMediaType } from '@lingo-match/types/strapi/shared';
-import clsx from 'clsx';
+import { cn } from '@lingo-match/utlis/cn';
 import NextLink from 'next/link';
 import { useState } from 'react';
 import { FiMenu } from 'react-icons/fi';
@@ -36,7 +36,7 @@ export const Header = ({ className, links, logo, logoDescription, logoTitle }: H
     <>
       <MenuMobile close={handleMenuButtonClick} isOpen={isMenuOpen} links={links} />
       <header
-        className={clsx(
+        className={cn(
           `sticky top-0 z-20 h-${headerHeight.mobile} relative w-full bg-gradient-to-b from-primary-600 to-[#9447fe] text-white desktop:h-${headerHeight.desktop}`,
           className,
         )}

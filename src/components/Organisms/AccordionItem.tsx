@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import { cn } from '@lingo-match/utlis/cn';
 import React, { ReactElement, ReactNode } from 'react';
 import { BsChevronDown } from 'react-icons/bs';
 
@@ -24,9 +24,9 @@ const AccordionItem = ({
   const [isExpanded, setIsExpanded] = React.useState(expanded);
 
   return (
-    <div className={clsx('w-full p-2', className)}>
+    <div className={cn('w-full p-2', className)}>
       <button
-        className={clsx(
+        className={cn(
           'text-paragraph flex w-full  items-center',
           bold && 'font-bold',
           !shouldBeExpandable && 'cursor-default',
@@ -37,13 +37,13 @@ const AccordionItem = ({
         {IconComponent && IconComponent} {title}
         {shouldBeExpandable && (
           <BsChevronDown
-            className={clsx(' transition-rotate ml-auto duration-300', isExpanded && 'rotate-180')}
+            className={cn(' transition-rotate ml-auto duration-300', isExpanded && 'rotate-180')}
           />
         )}
       </button>
 
       <div
-        className={clsx(
+        className={cn(
           'grid transition-[grid-template-rows] duration-[500ms] ease-in-out',
           shouldBeExpandable ? 'grid-rows-[0fr]' : 'grid-rows-[1fr]',
           isExpanded && shouldBeExpandable && 'grid-rows-[1fr]',

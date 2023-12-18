@@ -4,7 +4,7 @@ import IconImage from '@lingo-match/components/Atoms/IconImage';
 import Loader from '@lingo-match/components/Atoms/Loader';
 import AccordionItem from '@lingo-match/components/Organisms/AccordionItem';
 import { FilterAccordionDTO } from '@lingo-match/types/strapi/blocks';
-import clsx from 'clsx';
+import { cn } from '@lingo-match/utlis/cn';
 import { isEmpty } from 'lodash-es';
 import { useEffect, useState } from 'react';
 import { BsFilterLeft } from 'react-icons/bs';
@@ -125,7 +125,7 @@ export const FiltersAsideDesktop = ({
                     title={`${groupTitle} (${getFiltersCountForGroup(groupId)})`}
                   >
                     <div
-                      className={clsx(
+                      className={cn(
                         'flex gap-1 px-1 pb-1',
                         variant === 'label' ? 'flex-row flex-wrap' : 'flex-col',
                       )}

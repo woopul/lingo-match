@@ -4,8 +4,8 @@ import IconImage from '@lingo-match/components/Atoms/IconImage';
 import Loader from '@lingo-match/components/Atoms/Loader';
 import AccordionItem from '@lingo-match/components/Organisms/AccordionItem';
 import { FilterAccordionDTO } from '@lingo-match/types/strapi/blocks';
+import { cn } from '@lingo-match/utlis/cn';
 import { clearAllBodyScrollLocks, disableBodyScroll } from 'body-scroll-lock';
-import clsx from 'clsx';
 import { debounce, isEmpty } from 'lodash-es';
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
@@ -120,7 +120,7 @@ export const FilterSliderMobile = ({
 
   return createPortal(
     <aside
-      className={clsx(
+      className={cn(
         'fixed inset-0 z-30 -translate-x-full overflow-y-scroll bg-white transition-transform duration-300 ease-in-out desktop:hidden',
         isMobileFiltersOpen && 'translate-x-0',
       )}
@@ -136,7 +136,7 @@ export const FilterSliderMobile = ({
             </div>
             {/* Close Button */}
             <button onClick={close}>
-              <IoClose className={clsx('fill:white -mr-[3px]')} size={35} />
+              <IoClose className={cn('fill:white -mr-[3px]')} size={35} />
             </button>
           </div>
 
@@ -204,7 +204,7 @@ export const FilterSliderMobile = ({
                     title={`${groupTitle} (${getFiltersCountForGroup(groupId)})`}
                   >
                     <div
-                      className={clsx(
+                      className={cn(
                         'flex gap-1 px-1 pb-1',
                         variant === 'label' ? 'flex-row flex-wrap' : 'flex-col',
                       )}

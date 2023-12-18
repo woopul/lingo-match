@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import { cn } from '@lingo-match/utlis/cn';
 import React from 'react';
 
 export type RangeSliderProps = {
@@ -21,7 +21,7 @@ const RangeInput = ({ className, id, max, min }: RangeSliderProps) => {
   };
 
   return (
-    <div className={clsx('h-fit py-2', className)} id={id}>
+    <div className={cn('h-fit py-2', className)} id={id}>
       <div className="relative flex items-center ">
         <input
           className="custom-slider"
@@ -31,7 +31,7 @@ const RangeInput = ({ className, id, max, min }: RangeSliderProps) => {
           type="range"
         />
         <div
-          className={clsx('pointer-events-none absolute h-[2px] w-0 bg-orange')}
+          className={cn('pointer-events-none absolute h-[2px] w-0 bg-orange')}
           id="range-bar-filled"
         ></div>
       </div>

@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import { cn } from '@lingo-match/utlis/cn';
 import {
   ChangeEvent,
   ForwardedRef,
@@ -50,7 +50,7 @@ const Checkbox = forwardRef(
 
     return (
       <div
-        className={clsx(
+        className={cn(
           'relative flex desktop:hover:opacity-60',
           positionReversed && 'flex-row-reverse',
           disabled && 'opacity-30',
@@ -62,7 +62,7 @@ const Checkbox = forwardRef(
       >
         <input
           checked={checked ?? isChecked}
-          className={clsx(
+          className={cn(
             'peer absolute left-0 top-0 z-10 m-0 cursor-pointer p-0 opacity-0 disabled:pointer-events-none',
             variant === 'toggle' ? 'h-2.5 w-5.5' : 'h-full w-2.3',
           )}
@@ -76,7 +76,7 @@ const Checkbox = forwardRef(
         />
         {(variant === 'default' || 'icon' === variant) && (
           <div
-            className={clsx(
+            className={cn(
               'relative flex h-2.3 w-2.3 shrink-0 items-center justify-center overflow-hidden hover:cursor-pointer',
               align === 'start' && 'mt-1',
               checkedBackgroundStyle,
@@ -99,7 +99,7 @@ const Checkbox = forwardRef(
           />
         )}
         <label
-          className={clsx(
+          className={cn(
             'cursor-pointer text-12 leading-18 -tracking-1 desktop:text-14 desktop:leading-20 desktop:-tracking-0',
             labelFullWidth ? 'w-full' : 'w-fit',
             variant === 'label'

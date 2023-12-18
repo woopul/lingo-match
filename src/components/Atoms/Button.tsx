@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import { cn } from '@lingo-match/utlis/cn';
 import React, { forwardRef } from 'react';
 
 export type ButtonVariantType = 'full' | 'link' | 'text';
@@ -56,7 +56,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <button
         {...props}
-        className={clsx(
+        className={cn(
           'w-fit items-center justify-center gap-0.25 rounded-full transition-all',
           inline ? 'inline' : 'flex',
           variant === 'link' || variant === 'text'
