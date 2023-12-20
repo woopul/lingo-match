@@ -16,7 +16,7 @@ export type BlockType = {
 
 export type StrapiBlockType<T = Record<string, any>> = {
   __component: string;
-  id: string;
+  id?: string;
 } & T;
 
 export type StrapiBlocksType = StrapiBlockType[];
