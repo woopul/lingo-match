@@ -6,7 +6,6 @@ import { useMediaQuery } from '@lingo-match/hooks/useMediaQuery';
 import { BlockType, PlatformDTOMapToRecommendedCard } from '@lingo-match/types/strapi';
 import { getPlatformUrl } from '@lingo-match/utlis';
 import { cn } from '@lingo-match/utlis/cn';
-import { Grid, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 export type RecommendedPlatformsLabelsType = {
@@ -33,7 +32,6 @@ const RecommendedPlatforms = ({
   title,
 }: RecommendedPlatformsBlockType) => {
   const isDesktop = useMediaQuery(MD);
-  const slidesPerView = isDesktop ? 4.5 : 2.1;
 
   return (
     <div className={className}>
@@ -69,7 +67,7 @@ const RecommendedPlatforms = ({
                     <Image alt="image" src={item.logo?.data.attributes.url} />
                   </div>
                   <h4>{item.title}</h4>
-                  <ul className="flex w-full flex-col items-center rounded-lg bg-lighterGrey py-1">
+                  <ul className="flex min-h-[60px] w-full flex-col items-center justify-center rounded-lg bg-lighterGrey py-1 md:min-h-[80px]">
                     {item.labels.data?.slice(0, 3).map((label, i) => (
                       <li
                         className="text-small before: font-semibold text-darkGrey before:mx-auto before:my-[3px] before:block before:h-[3px] before:w-[3px] before:rounded-full before:bg-darkGrey first:before:hidden"
@@ -81,10 +79,9 @@ const RecommendedPlatforms = ({
                   </ul>
                   <div className="mt-auto self-end text-darkGrey">
                     <div className="text-preamble whitespace-nowrap text-right font-semibold text-black">
-                      {parseAndFormatPriceToCorrectCurrency(priceAsNumber)}{' '}
+                      {parseAndFormatPriceToCorrectCurrency(priceAsNumber)}
                       {mainCurrencyForThisMarket}
                       <span className="text-xsmall font-normal text-darkGrey">
-                        {' '}
                         {labels.priceSlashLabel}
                       </span>
                     </div>
