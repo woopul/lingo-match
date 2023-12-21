@@ -14,7 +14,8 @@ export async function middleware(req: NextRequest) {
     return;
   }
 
-  if (req.nextUrl.pathname.includes('rev')) {
+  if (req.nextUrl.pathname.includes('revalidate')) {
+    return;
   }
 
   if (req.nextUrl.locale === 'default') {
