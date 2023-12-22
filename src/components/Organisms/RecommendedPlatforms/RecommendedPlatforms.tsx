@@ -33,11 +33,16 @@ const RecommendedPlatforms = ({
 }: RecommendedPlatformsBlockType) => {
   const isDesktop = useMediaQuery(MD);
 
+  const swiperConfig = {
+    slidesPerView: isDesktop ? 4.5 : 2.1,
+    spaceBetween: isDesktop ? 16 : 8,
+  };
+
   return (
     <div className={className}>
       <h3 className="text-center">{title}</h3>
       <div className={cn('mt-[32px] md:flex', '[&>.swiper]:-mx-[15px] [&>.swiper]:px-[10px]')}>
-        <Swiper slidesPerView={isDesktop ? 4.5 : 2.1} spaceBetween={isDesktop ? 16 : 8}>
+        <Swiper {...swiperConfig}>
           {platforms?.map((item, i) => {
             const { currency, mainCurrencyForThisMarket, priceAsNumber } = item;
             const isForeignCurrency = () => currency !== mainCurrencyForThisMarket;
