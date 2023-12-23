@@ -103,7 +103,6 @@ const PlatformPage = ({
         <BlockRenderer blocks={contentBlocks} />
       </div>
       <RecommendedPlatforms
-        cardWrapperClassName="md:grid md:grid-cols-5"
         className="col-span-full pt-10"
         {...(recommendedPlatforms as RecommendedPlatformsBlockType)}
       />
