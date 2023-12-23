@@ -32,7 +32,7 @@ const RecommendedPlatforms = ({
   const isDesktop = useMediaQuery(MD);
 
   const swiperConfig = {
-    slidesPerView: isDesktop ? 4.5 : 2.1,
+    slidesPerView: 'auto' as 'auto',
     spaceBetween: isDesktop ? 16 : 8,
   };
 
@@ -61,7 +61,14 @@ const RecommendedPlatforms = ({
             };
 
             return (
-              <SwiperSlide key={item.slug}>
+              <SwiperSlide
+                className={cn(
+                  '!w-[40vw] !min-w-[160px]',
+                  // 'md:!w-[18vw] md:!min-w-[195px]',
+                  ' md:!w-[clamp(195px,18vw,300px)] ',
+                )}
+                key={item.slug}
+              >
                 <Link
                   className="my-[5%] flex aspect-[7/9] w-full flex-col items-center gap-2 rounded-md px-[8px] py-[16px] shadow-lg"
                   href={getPlatformUrl(item.slug)}
@@ -70,10 +77,13 @@ const RecommendedPlatforms = ({
                     <Image alt="image" src={item.logo?.data?.attributes.url} />
                   </div>
                   <h4>{item.title}</h4>
-                  <ul className="flex min-h-[60px] w-full flex-col items-center justify-center rounded-lg bg-lighterGrey py-1 md:min-h-[80px]">
+                  <ul className="text-small flex min-h-[60px] w-full flex-col items-center justify-center rounded-lg bg-lighterGrey py-1 md:min-h-[80px]">
                     {item.labels.data?.slice(0, 3).map((label, i) => (
                       <li
-                        className="text-small before: font-semibold text-darkGrey before:mx-auto before:my-[3px] before:block before:h-[3px] before:w-[3px] before:rounded-full before:bg-darkGrey first:before:hidden"
+                        className={cn(
+                          'font-semibold text-darkGrey before:mx-auto before:my-[3px] before:block before:h-[3px] before:w-[3px] before:rounded-full before:bg-darkGrey first:before:hidden last:hidden',
+                          'md:last:block',
+                        )}
                         key={i}
                       >
                         {label.attributes.title}
