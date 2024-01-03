@@ -62,7 +62,7 @@ export const Header = ({ className, links, logo, logoDescription, logoTitle }: H
           </button>
         </div>
         {/* Header desktop */}
-        <div className="mx-auto hidden max-w-[144rem] items-center justify-between px-8 py-2 sm:flex">
+        <div className="mx-auto hidden max-w-[144rem] items-center justify-between p-2 sm:flex lg:px-8">
           <NextLink className="flex flex-col no-underline" href={HOME_PAGE_ROUTE}>
             {logo ? (
               <div className="relative h-[3.5rem] w-[15rem]">
