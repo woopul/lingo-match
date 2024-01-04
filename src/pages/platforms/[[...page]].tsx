@@ -71,6 +71,10 @@ type HomePageProps = {
   platforms: PlatformDTO[];
 };
 
+const labels = {
+  allPlatformsFound: 'Znalezione oferty',
+};
+
 const HomePage = ({
   currenciesExchangeRate,
   homePage: { hero, mainFilters, paginationItemsPerPage: pageSize, platformCard, platformNotFound },
@@ -88,38 +92,46 @@ const HomePage = ({
   return (
     <>
       <GradientBox />
-      {hero && <Hero {...hero} />}
-      <div className="mt-3 flex h-full auto-rows-max grid-cols-12 flex-col gap-x-2 desktop:grid">
-        <PlatformFilters
-          filters={mainFilters || []}
-          pageSize={pageSize}
-          setPageCount={setPageCount}
-          setPlatformList={setPlatformList}
-          setTotal={setTotal}
-          totalItems={total}
-        />
-        <div className="flex flex-col gap-y-2 desktop:col-span-9">
-          {platformList.length ? (
-            platformList.map((platform) => (
-              <PlatformCard
-                currenciesExchangeRate={currenciesExchangeRate}
-                {...platformCard}
-                key={platform.slug}
-                platformData={platform}
-              />
-            ))
-          ) : (
-            <PlatformsNotFound {...platformNotFound} />
-          )}
+      <div className="relative z-20">
+        {hero && <Hero {...hero} />}
+        <div className="mt-3 flex h-full auto-rows-max grid-cols-12 flex-col gap-x-2 desktop:grid">
+          <PlatformFilters
+            filters={mainFilters || []}
+            pageSize={pageSize}
+            setPageCount={setPageCount}
+            setPlatformList={setPlatformList}
+            setTotal={setTotal}
+            totalItems={total}
+          />
+          <div className="flex flex-col gap-y-2 desktop:col-span-9">
+            {platformList.length ? (
+              <>
+                <div className="hidden text-12 text-darkGrey lg:block">
+                  {labels.allPlatformsFound}: {total}
+                </div>
+                {platformList.map((platform) => (
+                  <PlatformCard
+                    className="md:first-of-type:-mt-1"
+                    currenciesExchangeRate={currenciesExchangeRate}
+                    {...platformCard}
+                    key={platform.slug}
+                    platformData={platform}
+                  />
+                ))}
+              </>
+            ) : (
+              <PlatformsNotFound {...platformNotFound} />
+            )}
+          </div>
         </div>
+        <Pagination
+          currentPage={meta.pagination?.page}
+          itemsPerPage={meta.pagination?.pageSize}
+          pageCount={pageCount}
+          renderPageLink={getPlatformPaginationRoute}
+          totalItems={meta.pagination?.total}
+        />
       </div>
-      <Pagination
-        currentPage={meta.pagination?.page}
-        itemsPerPage={meta.pagination?.pageSize}
-        pageCount={pageCount}
-        renderPageLink={getPlatformPaginationRoute}
-        totalItems={meta.pagination?.total}
-      />
     </>
   );
 };

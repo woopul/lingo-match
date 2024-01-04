@@ -150,7 +150,7 @@ const getLabels = async ({ fields = [] }: GetLabelsOptions) => {
     });
     return parseStrapiResponseToData<TranslationsDTO>(blogPostResponse);
   } catch (error) {
-    console.error(`[Platform Service Error] Cannot get platform - ${error.message}`);
+    console.error(`[Platform Service Error] Cannot get labels - ${error.message}`);
     return null;
   }
 };
