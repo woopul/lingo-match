@@ -9,8 +9,7 @@ const withLayout = (Component: any) => {
   const wrappedComponent = ({ blocks, layoutConfig, ...rest }: BaseGetStaticPropsType) => {
     return (
       <Layout layoutConfig={layoutConfig}>
-        <Component {...rest} />
-        {blocks && <BlockRenderer blocks={blocks} />}
+        <Component {...rest}>{!!blocks && <BlockRenderer blocks={blocks} />}</Component>
       </Layout>
     );
   };

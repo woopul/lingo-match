@@ -4,6 +4,7 @@ import withLayout from '@lingo-match/containers/withLayout';
 import { BaseGetStaticPropsType } from '@lingo-match/types/strapi/baseApiResponse';
 import { BlogPostDTO } from '@lingo-match/types/strapi/blocks';
 import { GetStaticProps } from 'next';
+import { ReactNode } from 'react';
 
 export const getStaticPaths = async () => ({
   fallback: 'blocking',
@@ -28,11 +29,12 @@ export const getStaticProps: GetStaticProps<BaseGetStaticPropsType> = async ({ p
 };
 
 export type BlogPostPageProps = {
+  children: ReactNode;
   post: BlogPostDTO;
 };
 
-const BlogPostPage = ({ post }: BlogPostPageProps) => {
-  return <div className="pt-2 md:pt-3 lg:pt-4"></div>;
+const BlogPostPage = ({ children }: BlogPostPageProps) => {
+  return <div className="mx-auto max-w-[870px] pt-2 md:pt-3 lg:pt-4">{children}</div>;
 };
 
 export default withLayout(BlogPostPage);
