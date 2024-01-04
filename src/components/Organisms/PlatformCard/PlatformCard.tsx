@@ -1,11 +1,13 @@
+import { cn } from '@lingo-match/utlis/cn';
+
 import { PlatformCardDesktop, PlatformCardProps } from './PlatformCardDesktop';
 import { PlatformCardMobile } from './PlatformCardMobile';
 
 export const PlatformCard = (props: PlatformCardProps) => {
   return (
     <>
-      <PlatformCardMobile className="desktop:hidden" {...props} />
-      <PlatformCardDesktop className="hidden desktop:block " {...props} />
+      <PlatformCardDesktop className="hidden first-of-type:-mt-1 lg:block" {...props} />
+      <PlatformCardMobile className="lg:hidden" {...props} />
     </>
   );
 };

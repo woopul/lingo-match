@@ -111,7 +111,6 @@ const HomePage = ({
                 </div>
                 {platformList.map((platform) => (
                   <PlatformCard
-                    className="md:first-of-type:-mt-1"
                     currenciesExchangeRate={currenciesExchangeRate}
                     {...platformCard}
                     key={platform.slug}
