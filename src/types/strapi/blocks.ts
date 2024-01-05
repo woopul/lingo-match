@@ -184,3 +184,16 @@ export type LabelDTO = {
   icon: BaseResponseDataWrapper<StrapiMediaType>;
   title: string;
 };
+
+export type SubscriptionTypeDTO = {
+  priceAsNumber: number;
+  priceBeforeDiscountAsNumber: number;
+  subscription: {
+    data: {
+      attributes: {
+        title: string;
+      };
+      id: number;
+    };
+  };
+};

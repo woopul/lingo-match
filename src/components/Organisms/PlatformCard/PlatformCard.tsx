@@ -1,5 +1,3 @@
-import { cn } from '@lingo-match/utlis/cn';
-
 import { PlatformCardDesktop, PlatformCardProps } from './PlatformCardDesktop';
 import { PlatformCardMobile } from './PlatformCardMobile';
 

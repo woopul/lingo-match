@@ -1,19 +1,25 @@
-import { CurrencyResponseType } from '@lingo-match/api/currency';
+import { CurrencyResponseType, getCurrenciesExchangeRate } from '@lingo-match/api/currency';
 import { getLayoutConfig, getPlatformBySlug } from '@lingo-match/api/strapi';
 import { Image, RecommendedPlatforms, Spacer } from '@lingo-match/components';
 import { PrettyJSON } from '@lingo-match/components';
+import Button from '@lingo-match/components/Atoms/Button';
 import Label from '@lingo-match/components/Atoms/Label';
+import LinkButton from '@lingo-match/components/Atoms/LinkButton';
 import BlockRenderer from '@lingo-match/components/BlockRenderer';
+import { PriceBlock } from '@lingo-match/components/Organisms/PriceBlock/PriceBlock';
 import { RecommendedPlatformsBlockType } from '@lingo-match/components/Organisms/RecommendedPlatforms/RecommendedPlatforms';
 import { getPropsConfig } from '@lingo-match/config/getProps.config';
 import { DEFAULT_STATIC_PAGE_CACHE_TIME } from '@lingo-match/constants/cache';
 import { placeholderSrc } from '@lingo-match/constants/urls';
 import withLayout from '@lingo-match/containers/withLayout';
-import { LabelDTO, PlatformDTO } from '@lingo-match/types/strapi';
+import { formatPrice } from '@lingo-match/helpers/formatPrice';
+import { pricingBlockMock } from '@lingo-match/mocks/pricingBlock';
+import { LabelDTO, PlatformDTO, SUPPORTED_CURRENCIES } from '@lingo-match/types/strapi';
 import { BaseGetStaticPropsType } from '@lingo-match/types/strapi/baseApiResponse';
 import { extendBlockData, strapiData } from '@lingo-match/utlis';
 import { cn } from '@lingo-match/utlis/cn';
 import { GetStaticProps } from 'next';
+import { IoPricetagsOutline } from 'react-icons/io5';
 
 export const getStaticPaths = async () => ({
   fallback: 'blocking',
@@ -36,7 +42,7 @@ export const getStaticProps: GetStaticProps<BaseGetStaticPropsType> = async (con
     getPropsConfig,
   });
 
-  // extend recommended platfor block
+  // extend recommended platform block
   const recommendedPlatforms = await extendBlockData({
     blocks: platform?.recommendedPlatforms
       ? [{ ...platform.recommendedPlatforms, __component: 'blocks.recommended-platforms' }]
@@ -44,9 +50,12 @@ export const getStaticProps: GetStaticProps<BaseGetStaticPropsType> = async (con
     getPropsConfig,
   });
 
+  const { data: currenciesExchangeRate } = await getCurrenciesExchangeRate();
+
   return {
     props: {
       contentBlocks: extendedBlocks || [],
+      currenciesExchangeRate,
       layoutConfig: layoutConfig || {},
       platform: { ...platform, recommendedPlatforms: recommendedPlatforms?.[0] || {} },
     },
@@ -62,15 +71,39 @@ export type PlatformPageType = {
 
 const PlatformPage = ({
   contentBlocks,
-  platform: { detailedDescription, labels, logo, recommendedPlatforms, title },
+  currenciesExchangeRate,
+  platform: {
+    currency = SUPPORTED_CURRENCIES.PLN,
+    detailedDescription,
+    labels,
+    logo,
+    mainCurrencyForThisMarket,
+    recommendedPlatforms,
+    title,
+  },
   platform,
 }: PlatformPageType) => {
   const parsedLabelsToDisplay = strapiData<LabelDTO>(labels) as LabelDTO[];
+  // const isForeignCurrency = () => currency !== mainCurrencyForThisMarket;
+
+  // // TODO - change it to use mixed currencies pair exchange rate
+  // const getCalculatedValueInPLN = (price: number) => {
+  //   const currencyRate = currenciesExchangeRate?.find((item) => item.code === currency)?.mid ?? 1;
+  //   return price * currencyRate;
+  // };
+
+  // const parseAndFormatPriceToCorrectCurrency = (price: number) => {
+  //   let priceValue = price;
+  //   if (isForeignCurrency()) {
+  //     priceValue = getCalculatedValueInPLN(price);
+  //   }
+  //   return formatPrice(priceValue);
+  // };
 
   return (
-    <main className={cn('grid grid-cols-12 gap-2')}>
+    <main className={cn('grid-cols-[10fr_minmax(250px,_2fr)] gap-2 md:grid')}>
       <div className="col-span-full pt-5 md:pt-[96px]" data-breadcrumbs-placeholder />
-      <div className="col-span-full md:col-span-10 md:p-2 md:shadow-lg">
+      <div className="col-span-full md:col-span-1 md:p-2 md:shadow-lg">
         <div className="grid grid-cols-[minmax(100px,140px)_1fr] gap-2">
           <div className="relative aspect-[5/2] w-full shrink-0">
             <Image
@@ -102,6 +135,66 @@ const PlatformPage = ({
         <Spacer className="py-3" dividerPosition="center" withDivider />
         <BlockRenderer blocks={contentBlocks} />
       </div>
+      {/* <div className="relative col-span-full h-full w-full md:col-span-1">
+        <div className="sticky top-[95px] h-fit overflow-hidden rounded-md shadow-lg">
+          <div className="flex h-[54px] w-full items-center justify-center bg-orange">
+            <IoPricetagsOutline />
+            <span className="text-paragraph ml-1">Cena</span>
+          </div>
+          <div className="min-h-[80px]">
+            {pricingBlockMock.subscriptionType.map((item, i) => {
+              return (
+                <div
+                  className="mx-2 border-b-[1px] border-lightGrey pb-1 pt-2 last:border-b-0"
+                  key={i}
+                >
+                  <h3 className="text-paragraph pb-2.5 text-center">
+                    {item.subscription.data.attributes.title}
+                  </h3>
+                  <div className="text-small mt-auto flex flex-col gap-1 text-right">
+                    {isForeignCurrency() && translationsLabels.paymentInForeignCurrencyLabel && (
+                      <div className="text-small mt-auto">
+                        {translationsLabels.paymentInForeignCurrencyLabel}
+                      </div>
+                    )}
+                    <div className="text-small flex justify-end">
+                      {!!item.priceBeforeDiscountAsNumber && (
+                        <div className="mr-1 text-accentOne line-through">
+                          {mainCurrencyForThisMarket}{' '}
+                          {parseAndFormatPriceToCorrectCurrency(item.priceBeforeDiscountAsNumber)}
+                        </div>
+                      )}
+                      <div>
+                        <span className="text-16 font-bold text-black">
+                          {parseAndFormatPriceToCorrectCurrency(item.priceAsNumber)}{' '}
+                          {mainCurrencyForThisMarket}
+                        </span>
+                        <span className="text-middleGrey">
+                          {translationsLabels.pricePerMonthLabel}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="text-middleGrey">{translationsLabels.priceForShortLabel}</div>
+                  </div>
+                </div>
+              );
+            })}
+          </div> */}
+      {/* <div className="flex h-[90px] w-full items-center justify-center bg-orange">
+            <LinkButton className="h-[40px] w-[70%]" href={pricingBlockMock.linkCTA}>
+              Zobacz
+            </LinkButton>
+          </div>
+        </div>
+      </div> */}
+      <PriceBlock
+        currenciesExchangeRate={[]}
+        currency={currency}
+        mainCurrencyForThisMarket={mainCurrencyForThisMarket}
+        navigateToCTAButtonLabel="Zobacz"
+        priceLabel="cena"
+        subscriptionType={[]}
+      />
       <RecommendedPlatforms
         className="col-span-full pt-10"
         {...(recommendedPlatforms as RecommendedPlatformsBlockType)}
