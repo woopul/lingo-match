@@ -1,4 +1,3 @@
-import { FETCH_FIELDS_PLATFORM_LIST } from '@lingo-match/api/strapiFetchFieldsConfig';
 import { LayoutConfigDTO } from '@lingo-match/components/Layout';
 import { DEFAULT_PLATFORMS_PAGE_LIMIT } from '@lingo-match/constants/requests';
 import { redis } from '@lingo-match/lib/redis';
@@ -11,6 +10,8 @@ import {
 } from '@lingo-match/types/strapi/blocks';
 import { parseStrapiResponseToData, strapiData } from '@lingo-match/utlis/parseStrapiResponse';
 import qs from 'qs';
+
+import { getPlatformsDataConfig } from './dataPupulation.config';
 
 const getStrapiURL = (path: string = '') => {
   return `${process.env.STRAPI_API_URL}${path}`;
@@ -105,19 +106,12 @@ const getPlatforms = async (options?: GetPlatformsPayloadOptions) => {
     : [];
   try {
     const response = await fetchAPI<PlatformDTO[]>('/platforms', {
-      fields: FETCH_FIELDS_PLATFORM_LIST,
+      ...getPlatformsDataConfig,
       filters,
       pagination: {
         page: 1,
         pageSize: DEFAULT_PLATFORMS_PAGE_LIMIT,
         ...(pagination || {}),
-      },
-      populate: {
-        labels: {
-          populate: '*',
-        },
-        logo: true,
-        tags: true,
       },
     });
 
@@ -194,15 +188,8 @@ const getFilteredPlatforms = async (filtersArray: string[]) => {
   try {
     const filters = { $and: filtersArray.map((filter) => ({ tags: { type: { $eq: filter } } })) };
     const response = await fetchAPI<PlatformDTO[]>(`/platforms`, {
-      fields: FETCH_FIELDS_PLATFORM_LIST,
       filters,
-      populate: {
-        labels: {
-          populate: '*',
-        },
-        logo: true,
-        tags: true,
-      },
+      ...getPlatformsDataConfig,
     });
 
     return { data: response, success: true };
