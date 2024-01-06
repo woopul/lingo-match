@@ -1,10 +1,7 @@
 import { CurrencyResponseType, getCurrenciesExchangeRate } from '@lingo-match/api/currency';
 import { getLabels, getLayoutConfig, getPlatformBySlug } from '@lingo-match/api/strapi';
 import { Image, RecommendedPlatforms, Spacer } from '@lingo-match/components';
-import { PrettyJSON } from '@lingo-match/components';
-import Button from '@lingo-match/components/Atoms/Button';
 import Label from '@lingo-match/components/Atoms/Label';
-import LinkButton from '@lingo-match/components/Atoms/LinkButton';
 import BlockRenderer from '@lingo-match/components/BlockRenderer';
 import { PricingBlock } from '@lingo-match/components/Organisms/PricingBlock/PricingBlock';
 import { RecommendedPlatformsBlockType } from '@lingo-match/components/Organisms/RecommendedPlatforms/RecommendedPlatforms';
@@ -12,8 +9,6 @@ import { getPropsConfig } from '@lingo-match/config/getProps.config';
 import { DEFAULT_STATIC_PAGE_CACHE_TIME } from '@lingo-match/constants/cache';
 import { placeholderSrc } from '@lingo-match/constants/urls';
 import withLayout from '@lingo-match/containers/withLayout';
-import { formatPrice } from '@lingo-match/helpers/formatPrice';
-import { pricingBlockMock } from '@lingo-match/mocks/pricingBlock';
 import {
   LabelDTO,
   PlatformDTO,
@@ -24,7 +19,6 @@ import { BaseGetStaticPropsType } from '@lingo-match/types/strapi/baseApiRespons
 import { extendBlockData, strapiData } from '@lingo-match/utlis';
 import { cn } from '@lingo-match/utlis/cn';
 import { GetStaticProps } from 'next';
-import { IoPricetagsOutline } from 'react-icons/io5';
 
 export const getStaticPaths = async () => ({
   fallback: 'blocking',
@@ -37,6 +31,12 @@ export const getStaticProps: GetStaticProps<BaseGetStaticPropsType> = async (con
     getPlatformBySlug(context.params?.slug as string) as Promise<PlatformDTO>,
     getLabels({ fields: ['recommendedCard', 'pricingBlock'] }) as unknown as TranslationsDTO,
   ]);
+
+  if (!platform) {
+    return {
+      notFound: true,
+    };
+  }
 
   // extract and remove blocks from platform data as theire will be used in nested component
   const blocks = JSON.parse(JSON.stringify(platform?.blocks || null));
