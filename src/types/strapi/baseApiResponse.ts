@@ -1,4 +1,5 @@
 import { LayoutConfigDTO } from '@lingo-match/components/Layout';
+import { LabelsContextType } from '@lingo-match/context/LabelsProvider/Context';
 import { StrapiBlockType } from '@lingo-match/types/strapi/blocks';
 
 type BaseStrapiAttributesType = {
@@ -66,4 +67,5 @@ export type DataWrapper<DT> = {
 export type BaseGetStaticPropsType = {
   blocks?: StrapiBlockType[];
   layoutConfig: LayoutConfigDTO | {};
+  sitewideLabels?: LabelsContextType;
 } & Record<any, any>;

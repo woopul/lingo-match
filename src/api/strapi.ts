@@ -138,11 +138,11 @@ const getPlatformBySlug = async (slug: string) => {
 
 const getLabels = async ({ fields = [] }: GetLabelsOptions) => {
   try {
-    const blogPostResponse = await fetchAPI<TranslationsDTO>(`/translation`, {
+    const labelsResponse = await fetchAPI<TranslationsDTO>(`/translation`, {
       populate: fields,
       // populate: 'deep,2',
     });
-    return parseStrapiResponseToData<TranslationsDTO>(blogPostResponse);
+    return parseStrapiResponseToData<TranslationsDTO>(labelsResponse);
   } catch (error) {
     console.error(`[Platform Service Error] Cannot get labels - ${error.message}`);
     return null;

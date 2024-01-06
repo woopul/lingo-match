@@ -32,10 +32,10 @@ export const getStaticPaths = async () => ({
 });
 
 export const getStaticProps: GetStaticProps<BaseGetStaticPropsType> = async (context) => {
-  const [layoutConfig, platform, labels] = await Promise.all([
+  const [layoutConfig, platform, sitewideLabels] = await Promise.all([
     getLayoutConfig(),
     getPlatformBySlug(context.params?.slug as string) as Promise<PlatformDTO>,
-    getLabels({ fields: ['recommendedCard'] }) as unknown as TranslationsDTO,
+    getLabels({ fields: ['recommendedCard', 'pricingBlock'] }) as unknown as TranslationsDTO,
   ]);
 
   // extract and remove blocks from platform data as theire will be used in nested component
@@ -57,7 +57,6 @@ export const getStaticProps: GetStaticProps<BaseGetStaticPropsType> = async (con
   });
 
   const { data: currenciesExchangeRate } = await getCurrenciesExchangeRate();
-  // const labels = (await getLabels({ fields: ['recommendedCard'] })) as TranslationsDTO;
 
   return {
     props: {
@@ -65,6 +64,7 @@ export const getStaticProps: GetStaticProps<BaseGetStaticPropsType> = async (con
       currenciesExchangeRate,
       layoutConfig: layoutConfig || {},
       platform: { ...platform, recommendedPlatforms: recommendedPlatforms?.[0] || {} },
+      sitewideLabels,
     },
     revalidate: DEFAULT_STATIC_PAGE_CACHE_TIME,
   };

@@ -1,4 +1,5 @@
 import LinkButton from '@lingo-match/components/Atoms/LinkButton';
+import { useLabels } from '@lingo-match/context/LabelsProvider';
 import { formatPrice } from '@lingo-match/helpers/formatPrice';
 import { pricingBlockMock } from '@lingo-match/mocks/pricingBlock';
 import { SubscriptionTypeDTO } from '@lingo-match/types/strapi';
@@ -30,6 +31,7 @@ export const PricingBlock = ({
   priceLabel,
   subscriptionType,
 }: PriceBlockProps) => {
+  console.log(useLabels());
   const isForeignCurrency = () => currency !== mainCurrencyForThisMarket;
 
   // TODO - change it to use mixed currencies pair exchange rate
