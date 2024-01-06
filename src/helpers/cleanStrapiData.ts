@@ -12,7 +12,7 @@ const removeKeys = (obj: RemoveDataType, keysToRemove: string[]): void => {
       }
     });
     for (let key in obj) {
-      if (typeof obj[key] === 'object') {
+      if (obj[key] !== null && typeof obj[key] === 'object') {
         removeKeys(obj[key], keysToRemove);
       }
     }

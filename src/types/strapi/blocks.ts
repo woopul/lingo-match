@@ -201,6 +201,7 @@ export type SubscriptionTypeDTO = {
 };
 
 export type PricingBlockDTO = {
+  freeRegistration?: boolean;
   linkCTA?: string;
   subscriptionType?: SubscriptionTypeDTO[];
 };
