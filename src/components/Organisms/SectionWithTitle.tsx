@@ -6,7 +6,7 @@ export type SectionWithTitleProps = {
   title: TitleDTO;
 };
 
-const SectionWithTitle = ({ description, title }: SectionWithTitleProps) => {
+export const SectionWithTitle = ({ description, title }: SectionWithTitleProps) => {
   const CustomTag = title?.tagType || 'h2';
   return (
     <section className="[&>h1]:mb-2 [&_*+*]:mt-1">
@@ -17,5 +17,3 @@ const SectionWithTitle = ({ description, title }: SectionWithTitleProps) => {
     </section>
   );
 };
-
-export default SectionWithTitle;

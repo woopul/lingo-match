@@ -109,6 +109,7 @@ export type PlatformDTO = StrapiAdditionalAttributesType & {
   mainCurrencyForThisMarket: SUPPORTED_CURRENCIES;
   priceAsNumber: number;
   priceBeforeDiscountAsNumber?: number;
+  pricingBlock?: PricingBlockDTO;
   rating?: number;
   recommendedPlatforms?: {
     platforms: PlatformDTOMapToRecommendedCard[];
@@ -186,6 +187,7 @@ export type LabelDTO = {
 };
 
 export type SubscriptionTypeDTO = {
+  id: number;
   priceAsNumber: number;
   priceBeforeDiscountAsNumber: number;
   subscription: {
@@ -196,4 +198,9 @@ export type SubscriptionTypeDTO = {
       id: number;
     };
   };
+};
+
+export type PricingBlockDTO = {
+  linkCTA: string;
+  subscriptionType: SubscriptionTypeDTO[];
 };

@@ -1,4 +1,4 @@
-import PostCard from '@lingo-match/components/Organisms/PostCard';
+import { PostCard } from '@lingo-match/components/Organisms/PostCard';
 import { BlogPostDTO } from '@lingo-match/types/strapi/blocks';
 import { cn } from '@lingo-match/utlis/cn';
 import React from 'react';
@@ -9,7 +9,7 @@ export type PostListProps = {
   posts: BlogPostDTO[];
 };
 
-const PostList = ({ className, display = 'grid', posts }: PostListProps) => {
+export const PostList = ({ className, display = 'grid', posts }: PostListProps) => {
   if (!posts || !posts.length) {
     return null;
   }
@@ -24,5 +24,3 @@ const PostList = ({ className, display = 'grid', posts }: PostListProps) => {
     </div>
   );
 };
-
-export default PostList;

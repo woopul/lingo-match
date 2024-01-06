@@ -15,7 +15,7 @@ export type PostCardProps = Pick<
 const placeholderSrc =
   'https://res.cloudinary.com/dbnc7cgvp/image/upload/v1682797183/logo_2_33627850b1.png';
 
-const PostCard = ({
+export const PostCard = ({
   alignment = 'vertical',
   author,
   blogCategories,
@@ -64,5 +64,3 @@ const PostCard = ({
     </NextLink>
   );
 };
-
-export default PostCard;

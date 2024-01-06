@@ -4,6 +4,13 @@ import { pricingBlockMock } from '@lingo-match/mocks/pricingBlock';
 import { SubscriptionTypeDTO } from '@lingo-match/types/strapi';
 import { IoPricetagsOutline } from 'react-icons/io5';
 
+type PricingBlockStrapiLabels = {
+  navigateToCTAButtonLabel?: string;
+  priceForShortLabel?: string;
+  priceLabel?: string;
+  pricePerMonthLabel?: string;
+};
+
 export type PriceBlockProps = {
   currenciesExchangeRate: any[];
   currency: string;
@@ -14,7 +21,7 @@ export type PriceBlockProps = {
   subscriptionType: SubscriptionTypeDTO[];
 };
 
-export const PriceBlock = ({
+export const PricingBlock = ({
   currenciesExchangeRate,
   currency,
   link,
@@ -50,10 +57,10 @@ export const PriceBlock = ({
       <div className="sticky top-[95px] h-fit overflow-hidden rounded-md shadow-lg">
         <div className="flex h-[54px] w-full items-center justify-center bg-orange">
           <IoPricetagsOutline />
-          <span className="text-paragraph ml-1">Cena</span>
+          <span className="text-paragraph ml-1">{priceLabel}</span>
         </div>
         <div className="min-h-[80px]">
-          {pricingBlockMock.subscriptionType.map((item, i) => {
+          {subscriptionType.map((item, i) => {
             return (
               <div
                 className="mx-2 border-b-[1px] border-lightGrey pb-1 pt-2 last:border-b-0"
@@ -92,8 +99,8 @@ export const PriceBlock = ({
           })}
         </div>
         <div className="flex h-[90px] w-full items-center justify-center bg-orange">
-          <LinkButton className="h-[40px] w-[70%]" href={pricingBlockMock.linkCTA}>
-            Zobacz
+          <LinkButton className="h-[40px] w-[70%]" href={link}>
+            {navigateToCTAButtonLabel}
           </LinkButton>
         </div>
       </div>

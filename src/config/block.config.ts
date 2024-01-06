@@ -28,7 +28,10 @@ const CheckboxColumns = dynamic(() => import('@lingo-match/components/Organisms/
 });
 
 const SectionWithTitle = dynamic(
-  () => import('@lingo-match/components/Organisms/SectionWithTitle'),
+  () =>
+    import('@lingo-match/components/Organisms/SectionWithTitle').then(
+      (mod) => mod.SectionWithTitle,
+    ),
   {
     ssr: true,
   },
