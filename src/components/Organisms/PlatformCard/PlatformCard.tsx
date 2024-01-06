@@ -1,5 +1,5 @@
-import { PlatformCardDesktop, PlatformCardProps } from './PlatformCardDesktop';
-import { PlatformCardMobile } from './PlatformCardMobile';
+import { PlatformCardDesktop, PlatformCardProps } from './components/PlatformCardDesktop';
+import { PlatformCardMobile } from './components/PlatformCardMobile';
 
 export const PlatformCard = (props: PlatformCardProps) => {
   return (

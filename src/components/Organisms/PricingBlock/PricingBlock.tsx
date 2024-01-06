@@ -7,6 +7,8 @@ import { PricingBlockDTO, SubscriptionTypeDTO } from '@lingo-match/types/strapi'
 import { cn } from '@lingo-match/utlis/cn';
 import { IoPricetagsOutline } from 'react-icons/io5';
 
+import { CTAButton } from './components/CTAButton';
+
 type PricingBlockStrapiLabels = {
   foreignCurrencyDescriptionLabel?: string;
   freeRegistrationAcccent?: string;
@@ -49,69 +51,76 @@ export const PricingBlock = ({
   };
 
   return (
-    <div className="relative col-span-full h-full w-full md:col-span-1">
-      <div className="sticky top-[95px] h-fit overflow-hidden rounded-md shadow-lg">
-        <div className="flex h-[54px] w-full items-center justify-center bg-orange">
-          <IoPricetagsOutline />
-          <span className="text-paragraph ml-1">{pricingBlockLabels.priceLabel}</span>
-        </div>
-        <div
-          className={cn(
-            'min-h-[80px]',
-            '[&>*]:border-b-[1px] [&>*]:border-lightGrey [&>*]:last:border-b-0',
-          )}
-        >
-          {subscriptionType?.map((item, i) => {
-            return (
-              <div className="mx-2 border-b-[1px] py-1.5" key={i}>
-                <h3 className="text-paragraph pb-2 text-center">
-                  {item.subscription.data.attributes.title}
-                </h3>
-                <div className="text-small mt-auto flex flex-col gap-0.5 text-right">
-                  {isForeignCurrency() && pricingBlockLabels.foreignCurrencyDescriptionLabel && (
-                    <div className="text-small mt-auto">
-                      {pricingBlockLabels.foreignCurrencyDescriptionLabel}
-                    </div>
-                  )}
-                  <div className="text-small flex justify-end">
-                    {!!item.priceBeforeDiscountAsNumber && (
-                      <div className="mr-1 text-accentOne line-through">
-                        {mainCurrencyForThisMarket}{' '}
-                        {parseAndFormatPriceToCorrectCurrency(item.priceBeforeDiscountAsNumber)}
+    <>
+      <div className="relative col-span-full -ml-2 h-full w-screen md:col-span-1 md:-ml-0 md:w-full">
+        <div className="sticky top-[95px] h-fit overflow-hidden rounded-md shadow-lg">
+          <div className="flex h-[54px] w-full items-center justify-center bg-orange">
+            <IoPricetagsOutline />
+            <span className="text-paragraph ml-1">{pricingBlockLabels.priceLabel}</span>
+          </div>
+          <div
+            className={cn(
+              'min-h-[80px]',
+              '[&>*]:border-b-[1px] [&>*]:border-lightGrey [&>*]:last:border-b-0',
+            )}
+          >
+            {subscriptionType?.map((item, i) => {
+              return (
+                <div className="mx-2 border-b-[1px] py-1.5" key={i}>
+                  <h3 className="text-paragraph pb-2 text-center">
+                    {item.subscription.data.attributes.title}
+                  </h3>
+                  <div className="text-small mt-auto flex flex-col gap-0.5 text-right">
+                    {isForeignCurrency() && pricingBlockLabels.foreignCurrencyDescriptionLabel && (
+                      <div className="text-small mt-auto">
+                        {pricingBlockLabels.foreignCurrencyDescriptionLabel}
                       </div>
                     )}
-                    <div>
-                      <span className="text-16 font-bold text-black">
-                        {parseAndFormatPriceToCorrectCurrency(item.priceAsNumber)}{' '}
-                        {mainCurrencyForThisMarket}
-                      </span>
-                      <span className="text-middleGrey">
-                        {pricingBlockLabels.pricePerMonthLabel}
-                      </span>
+                    <div className="text-small flex justify-end">
+                      {!!item.priceBeforeDiscountAsNumber && (
+                        <div className="mr-1 text-accentOne line-through">
+                          {mainCurrencyForThisMarket}{' '}
+                          {parseAndFormatPriceToCorrectCurrency(item.priceBeforeDiscountAsNumber)}
+                        </div>
+                      )}
+                      <div>
+                        <span className="text-16 font-bold text-black">
+                          {parseAndFormatPriceToCorrectCurrency(item.priceAsNumber)}{' '}
+                          {mainCurrencyForThisMarket}
+                        </span>
+                        <span className="text-middleGrey">
+                          {pricingBlockLabels.pricePerMonthLabel}
+                        </span>
+                      </div>
                     </div>
+                    <div className="text-middleGrey">{pricingBlockLabels.priceForShortLabel}</div>
                   </div>
-                  <div className="text-middleGrey">{pricingBlockLabels.priceForShortLabel}</div>
                 </div>
+              );
+            })}
+            {freeRegistration && (
+              <div className="mx-2 py-1.5 pr-1">
+                <h3 className="text-small pb-0.5 text-right text-middleGrey">
+                  {pricingBlockLabels.freeRegistrationTitle}
+                </h3>
+                <h4 className="text-h3 text-right text-accentTwo">
+                  {pricingBlockLabels.freeRegistrationAcccent}
+                </h4>
               </div>
-            );
-          })}
-          {freeRegistration && (
-            <div className="mx-2 py-1.5 pr-1">
-              <h3 className="text-small pb-0.5 text-right text-middleGrey">
-                {pricingBlockLabels.freeRegistrationTitle}
-              </h3>
-              <h4 className="text-h3 text-right text-accentTwo">
-                {pricingBlockLabels.freeRegistrationAcccent}
-              </h4>
-            </div>
-          )}
-        </div>
-        <div className="flex h-[90px] w-full items-center justify-center bg-orange">
-          <LinkButton className="h-[40px] w-[70%]" href={linkCTA}>
-            {pricingBlockLabels.navigateToCTAButtonLabel}
-          </LinkButton>
+            )}
+          </div>
+          <CTAButton
+            className="hidden md:block"
+            linkCTA={linkCTA}
+            navigateToCTAButtonLabel={pricingBlockLabels.navigateToCTAButtonLabel}
+          />
         </div>
       </div>
-    </div>
+      <CTAButton
+        className="sticky bottom-0 -ml-2 w-screen md:hidden"
+        linkCTA={linkCTA}
+        navigateToCTAButtonLabel={pricingBlockLabels.navigateToCTAButtonLabel}
+      />
+    </>
   );
 };

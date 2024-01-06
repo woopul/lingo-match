@@ -3,9 +3,9 @@ import { strapiData } from '@lingo-match/utlis';
 import { debounce, isEmpty } from 'lodash-es';
 import { useEffect, useState } from 'react';
 
-import { FiltersAsideDesktop } from './Desktop/FiltersAsideDesktop';
-import { FiltersBarMobile } from './Mobile/FiltersBarMobile';
-import { FilterSliderMobile } from './Mobile/FilterSliderMobile';
+import { FiltersAsideDesktop } from './components/Desktop/FiltersAsideDesktop';
+import { FiltersBarMobile } from './components/Mobile/FiltersBarMobile';
+import { FilterSliderMobile } from './components/Mobile/FilterSliderMobile';
 
 export type MainPlatformFiltersProps = {
   filters: FilterAccordionDTO[] | [];
