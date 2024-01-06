@@ -1,8 +1,8 @@
 import { BaseDataItem } from '@lingo-match/types/strapi/baseApiResponse';
 import { StrapiMediaType } from '@lingo-match/types/strapi/shared';
 
-import { FooterDesktop } from './FooterDesktop';
-import { FooterMobile } from './FooterMobile';
+import { FooterDesktop } from './components/FooterDesktop';
+import { FooterMobile } from './components/FooterMobile';
 
 export type FooterColumnType = {
   align?: 'vertical' | 'horizontal';

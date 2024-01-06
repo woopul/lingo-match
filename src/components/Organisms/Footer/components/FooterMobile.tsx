@@ -3,7 +3,7 @@ import { BaseDataItem } from '@lingo-match/types/strapi/baseApiResponse';
 import { StrapiMediaType } from '@lingo-match/types/strapi/shared';
 import { cn } from '@lingo-match/utlis/cn';
 
-import AccordionItem from '../AccordionItem';
+import AccordionItem from '../../AccordionItem';
 
 export type FooterColumnType = {
   align?: 'vertical' | 'horizontal';
