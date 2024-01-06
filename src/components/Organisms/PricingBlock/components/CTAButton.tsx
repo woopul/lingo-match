@@ -9,7 +9,13 @@ export type CTAButtonProps = {
 
 export const CTAButton = ({ className, linkCTA, navigateToCTAButtonLabel }: CTAButtonProps) => {
   return (
-    <div className={cn('flex h-[90px] w-full items-center justify-center bg-orange', className)}>
+    <div
+      className={cn(
+        'flex h-[90px] w-full items-center justify-center bg-orange',
+        'flex',
+        className,
+      )}
+    >
       <LinkButton className="h-[40px] w-[70%]" href={linkCTA}>
         {navigateToCTAButtonLabel}
       </LinkButton>

@@ -110,7 +110,7 @@ export const PricingBlock = ({
             )}
           </div>
           <CTAButton
-            className="hidden md:block"
+            className="hidden md:flex"
             linkCTA={linkCTA}
             navigateToCTAButtonLabel={pricingBlockLabels.navigateToCTAButtonLabel}
           />
