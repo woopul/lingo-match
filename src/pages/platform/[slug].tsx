@@ -38,8 +38,6 @@ export const getStaticProps: GetStaticProps<BaseGetStaticPropsType> = async (con
     getLabels({ fields: ['recommendedCard', 'pricingBlock'] }) as unknown as TranslationsDTO,
   ]);
 
-  console.log('PLATFORM', sitewideLabels);
-
   // extract and remove blocks from platform data as theire will be used in nested component
   const blocks = JSON.parse(JSON.stringify(platform?.blocks || null));
   delete platform.blocks;

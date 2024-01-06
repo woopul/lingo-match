@@ -144,9 +144,7 @@ const getLabels = async ({ fields = [] }: GetLabelsOptions) => {
       // populate: 'deep,2',
     });
 
-    console.log('getLabels 1', labelsResponse);
     const parsedData = parseStrapiResponseToData<TranslationsDTO>(labelsResponse);
-    console.log('getLabels 2', parsedData);
     return cleanStrapiData(parsedData);
   } catch (error) {
     console.error(`[Platform Service Error] Cannot get labels - ${error.message}`);
