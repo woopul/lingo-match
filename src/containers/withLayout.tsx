@@ -10,11 +10,11 @@ const withLayout = (Component: any) => {
   const wrappedComponent = ({
     blocks,
     layoutConfig,
-    sitewideLabels,
+    sitewideLabels = {},
     ...rest
   }: BaseGetStaticPropsType) => {
     return (
-      <LabelsProvider labels={sitewideLabels || {}}>
+      <LabelsProvider labels={sitewideLabels}>
         <Layout layoutConfig={layoutConfig}>
           <Component {...rest}>{!!blocks && <BlockRenderer blocks={blocks} />}</Component>
         </Layout>

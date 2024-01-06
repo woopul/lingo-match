@@ -1,5 +1,6 @@
 import { LayoutConfigDTO } from '@lingo-match/components/Layout';
 import { DEFAULT_PLATFORMS_PAGE_LIMIT } from '@lingo-match/constants/requests';
+import { cleanStrapiData } from '@lingo-match/helpers/cleanStrapiData';
 import { redis } from '@lingo-match/lib/redis';
 import { BaseResponseDataWrapper } from '@lingo-match/types/strapi/baseApiResponse';
 import {
@@ -142,7 +143,9 @@ const getLabels = async ({ fields = [] }: GetLabelsOptions) => {
       populate: fields,
       // populate: 'deep,2',
     });
-    return parseStrapiResponseToData<TranslationsDTO>(labelsResponse);
+
+    const parsedData = parseStrapiResponseToData<TranslationsDTO>(labelsResponse);
+    return cleanStrapiData(parsedData);
   } catch (error) {
     console.error(`[Platform Service Error] Cannot get labels - ${error.message}`);
     return null;

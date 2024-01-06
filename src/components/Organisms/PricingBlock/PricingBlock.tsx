@@ -1,5 +1,6 @@
 import LinkButton from '@lingo-match/components/Atoms/LinkButton';
 import { useLabels } from '@lingo-match/context/LabelsProvider';
+import { LabelsContextType } from '@lingo-match/context/LabelsProvider/Context';
 import { formatPrice } from '@lingo-match/helpers/formatPrice';
 import { pricingBlockMock } from '@lingo-match/mocks/pricingBlock';
 import { SubscriptionTypeDTO } from '@lingo-match/types/strapi';
@@ -31,7 +32,7 @@ export const PricingBlock = ({
   priceLabel,
   subscriptionType,
 }: PriceBlockProps) => {
-  console.log(useLabels());
+  const { pricingBlock = {} }: any = useLabels();
   const isForeignCurrency = () => currency !== mainCurrencyForThisMarket;
 
   // TODO - change it to use mixed currencies pair exchange rate
@@ -46,12 +47,6 @@ export const PricingBlock = ({
       priceValue = getCalculatedValueInPLN(price);
     }
     return formatPrice(priceValue);
-  };
-
-  const translationsLabels = {
-    paymentInForeignCurrencyLabel: 'Płatność w obcej walucie',
-    priceForShortLabel: 'za najkorzystniejszą subskrypcję',
-    pricePerMonthLabel: '/miesiąc',
   };
 
   return (
@@ -72,9 +67,9 @@ export const PricingBlock = ({
                   {item.subscription.data.attributes.title}
                 </h3>
                 <div className="text-small mt-auto flex flex-col gap-1 text-right">
-                  {isForeignCurrency() && translationsLabels.paymentInForeignCurrencyLabel && (
+                  {isForeignCurrency() && pricingBlock.foreignCurrencyDescriptionLabel && (
                     <div className="text-small mt-auto">
-                      {translationsLabels.paymentInForeignCurrencyLabel}
+                      {pricingBlock.foreignCurrencyDescriptionLabel}
                     </div>
                   )}
                   <div className="text-small flex justify-end">
@@ -89,12 +84,10 @@ export const PricingBlock = ({
                         {parseAndFormatPriceToCorrectCurrency(item.priceAsNumber)}{' '}
                         {mainCurrencyForThisMarket}
                       </span>
-                      <span className="text-middleGrey">
-                        {translationsLabels.pricePerMonthLabel}
-                      </span>
+                      <span className="text-middleGrey">{pricingBlock.pricePerMonthLabel}</span>
                     </div>
                   </div>
-                  <div className="text-middleGrey">{translationsLabels.priceForShortLabel}</div>
+                  <div className="text-middleGrey">{pricingBlock.priceForShortLabel}</div>
                 </div>
               </div>
             );
