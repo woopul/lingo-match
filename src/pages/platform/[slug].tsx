@@ -85,6 +85,7 @@ const PlatformPage = ({
     labels,
     logo,
     mainCurrencyForThisMarket,
+    pricingBlock,
     recommendedPlatforms,
     title,
   },
@@ -130,9 +131,7 @@ const PlatformPage = ({
         currenciesExchangeRate={currenciesExchangeRate}
         currency={currency}
         mainCurrencyForThisMarket={mainCurrencyForThisMarket}
-        navigateToCTAButtonLabel="Zobacz"
-        priceLabel="cena"
-        subscriptionType={[]}
+        {...pricingBlock}
       />
       <RecommendedPlatforms
         className="col-span-full pt-10"

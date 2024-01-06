@@ -3,7 +3,7 @@ import { useLabels } from '@lingo-match/context/LabelsProvider';
 import { LabelsContextType } from '@lingo-match/context/LabelsProvider/Context';
 import { formatPrice } from '@lingo-match/helpers/formatPrice';
 import { pricingBlockMock } from '@lingo-match/mocks/pricingBlock';
-import { SubscriptionTypeDTO } from '@lingo-match/types/strapi';
+import { PricingBlockDTO, SubscriptionTypeDTO } from '@lingo-match/types/strapi';
 import { IoPricetagsOutline } from 'react-icons/io5';
 
 type PricingBlockStrapiLabels = {
@@ -16,20 +16,14 @@ type PricingBlockStrapiLabels = {
 export type PriceBlockProps = {
   currenciesExchangeRate: any[];
   currency: string;
-  link?: string;
   mainCurrencyForThisMarket: string;
-  navigateToCTAButtonLabel: string;
-  priceLabel: string;
-  subscriptionType: SubscriptionTypeDTO[];
-};
+} & PricingBlockDTO;
 
 export const PricingBlock = ({
   currenciesExchangeRate,
   currency,
-  link,
+  linkCTA = '',
   mainCurrencyForThisMarket,
-  navigateToCTAButtonLabel,
-  priceLabel,
   subscriptionType,
 }: PriceBlockProps) => {
   const { pricingBlock = {} }: any = useLabels();
@@ -54,10 +48,10 @@ export const PricingBlock = ({
       <div className="sticky top-[95px] h-fit overflow-hidden rounded-md shadow-lg">
         <div className="flex h-[54px] w-full items-center justify-center bg-orange">
           <IoPricetagsOutline />
-          <span className="text-paragraph ml-1">{priceLabel}</span>
+          <span className="text-paragraph ml-1">{pricingBlock.priceLabel}</span>
         </div>
         <div className="min-h-[80px]">
-          {subscriptionType.map((item, i) => {
+          {subscriptionType?.map((item, i) => {
             return (
               <div
                 className="mx-2 border-b-[1px] border-lightGrey pb-1 pt-2 last:border-b-0"
@@ -94,8 +88,8 @@ export const PricingBlock = ({
           })}
         </div>
         <div className="flex h-[90px] w-full items-center justify-center bg-orange">
-          <LinkButton className="h-[40px] w-[70%]" href={link}>
-            {navigateToCTAButtonLabel}
+          <LinkButton className="h-[40px] w-[70%]" href={linkCTA}>
+            {pricingBlock.navigateToCTAButtonLabel}
           </LinkButton>
         </div>
       </div>

@@ -201,6 +201,6 @@ export type SubscriptionTypeDTO = {
 };
 
 export type PricingBlockDTO = {
-  linkCTA: string;
-  subscriptionType: SubscriptionTypeDTO[];
+  linkCTA?: string;
+  subscriptionType?: SubscriptionTypeDTO[];
 };
