@@ -31,8 +31,6 @@ export const getStaticProps: GetStaticProps<BaseGetStaticPropsType> = async (con
     getPlatformBySlug(context.params?.slug as string) as Promise<PlatformDTO>,
     getLabels({ fields: ['recommendedCard', 'pricingBlock'] }) as unknown as TranslationsDTO,
   ]);
-  // const platform = platformData?.data;
-  // console.log(platformData);
 
   if (!platform) {
     return {
@@ -92,11 +90,7 @@ const PlatformPage = ({
     recommendedPlatforms,
     title,
   },
-  platform,
-}: // platformData = {},
-PlatformPageType) => {
-  // console.log(platformData);
-  console.log({ platform });
+}: PlatformPageType) => {
   const parsedLabelsToDisplay = strapiData<LabelDTO>(labels) as LabelDTO[];
   return (
     <main className={cn('grid-cols-[10fr_minmax(250px,_2fr)] gap-2 md:grid')}>

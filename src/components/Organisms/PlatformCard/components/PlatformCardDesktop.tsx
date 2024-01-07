@@ -89,13 +89,13 @@ export const PlatformCardDesktop = ({
             )}
             <div className="flex justify-end">
               {!!priceBeforeDiscountAsNumber && (
-                <div className="mr-3 text-accentOne line-through">
-                  {mainCurrencyForThisMarket}{' '}
-                  {parseAndFormatPriceToCorrectCurrency(priceBeforeDiscountAsNumber)}
+                <div className="mr-1.5 whitespace-nowrap text-accentOne line-through">
+                  {parseAndFormatPriceToCorrectCurrency(priceBeforeDiscountAsNumber)}{' '}
+                  {mainCurrencyForThisMarket}
                 </div>
               )}
               <div>
-                <span className="text-16 font-bold text-black">
+                <span className="whitespace-nowrap text-16 font-bold text-black">
                   {parseAndFormatPriceToCorrectCurrency(priceAsNumber)} {mainCurrencyForThisMarket}
                 </span>
                 <span className="text-middleGrey">{pricePerMonthLabel}</span>
