@@ -89,8 +89,8 @@ export const PricingBlock = ({
                     <div className="text-small flex justify-end">
                       {!!item.priceBeforeDiscountAsNumber && (
                         <div className="mr-1 text-accentOne line-through">
-                          {mainCurrencyForThisMarket}{' '}
-                          {parseAndFormatPriceToCorrectCurrency(item.priceBeforeDiscountAsNumber)}
+                          {parseAndFormatPriceToCorrectCurrency(item.priceBeforeDiscountAsNumber)}{' '}
+                          {mainCurrencyForThisMarket}
                         </div>
                       )}
                       <div>
@@ -103,17 +103,19 @@ export const PricingBlock = ({
                         </span>
                       </div>
                     </div>
-                    <div className="text-middleGrey">{pricingBlockLabels.priceForShortLabel}</div>
+                    <div className="text-[11px] text-middleGrey">
+                      {pricingBlockLabels.priceForShortLabel}
+                    </div>
                   </div>
                 </div>
               );
             })}
             {freeRegistration && (
               <div className="mx-2 py-1.5 pr-1">
-                <h3 className="text-small pb-0.5 text-right text-middleGrey">
+                <h3 className="text-small pb-0.5 text-right font-thin !tracking-[.1em] text-middleGrey">
                   {pricingBlockLabels.freeRegistrationTitle}
                 </h3>
-                <h4 className="text-h3 text-right text-accentTwo">
+                <h4 className="text-h3 text-right !tracking-[.05em] text-accentTwo">
                   {pricingBlockLabels.freeRegistrationAcccent}
                 </h4>
               </div>
