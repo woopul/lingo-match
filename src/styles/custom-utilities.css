@@ -182,6 +182,7 @@
         transparent 100%
       );
   }
+
   .rich-text blockquote {
     @apply bg-gray-100;
     @apply ml-1;
@@ -189,6 +190,24 @@
     padding: 0.5em 10px;
     quotes: "\201C""\201D""\2018""\2019";
   }
+
+  .rich-text ul,
+  ol,
+  li,
+  p {
+    @apply text-paragraph;
+  }
+
+  .rich-text ul {
+    @apply list-disc;
+    @apply ml-3;
+  }
+
+  .rich-text ol {
+    @apply list-decimal;
+    @apply ml-3;
+  }
+
   .rich-text blockquote:before {
     color: #ccc;
     content: open-quote;

@@ -8,10 +8,12 @@ type RichTextProps = {
   style?: React.CSSProperties;
 };
 
-const RichText = ({ className, data, style }: RichTextProps) => (
-  <section className={cn('rich-text py-1', className)} style={style}>
-    <Markdown remarkPlugins={[remarkGfm]}>{data}</Markdown>
-  </section>
-);
+const RichText = ({ className, data, style }: RichTextProps) => {
+  return (
+    <section className={cn('rich-text py-1', className)} style={style}>
+      <Markdown remarkPlugins={[remarkGfm]}>{data}</Markdown>
+    </section>
+  );
+};
 
 export default RichText;
