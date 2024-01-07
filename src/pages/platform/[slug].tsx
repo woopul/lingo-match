@@ -31,6 +31,8 @@ export const getStaticProps: GetStaticProps<BaseGetStaticPropsType> = async (con
     getPlatformBySlug(context.params?.slug as string) as Promise<PlatformDTO>,
     getLabels({ fields: ['recommendedCard', 'pricingBlock'] }) as unknown as TranslationsDTO,
   ]);
+  // const platform = platformData?.data;
+  // console.log(platformData);
 
   if (!platform) {
     return {
@@ -65,6 +67,7 @@ export const getStaticProps: GetStaticProps<BaseGetStaticPropsType> = async (con
       layoutConfig: layoutConfig || {},
       platform: { ...platform, recommendedPlatforms: recommendedPlatforms?.[0] || {} },
       sitewideLabels,
+      // platformData,
     },
     revalidate: DEFAULT_STATIC_PAGE_CACHE_TIME,
   };
@@ -90,7 +93,10 @@ const PlatformPage = ({
     title,
   },
   platform,
-}: PlatformPageType) => {
+}: // platformData = {},
+PlatformPageType) => {
+  // console.log(platformData);
+  console.log({ platform });
   const parsedLabelsToDisplay = strapiData<LabelDTO>(labels) as LabelDTO[];
   return (
     <main className={cn('grid-cols-[10fr_minmax(250px,_2fr)] gap-2 md:grid')}>

@@ -12,7 +12,7 @@ import {
 import { parseStrapiResponseToData, strapiData } from '@lingo-match/utlis/parseStrapiResponse';
 import qs from 'qs';
 
-import { getPlatformsDataConfig } from './dataPupulation.config';
+import { getPlatformBySlugDataConfig, getPlatformsDataConfig } from './dataPupulation.config';
 
 const getStrapiURL = (path: string = '') => {
   return `${process.env.STRAPI_API_URL}${path}`;
@@ -127,10 +127,20 @@ const getPlatforms = async (options?: GetPlatformsPayloadOptions) => {
 
 const getPlatformBySlug = async (slug: string) => {
   try {
-    const blogPostResponse = await fetchAPI<PlatformDTO>(`/platforms/${slug}`, {
-      populate: 'deep,4',
+    const platformResponse = await fetchAPI<PlatformDTO>(`/platforms/${slug}`, {
+      ...getPlatformBySlugDataConfig,
     });
-    return parseStrapiResponseToData<PlatformDTO>(blogPostResponse);
+    // const data = parseStrapiResponseToData<PlatformDTO>(platformResponse);
+
+    // let time = Date.now();
+    // const cleanedData = cleanStrapiData(strapiData(platformResponse));
+    // time = Date.now() - time;
+
+    // return {
+    //   data,
+    //   test: { cleanedData, time },
+    // };
+    return parseStrapiResponseToData<PlatformDTO>(platformResponse);
   } catch (error) {
     console.error(`[Platform Service Error] Cannot get platform - ${error.message}`);
     return null;
