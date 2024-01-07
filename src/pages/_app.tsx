@@ -3,6 +3,7 @@ import '../styles/styles.css';
 import ErrorBoundary from '@lingo-match/components/Organisms/ErrorBoundary';
 import { DM_Sans } from '@next/font/google';
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { AppProps } from 'next/app';
 
 const dmSans = DM_Sans({
@@ -24,6 +25,7 @@ const CustomApp = ({ Component, pageProps }: AppProps) => {
         <Component {...pageProps} />
       </ErrorBoundary>
       <Analytics />
+      <SpeedInsights />
     </>
   );
 };
