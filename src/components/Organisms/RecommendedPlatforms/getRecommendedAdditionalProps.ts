@@ -20,14 +20,12 @@ export const getRecommendedPlatformProps = async (
   const { __component, id, title } = block;
   const { data: currenciesExchangeRate } = await getCurrenciesExchangeRate();
 
-  const labels = (await getLabels({ fields: ['recommendedCard'] })) as TranslationsDTO;
   const platforms = strapiDataArray<PlatformDTOMapToRecommendedCard[]>(block.platforms) || [];
 
   return {
     __component,
     currenciesExchangeRate,
     id,
-    labels: labels?.recommendedCard || {},
     platforms: platforms?.map((platform) =>
       pick(platform, [
         'id',

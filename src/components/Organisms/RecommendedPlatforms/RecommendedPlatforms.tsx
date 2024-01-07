@@ -1,6 +1,7 @@
 import { CurrencyResponseType } from '@lingo-match/api/currency';
 import { Image, Link } from '@lingo-match/components/Atoms';
 import { MD } from '@lingo-match/constants/mediaQueries';
+import { useLabels } from '@lingo-match/context/LabelsProvider';
 import { formatPrice } from '@lingo-match/helpers/formatPrice';
 import { useMediaQuery } from '@lingo-match/hooks/useMediaQuery';
 import { BlockType, PlatformDTOMapToRecommendedCard } from '@lingo-match/types/strapi';
@@ -17,7 +18,6 @@ export type RecommendedPlatformsLabelsType = {
 export type RecommendedPlatformsBlockType = BlockType & {
   className?: string;
   currenciesExchangeRate: CurrencyResponseType[];
-  labels: RecommendedPlatformsLabelsType;
   platforms: PlatformDTOMapToRecommendedCard[];
   title: string;
 };
@@ -25,11 +25,11 @@ export type RecommendedPlatformsBlockType = BlockType & {
 const RecommendedPlatforms = ({
   className,
   currenciesExchangeRate,
-  labels,
   platforms,
   title,
 }: RecommendedPlatformsBlockType) => {
   const isDesktop = useMediaQuery(MD);
+  const labels = useLabels('recommendedCard') as RecommendedPlatformsLabelsType;
 
   const swiperConfig = {
     slidesPerView: 'auto' as 'auto',
