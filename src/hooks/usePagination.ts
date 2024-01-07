@@ -2,11 +2,7 @@ const getPages = (length: number, inc: number = 1) => Array.from({ length }, (_,
 
 export const dotts = '...';
 
-export default function usePagination(
-  totalItems: number,
-  currentPage: number,
-  itemsPerPage: number,
-) {
+export const usePagination = (totalItems: number, currentPage: number, itemsPerPage: number) => {
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
   // -> 1 2 3 4 5
@@ -23,4 +19,4 @@ export default function usePagination(
   }
   // -> 1 ... 7 8 9 10
   return [1, dotts, ...getPages(4, totalPages - 3)];
-}
+};

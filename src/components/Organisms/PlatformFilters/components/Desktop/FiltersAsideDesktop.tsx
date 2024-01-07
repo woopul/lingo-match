@@ -3,10 +3,11 @@ import Checkbox from '@lingo-match/components/Atoms/Checkbox';
 import IconImage from '@lingo-match/components/Atoms/IconImage';
 import Loader from '@lingo-match/components/Atoms/Loader';
 import AccordionItem from '@lingo-match/components/Organisms/AccordionItem';
+import { useHeaderHeight } from '@lingo-match/hooks';
 import { FilterAccordionDTO } from '@lingo-match/types/strapi/blocks';
 import { cn } from '@lingo-match/utlis/cn';
 import { isEmpty } from 'lodash-es';
-import { useEffect, useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import { BsFilterLeft } from 'react-icons/bs';
 import { IoCloseOutline } from 'react-icons/io5';
 
@@ -38,15 +39,10 @@ export const FiltersAsideDesktop = ({
   selectedFilters,
   setSelectedFilters,
 }: MainPlatformFiltersProps) => {
-  const [headerHeight, setHeaderHeight] = useState(0);
+  const headerHeight = useHeaderHeight();
   const isCheckboxChecked = (type: string) => {
     return selectedFilters.some((item) => item.type === type);
   };
-
-  useEffect(() => {
-    const headerHeight = document.getElementById('header')?.offsetHeight || 0;
-    setHeaderHeight(headerHeight);
-  }, []);
 
   const getFiltersCountForGroup = (groupId: number) => {
     return selectedFilters.filter((item) => item.groupId === groupId).length;

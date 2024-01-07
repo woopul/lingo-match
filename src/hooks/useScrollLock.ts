@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-export function useLockBodyScroll() {
+export const useLockBodyScroll = () => {
   useEffect(() => {
     const originalStyle = window.getComputedStyle(document.body).overflow;
     document.body.style.overflow = 'hidden';
@@ -8,4 +8,4 @@ export function useLockBodyScroll() {
       document.body.style.overflow = originalStyle;
     };
   }, []);
-}
+};

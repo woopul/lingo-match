@@ -2,6 +2,7 @@ import LinkButton from '@lingo-match/components/Atoms/LinkButton';
 import { useLabels } from '@lingo-match/context/LabelsProvider';
 import { LabelsContextType } from '@lingo-match/context/LabelsProvider/Context';
 import { formatPrice } from '@lingo-match/helpers/formatPrice';
+import { useHeaderHeight } from '@lingo-match/hooks/useHeaderHeight';
 import { pricingBlockMock } from '@lingo-match/mocks/pricingBlock';
 import { PricingBlockDTO, SubscriptionTypeDTO } from '@lingo-match/types/strapi';
 import { cn } from '@lingo-match/utlis/cn';
@@ -35,12 +36,7 @@ export const PricingBlock = ({
   subscriptionType,
 }: PriceBlockProps) => {
   const pricingBlockLabels = useLabels('pricingBlock') as PricingBlockStrapiLabels;
-  const [headerHeight, setHeaderHeight] = useState(0);
-
-  useEffect(() => {
-    const headerHeight = document.getElementById('header')?.offsetHeight || 0;
-    setHeaderHeight(headerHeight);
-  }, []);
+  const headerHeight = useHeaderHeight();
 
   const isForeignCurrency = () => currency !== mainCurrencyForThisMarket;
   // TODO - change it to use mixed currencies pair exchange rate

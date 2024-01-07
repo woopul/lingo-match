@@ -1,4 +1,4 @@
-import usePagination, { dotts } from '@lingo-match/hooks/usePagination';
+import { dotts, usePagination } from '@lingo-match/hooks/usePagination';
 import { cn } from '@lingo-match/utlis/cn';
 import Link from 'next/link';
 import React from 'react';

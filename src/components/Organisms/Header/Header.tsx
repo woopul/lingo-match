@@ -34,7 +34,7 @@ export const Header = ({ className, links, logo, logoDescription, logoTitle }: H
   };
   return (
     <>
-      <MenuMobile close={handleMenuButtonClick} isOpen={isMenuOpen} links={links} />
+      <MenuMobile className="" close={handleMenuButtonClick} isOpen={isMenuOpen} links={links} />
       <header
         className={cn(
           `sticky top-0 z-30 w-full bg-gradient-to-b from-primary-600 to-[#9447fe] text-white `,
