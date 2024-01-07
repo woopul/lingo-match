@@ -66,7 +66,7 @@ const RecommendedPlatforms = ({
                 key={item.slug}
               >
                 <Link
-                  className="my-[5%] flex aspect-[7/9] max-h-[300px] w-full flex-col items-center gap-2 rounded-md px-[8px] py-[16px] shadow-lg"
+                  className="my-[5%] flex aspect-[7/9] max-h-[300px] w-full flex-col items-center gap-2 rounded-md px-[8px] py-[16px] shadow-card"
                   href={getPlatformUrl(item.slug)}
                 >
                   <div className="relative h-[40px] w-full">
@@ -88,7 +88,7 @@ const RecommendedPlatforms = ({
                   </ul>
                   <div className="mt-auto self-end text-darkGrey">
                     <div className="text-preamble whitespace-nowrap text-right font-semibold text-black">
-                      {parseAndFormatPriceToCorrectCurrency(priceAsNumber)}
+                      {parseAndFormatPriceToCorrectCurrency(priceAsNumber)}{' '}
                       {mainCurrencyForThisMarket}
                       <span className="text-xsmall font-normal text-darkGrey">
                         {labels.priceSlashLabel}

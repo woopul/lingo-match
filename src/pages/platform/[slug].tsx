@@ -140,7 +140,7 @@ PlatformPageType) => {
         {...pricingBlock}
       />
       <RecommendedPlatforms
-        className="col-span-full pt-10"
+        className="col-span-full pt-5 md:pt-10"
         {...(recommendedPlatforms as RecommendedPlatformsBlockType)}
       />
     </main>

@@ -47,6 +47,9 @@ module.exports = {
           'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
         },
       },
+      boxShadow: {
+        card: '0px 4px 15px 0px #e2e2e2',
+      },
     },
     fontFamily: {
       default: ['var(--font-dm)', 'sans-serif'],
