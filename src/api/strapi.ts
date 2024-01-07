@@ -130,16 +130,7 @@ const getPlatformBySlug = async (slug: string) => {
     const platformResponse = await fetchAPI<PlatformDTO>(`/platforms/${slug}`, {
       ...getPlatformBySlugDataConfig,
     });
-    // const data = parseStrapiResponseToData<PlatformDTO>(platformResponse);
 
-    // let time = Date.now();
-    // const cleanedData = cleanStrapiData(strapiData(platformResponse));
-    // time = Date.now() - time;
-
-    // return {
-    //   data,
-    //   test: { cleanedData, time },
-    // };
     return parseStrapiResponseToData<PlatformDTO>(platformResponse);
   } catch (error) {
     console.error(`[Platform Service Error] Cannot get platform - ${error.message}`);
@@ -151,7 +142,6 @@ const getLabels = async ({ fields = [] }: GetLabelsOptions) => {
   try {
     const labelsResponse = await fetchAPI<TranslationsDTO>(`/translation`, {
       populate: fields,
-      // populate: 'deep,2',
     });
 
     const parsedData = parseStrapiResponseToData<TranslationsDTO>(labelsResponse);
@@ -214,6 +204,19 @@ const getFilteredPlatforms = async (filtersArray: string[]) => {
   }
 };
 
+const getPage = async (slug: string) => {
+  try {
+    const pageResponse = await fetchAPI<BlogPostDTO>(`/pages/${slug}`, {
+      populate: 'deep,4',
+    });
+
+    return parseStrapiResponseToData(pageResponse);
+  } catch (error) {
+    console.error(`[BlogPost Service Error] Cannot get blog post - ${error.message}`);
+    return null;
+  }
+};
+
 export {
   fetchAPI,
   getBlogPostBySlug,
@@ -224,4 +227,5 @@ export {
   getLayoutConfig,
   getPlatformBySlug,
   getPlatforms,
+  getPage,
 };
