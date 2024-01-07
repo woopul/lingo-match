@@ -76,8 +76,8 @@ export const PlatformCardMobile = ({
             <div className="ml-auto mt-0.5 flex">
               {!!priceBeforeDiscountAsNumber && (
                 <div className="mr-1 text-accentOne line-through">
-                  {mainCurrencyForThisMarket}{' '}
-                  {parseAndFormatPriceToCorrectCurrency(priceBeforeDiscountAsNumber)}
+                  {parseAndFormatPriceToCorrectCurrency(priceBeforeDiscountAsNumber)}{' '}
+                  {mainCurrencyForThisMarket}
                 </div>
               )}
               <div>

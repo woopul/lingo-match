@@ -101,7 +101,7 @@ export const PlatformCardDesktop = ({
                 <span className="text-middleGrey">{pricePerMonthLabel}</span>
               </div>
             </div>
-            <div className="text-middleGrey">{priceForShortLabel}</div>
+            <div className="-mt-0.5 text-middleGrey">{priceForShortLabel}</div>
           </div>
         </div>
         <div className={cn('col-span-3 flex gap-2 self-end overflow-hidden')}>
