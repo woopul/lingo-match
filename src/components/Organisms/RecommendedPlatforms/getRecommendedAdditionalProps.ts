@@ -7,7 +7,7 @@ import {
   StrapiBlockType,
   TranslationsDTO,
 } from '@lingo-match/types/strapi';
-import { strapiData, strapiDataArray } from '@lingo-match/utlis';
+import { strapiDataArray } from '@lingo-match/utlis';
 import { pick } from 'lodash-es';
 
 import { RecommendedPlatformsBlockType } from './RecommendedPlatforms';
@@ -26,6 +26,7 @@ export const getRecommendedPlatformProps = async (
     __component,
     currenciesExchangeRate,
     id,
+    // todo: think about adding separate directory for data mappers and unify them with strapi population(?)
     platforms: platforms?.map((platform) =>
       pick(platform, [
         'id',
