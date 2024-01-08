@@ -1,6 +1,7 @@
 import '../styles/styles.css';
 
 import ErrorBoundary from '@lingo-match/components/Organisms/ErrorBoundary';
+import { Toaster } from '@lingo-match/components/ui/sonner';
 import { DM_Sans } from '@next/font/google';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
@@ -23,6 +24,7 @@ const CustomApp = ({ Component, pageProps }: AppProps) => {
       `}</style>
       <ErrorBoundary>
         <Component {...pageProps} />
+        <Toaster />
       </ErrorBoundary>
       <Analytics />
       <SpeedInsights />

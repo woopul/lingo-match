@@ -66,7 +66,7 @@ const RecommendedPlatforms = ({
                 key={item.slug}
               >
                 <Link
-                  className="my-[5%] flex aspect-[7/9] max-h-[300px] w-full flex-col items-center gap-2 rounded-md px-[8px] py-[16px] shadow-card"
+                  className="my-[5%] flex aspect-[7/9] max-h-[300px] w-full flex-col items-center gap-2 rounded-md px-[8px] py-[16px] shadow-card-shadow"
                   href={getPlatformUrl(item.slug)}
                 >
                   <div className="relative h-[40px] w-full">

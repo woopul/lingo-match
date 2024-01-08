@@ -37,7 +37,7 @@ const DesignSystem = () => (
   <div className="text-white">
     <HeaderPlaceholder />
     <main className="px-6 pb-10">
-      <h2 className="text-6xl mb-8 mt-6 w-full text-center font-bold">Design System</h2>
+      <h2 className="mb-8 mt-6 w-full text-center text-6xl font-bold">Design System</h2>
       <div className="mt-2 grid w-full auto-rows-auto grid-cols-2 gap-2">
         <div>
           <h2 className="mb-2">fonts</h2>

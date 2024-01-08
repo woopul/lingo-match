@@ -7,7 +7,7 @@ const BlockQuote = (props: any) => {
     <blockquote className="relative">
       <svg
         aria-hidden="true"
-        className="h-16 w-16 absolute left-0 top-0 -translate-x-6 -translate-y-8 transform text-gray-100 dark:text-gray-700"
+        className="absolute left-0 top-0 h-16 w-16 -translate-x-6 -translate-y-8 transform text-gray-100 dark:text-gray-700"
         fill="none"
         height="16"
         viewBox="0 0 16 16"
@@ -21,7 +21,7 @@ const BlockQuote = (props: any) => {
       </svg>
 
       <div className="relative z-10">
-        <p className="sm:text-xl text-gray-800 dark:text-white">
+        <p className="text-gray-800 dark:text-white sm:text-xl">
           <em>TEST QUOTE</em>
         </p>
       </div>

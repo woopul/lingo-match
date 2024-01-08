@@ -1,6 +1,7 @@
 import { Footer, FooterColumnType } from '@lingo-match/components';
 import { SeoDTO } from '@lingo-match/types/strapi/shared';
 import { PropsWithChildren } from 'react';
+import { toast } from 'sonner';
 
 import Header, { HeaderDTO } from './Organisms/Header/Header';
 
