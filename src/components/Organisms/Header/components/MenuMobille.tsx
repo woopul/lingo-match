@@ -1,6 +1,7 @@
 import { Link } from '@lingo-match/components';
 import { LinkDTO } from '@lingo-match/components/Atoms/Link';
 import { getHomeRoute } from '@lingo-match/helpers/getHomeRoute';
+import { useHeaderHeight } from '@lingo-match/hooks';
 import { cn } from '@lingo-match/utlis/cn';
 import { clearAllBodyScrollLocks, disableBodyScroll } from 'body-scroll-lock';
 import { useEffect, useRef, useState } from 'react';
@@ -14,6 +15,7 @@ export type MenuMobileProps = {
   links?: LinkDTO[];
 };
 export const MenuMobile = ({ className, close, isOpen, links }: MenuMobileProps) => {
+  const headerHeight = useHeaderHeight();
   const [initialised, setInitialised] = useState(false);
   const mobileNav = useRef(null);
 
@@ -41,18 +43,16 @@ export const MenuMobile = ({ className, close, isOpen, links }: MenuMobileProps)
   return createPortal(
     <nav
       className={cn(
-        `fixed inset-0 z-20 bg-white p-2 capitalize text-black transition-transform duration-300 sm:hidden`,
+        `fixed inset-0 z-20 bg-white p-2 capitalize text-black transition-transform duration-500 sm:hidden`,
         !isOpen && '-translate-x-full',
         className,
       )}
       ref={mobileNav}
+      style={{ paddingTop: headerHeight }}
     >
-      <button className="absolute right-2 top-2" onClick={close}>
-        <IoClose size={35} />
-      </button>
-      <ul className="mt-5">
+      <ul className="pt-2">
         {links?.map(({ label, path, textColor }) => (
-          <li className="mx-auto px-3 py-2 " key={path}>
+          <li className="mx-auto pl-1 pt-2" key={path}>
             <Link
               href={getHomeRoute(path)}
               label={label || ''}

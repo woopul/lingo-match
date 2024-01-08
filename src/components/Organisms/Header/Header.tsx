@@ -9,6 +9,7 @@ import NextLink from 'next/link';
 import { useState } from 'react';
 import { FiMenu } from 'react-icons/fi';
 
+import { MenuButtonMobile } from './components/MenuButtonMobile';
 import { MenuMobile } from './components/MenuMobille';
 
 export type HeaderDTO = {
@@ -44,7 +45,7 @@ export const Header = ({ className, links, logo, logoDescription, logoTitle }: H
         id="header"
       >
         {/* Header mobile */}
-        <div className="relative z-[22] flex w-full items-center justify-between px-2 py-2 sm:hidden">
+        <div className="relative z-[22] flex w-full items-center justify-between overflow-hidden px-2 py-2 sm:hidden">
           <NextLink className="flex flex-col no-underline" href={HOME_PAGE_ROUTE}>
             {logo ? (
               <div className="relative h-[3.5rem] w-[15rem]">
@@ -57,9 +58,7 @@ export const Header = ({ className, links, logo, logoDescription, logoTitle }: H
               <h1 className="text-h2 font-bold ">{logoTitle}</h1>
             )}
           </NextLink>
-          <button onClick={handleMenuButtonClick}>
-            <FiMenu size={30} />
-          </button>
+          <MenuButtonMobile onChange={() => setIsMenuOpen(!isMenuOpen)} />
         </div>
         {/* Header desktop */}
         <div className="mx-auto hidden max-w-[144rem] items-center justify-between p-2 sm:flex lg:px-8">

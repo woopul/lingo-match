@@ -1,10 +1,10 @@
 @layer components {
   .mySwiper {
-  --swiper-navigation-size: 44px;
-  --swiper-navigation-top-offset: 50%;
-  --swiper-navigation-sides-offset: -10px;
-  --swiper-navigation-color: black;
-  --swiper-navigation-top-offset: 0%;
+    --swiper-navigation-size: 44px;
+    --swiper-navigation-top-offset: 50%;
+    --swiper-navigation-sides-offset: -10px;
+    --swiper-navigation-color: black;
+    --swiper-navigation-top-offset: 0%;
   }
 
   .mySwiper.swiper {
@@ -15,15 +15,15 @@
     display: none;
   }
 
-  .mySwiper .swiper-slide{
-    width: fit-content
+  .mySwiper .swiper-slide {
+    width: fit-content;
   }
 
   .mySwiper .swiper-button-next,
-  .mySwiper .swiper-button-prev{
+  .mySwiper .swiper-button-prev {
     height: 100%;
     padding: 0 5px;
-    top:0;
+    top: 0;
     margin: 0;
   }
 
@@ -32,4 +32,58 @@
     font-size: 20px;
   }
 
+  .MenuButtonMobile path {
+    fill: none;
+    stroke: #ffffff;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    --length: 30;
+    --offset: -38;
+    stroke-dasharray: var(--length) var(--total-length);
+    stroke-dashoffset: var(--offset);
+    transition: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
+
+  .MenuButtonMobile input {
+    heigh: 0;
+    width: 0;
+  }
+
+  .MenuButtonMobile svg {
+    display: inline;
+    margin-top: -20px;
+  }
+
+  .MenuButtonMobile {
+    width: 80px;
+    height: 40px;
+    margin-right: -20px;
+    transition: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
+  .MenuButtonMobile .line--1,
+  .MenuButtonMobile .line--3 {
+    --total-length: 111.22813415527344;
+    --offset: -50.22813415527344;
+  }
+  .MenuButtonMobile .line--2 {
+    --total-length: 99;
+  }
+  .MenuButtonMobile input:checked + svg path {
+    transform: translateX(30px);
+  }
+
+  .MenuButtonMobile:has(input:checked) {
+    margin-right: -30px;
+  }
+
+  .MenuButtonMobile input:checked + svg .line--1,
+  .MenuButtonMobile input:checked + svg .line--3 {
+    --offset: -14.5;
+    --length: 27.5;
+  }
+  .MenuButtonMobile input:checked + svg .line--2 {
+    --offset: -20;
+    --length: 0;
+  }
 }
