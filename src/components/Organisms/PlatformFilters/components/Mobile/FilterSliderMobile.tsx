@@ -11,6 +11,7 @@ import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { BsFilterLeft } from 'react-icons/bs';
 import { IoClose, IoCloseOutline } from 'react-icons/io5';
+import { toast } from 'sonner';
 
 export type FilterSliderMobileProps = {
   className?: string;
@@ -102,6 +103,7 @@ export const FilterSliderMobile = ({
     });
 
     const { data, success } = await response.json();
+    await new Promise((r) => setTimeout(r, 1000));
 
     if (!success) {
       // TODO - handle fetch error (notification?)
@@ -110,6 +112,12 @@ export const FilterSliderMobile = ({
     }
     setPlatformList(data);
     setIsLoading(false);
+    if (!data.data.length) {
+      toast.info('Nie znaleziono ofert');
+    } else {
+      toast.success(`Znaleziono ${data.data.length} ofert`, { duration: 2000 });
+      setTimeout(() => close(), 2000);
+    }
   };
 
   const debounceFetchFilters = debounce(handleFiltersSubmit, 1000);
@@ -121,7 +129,7 @@ export const FilterSliderMobile = ({
   return createPortal(
     <aside
       className={cn(
-        'fixed inset-0 z-30 -translate-x-full overflow-y-scroll bg-white transition-transform duration-300 ease-in-out desktop:hidden',
+        'fixed inset-0 z-30 -translate-x-full overflow-y-scroll bg-white transition-transform duration-500 ease-in-out desktop:hidden',
         isMobileFiltersOpen && 'translate-x-0',
       )}
       ref={filterContainer}

@@ -58,7 +58,6 @@ export const getStaticProps: GetStaticProps<BaseGetStaticPropsType> = async ({ p
       layoutConfig: layoutConfig || {},
       meta: platforms.data?.meta || {},
       platforms: parseStrapiResponseToData<PlatformDTO[]>(platforms.data) || [],
-      platforms2: platforms,
     },
     revalidate: DEFAULT_STATIC_PAGE_CACHE_TIME,
   };
