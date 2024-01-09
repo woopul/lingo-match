@@ -44,7 +44,7 @@ const AccordionItem = ({
 
       <div
         className={cn(
-          'duration-[500ms] grid transition-[grid-template-rows] ease-in-out',
+          'grid transition-[grid-template-rows] duration-500 ease-in-out',
           shouldBeExpandable ? 'grid-rows-[0fr]' : 'grid-rows-[1fr]',
           isExpanded && shouldBeExpandable && 'grid-rows-[1fr]',
         )}

@@ -17,6 +17,8 @@ export type FilterSliderMobileProps = {
   className?: string;
   close: () => void;
   filters: FilterAccordionDTO[] | [];
+  handleFiltersChange: (filter: SelectedFilterType) => void;
+  isLoading: boolean;
   isMobileFiltersOpen?: boolean;
   selectedFilters: Array<SelectedFilterType>;
   setPlatformList: (platforms: any) => void;
@@ -39,12 +41,13 @@ export const FilterSliderMobile = ({
   className,
   close,
   filters,
+  handleFiltersChange,
+  isLoading,
   isMobileFiltersOpen,
   selectedFilters,
   setPlatformList,
   setSelectedFilters,
 }: FilterSliderMobileProps) => {
-  const [isLoading, setIsLoading] = useState(false);
   const [initialised, setInitialised] = useState(false);
   const filterContainer = useRef(null);
 
@@ -65,21 +68,6 @@ export const FilterSliderMobile = ({
     return () => clearAllBodyScrollLocks();
   }, [isMobileFiltersOpen]);
 
-  useEffect(() => {
-    debounceFetchFilters();
-    return () => {
-      debounceFetchFilters.cancel();
-    };
-  }, [selectedFilters]);
-
-  const handleFiltersChange = (filter: SelectedFilterType) => {
-    if (!isEmpty(selectedFilters) && selectedFilters.some((item) => item.name === filter.name)) {
-      setSelectedFilters(selectedFilters.filter((item) => item.name !== filter.name));
-      return;
-    }
-    setSelectedFilters([...selectedFilters, filter]);
-  };
-
   const isCheckboxChecked = (type: string) => {
     return selectedFilters.some((item) => item.type === type);
   };
@@ -87,40 +75,6 @@ export const FilterSliderMobile = ({
   const getFiltersCountForGroup = (groupId: number) => {
     return selectedFilters.filter((item) => item.groupId === groupId).length;
   };
-
-  const handleFiltersSubmit = async () => {
-    if (!initialised) {
-      return;
-    }
-
-    setIsLoading(true);
-    const filtersArray = selectedFilters.map((item) => item.type);
-
-    // TODO - handle response change for filtered platforms
-    const response = await fetch('/api/platforms/filter', {
-      body: JSON.stringify(filtersArray),
-      method: 'POST',
-    });
-
-    const { data, success } = await response.json();
-    await new Promise((r) => setTimeout(r, 1000));
-
-    if (!success) {
-      // TODO - handle fetch error (notification?)
-      setIsLoading(false);
-      return;
-    }
-    setPlatformList(data);
-    setIsLoading(false);
-    if (!data.data.length) {
-      toast.info('Nie znaleziono ofert');
-    } else {
-      toast.success(`Znaleziono ${data.data.length} ofert`, { duration: 2000 });
-      setTimeout(() => close(), 2000);
-    }
-  };
-
-  const debounceFetchFilters = debounce(handleFiltersSubmit, 1000);
 
   if (!initialised) {
     return null;
@@ -131,6 +85,7 @@ export const FilterSliderMobile = ({
       className={cn(
         'fixed inset-0 z-30 -translate-x-full overflow-y-scroll bg-white transition-transform duration-500 ease-in-out desktop:hidden',
         isMobileFiltersOpen && 'translate-x-0',
+        className,
       )}
       ref={filterContainer}
     >

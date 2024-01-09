@@ -38,6 +38,10 @@ export const PricingBlock = ({
   const pricingBlockLabels = useLabels('pricingBlock') as PricingBlockStrapiLabels;
   const headerHeight = useHeaderHeight();
 
+  if (!subscriptionType) {
+    return null;
+  }
+
   const isForeignCurrency = () => currency !== mainCurrencyForThisMarket;
   // TODO - change it to use mixed currencies pair exchange rate
   const getCalculatedValueInPLN = (price: number) => {
@@ -74,7 +78,7 @@ export const PricingBlock = ({
               return (
                 <div className="mx-2 border-b-[1px] py-1.5" key={i}>
                   <h3 className="text-paragraph pb-2 text-center">
-                    {item.subscription.data.attributes.title}
+                    {item.subscription.data?.attributes.title}
                   </h3>
                   <div className="text-small mt-auto flex flex-col gap-0.5 text-right">
                     {isForeignCurrency() && pricingBlockLabels.foreignCurrencyDescriptionLabel && (
