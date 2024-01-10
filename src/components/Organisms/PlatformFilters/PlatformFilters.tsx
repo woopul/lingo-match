@@ -1,12 +1,13 @@
 import { FilterAccordionDTO } from '@lingo-match/types/strapi/blocks';
 import { strapiData } from '@lingo-match/utlis';
 import { debounce, isEmpty } from 'lodash-es';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { toast } from 'sonner';
 
 import { FiltersAsideDesktop } from './components/Desktop/FiltersAsideDesktop';
 import { FiltersBarMobile } from './components/Mobile/FiltersBarMobile';
 import { FilterSliderMobile } from './components/Mobile/FilterSliderMobile';
+import { usePlatformFetch } from './hooks/usePlatformFetch';
 
 export type MainPlatformFiltersProps = {
   filters: FilterAccordionDTO[] | [];
@@ -43,6 +44,7 @@ export const PlatformFilters = ({
   const [initialised, setInitialised] = useState(false);
   const timeoutId = useRef<any>(null);
   const toastId = useRef<any>(null);
+  usePlatformFetch(selectedFilters, pageSize);
 
   useEffect(() => {
     setInitialised(true);
@@ -68,8 +70,6 @@ export const PlatformFilters = ({
   const handleCloseMobileFilters = () => {
     setIsMobileFilterModalOpen(false);
   };
-
-  const debounceClose = debounce(handleCloseMobileFilters, 2000);
 
   const handleFiltersSubmit = async () => {
     if (!initialised) {

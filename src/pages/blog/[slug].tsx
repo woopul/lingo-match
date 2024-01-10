@@ -22,7 +22,6 @@ export const getStaticProps: GetStaticProps<BaseGetStaticPropsType> = async ({ p
     props: {
       blocks: blocks || [],
       layoutConfig: layoutConfig || {},
-      post: post || 'Not found',
     },
     revalidate: DEFAULT_STATIC_PAGE_CACHE_TIME,
   };
@@ -30,7 +29,6 @@ export const getStaticProps: GetStaticProps<BaseGetStaticPropsType> = async ({ p
 
 export type BlogPostPageProps = {
   children: ReactNode;
-  post: BlogPostDTO;
 };
 
 const BlogPostPage = ({ children }: BlogPostPageProps) => {
