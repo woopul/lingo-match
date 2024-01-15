@@ -29,26 +29,14 @@ export type MainStrapiMetaType = {
 export type BaseDT<DT> = DT & BaseStrapiAttributesType;
 export type MainDT<DT> = DT & BaseStrapiAttributesType & MainStrapiAttributesType;
 
-export type CustomResponseDataType<TExpected, TFallback = null> = Promise<
-  | {
-      data: TExpected;
-      success: true;
-    }
-  | {
-      data: TFallback;
-      success: false;
-    }
->;
-
 export type BaseDataItem<DT> = {
   attributes: MainDT<DT> | BaseDT<DT>;
   id: number;
 };
 
-export type BaseResponseDataWrapper<DT> = {
-  data: DT extends any[] ? Array<BaseDataItem<DT>> : BaseDataItem<DT>;
-  meta?: MainStrapiMetaType;
-};
+export type BaseResponseDataWrapper<DT> = DT extends any[]
+  ? BaseArrayDataWrapper<DT>
+  : BaseDataWrapper<DT>;
 
 export type BaseArrayDataWrapper<DT> = {
   data: Array<BaseDataItem<DT>> | null;
@@ -64,8 +52,24 @@ export type DataWrapper<DT> = {
   data: DT;
 };
 
+// Type guards
+export const isMainStrapiMetaType = (obj: any): obj is MainStrapiMetaType => {
+  return 'pagination' in obj;
+};
+
 export type BaseGetStaticPropsType = {
   blocks?: StrapiBlockType[];
   layoutConfig: LayoutConfigDTO | {};
   sitewideLabels?: LabelsContextType;
 } & Record<any, any>;
+
+export type CustomResponseDataType<TExpected, TFallback = null> = Promise<
+  | {
+      data: TExpected;
+      success: true;
+    }
+  | {
+      data: TFallback;
+      success: false;
+    }
+>;

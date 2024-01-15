@@ -65,7 +65,6 @@ export const getStaticProps: GetStaticProps<BaseGetStaticPropsType> = async (con
       layoutConfig: layoutConfig || {},
       platform: { ...platform, recommendedPlatforms: recommendedPlatforms?.[0] || {} },
       sitewideLabels,
-      // platformData,
     },
     revalidate: DEFAULT_STATIC_PAGE_CACHE_TIME,
   };

@@ -1,5 +1,7 @@
 /* eslint-disable sort-keys */
 import { getFilteredPlatforms, getPlatforms } from '@lingo-match/api/strapi';
+import { isMainStrapiMetaType, MainStrapiMetaType } from '@lingo-match/types/strapi';
+import { extractPaginationData, strapiData } from '@lingo-match/utlis';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 const platformFiltersHandler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -23,13 +25,25 @@ const platformFiltersHandler = async (req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    const response = await getPlatforms({
+    const { data, success } = await getPlatforms({
       filters: payload,
       pagination: { pageSize: pageSize ? Number(pageSize) : undefined },
     });
-    return res.status(200).json(response);
+
+    const paginationData = extractPaginationData(data);
+
+    const parsedResponse = {
+      data: {
+        platforms: strapiData(data),
+        total: (paginationData as MainStrapiMetaType['pagination'])?.total,
+        pageCount: (paginationData as MainStrapiMetaType['pagination'])?.pageCount,
+      },
+      success,
+    };
+
+    return res.status(200).json(parsedResponse);
   } catch (error) {
-    return res.status(500).json({ success: false, message: error.message });
+    return res.status(500).json({ success: false, data: null });
   }
 };
 export default platformFiltersHandler;

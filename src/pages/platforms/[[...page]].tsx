@@ -15,7 +15,7 @@ import {
   MainStrapiMetaType,
 } from '@lingo-match/types/strapi/baseApiResponse';
 import { HomePageDTO, PlatformDTO } from '@lingo-match/types/strapi/blocks';
-import { parseStrapiResponseToData } from '@lingo-match/utlis';
+import { parseStrapiResponseToData, strapiDataArray } from '@lingo-match/utlis';
 import { GetStaticProps } from 'next';
 import { useEffect, useState } from 'react';
 
@@ -57,7 +57,7 @@ export const getStaticProps: GetStaticProps<BaseGetStaticPropsType> = async ({ p
       homePage: homePage || {},
       layoutConfig: layoutConfig || {},
       meta: platforms.data?.meta || {},
-      platforms: parseStrapiResponseToData<PlatformDTO[]>(platforms.data) || [],
+      platforms: strapiDataArray<PlatformDTO[]>(platforms.data),
     },
     revalidate: DEFAULT_STATIC_PAGE_CACHE_TIME,
   };

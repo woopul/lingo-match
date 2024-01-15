@@ -71,7 +71,7 @@ export const PricingBlock = ({
           <div
             className={cn(
               'min-h-[80px]',
-              '[&>*]:border-b-[1px] [&>*]:border-lightGrey [&>*]:last:border-b-0',
+              '[&>*:last-of-type]:border-b-0 [&>*]:border-b-[1px] [&>*]:border-lightGrey',
             )}
           >
             {subscriptionType?.map((item, i) => {

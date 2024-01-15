@@ -70,7 +70,7 @@ const RecommendedPlatforms = ({
                   href={getPlatformUrl(item.slug)}
                 >
                   <div className="relative h-[40px] w-full">
-                    <Image alt="image" src={item.logo?.data?.attributes.url} />
+                    <Image alt="image" src={item.logo?.data?.attributes.url || ''} />
                   </div>
                   <h4>{item.title}</h4>
                   <ul className="text-small flex min-h-[60px] w-full flex-col items-center justify-center rounded-lg bg-lighterGrey py-1 md:min-h-[80px]">

@@ -2,7 +2,10 @@ import { LayoutConfigDTO } from '@lingo-match/components/Layout';
 import { DEFAULT_PLATFORMS_PAGE_LIMIT } from '@lingo-match/constants/requests';
 import { cleanStrapiData } from '@lingo-match/helpers/cleanStrapiData';
 import { redis } from '@lingo-match/lib/redis';
-import { BaseResponseDataWrapper } from '@lingo-match/types/strapi/baseApiResponse';
+import {
+  BaseArrayDataWrapper,
+  BaseResponseDataWrapper,
+} from '@lingo-match/types/strapi/baseApiResponse';
 import {
   BlogPostDTO,
   HomePageDTO,
@@ -121,7 +124,7 @@ const getPlatforms = async (options?: GetPlatformsPayloadOptions) => {
     console.error(
       `[Platforms Service Error] Filter platforms Cannot get platforms - ${error.message}`,
     );
-    return { data: null, success: false };
+    throw new Error(error);
   }
 };
 

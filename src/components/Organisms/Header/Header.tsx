@@ -50,8 +50,8 @@ export const Header = ({ className, links, logo, logoDescription, logoTitle }: H
             {logo ? (
               <div className="relative h-[3.5rem] w-[15rem]">
                 <Image
-                  alt={logo.data.attributes.alternativeText || ''}
-                  src={logo.data.attributes.url}
+                  alt={logo.data?.attributes.alternativeText || ''}
+                  src={logo.data?.attributes.url || ''}
                 />
               </div>
             ) : (
@@ -66,8 +66,8 @@ export const Header = ({ className, links, logo, logoDescription, logoTitle }: H
             {logo ? (
               <div className="relative h-[3.5rem] w-[15rem]">
                 <Image
-                  alt={logo.data.attributes.alternativeText || ''}
-                  src={logo.data.attributes.url}
+                  alt={logo.data?.attributes.alternativeText || ''}
+                  src={logo.data?.attributes.url || ''}
                 />
               </div>
             ) : (

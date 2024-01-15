@@ -3,6 +3,7 @@ import {
   BaseDataItem,
   BaseDataWrapper,
   BaseResponseDataWrapper,
+  MainStrapiMetaType,
 } from '@lingo-match/types/strapi/baseApiResponse';
 
 export const parseStrapiResponseToData = <T>(
@@ -35,4 +36,11 @@ export const strapiDataArray = <T>(item: BaseArrayDataWrapper<T>): T[] => {
     return [];
   }
   return item.data.map((dataItem) => dataItem.attributes);
+};
+
+export const extractPaginationData = <DT>(
+  item: BaseDataWrapper<DT> | BaseArrayDataWrapper<DT>,
+): MainStrapiMetaType['pagination'] | {} => {
+  const meta = item.meta as MainStrapiMetaType | null;
+  return meta?.pagination || {};
 };
