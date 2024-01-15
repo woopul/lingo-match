@@ -1,6 +1,6 @@
 /* eslint-disable sort-keys */
-import { getFilteredPlatforms, getPlatforms } from '@lingo-match/api/strapi';
-import { isMainStrapiMetaType, MainStrapiMetaType } from '@lingo-match/types/strapi';
+import { getPlatforms } from '@lingo-match/api/strapi';
+import { MainStrapiMetaType } from '@lingo-match/types/strapi';
 import { extractPaginationData, strapiData } from '@lingo-match/utlis';
 import type { NextApiRequest, NextApiResponse } from 'next';
 

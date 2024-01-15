@@ -1,7 +1,6 @@
 import { FilterAccordionDTO } from '@lingo-match/types/strapi/blocks';
-import { strapiData } from '@lingo-match/utlis';
-import { debounce, isEmpty } from 'lodash-es';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { isEmpty } from 'lodash-es';
+import { useEffect, useRef, useState } from 'react';
 
 import { FiltersAsideDesktop } from './components/Desktop/FiltersAsideDesktop';
 import { FiltersBarMobile } from './components/Mobile/FiltersBarMobile';

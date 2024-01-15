@@ -7,7 +7,6 @@ import { StrapiMediaType } from '@lingo-match/types/strapi/shared';
 import { cn } from '@lingo-match/utlis/cn';
 import NextLink from 'next/link';
 import { useState } from 'react';
-import { FiMenu } from 'react-icons/fi';
 
 import { MenuButtonMobile } from './components/MenuButtonMobile';
 import { MenuMobile } from './components/MenuMobille';

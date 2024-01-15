@@ -1,11 +1,7 @@
 import { LayoutConfigDTO } from '@lingo-match/components/Layout';
 import { DEFAULT_PLATFORMS_PAGE_LIMIT } from '@lingo-match/constants/requests';
 import { cleanStrapiData } from '@lingo-match/helpers/cleanStrapiData';
-import { redis } from '@lingo-match/lib/redis';
-import {
-  BaseArrayDataWrapper,
-  BaseResponseDataWrapper,
-} from '@lingo-match/types/strapi/baseApiResponse';
+import { BaseResponseDataWrapper } from '@lingo-match/types/strapi/baseApiResponse';
 import {
   BlogPostDTO,
   HomePageDTO,

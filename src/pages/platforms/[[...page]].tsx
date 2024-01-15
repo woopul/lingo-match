@@ -15,7 +15,7 @@ import {
   MainStrapiMetaType,
 } from '@lingo-match/types/strapi/baseApiResponse';
 import { HomePageDTO, PlatformDTO } from '@lingo-match/types/strapi/blocks';
-import { parseStrapiResponseToData, strapiDataArray } from '@lingo-match/utlis';
+import { strapiDataArray } from '@lingo-match/utlis';
 import { GetStaticProps } from 'next';
 import { useEffect, useState } from 'react';
 
