@@ -10,7 +10,12 @@
     "prettier"
   ],
   "rules": {
-    "prettier/prettier": "error",
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ],
     "no-restricted-exports": "off",
     "no-underscore-dangle": "off",
     "react/jsx-props-no-spreading": "off",
