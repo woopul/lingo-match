@@ -1,6 +1,5 @@
 import { LinkIcon } from '@lingo-match/components/Atoms';
 import { PlatformListDTO } from '@lingo-match/types/strapi';
-import React from 'react';
 
 type AsideStickyLinksBlockProps = {
   platformList?: PlatformListDTO;
