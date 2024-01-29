@@ -3,12 +3,14 @@ import { getLabels, getLayoutConfig, getPlatformBySlug } from '@lingo-match/api/
 import { Image, RecommendedPlatforms, Spacer } from '@lingo-match/components';
 import Label from '@lingo-match/components/Atoms/Label';
 import BlockRenderer from '@lingo-match/components/BlockRenderer';
+import AsideStickyLinksBlock from '@lingo-match/components/Organisms/AsideStickyLinksBlock/AsideStickyLinksBlock';
 import { PricingBlock } from '@lingo-match/components/Organisms/PricingBlock/PricingBlock';
 import { RecommendedPlatformsBlockType } from '@lingo-match/components/Organisms/RecommendedPlatforms/RecommendedPlatforms';
 import { getPropsConfig } from '@lingo-match/config/getProps.config';
 import { DEFAULT_STATIC_PAGE_CACHE_TIME } from '@lingo-match/constants/cache';
 import { placeholderSrc } from '@lingo-match/constants/urls';
 import withLayout from '@lingo-match/containers/withLayout';
+import { useHeaderHeight } from '@lingo-match/hooks';
 import {
   LabelDTO,
   PlatformDTO,
@@ -29,7 +31,9 @@ export const getStaticProps: GetStaticProps<BaseGetStaticPropsType> = async (con
   const [layoutConfig, platform, sitewideLabels] = await Promise.all([
     getLayoutConfig(),
     getPlatformBySlug(context.params?.slug as string) as Promise<PlatformDTO>,
-    getLabels({ fields: ['recommendedCard', 'pricingBlock'] }) as unknown as TranslationsDTO,
+    getLabels({
+      fields: ['recommendedCard', 'pricingBlock', 'asideStickyLinksBlock'],
+    }) as unknown as TranslationsDTO,
   ]);
 
   if (!platform) {
@@ -85,11 +89,13 @@ const PlatformPage = ({
     labels,
     logo,
     mainCurrencyForThisMarket,
+    platformList,
     pricingBlock,
     recommendedPlatforms,
     title,
   },
 }: PlatformPageType) => {
+  const headerHeight = useHeaderHeight();
   const parsedLabelsToDisplay = strapiData<LabelDTO>(labels) as LabelDTO[];
   return (
     <main className={cn('grid-cols-[10fr_minmax(250px,_2fr)] gap-2 md:grid')}>
@@ -126,12 +132,24 @@ const PlatformPage = ({
         <Spacer className="py-3" dividerPosition="center" withDivider />
         <BlockRenderer blocks={contentBlocks} />
       </div>
-      <PricingBlock
-        currenciesExchangeRate={currenciesExchangeRate}
-        currency={currency}
-        mainCurrencyForThisMarket={mainCurrencyForThisMarket}
-        {...pricingBlock}
-      />
+      <div className="relative col-span-full -ml-2 flex h-full w-screen flex-col md:col-span-1 md:-ml-0 md:w-full">
+        <div className="h-full">
+          <div
+            className="sticky h-fit overflow-hidden rounded-md shadow-lg"
+            style={{ top: headerHeight + 12 }}
+          >
+            <PricingBlock
+              currenciesExchangeRate={currenciesExchangeRate}
+              currency={currency}
+              mainCurrencyForThisMarket={mainCurrencyForThisMarket}
+              {...pricingBlock}
+            />
+          </div>
+        </div>
+        <div className="mt-auto">
+          <AsideStickyLinksBlock platformList={platformList} />
+        </div>
+      </div>
       <RecommendedPlatforms
         className="col-span-full pt-5 md:pt-10"
         {...(recommendedPlatforms as RecommendedPlatformsBlockType)}

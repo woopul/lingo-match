@@ -42,5 +42,17 @@ export const getPlatformBySlugDataConfig = {
     pricingBlock: {
       populate: ['subscriptionType', 'subscriptionType.subscription'],
     },
+
+    platformList: {
+      populate: {
+        links: {
+          populate: {
+            icon: {
+              fields: ['url'],
+            },
+          },
+        },
+      },
+    },
   },
 };
