@@ -1,4 +1,5 @@
 import { Image } from '@lingo-match/components';
+import { formatDate } from '@lingo-match/helpers/formatDate';
 import { BlogPostDTO } from '@lingo-match/types/strapi/blocks';
 import { getBlogUrl } from '@lingo-match/utlis';
 import { cn } from '@lingo-match/utlis/cn';
@@ -35,7 +36,7 @@ export const PostCard = ({
       )}
       href={getBlogUrl(slug)}
     >
-      <div className="relative h-[23.5rem] w-full bg-primary-200">
+      <div className="relative h-[23.5rem] w-full shrink-0 bg-primary-200">
         {splash?.data && (
           <Image
             alt=""
@@ -44,7 +45,7 @@ export const PostCard = ({
           />
         )}
       </div>
-      <div className="mt-1 flex flex-col px-1 [&>*]:mb-1">
+      <div className="mt-1 flex h-full flex-col px-1 [&>*]:mb-1">
         <div className="flex w-full text-primary-500">
           {blogCategories?.data?.map((categoryItem) => (
             <div
@@ -56,9 +57,9 @@ export const PostCard = ({
           ))}
         </div>
         <h3>{title}</h3>
-        <p className="">{shortDescription}</p>
+        <p>{shortDescription}</p>
         <p className={cn('text-darkGray mt-auto')}>
-          BY {author} / {publishedAt}
+          By <span className="font-semibold">{author}</span> | {formatDate(publishedAt)}
         </p>
       </div>
     </NextLink>
