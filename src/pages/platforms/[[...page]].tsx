@@ -88,8 +88,6 @@ const HomePage = ({
     setPlatformList(platforms);
   }, [platforms]);
 
-  console.log('platformList', platformList);
-
   return (
     <>
       <GradientBox />

@@ -1,5 +1,6 @@
 import {
   BaseArrayDataWrapper,
+  BaseDataItem,
   BaseDataWrapper,
   BaseResponseDataWrapper,
   StrapiAdditionalAttributesType,
@@ -107,6 +108,7 @@ export type PlatformDTO = StrapiAdditionalAttributesType & {
   labels: BaseArrayDataWrapper<LabelDTO>;
   logo: BaseResponseDataWrapper<StrapiMediaType>;
   mainCurrencyForThisMarket: SUPPORTED_CURRENCIES;
+  platformList?: PlatformListDTO;
   priceAsNumber: number;
   priceBeforeDiscountAsNumber?: number;
   pricingBlock?: PricingBlockDTO;
@@ -204,4 +206,15 @@ export type PricingBlockDTO = {
   freeRegistration?: boolean;
   linkCTA?: string;
   subscriptionType?: SubscriptionTypeDTO[];
+};
+
+export type PlatformListDTO = {
+  links?: {
+    href?: string;
+    icon?: {
+      data: BaseDataItem<StrapiMediaType> | null;
+    };
+    label?: string;
+  }[];
+  title: string;
 };
