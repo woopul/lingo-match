@@ -63,7 +63,7 @@ export const Header = ({ className, links, logo, logoDescription, logoTitle }: H
         <div className="mx-auto hidden max-w-[144rem] items-center justify-between p-2 sm:flex lg:px-8">
           <NextLink className="flex flex-col no-underline" href={HOME_PAGE_ROUTE}>
             {logo ? (
-              <div className="relative h-[3.5rem] w-[15rem]">
+              <div className="relative h-[3.5rem] w-[17rem]">
                 <Image
                   alt={logo.data?.attributes.alternativeText || ''}
                   src={logo.data?.attributes.url || ''}
@@ -84,9 +84,6 @@ export const Header = ({ className, links, logo, logoDescription, logoTitle }: H
                 variant="styled"
               />
             ))}
-            <NextLink className="styled-link" href="/design-system">
-              <div className="text-preamble">design system</div>
-            </NextLink>
           </nav>
         </div>
       </header>

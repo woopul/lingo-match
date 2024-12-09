@@ -33,7 +33,7 @@ const Pagination = ({
         ) : (
           <Link
             className={cn(
-              'justify-centerrounded-md flex h-4 w-4 items-center justify-center border text-sm font-semibold no-underline opacity-30 hover:opacity-100',
+              'justify-centerrounded-md  text-md flex h-4 w-4 items-center justify-center border font-semibold no-underline opacity-30 hover:opacity-100 ',
               pageNumber === currentPage && 'border-primary-500 text-primary-500 opacity-100',
             )}
             href={renderPageLink(pageNumber as number)}

@@ -4,6 +4,7 @@ import withLayout from '@lingo-match/containers/withLayout';
 import { BaseGetStaticPropsType } from '@lingo-match/types/strapi/baseApiResponse';
 import { BlogPostDTO } from '@lingo-match/types/strapi/blocks';
 import { GetStaticProps } from 'next';
+import Image from 'next/image';
 import { ReactNode } from 'react';
 
 export const getStaticPaths = async () => ({
@@ -32,7 +33,23 @@ export type BlogPostPageProps = {
 };
 
 const BlogPostPage = ({ children }: BlogPostPageProps) => {
-  return <div className="mx-auto max-w-[870px] pt-2 md:pt-3 lg:pt-4">{children}</div>;
+  return (
+    <>
+      <div className="absolute right-0 top-20 h-[800px] w-full">
+        <picture>
+          <Image
+            alt="Blog Background Shadow"
+            layout="fill"
+            objectFit="cover"
+            quality={100}
+            src="/bg-blog-shadow.avif"
+          />
+        </picture>
+      </div>
+
+      <div className="relative mx-auto max-w-[870px] pt-2 md:pt-3 lg:pt-4">{children}</div>
+    </>
+  );
 };
 
 export default withLayout(BlogPostPage);

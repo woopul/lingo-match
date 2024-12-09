@@ -27,7 +27,7 @@ const AccordionItem = ({
     <div className={cn('w-full p-2', className)}>
       <button
         className={cn(
-          'text-paragraph flex w-full  items-center',
+          'text-paragraph-sm flex w-full  items-center',
           bold && 'font-bold',
           !shouldBeExpandable && 'cursor-default',
         )}

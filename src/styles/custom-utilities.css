@@ -51,6 +51,12 @@
     @apply -tracking-1 desktop:tracking-0;
   }
 
+  .text-paragraph-sm {
+    @apply text-12 desktop:text-14;
+    @apply leading-18 desktop:leading-28;
+    @apply -tracking-1 desktop:tracking-0;
+  }
+
   .text-small {
     @apply text-10 desktop:text-12;
     @apply leading-14 desktop:leading-16;
