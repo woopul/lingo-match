@@ -7,7 +7,6 @@ import { useHeaderHeight } from '@lingo-match/hooks';
 import { FilterAccordionDTO } from '@lingo-match/types/strapi/blocks';
 import { cn } from '@lingo-match/utlis/cn';
 import { isEmpty } from 'lodash-es';
-import { use, useEffect, useState } from 'react';
 import { BsFilterLeft } from 'react-icons/bs';
 import { IoCloseOutline } from 'react-icons/io5';
 
@@ -79,14 +78,16 @@ export const FiltersAsideDesktop = ({
                     key={filter.name}
                   >
                     <Button
-                      className="peer p-[0.5rem] px-[0.5rem]"
+                      className="p-[0.5rem] px-[0.5rem] hover:line-through"
                       onClick={() => handleFiltersChange(filter)}
                       type={'button'}
                       variant="text"
                     >
+                      <span className=" max-w-[250px] overflow-hidden text-ellipsis whitespace-nowrap pl-1 leading-14">
+                        {filter.name}
+                      </span>
                       <IoCloseOutline />
                     </Button>
-                    <span className="pl-1 leading-14 peer-hover:line-through">{filter.name}</span>
                   </div>
                 ))}
               </div>
