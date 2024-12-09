@@ -10,9 +10,9 @@ type RichTextProps = {
 
 const RichText = ({ className, data, style }: RichTextProps) => {
   return (
-    <div className={cn('rich-text', className)} style={style}>
+    <section className={cn('rich-text', className)} style={style}>
       <Markdown remarkPlugins={[remarkGfm]}>{data}</Markdown>
-    </div>
+    </section>
   );
 };
 

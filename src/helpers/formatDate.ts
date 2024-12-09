@@ -22,15 +22,12 @@ const defaultOptions: Intl.DateTimeFormatOptions = {
 
 const defaultLanguage = 'pl-PL';
 
-export const formatDate = (
-  dateString?: string,
-  options: Intl.DateTimeFormatOptions = defaultOptions,
-) => {
+export const formatDate = (dateString?: string, options: Intl.DateTimeFormatOptions = {}) => {
   if (!dateString) {
     return '';
   }
 
   const date = new Date(dateString);
 
-  return date.toLocaleString(defaultLanguage, options);
+  return date.toLocaleString(defaultLanguage, { ...defaultOptions, ...options });
 };

@@ -1,3 +1,4 @@
+import { SectionWithTitleProps } from '@lingo-match/components/Organisms/SectionWithTitle';
 import {
   BaseArrayDataWrapper,
   BaseDataWrapper,
@@ -14,8 +15,8 @@ export type BlockType = {
   id: string;
 };
 
-export type StrapiBlockType<T = Record<string, any>> = {
-  __component: string;
+export type StrapiBlockType<T = Record<string, any>, C = string> = {
+  __component: C;
   id?: string;
 } & T;
 
@@ -205,3 +206,8 @@ export type PricingBlockDTO = {
   linkCTA?: string;
   subscriptionType?: SubscriptionTypeDTO[];
 };
+
+export type SectionWithTitleDTO = StrapiBlockType<
+  SectionWithTitleProps,
+  'blocks.section-with-title'
+>;

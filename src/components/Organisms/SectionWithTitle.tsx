@@ -2,8 +2,8 @@ import RichText from '@lingo-match/components/Atoms/RichText';
 import { DescriptionDTO, TitleDTO } from '@lingo-match/types/strapi/blocks';
 
 export type SectionWithTitleProps = {
-  description: DescriptionDTO[];
-  title: TitleDTO;
+  description?: DescriptionDTO[];
+  title?: TitleDTO;
 };
 
 export const SectionWithTitle = ({ description, title }: SectionWithTitleProps) => {

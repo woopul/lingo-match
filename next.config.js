@@ -8,7 +8,7 @@ const nextConfig = {
   images: {
     deviceSizes: [320, 768, 1024, 1280],
     loader: 'default',
-    domains: ['localhost', 'res.cloudinary.com'],
+    domains: ['localhost', 'res.cloudinary.com', 'avatar.iran.liara.run'],
   },
   async redirects() {
     return [
