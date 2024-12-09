@@ -92,7 +92,7 @@ const PlatformPage = ({
 }: PlatformPageType) => {
   const parsedLabelsToDisplay = strapiData<LabelDTO>(labels) as LabelDTO[];
   return (
-    <main className={cn('grid-cols-[10fr_minmax(250px,_2fr)] gap-2 md:grid')}>
+    <main className={cn('grid-cols-[10fr_minmax(300px,_2fr)] gap-2 md:grid')}>
       <div className="col-span-full pt-5 md:pt-[96px]" data-breadcrumbs-placeholder />
       <div className="col-span-full md:col-span-1 md:p-2 md:shadow-lg">
         <div className="grid grid-cols-[minmax(100px,140px)_1fr] gap-2">
@@ -105,7 +105,7 @@ const PlatformPage = ({
           </div>
 
           <h1 className="text-h2 self-center">{title}</h1>
-          <p className="col-span-2 md:col-span-1 md:col-start-2">{detailedDescription}</p>
+          <p className="col-span-2 m-0 md:col-span-1 md:col-start-2">{detailedDescription}</p>
         </div>
         <Spacer className="py-2 md:py-3" dividerPosition="center" withDivider />
         <div

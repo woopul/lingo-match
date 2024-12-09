@@ -15,7 +15,7 @@ const BlockRenderer = ({ blocks }: BlockRendererProps) => {
   }
 
   return (
-    <div className="w-full [&>*+*]:mt-3">
+    <div className="w-full">
       {blocks.map(({ __component, id, ...rest }) => {
         const Component = getComponent(__component, blockConfig);
 

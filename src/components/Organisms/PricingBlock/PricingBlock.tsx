@@ -62,7 +62,7 @@ export const PricingBlock = ({
         >
           <div className="flex h-[54px] w-full items-center justify-center bg-orange">
             <IoPricetagsOutline />
-            <span className="text-paragraph ml-1">{pricingBlockLabels.priceLabel}</span>
+            <span className="text-h5 ml-1">{pricingBlockLabels.priceLabel}</span>
           </div>
           <div
             className={cn(
