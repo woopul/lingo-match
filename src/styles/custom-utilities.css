@@ -46,7 +46,7 @@
   }
 
   .text-paragraph {
-    @apply text-14 desktop:text-16;
+    @apply text-14 desktop:text-14;
     @apply leading-20 desktop:leading-28;
     @apply -tracking-1 desktop:tracking-0;
   }
@@ -204,9 +204,9 @@
   }
 
   .rich-text ul,
-  ol,
-  li,
-  p {
+  .rich-text ol,
+  .rich-text li,
+  .rich-text p {
     @apply text-paragraph-read;
     margin: 2rem 0;
   }

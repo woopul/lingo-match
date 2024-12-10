@@ -10,10 +10,10 @@ export const getBlogPostTimeToRead = (
   const totalWords = blocks.reduce((acc, block) => {
     if (block.__component === 'blocks.section-with-title') {
       const { description, title } = block as SectionWithTitleProps;
-      const titleWords = title?.title.split(' ').length ?? 0;
+      const titleWords = title?.title?.split(' ').length ?? 0;
       const descriptionWords =
         description?.reduce((descAcc, desc) => {
-          return descAcc + desc.descriptionText.split(' ').length;
+          return descAcc + desc.descriptionText?.split(' ').length;
         }, 0) ?? 0;
       return acc + titleWords + descriptionWords;
     }

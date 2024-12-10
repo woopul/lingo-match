@@ -48,10 +48,10 @@ export const FiltersAsideDesktop = ({
   };
 
   return (
-    <aside className="col-span-3 hidden min-h-[40rem] flex-col justify-start desktop:flex">
+    <aside className="col-span-3 hidden min-h-[40rem] min-w-[230px] flex-col justify-start desktop:flex">
       <div className="sticky top-10 rounded-md bg-white px-2 drop-shadow-md">
         <div
-          className="sticky  z-20 -mx-2 mb-2 flex flex-col gap-2 rounded-md border-b border-lighterGrey bg-white p-2"
+          className="sticky z-20 -mx-2 mb-2 flex flex-col gap-2 rounded-md border-b border-lighterGrey bg-white p-2"
           style={{ top: headerHeight }}
         >
           <div className="flex justify-between">
@@ -83,7 +83,7 @@ export const FiltersAsideDesktop = ({
                       type={'button'}
                       variant="text"
                     >
-                      <span className=" max-w-[250px] overflow-hidden text-ellipsis whitespace-nowrap pl-1 leading-14">
+                      <span className=" max-w-[180px] overflow-hidden text-ellipsis whitespace-nowrap pl-1 leading-14">
                         {filter.name}
                       </span>
                       <IoCloseOutline />
