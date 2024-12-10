@@ -221,6 +221,16 @@
     @apply ml-3;
   }
 
+  .rich-text a {
+    @apply font-bold;
+    text-decoration: none;
+    border-bottom: 1px solid #751db9;
+  }
+
+  .rich-text a:hover {
+    border-bottom: 2px solid #751db9;
+  }
+
   .rich-text blockquote:before {
     color: #ccc;
     content: open-quote;

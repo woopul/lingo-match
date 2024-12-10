@@ -21,7 +21,6 @@ export const usePlatformFetch = (filters: Array<SelectedFilterType>, pageSize?: 
   const abortControllerRef = useRef<AbortController | null>(null);
   const debouncedFetchDataRef = useRef(
     debounce(async (filters: Array<SelectedFilterType>, pageSize) => {
-      console.log('test debouncedFetchDataRef');
       try {
         setIsLoading(true);
 
